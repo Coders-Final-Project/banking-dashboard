@@ -1,0 +1,177 @@
+$font-size1: 100px;
+$font-size2: 80px;
+$font-size3: 64px;
+$font-size4: 48px;
+$font-size5: 40px;
+$font-size6: 32px;
+$font-size7: 28px;
+$font-size8: 24px;
+$font-size9: 18px;
+$font-size10: 16px;
+$font-size11: 14px;
+
+$font-style: normal;
+$font-weight1: 600;
+$font-weight2: 500;
+$font-weight3: 400;
+
+$line-height1: 150%;
+$line-height2: 120%;
+$line-height3: 110%;
+
+%dashboard-heading1 {
+  font-size: $font-size4;
+  font-style: $font-style;
+  font-weight: $font-weight2;
+  line-height: $line-height1;
+  letter-spacing: -0.48px;
+}
+
+%dashboard-heading2 {
+  font-size: $font-size5;
+  font-style: $font-style;
+  font-weight: $font-weight2;
+  line-height: $line-height1;
+  letter-spacing: -0.4px;
+}
+
+%dashboard-heading3 {
+  font-size: $font-size6;
+  font-style: $font-style;
+  font-weight: $font-weight1;
+  line-height: $line-height1;
+  letter-spacing: -0.32px;
+}
+
+%dashboard-heading4 {
+  font-size: $font-size8;
+  font-style: $font-style;
+  font-weight: $font-weight1;
+  line-height: $line-height1;
+  letter-spacing: -0.24px;
+}
+
+%website-heading1 {
+  font-size: $font-size1;
+  font-style: $font-style;
+  font-weight: $font-weight1;
+  line-height: $line-height3;
+  letter-spacing: -2px;
+}
+
+%website-heading2 {
+  font-size: $font-size2;
+  font-style: $font-style;
+  font-weight: $font-weight1;
+  line-height: $line-height3;
+  letter-spacing: -1.6px;
+}
+
+%website-heading3 {
+  font-size: $font-size3;
+  font-style: $font-style;
+  font-weight: $font-weight1;
+  line-height: $line-height2;
+  letter-spacing: -1.28px;
+}
+
+%website-heading4 {
+  font-size: $font-size8;
+  font-style: $font-style;
+  font-weight: $font-weight1;
+  line-height: $line-height2;
+  letter-spacing: -0.48px;
+}
+
+%website-heading5 {
+  font-size: $font-size8;
+  font-style: $font-style;
+  font-weight: $font-weight1;
+  line-height: $line-height1;
+}
+
+%website-heading6 {
+  font-size: $font-size8;
+  font-style: $font-style;
+  font-weight: $font-weight1;
+  line-height: $line-height1;
+  letter-spacing: -0.5px;
+}
+
+%title-size1 {
+  font-size: $font-size6;
+  font-style: $font-style;
+  font-weight: $font-weight2;
+  line-height: $line-height2;
+  letter-spacing: -0.32px;
+}
+
+%title-size2 {
+  font-size: $font-size7;
+  font-style: $font-style;
+  font-weight: $font-weight1;
+  line-height: $line-height1;
+}
+
+%button-size1 {
+  font-size: $font-size8;
+  font-style: $font-style;
+  font-weight: $font-weight1;
+  line-height: $line-height1;
+  letter-spacing: -0.24px;
+}
+
+%button-size2 {
+  font-size: $font-size9;
+  font-style: $font-style;
+  font-weight: $font-weight1;
+  line-height: $line-height1;
+  letter-spacing: -0.18px;
+}
+
+%button-size3 {
+  font-size: $font-size10;
+  font-style: $font-style;
+  font-weight: $font-weight2;
+  line-height: $line-height1;
+  letter-spacing: -0.18px;
+}
+
+%button-size4 {
+  font-size: $font-size11;
+  font-style: $font-style;
+  font-weight: $font-weight1;
+  line-height: $line-height2;
+  letter-spacing: -0.16px;
+}
+
+%body-medium {
+  font-size: $font-size10;
+  font-style: $font-style;
+  font-weight: $font-weight2;
+  line-height: $line-height1;
+  letter-spacing: -0.32px;
+}
+
+%body-medium2 {
+  font-size: $font-size8;
+  font-style: $font-style;
+  font-weight: $font-weight2;
+  line-height: $line-height1;
+  letter-spacing: -0.24px;
+}
+
+%body-regular {
+  font-size: $font-size10;
+  font-style: $font-style;
+  font-weight: $font-weight3;
+  line-height: $line-height1;
+}
+
+%body-bold {
+  font-size: $font-size9;
+  font-style: $font-style;
+  font-weight: $font-weight1;
+  line-height: $line-height1;
+  letter-spacing: -0.18px;
+}

@@ -1,0 +1,26 @@
+@import "./base/reset";
+@import "/sass/utils/colors";
+
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+}
+
+nav,
+section {
+  padding-left: 4vw;
+  padding-right: 4vw;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: $main-color-white;
+}
+
+::-webkit-scrollbar-thumb {
+  background: $main-color-blue;
+}
