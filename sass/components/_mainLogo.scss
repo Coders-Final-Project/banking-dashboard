@@ -1,0 +1,18 @@
+@import "/sass/utils/colors";
+@import "/sass/utils/variables";
+@import "/sass/utils/mixins";
+@import "/sass/base/typography";
+
+.main__logo {
+  @include flexbox($justify: flex-start, $items: center, $gap: 0.2em);
+  text-decoration: none;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &__text {
+    color: $main-color-black;
+    @extend %website-heading4;
+  }
+}
