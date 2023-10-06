@@ -1,0 +1,47 @@
+@import "/sass/utils/colors";
+@import "/sass/utils/variables";
+@import "/sass/utils/mixins";
+@import "/sass/base/typography";
+
+.avatar__detail {
+  @include flexbox($justify: space-between, $items: center, $gap: 1.25em);
+
+  &__notify {
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  &__person {
+    @include flexbox($justify: space-between, $items: center, $gap: 0.75em);
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    &__info {
+      @include flexbox(
+        $direction: column,
+        $justify: space-between,
+        $items: flex-start
+      );
+
+      &__name {
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 160%;
+        color: $main-color-black;
+      }
+
+      &__position {
+        font-size: 12px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 160%;
+        letter-spacing: 0.12px;
+        color: $greyscale-grey-500;
+      }
+    }
+  }
+}
