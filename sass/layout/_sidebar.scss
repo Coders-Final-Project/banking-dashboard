@@ -1,0 +1,82 @@
+@import "/sass/utils/colors";
+@import "/sass/utils/variables";
+@import "/sass/utils/mixins";
+@import "/sass/base/typography";
+
+.sidebar {
+  position: relative;
+  z-index: 1;
+  float: left;
+  width: 280px;
+  height: 100vh;
+  border-right: 1px solid $greyscale-grey-200;
+  background-color: $main-color-white;
+  padding: 32px 24px;
+  @include flexbox(
+    $direction: column,
+    $justify: flex-start,
+    $items: flex-start,
+    $gap: 3.5em
+  );
+
+  &__links {
+    @include flexbox(
+      $direction: column,
+      $justify: flex-start,
+      $items: flex-start,
+      $gap: 0.75em
+    );
+    width: 100%;
+
+    &__item {
+      @include flexbox($justify: flex-start, $items: center, $gap: 0.75em);
+      position: relative;
+      padding: 12px;
+      width: 100%;
+      border: 1px solid transparent;
+      text-decoration: none;
+
+      &__icon__extra {
+        position: absolute;
+        left: 21px;
+        top: 21px;
+      }
+
+      &__text {
+        color: $greyscale-grey-400;
+        @extend %body-medium;
+        text-transform: capitalize;
+      }
+
+      &:hover {
+        cursor: pointer;
+
+        .sidebar__links__item__text {
+          color: $main-color-blue;
+        }
+      }
+    }
+
+    &__item.active {
+      border-radius: 12px;
+      border: 1px solid $greyscale-grey-200;
+      background: $greyscale-grey-50;
+
+      .sidebar__links__item__text {
+        color: $main-color-blue;
+      }
+    }
+  }
+
+  &__settings {
+    @include flexbox($justify: flex-start, $items: center, $gap: 0.75em);
+    position: absolute;
+    bottom: 32px;
+    left: 24px;
+    text-decoration: none;
+
+    &__text {
+      color: $greyscale-grey-400;
+    }
+  }
+}
