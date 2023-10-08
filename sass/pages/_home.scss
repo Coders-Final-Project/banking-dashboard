@@ -26,3 +26,11 @@
     }
   }
 }
+
+.home__content {
+  padding: 24px 32px 32px 32px;
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  column-gap: 32px;
+  row-gap: 34px;
+}
