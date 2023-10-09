@@ -1,0 +1,50 @@
+@import "/sass/utils/colors";
+@import "/sass/utils/variables";
+@import "/sass/utils/mixins";
+@import "/sass/base/typography";
+
+.home__content__transaction {
+  padding: 24px;
+  border-radius: 16px;
+  border: 1px solid $greyscale-grey-200;
+  background: $main-color-white;
+  width: auto;
+  height: auto;
+  @include flexbox(
+    $direction: column,
+    $justify: space-between,
+    $items: flex-start,
+    $gap: 1.5em
+  );
+
+  &__header {
+    @include flexbox($justify: space-between, $items: center);
+    width: 100%;
+
+    &__title {
+      font-size: 20px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 150%;
+      color: $main-color-black;
+      text-transform: capitalize;
+    }
+
+    &__all {
+      text-decoration: none;
+      text-transform: capitalize;
+      color: $main-color-blue;
+      @extend %button-size4;
+    }
+  }
+
+  &__body {
+    @include flexbox(
+      $direction: column,
+      $justify: space-between,
+      $items: flex-start,
+      $gap: 1.25em
+    );
+    width: 100%;
+  }
+}

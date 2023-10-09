@@ -1,0 +1,52 @@
+@import "/sass/utils/colors";
+@import "/sass/utils/variables";
+@import "/sass/utils/mixins";
+@import "/sass/base/typography";
+
+.home__content__total {
+  padding: 24px;
+  border-radius: 16px;
+  border: 1px solid $greyscale-grey-200;
+  @include flexbox($justify: space-between, $items: center, $gap: 2.5em);
+  max-width: 626px;
+
+  &__item {
+    @include flexbox($justify: space-between, $items: flex-start, $gap: 1em);
+
+    &__info {
+      @include flexbox(
+        $direction: column,
+        $justify: space-between,
+        $items: flex-start,
+        $gap: 0.875em
+      );
+
+      &__text {
+        @extend %body-medium;
+        text-transform: capitalize;
+        color: $greyscale-grey-500;
+
+        span {
+          color: $greyscale-grey-400;
+          @extend %body-medium2;
+        }
+      }
+
+      &__number {
+        @extend %title-size1;
+        color: $main-color-black;
+
+        span {
+          color: $greyscale-grey-400;
+          @extend %body-medium2;
+        }
+      }
+    }
+  }
+
+  &__divider {
+    width: 1px;
+    height: 82px;
+    background: $greyscale-grey-100;
+  }
+}

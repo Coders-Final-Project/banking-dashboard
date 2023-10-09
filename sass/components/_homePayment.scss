@@ -1,0 +1,114 @@
+@import "/sass/utils/colors";
+@import "/sass/utils/variables";
+@import "/sass/utils/mixins";
+@import "/sass/base/typography";
+
+.home__content__payment {
+  max-width: 626px;
+  padding: 24px 0px;
+  border-radius: 16px;
+  border: 1px solid $greyscale-grey-200;
+  @include flexbox(
+    $direction: column,
+    $justify: space-between,
+    $items: flex-start,
+    $gap: 1em
+  );
+
+  &__firstLine {
+    @include flexbox($justify: space-between, $items: center);
+    padding: 0 24px;
+    width: 100%;
+
+    &__title {
+      font-size: 20px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 150%;
+      color: $main-color-black;
+      text-transform: capitalize;
+    }
+
+    &__btnGroups {
+      @include flexbox($justify: space-between, $items: center, $gap: 0.5em);
+      margin-left: auto;
+
+      &__btn {
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 160%;
+        letter-spacing: 0.14px;
+        color: $greyscale-grey-500;
+        text-transform: capitalize;
+        border: none;
+        outline: none;
+        background-color: transparent;
+        border: 1px solid transparent;
+        font-size: 14px;
+        padding: 4px;
+
+        &:hover {
+          cursor: pointer;
+        }
+      }
+
+      &__btn.active {
+        border-radius: 8px;
+        border: 1px solid $greyscale-grey-200;
+        background: $greyscale-grey-100;
+        padding: 4px;
+        color: $main-color-black;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 160%;
+      }
+    }
+  }
+
+  &__secondLine {
+    @include flexbox(
+      $direction: column,
+      $justify: space-between,
+      $items: flex-start,
+      $gap: 0.5em
+    );
+    padding: 0 24px;
+
+    &__number {
+      @extend %dashboard-heading2;
+
+      span {
+        font-size: 32px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 130%;
+        letter-spacing: -0.32px;
+        color: $greyscale-grey-400;
+      }
+    }
+
+    &__difference {
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 160%;
+      letter-spacing: 0.14px;
+      color: $main-color-black;
+      opacity: 0.5;
+
+      span {
+        border-radius: 100px;
+        background: $action-green-20;
+        padding: 0px 8px;
+        color: $action-green-100;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 160%;
+        letter-spacing: -0.32px;
+      }
+    }
+  }
+}
