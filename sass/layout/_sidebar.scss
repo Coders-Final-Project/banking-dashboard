@@ -4,9 +4,10 @@
 @import "/sass/base/typography";
 
 .sidebar {
-  position: relative;
+  position: fixed;
+  top: 0;
+  left: 0;
   z-index: 1;
-  float: left;
   width: 280px;
   height: 100vh;
   border-right: 1px solid $greyscale-grey-200;
@@ -18,6 +19,7 @@
     $items: flex-start,
     $gap: 3.5em
   );
+  overflow: hidden;
 
   &__links {
     @include flexbox(

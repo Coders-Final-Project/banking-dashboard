@@ -3,34 +3,38 @@
 @import "/sass/utils/mixins";
 @import "/sass/base/typography";
 
-.home__header {
-  padding: 24px 32px;
-  height: auto;
-  @include flexbox($justify: space-between, $items: center, $gap: 7.5em);
+.home {
+  margin-left: 280px;
 
-  &__welcome {
-    @include flexbox(
-      $direction: column,
-      $justify: space-between,
-      $items: flex-start,
-      $gap: 4px
-    );
+  .home__header {
+    padding: 24px 32px;
+    height: auto;
+    @include flexbox($justify: space-between, $items: center, $gap: 7.5em);
 
-    &__title {
-      @extend %dashboard-heading3;
-    }
+    &__welcome {
+      @include flexbox(
+        $direction: column,
+        $justify: space-between,
+        $items: flex-start,
+        $gap: 4px
+      );
 
-    &__desc {
-      @extend %body-regular;
-      color: $greyscale-grey-600;
+      &__title {
+        @extend %dashboard-heading3;
+      }
+
+      &__desc {
+        @extend %body-regular;
+        color: $greyscale-grey-600;
+      }
     }
   }
-}
 
-.home__content {
-  padding: 24px 32px 32px 32px;
-  display: grid;
-  grid-template-columns: repeat(2, auto);
-  column-gap: 32px;
-  row-gap: 34px;
+  .home__content {
+    padding: 24px 32px 32px 32px;
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    column-gap: 32px;
+    row-gap: 34px;
+  }
 }

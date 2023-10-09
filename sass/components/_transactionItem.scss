@@ -1,0 +1,70 @@
+@import "/sass/utils/colors";
+@import "/sass/utils/variables";
+@import "/sass/utils/mixins";
+@import "/sass/base/typography";
+
+.home__content__transaction__body__person {
+  @include flexbox($justify: space-between, $items: center, $gap: 1em);
+  width: 100%;
+
+  &:hover {
+    cursor: pointer;
+    background-color: $shades-of-blue-98;
+    border-radius: 10px;
+  }
+
+  &__img {
+    padding: 5px;
+    background-color: $shades-of-blue-96;
+    border-radius: 100px;
+  }
+
+  &__info {
+    @include flexbox(
+      $direction: column,
+      $justify: space-between,
+      $items: flex-start
+    );
+    margin-right: auto;
+
+    &__name {
+      @extend %body-medium;
+      color: $main-color-black;
+    }
+
+    &__company {
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 160%;
+      letter-spacing: 0.14px;
+      color: $greyscale-grey-500;
+    }
+  }
+
+  &__amount {
+    @include flexbox(
+      $direction: column,
+      $justify: space-between,
+      $items: center
+    );
+
+    &__number {
+      font-size: 18px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 160%;
+      letter-spacing: -0.18px;
+      color: $main-color-black;
+    }
+
+    &__date {
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 160%;
+      letter-spacing: 0.14px;
+      color: $greyscale-grey-500;
+    }
+  }
+}
