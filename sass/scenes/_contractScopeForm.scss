@@ -1,0 +1,40 @@
+@import "/sass/utils/colors";
+@import "/sass/utils/variables";
+@import "/sass/utils/mixins";
+@import "/sass/base/typography";
+
+.contract__scope__container {
+  @include flexbox(
+    $direction: column,
+    $justify: space-between,
+    $items: flex-start,
+    $gap: 0.75em
+  );
+  width: 100%;
+
+  &__title {
+    @extend %body-medium;
+    color: $main-color-black;
+  }
+
+  &__input {
+    border-radius: 12px;
+    resize: none;
+    border: 1px solid $greyscale-grey-300;
+    width: 100%;
+    padding: 16px;
+    height: 182px;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 160%;
+    outline: none;
+  }
+
+  &__counter {
+    width: 100%;
+    text-align: right;
+    @extend %body-regular2;
+    color: $greyscale-grey-300;
+  }
+}

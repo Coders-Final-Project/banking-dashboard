@@ -26,3 +26,16 @@ export interface IContractClient {
   clientName: string;
   clientCompany: string;
 }
+
+export interface FormData {
+  client: string;
+  compnay: string;
+  job: string;
+  projectName: string;
+  currency: string;
+  date: string;
+  workScope: string;
+  cycleEnd: string;
+  paymentDue: string;
+  isSigned: boolean;
+}

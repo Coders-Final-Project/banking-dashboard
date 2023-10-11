@@ -1,5 +1,7 @@
 "use client";
 
+import { useState } from "react";
+
 import AvatarDetail from "@/shared/AvatarDetail/AvatarDetail";
 
 import { useMultiplestepForm } from "@/hooks/useMultiplestepForm";
@@ -13,8 +15,33 @@ import ContractSign from "@/scenes/ContractForms/ContractSign";
 
 import { user } from "@/db/user";
 import { FormEvent } from "react";
+import { FormData } from "@/interface";
+
+const INITIAL_DATA: FormData = {
+  client: "",
+  compnay: "",
+  job: "",
+  projectName: "",
+  currency: "",
+  date: "",
+  workScope: "",
+  cycleEnd: "",
+  paymentDue: "",
+  isSigned: false,
+};
 
 const ContractCreate = () => {
+  const [data, setData] = useState(INITIAL_DATA);
+
+  const updateFields = (fields: Partial<FormData>) => {
+    setData((prev) => {
+      return {
+        ...prev,
+        ...fields,
+      };
+    });
+  };
+
   const {
     step,
     currentStepIndex,
@@ -25,10 +52,10 @@ const ContractCreate = () => {
     isFirstStep,
     isLastStep,
   } = useMultiplestepForm([
-    <ContractGeneral key={1} />,
-    <ContractScope key={2} />,
-    <ContractPayment key={3} />,
-    <ContractSign key={4} />,
+    <ContractGeneral {...data} updateFields={updateFields} key={1} />,
+    <ContractScope {...data} updateFields={updateFields} key={2} />,
+    <ContractPayment {...data} updateFields={updateFields} key={3} />,
+    <ContractSign {...data} updateFields={updateFields} key={4} />,
   ]);
 
   const onSubmit = (e: FormEvent) => {

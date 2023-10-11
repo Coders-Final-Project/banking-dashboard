@@ -1,0 +1,101 @@
+@import "/sass/utils/colors";
+@import "/sass/utils/variables";
+@import "/sass/utils/mixins";
+@import "/sass/base/typography";
+
+.contract__sign {
+  padding: 40px;
+  background-color: $main-color-white;
+  @include flexbox(
+    $direction: column,
+    $justify: space-between,
+    $items: center,
+    $gap: 2.5em
+  );
+  width: 1180px;
+
+  &__header {
+    @include flexbox($justify: space-between, $items: center);
+    width: 100%;
+
+    &__title {
+      @extend %dashboard-heading4;
+      color: $main-color-black;
+      margin-right: auto;
+    }
+
+    &__btns {
+      @include flexbox($justify: space-between, $items: center, $gap: 1em);
+
+      &__invite,
+      &__sign {
+        border-radius: 100px;
+        border: 1px solid $greyscale-grey-200;
+        background: $main-color-white;
+        @extend %body-regular2;
+        color: $main-color-black;
+        padding: 10px 20px;
+        transition: $transition;
+
+        &:hover {
+          cursor: pointer;
+          opacity: 0.9;
+          transition: $transition;
+        }
+      }
+
+      &__sign {
+        background-color: $main-color-blue;
+        color: $main-color-white;
+      }
+    }
+  }
+
+  &__divider {
+    width: 1016px;
+    height: 1px;
+    background-color: $greyscale-grey-200;
+  }
+
+  &__star {
+    padding: 22px;
+    border-radius: 999px;
+    border: 3px solid $main-color-white;
+    background-color: $action-purple-20;
+  }
+
+  &__agreement {
+    @include flexbox(
+      $direction: column,
+      $justify: space-between,
+      $items: center,
+      $gap: 1.5em
+    );
+
+    &__title {
+      color: $main-color-black;
+      text-transform: uppercase;
+      font-size: 25px;
+      font-weight: 500;
+    }
+
+    &__body {
+      @include flexbox(
+        $direction: column,
+        $justify: space-between,
+        $items: center,
+        $gap: 1.5em
+      );
+      width: 80%;
+      margin: 0 auto;
+
+      &__item {
+        letter-spacing: 0.02rem;
+      }
+
+      span {
+        font-weight: 600;
+      }
+    }
+  }
+}
