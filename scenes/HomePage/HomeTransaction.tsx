@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import "@/sass/components/_homeTransaction.scss";
+import "@/sass/scenes/_homeTransaction.scss";
 
 import { userTransactionHistory } from "@/db/user";
 

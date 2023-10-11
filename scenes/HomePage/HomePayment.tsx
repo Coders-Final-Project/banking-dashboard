@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-import "@/sass/components/_homePayment.scss";
+import "@/sass/scenes/_homePayment.scss";
 
 import HomeLineChart from "@/charts/HomeLineChart";
 

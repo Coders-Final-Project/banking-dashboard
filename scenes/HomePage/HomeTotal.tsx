@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-import "@/sass/components/_homeTotal.scss";
+import "@/sass/scenes/_homeTotal.scss";
 
 const HomeTotal = () => {
   return (

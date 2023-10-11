@@ -1,0 +1,100 @@
+@import "/sass/utils/colors";
+@import "/sass/utils/variables";
+@import "/sass/utils/mixins";
+@import "/sass/base/typography";
+
+.contract__create {
+  margin-left: 280px;
+
+  &__header {
+    padding: 24px 32px;
+    height: 126px;
+    @include flexbox($justify: space-between, $items: center, $gap: 7.5em);
+
+    &__progress {
+      @include flexbox(
+        $direction: column,
+        $justify: space-between,
+        $items: flex-start,
+        $gap: 0.25em
+      );
+
+      &__title {
+        @extend %dashboard-heading3;
+      }
+
+      &__steps {
+        @extend %body-medium;
+
+        span {
+          color: $greyscale-grey-400;
+        }
+      }
+    }
+  }
+
+  &__progressBar {
+    max-width: 100%;
+    height: 4px;
+    background-color: $main-color-blue;
+  }
+
+  &__content {
+    padding: 32px;
+    background-color: $greyscale-grey-50;
+
+    &__form {
+      @include flexbox(
+        $direction: column,
+        $justify: space-between,
+        $items: center,
+        $gap: 2em
+      );
+      width: 720px;
+      margin: 0 auto;
+
+      &__btns {
+        @include flexbox(
+          $justify: space-between,
+          $items: flex-end,
+          $gap: 0.75em
+        );
+        margin-left: auto;
+
+        &__back {
+          width: 162px;
+          padding: 16px 32px;
+          border-radius: 100px;
+          border: 1px solid $greyscale-grey-200;
+          background: $main-color-white;
+          @extend %button-size3;
+          color: $main-color-black;
+          transition: $transition;
+
+          &:hover {
+            cursor: pointer;
+            opacity: 0.9;
+            transition: $transition;
+          }
+        }
+
+        &__next {
+          width: 162px;
+          padding: 16px 32px;
+          border-radius: 100px;
+          border: 1px solid $greyscale-grey-200;
+          background: $main-color-blue;
+          @extend %button-size3;
+          color: $main-color-white;
+          transition: $transition;
+
+          &:hover {
+            cursor: pointer;
+            opacity: 0.9;
+            transition: $transition;
+          }
+        }
+      }
+    }
+  }
+}

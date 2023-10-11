@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-import "@/sass/components/_homeMethod.scss";
+import "@/sass/scenes/_homeMethod.scss";
 
 const HomeMethod = () => {
   return (

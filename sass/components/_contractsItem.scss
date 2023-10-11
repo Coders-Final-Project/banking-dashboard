@@ -1,0 +1,126 @@
+@import "/sass/utils/colors";
+@import "/sass/utils/variables";
+@import "/sass/utils/mixins";
+@import "/sass/base/typography";
+
+.contracts__content__active__body__item {
+  padding: 24px;
+  @include flexbox(
+    $direction: column,
+    $justify: space-between,
+    $items: flex-start,
+    $gap: 1em
+  );
+  border-radius: 8px;
+  background: $greyscale-grey-50;
+  width: 100%;
+  transition: $transition;
+
+  &:hover {
+    cursor: pointer;
+    background: $greyscale-grey-100;
+    transition: $transition;
+  }
+
+  &__main {
+    @include flexbox($justify: space-between, $items: center, $gap: 1em);
+    width: 100%;
+
+    &__detail {
+      @include flexbox(
+        $direction: column,
+        $justify: space-between,
+        $items: flex-start,
+        $gap: 0.1em
+      );
+
+      &__name {
+        @extend %body-medium;
+        color: $main-color-black;
+        text-transform: capitalize;
+      }
+
+      &__location {
+        @extend %body-regular2;
+        color: $greyscale-grey-500;
+        text-transform: capitalize;
+      }
+    }
+
+    &__amount {
+      @include flexbox(
+        $direction: column,
+        $justify: space-between,
+        $items: center,
+        $gap: 0.1em
+      );
+      margin-left: auto;
+
+      &__number {
+        @extend %body-medium;
+        color: $main-color-black;
+        text-transform: capitalize;
+      }
+
+      &__rate {
+        @extend %body-regular2;
+        color: $greyscale-grey-500;
+        text-transform: capitalize;
+      }
+    }
+  }
+
+  &__divider {
+    width: 448px;
+    height: 1px;
+    background-color: $greyscale-grey-200;
+  }
+
+  &__secondary {
+    @include flexbox($justify: space-between, $items: center);
+    width: 100%;
+
+    &__period {
+      @include flexbox(
+        $direction: column,
+        $justify: space-between,
+        $items: flex-start,
+        $gap: 0.1em
+      );
+      margin-right: auto;
+
+      &__title {
+        @extend %body-regular2;
+        color: $greyscale-grey-500;
+        text-transform: capitalize;
+      }
+
+      &__date {
+        @extend %body-medium3;
+        color: $main-color-black;
+        text-transform: capitalize;
+      }
+    }
+
+    &__client {
+      @include flexbox(
+        $direction: column,
+        $justify: space-between,
+        $items: flex-end,
+        $gap: 0.1em
+      );
+
+      &__title {
+        @extend %body-regular2;
+        color: $greyscale-grey-500;
+        text-transform: capitalize;
+      }
+
+      &__name {
+        @extend %body-medium3;
+        color: $main-color-black;
+        text-transform: capitalize;
+      }
+    }
+  }
+}
