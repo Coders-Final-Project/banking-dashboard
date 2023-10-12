@@ -4,13 +4,18 @@ import "@/sass/scenes/_contractSign.scss";
 
 type SignFormData = {
   isSigned: boolean;
+  successAlert: boolean;
 };
 
 type SignFormProps = SignFormData & {
   updateFields: (fields: Partial<SignFormData>) => void;
 };
 
-const ContractSign = ({ isSigned, updateFields }: SignFormProps) => {
+const ContractSign = ({
+  isSigned,
+  updateFields,
+  successAlert,
+}: SignFormProps) => {
   return (
     <div className="contract__sign">
       <div className="contract__sign__header">
@@ -19,8 +24,13 @@ const ContractSign = ({ isSigned, updateFields }: SignFormProps) => {
           <button className="contract__sign__header__btns__invite">
             Invite Client
           </button>
-          <button className="contract__sign__header__btns__sign">
-            Sign Contract
+          <button
+            type="button"
+            disabled={successAlert}
+            onClick={(e) => updateFields({ isSigned: !isSigned })}
+            className="contract__sign__header__btns__sign"
+          >
+            {isSigned ? "Signed" : "Sign Contract"}
           </button>
         </div>
       </div>

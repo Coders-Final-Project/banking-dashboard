@@ -38,6 +38,7 @@ const ContractScope = ({ workScope, updateFields }: ScopeFormProps) => {
           className="contract__scope__container__input"
           placeholder="Descripe scope of work"
           value={workScope}
+          required
         />
         <div className="contract__scope__container__counter">
           {state.charCount}/500

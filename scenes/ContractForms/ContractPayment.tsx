@@ -30,6 +30,7 @@ const ContractPayment = ({
             <input
               type="text"
               id="project"
+              required
               placeholder="$ 10,000"
               value={projectName}
               onChange={(e) => updateFields({ projectName: e.target.value })}
@@ -40,11 +41,12 @@ const ContractPayment = ({
             <select
               id="currency"
               value={currency}
+              required
               onChange={(e) => updateFields({ currency: e.target.value })}
             >
-              <option value="usd">USD</option>
-              <option value="eur">EUR</option>
-              <option value="azn">AZN</option>
+              <option value="USD">USD</option>
+              <option value="EUR">EUR</option>
+              <option value="AZN">AZN</option>
             </select>
           </div>
         </div>
@@ -57,11 +59,16 @@ const ContractPayment = ({
             <select
               id="ends"
               value={cycleEnd}
+              required
               onChange={(e) => updateFields({ cycleEnd: e.target.value })}
             >
-              <option value="month end">Last day of the month</option>
-              <option value="three month end">In a three month</option>
-              <option value="year end">At the end of the year</option>
+              <option value="Last day of the month">
+                Last day of the month
+              </option>
+              <option value="In a three month">In a three month</option>
+              <option value="At the end of the year">
+                At the end of the year
+              </option>
             </select>
           </div>
           <div className="contract__payment__oneColumn">
@@ -69,11 +76,12 @@ const ContractPayment = ({
             <select
               id="due"
               value={paymentDue}
+              required
               onChange={(e) => updateFields({ paymentDue: e.target.value })}
             >
-              <option value="same day">Same day</option>
-              <option value="in a week">In a week</option>
-              <option value="this month">This month</option>
+              <option value="Same Day">Same day</option>
+              <option value="In a week">In a week</option>
+              <option value="This month">This month</option>
             </select>
           </div>
         </div>

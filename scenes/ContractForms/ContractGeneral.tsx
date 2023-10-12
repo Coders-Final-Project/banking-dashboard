@@ -31,6 +31,7 @@ const ContractGeneral = ({
         <input
           type="text"
           id="client"
+          required
           placeholder="Enter client name"
           value={client}
           onChange={(e) => updateFields({ client: e.target.value })}
@@ -42,6 +43,7 @@ const ContractGeneral = ({
           <input
             type="text"
             id="company"
+            required
             placeholder="Enter company name"
             value={compnay}
             onChange={(e) => updateFields({ compnay: e.target.value })}
@@ -52,6 +54,7 @@ const ContractGeneral = ({
           <input
             type="text"
             id="job"
+            required
             placeholder="Enter job title"
             value={job}
             onChange={(e) => updateFields({ job: e.target.value })}
@@ -64,6 +67,7 @@ const ContractGeneral = ({
           <input
             type="text"
             id="project"
+            required
             placeholder="UI/UX Design for Beauty Start-up"
             value={projectName}
             onChange={(e) => updateFields({ projectName: e.target.value })}
@@ -75,10 +79,11 @@ const ContractGeneral = ({
             id="currency"
             value={currency}
             onChange={(e) => updateFields({ currency: e.target.value })}
+            required
           >
-            <option value="usd">USD</option>
-            <option value="eur">EUR</option>
-            <option value="azn">AZN</option>
+            <option value="USD">USD</option>
+            <option value="EUR">EUR</option>
+            <option value="AZN">AZN</option>
           </select>
         </div>
       </div>
@@ -87,6 +92,7 @@ const ContractGeneral = ({
         <input
           type="date"
           id="date"
+          required
           placeholder="Select Date"
           value={date}
           onChange={(e) => updateFields({ date: e.target.value })}
