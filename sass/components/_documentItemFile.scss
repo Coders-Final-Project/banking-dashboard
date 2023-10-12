@@ -1,0 +1,68 @@
+@import "/sass/utils/colors";
+@import "/sass/utils/variables";
+@import "/sass/utils/mixins";
+@import "/sass/base/typography";
+
+.document__item__file {
+  border-radius: 8px;
+  border: 1px solid $greyscale-grey-200;
+  padding: 16px 16px 16px 24px;
+  @include flexbox($justify: flex-start, $items: flex-start, $gap: 1em);
+  width: 100%;
+
+  &__icons {
+    border-radius: 50%;
+    padding: 8px;
+    border: 8px solid $shades-of-blue-96;
+    position: relative;
+    width: 50px;
+    height: 50px;
+
+    &__img {
+      position: absolute;
+      top: 30%;
+      left: 1%;
+    }
+  }
+
+  &__text {
+    @include flexbox(
+      $direction: column,
+      $justify: center,
+      $items: flex-start,
+      $gap: 0.1em
+    );
+    margin-right: auto;
+
+    &__title {
+      @extend %button-size3;
+      color: $main-color-black;
+    }
+
+    &__case {
+      @extend %body-medium3;
+      color: $action-orange-100;
+    }
+  }
+
+  &__input {
+    border-radius: 100px;
+    border: 1px solid $greyscale-grey-200;
+    background: $main-color-white;
+    padding: 10px 20px;
+    @include flexbox($justify: space-between, $items: center, $gap: 0.75em);
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    &__text {
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 140%;
+      letter-spacing: -0.14px;
+      color: $main-color-blue;
+    }
+  }
+}

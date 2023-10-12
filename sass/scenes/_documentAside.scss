@@ -1,0 +1,68 @@
+@import "/sass/utils/colors";
+@import "/sass/utils/variables";
+@import "/sass/utils/mixins";
+@import "/sass/base/typography";
+
+.documents__aside {
+  padding: 32px;
+  border-radius: 16px;
+  border: 1px solid $greyscale-grey-200;
+  @include flexbox(
+    $direction: column,
+    $justify: space-between,
+    $items: center,
+    $gap: 1em
+  );
+
+  &__icon {
+    border-radius: 50%;
+    background-color: $shades-of-blue-98;
+    padding: 10px;
+  }
+
+  &__title {
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 150%;
+    color: $main-color-black;
+    text-align: center;
+  }
+
+  &__desc {
+    @extend %body-regular;
+    color: $greyscale-grey-500;
+    text-align: center;
+  }
+
+  &__btn {
+    @include flexbox($justify: space-between, $items: center, $gap: 0.75em);
+    border-radius: 100px;
+    background: $main-color-blue;
+    padding: 10px 20px;
+    border: none;
+    outline: none;
+    color: $main-color-white;
+    transform: $transition;
+
+    &:hover {
+      cursor: pointer;
+      opacity: 0.9;
+      transform: $transition;
+    }
+
+    &__text {
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 140%;
+      letter-spacing: -0.14px;
+    }
+
+    &__icon {
+      border-radius: 50%;
+      background-color: $main-color-white;
+      padding: 2px;
+    }
+  }
+}
