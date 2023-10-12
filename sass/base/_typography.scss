@@ -160,11 +160,26 @@ $line-height3: 110%;
   letter-spacing: -0.24px;
 }
 
+%body-medium3 {
+  font-size: $font-size11;
+  font-style: $font-style;
+  font-weight: $font-weight2;
+  line-height: $line-height1;
+}
+
 %body-regular {
   font-size: $font-size10;
   font-style: $font-style;
   font-weight: $font-weight3;
   line-height: $line-height1;
+}
+
+%body-regular2 {
+  font-size: $font-size11;
+  font-style: $font-style;
+  font-weight: $font-weight3;
+  line-height: $line-height1;
+  letter-spacing: 0.14px;
 }
 
 %body-bold {

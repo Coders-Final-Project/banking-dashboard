@@ -1,0 +1,58 @@
+@import "/sass/utils/colors";
+@import "/sass/utils/variables";
+@import "/sass/utils/mixins";
+@import "/sass/base/typography";
+
+.contracts__content__client__body__item {
+  @include flexbox($justify: space-between, $items: flex-start, $gap: 1em);
+  width: 100%;
+
+  &__img {
+    padding: 4px;
+    background-color: $shades-of-blue-96;
+    border-radius: 50%;
+  }
+
+  &__detail {
+    @include flexbox(
+      $direction: column,
+      $justify: space-between,
+      $items: flex-start,
+      $gap: 0.1em
+    );
+    margin-right: auto;
+
+    &__client {
+      @extend %body-medium;
+      color: $main-color-black;
+      text-transform: capitalize;
+    }
+
+    &__company {
+      @extend %body-regular2;
+      color: $greyscale-grey-500;
+      text-transform: capitalize;
+    }
+  }
+
+  &__btn {
+    border-radius: 100px;
+    border: 1px solid $greyscale-grey-200;
+    background: $main-color-white;
+    @include flexbox($justify: space-between, $items: center, $gap: 0.75em);
+    padding: 10px 20px;
+    transition: $transition;
+
+    &:hover {
+      cursor: pointer;
+      background-color: $greyscale-grey-200;
+      transition: $transition;
+    }
+
+    &__text {
+      @extend %body-regular2;
+      color: $main-color-black;
+      text-transform: capitalize;
+    }
+  }
+}

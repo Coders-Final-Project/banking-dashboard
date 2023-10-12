@@ -15,7 +15,13 @@ interface Props {
 const AvatarDetail = ({ name, position, imgUrl, hasBtn }: Props) => {
   return (
     <div className="avatar__detail">
-      {hasBtn && <Button text="create a contract" icon="frame.png" />}
+      {hasBtn && (
+        <Button
+          text="create a contract"
+          icon="frame.png"
+          url="/contracts/create"
+        />
+      )}
       <Image
         src="/assets/home/notification.png"
         alt="notification"

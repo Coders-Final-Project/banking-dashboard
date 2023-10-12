@@ -1,10 +1,10 @@
 import "@/sass/pages/_home.scss";
 
 import AvatarDetail from "@/shared/AvatarDetail/AvatarDetail";
-import HomeTotal from "./_components/HomeTotal";
-import HomeMethod from "./_components/HomeMethod";
-import HomePayment from "./_components/HomePayment";
-import HomeTransaction from "./_components/HomeTransaction";
+import HomeTotal from "../scenes/HomePage/HomeTotal";
+import HomeMethod from "../scenes/HomePage/HomeMethod";
+import HomePayment from "../scenes/HomePage/HomePayment";
+import HomeTransaction from "../scenes/HomePage/HomeTransaction";
 
 import { user } from "@/db/user";
 

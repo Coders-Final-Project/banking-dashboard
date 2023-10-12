@@ -1,0 +1,32 @@
+@import "/sass/utils/colors";
+@import "/sass/utils/variables";
+@import "/sass/utils/mixins";
+@import "/sass/base/typography";
+
+.contract__wrapper {
+  @include flexbox(
+    $direction: column,
+    $justify: space-between,
+    $items: center,
+    $gap: 2em
+  );
+
+  &__title {
+    @extend %dashboard-heading4;
+    color: $main-color-black;
+  }
+
+  &__container {
+    width: 720px;
+    padding: 32px;
+    @include flexbox(
+      $direction: column,
+      $justify: space-between,
+      $items: flex-start,
+      $gap: 1.5em
+    );
+    background-color: $main-color-white;
+    border-radius: 16px;
+    border: 1px solid $greyscale-grey-200;
+  }
+}

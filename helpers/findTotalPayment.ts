@@ -17,3 +17,7 @@ export const findTotalPayment = ({
 
   return { fullPart, fractioanalPart };
 };
+
+export const createProgressBar = (index: number, length: number) => {
+  return ((index + 1) * 100) / length;
+};
