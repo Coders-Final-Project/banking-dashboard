@@ -6,9 +6,15 @@ interface IProps {
   title: string;
   isSubmitted: boolean;
   color: string;
+  handleUpload: (e: any, title: string) => void;
 }
 
-const DocumentItemFile = ({ title, isSubmitted, color }: IProps) => {
+const DocumentItemFile = ({
+  title,
+  isSubmitted,
+  color,
+  handleUpload,
+}: IProps) => {
   return (
     <div className="document__item__file">
       <div
@@ -29,7 +35,10 @@ const DocumentItemFile = ({ title, isSubmitted, color }: IProps) => {
           {isSubmitted ? "Submitted" : "Not submitted"}
         </div>
       </div>
-      <button className="document__item__file__input">
+      <button
+        onClick={(e) => handleUpload(e, title)}
+        className="document__item__file__input"
+      >
         <Image
           src="/assets/documents/file.png"
           alt="file"

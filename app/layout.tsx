@@ -8,7 +8,7 @@ import Sidebar from "@/shared/Sidebar/Sidebar";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Marketing Page",
+  title: "Dashboard",
   description: "Coders Final Project",
 };
 
