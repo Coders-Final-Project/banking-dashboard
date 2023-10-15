@@ -1,0 +1,144 @@
+@import "/sass/utils/colors";
+@import "/sass/utils/variables";
+@import "/sass/utils/mixins";
+@import "/sass/base/typography";
+
+.document__modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 100;
+
+  &__card {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    @include flexbox(
+      $direction: column,
+      $justify: space-between,
+      $items: flex-start,
+      $gap: 1.5em
+    );
+    padding: 24px;
+    border-radius: 16px;
+    border: 1px solid $greyscale-grey-200;
+    background: $main-color-white;
+
+    &__heading {
+      @include flexbox($justify: space-between, $items: center, $gap: 1em);
+      width: 100%;
+
+      &__title {
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 150%;
+        color: $main-color-black;
+        margin-right: auto;
+      }
+
+      &__closeBtn {
+        border: none;
+        outline: none;
+        padding: 4px 10px;
+        font-size: 21px;
+        border-radius: 50%;
+        background-color: $greyscale-grey-200;
+        color: $main-color-black;
+
+        &:hover {
+          cursor: pointer;
+        }
+      }
+    }
+
+    &__content {
+      width: 100%;
+      height: auto;
+      padding: 56px 80px;
+      border-radius: 8px;
+      border: 1px dashed $main-color-blue;
+      background: $shades-of-blue-98;
+      @include flexbox(
+        $direction: column,
+        $justify: center,
+        $items: center,
+        $gap: 1.5em
+      );
+
+      input[type="file"] {
+        display: none;
+      }
+
+      &__icon {
+        padding: 16px;
+        border-radius: 100px;
+        background: $shades-of-blue-96;
+      }
+
+      &__input {
+        cursor: pointer;
+        color: $main-color-blue;
+        @extend %body-medium;
+      }
+
+      &__process {
+        @include flexbox(
+          $direction: column,
+          $justify: center,
+          $items: center,
+          $gap: 1em
+        );
+
+        &__file {
+          @include flexbox($justify: center, $items: center, $gap: 1em);
+
+          &__text {
+            color: $greyscale-grey-500;
+          }
+
+          &__btn {
+            border: none;
+            outline: none;
+            background-color: transparent;
+            font-size: 16px;
+            color: $action-green-100;
+
+            &:hover {
+              cursor: pointer;
+              text-decoration: underline;
+            }
+          }
+        }
+
+        &__progress {
+          @include flexbox(
+            $direction: column,
+            $justify: center,
+            $items: center,
+            $gap: 0.5em
+          );
+
+          span {
+            color: $main-color-black;
+            font-size: 14px;
+            color: $greyscale-grey-500;
+          }
+        }
+      }
+    }
+
+    &__note {
+      color: $greyscale-grey-400;
+      @extend %body-regular2;
+    }
+  }
+}
+
+.document__modal.close {
+  display: none;
+}

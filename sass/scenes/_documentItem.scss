@@ -1,0 +1,45 @@
+@import "/sass/utils/colors";
+@import "/sass/utils/variables";
+@import "/sass/utils/mixins";
+@import "/sass/base/typography";
+
+.documents__content__upload__files {
+  @include flexbox(
+    $direction: column,
+    $justify: space-between,
+    $items: flex-start,
+    $gap: 2em
+  );
+  width: 100%;
+
+  .document__item {
+    border-radius: 16px;
+    border: 1px solid $greyscale-grey-200;
+    width: 100%;
+    padding: 24px;
+    @include flexbox(
+      $direction: column,
+      $justify: space-between,
+      $items: flex-start,
+      $gap: 1.5em
+    );
+
+    &__title {
+      font-size: 20px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 150%;
+      color: $main-color-black;
+    }
+
+    &__body {
+      @include flexbox(
+        $direction: column,
+        $justify: space-between,
+        $items: flex-start,
+        $gap: 1em
+      );
+      width: 100%;
+    }
+  }
+}

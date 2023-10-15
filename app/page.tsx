@@ -1,4 +1,5 @@
 import "@/sass/pages/_home.scss";
+import "@/sass/layout/_pageHeader.scss";
 
 import AvatarDetail from "@/shared/AvatarDetail/AvatarDetail";
 import HomeTotal from "../scenes/HomePage/HomeTotal";
@@ -11,12 +12,12 @@ import { user } from "@/db/user";
 export default function Home() {
   return (
     <main className="home">
-      <header className="home__header">
-        <div className="home__header__welcome">
-          <div className="home__header__welcome__title">
+      <header className="page__header">
+        <div className="page__header__welcome">
+          <div className="page__header__welcome__title">
             Good morning, {user.name.split(" ")[0]}
           </div>
-          <div className="home__header__welcome__desc">
+          <div className="page__header__welcome__desc">
             Here is your dashboard overview.
           </div>
         </div>

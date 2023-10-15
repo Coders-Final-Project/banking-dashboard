@@ -6,16 +6,6 @@
 .contracts {
   margin-left: 280px;
 
-  &__header {
-    padding: 24px 32px;
-    height: 126px;
-    @include flexbox($justify: space-between, $items: center, $gap: 7.5em);
-
-    &__welcome {
-      @extend %dashboard-heading3;
-    }
-  }
-
   &__content {
     padding: 24px 32px 32px 32px;
     @include flexbox($justify: space-between, $items: flex-start, $gap: 2em);

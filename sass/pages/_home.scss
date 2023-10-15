@@ -6,30 +6,6 @@
 .home {
   margin-left: 280px;
 
-  .home__header {
-    padding: 24px 32px;
-    height: 126px;
-    @include flexbox($justify: space-between, $items: center, $gap: 7.5em);
-
-    &__welcome {
-      @include flexbox(
-        $direction: column,
-        $justify: space-between,
-        $items: flex-start,
-        $gap: 4px
-      );
-
-      &__title {
-        @extend %dashboard-heading3;
-      }
-
-      &__desc {
-        @extend %body-regular;
-        color: $greyscale-grey-600;
-      }
-    }
-  }
-
   .home__content {
     padding: 24px 32px 32px 32px;
     display: grid;
