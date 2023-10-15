@@ -1,6 +1,7 @@
 "use client";
 
 import { ChartOptions } from "chart.js";
+import { ICardReport } from "@/interface";
 
 import { IUserPayment } from "@/interface";
 
@@ -42,18 +43,28 @@ const options: ChartOptions = {
       boxWidth: 20,
     },
   },
+  scales: {
+    y: {
+      grid: {
+        display: false,
+      },
+      ticks: {
+        display: false,
+      },
+    },
+  },
 };
 
 const HomeLineChart = ({
   duration,
-  userPaymentHistory,
+  data,
 }: {
   duration: string;
-  userPaymentHistory: IUserPayment;
+  data: IUserPayment | ICardReport;
 }) => {
   return (
-    <div style={{ width: 600, height: 300 }}>
-      <Line options={options} data={userPaymentHistory[duration]} />
+    <div style={{ width: 600, height: 300, margin: "0 auto" }}>
+      <Line options={options} data={data[duration]} />
     </div>
   );
 };

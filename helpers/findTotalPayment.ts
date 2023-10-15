@@ -1,13 +1,14 @@
 import { IUserPayment } from "@/interface";
+import { ICardReport } from "@/interface";
 
 export const findTotalPayment = ({
   duration,
-  userPaymentHistory,
+  data,
 }: {
   duration: string;
-  userPaymentHistory: IUserPayment;
+  data: IUserPayment | ICardReport;
 }) => {
-  const total = userPaymentHistory[duration].datasets[0].data.reduce(
+  const total = data[duration].datasets[0].data.reduce(
     (cur: number, item) => +item + cur,
     0,
   );

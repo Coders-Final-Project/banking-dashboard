@@ -19,7 +19,7 @@ const ContractsSummary = () => {
           </div>
           <div className="contracts__content__summary__data__info__body">
             <div className="contracts__content__summary__data__info__body__number">
-              83
+              $83
             </div>
             <div className="contracts__content__summary__data__info__body__perc">
               +8%
