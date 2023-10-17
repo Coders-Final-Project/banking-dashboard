@@ -11,7 +11,7 @@ import CardReportItem from "@/components/CardReportItem/CardReportItem";
 import AddCardModal from "@/components/AddCardModal/AddCardModal";
 
 const CardsAdd = () => {
-  const [isModalOpen, setIsModalOpen] = useState(true);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleCardModal = () => {
     setIsModalOpen((prevValue) => !prevValue);
