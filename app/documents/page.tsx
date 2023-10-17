@@ -23,6 +23,8 @@ const Documents = () => {
         </div>
         <AvatarDetail {...user} />
       </header>
+
+      
       <div className="documents__content">
         <div className="documents__content__warning">
           <Image
