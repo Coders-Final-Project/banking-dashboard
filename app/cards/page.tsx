@@ -7,7 +7,7 @@ import AvatarDetail from "@/shared/AvatarDetail/AvatarDetail";
 import CardsSummary from "@/scenes/CardsPage/CardsSummary";
 import CardsReport from "@/scenes/CardsPage/CardsReport";
 import CardsTransaction from "@/scenes/CardsPage/CardsTransaction";
-import CardsAdd from "@/scenes/CardsPage/CardsAdd";
+import CardsDetail from "@/scenes/CardsPage/CardsDetail";
 
 import { user } from "@/db/user";
 
@@ -26,9 +26,7 @@ const Cards = () => {
           <CardsReport />
           <CardsTransaction />
         </div>
-        <div className="cards__content__cardPart">
-          <CardsAdd />
-        </div>
+        <CardsDetail />
       </div>
     </main>
   );

@@ -52,10 +52,18 @@
 
         span {
           padding: 0px 8px;
-          background-color: $action-green-20;
-          color: $action-green-100;
           @extend %body-medium;
           border-radius: 50px;
+        }
+
+        span.income {
+          background-color: $action-green-20;
+          color: $action-green-100;
+        }
+
+        span.expense {
+          background-color: $action-red-20;
+          color: $action-red-100;
         }
       }
     }

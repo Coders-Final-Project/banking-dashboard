@@ -1,0 +1,98 @@
+@import "/sass/utils/colors";
+@import "/sass/utils/variables";
+@import "/sass/utils/mixins";
+@import "/sass/base/typography";
+
+.cards__detail {
+  background: $main-color-white;
+  box-shadow: $box-shadow2;
+  padding: 24px;
+  @include flexbox(
+    $direction: column,
+    $justify: space-between,
+    $items: flex-start,
+    $gap: 1.6em
+  );
+  width: 35%;
+
+  &__add {
+    @include flexbox($justify: space-between, $items: center);
+    width: 100%;
+
+    &__title {
+      font-size: 20px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 150%;
+      color: $main-color-black;
+    }
+
+    &__btn {
+      border: none;
+      outline: none;
+      background-color: transparent;
+      border-radius: 100px;
+      background: $main-color-blue;
+      padding: 10px 20px;
+      color: $main-color-white;
+      @extend %button-size4;
+      letter-spacing: -0.14px;
+
+      &:hover {
+        cursor: pointer;
+        opacity: 0.9;
+      }
+
+      span {
+        border-radius: 50%;
+        padding: 3px 8px;
+        background-color: $main-color-white;
+        color: $main-color-blue;
+        font-size: 18px;
+        margin-left: 5px;
+      }
+    }
+  }
+
+  &__cardImg {
+    width: 100%;
+    @include flexbox($justify: center, $items: center);
+    box-shadow: $box-shadow;
+    border-radius: 15px;
+  }
+
+  &__divider {
+    width: 328px;
+    height: 1px;
+    margin: 0 auto;
+    background-color: $greyscale-grey-200;
+  }
+
+  &__report {
+    @include flexbox(
+      $direction: column,
+      $justify: space-between,
+      $items: flex-start,
+      $gap: 1.5em
+    );
+    width: 100%;
+
+    &__title {
+      font-size: 20px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 150%;
+      color: $main-color-black;
+    }
+
+    &__content {
+      @include flexbox(
+        $direction: column,
+        $justify: space-between,
+        $items: flex-start,
+        $gap: 1.5em
+      );
+      width: 100%;
+    }
+  }
+}

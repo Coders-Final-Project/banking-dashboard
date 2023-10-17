@@ -65,3 +65,48 @@ export const cardReport = {
     ],
   },
 };
+
+export const cardTransaction = [
+  {
+    id: 1,
+    name: "Dropbox",
+    iconUrl: "/assets/cards/action1.png",
+    date: "Mar 22, 2023",
+    amount: 204,
+  },
+  {
+    id: 2,
+    name: "Asana",
+    iconUrl: "/assets/cards/action2.png",
+    date: "Feb 5, 2023",
+    amount: 120,
+  },
+  {
+    id: 3,
+    name: "Github",
+    iconUrl: "/assets/cards/action3.png",
+    date: "Feb 1, 2023",
+    amount: 80,
+  },
+  {
+    id: 4,
+    name: "Loom",
+    iconUrl: "/assets/cards/action4.png",
+    date: "Jan 27, 2023",
+    amount: 65,
+  },
+  {
+    id: 5,
+    name: "Zendesk",
+    iconUrl: "/assets/cards/action5.png",
+    date: "Jan 23, 2023",
+    amount: 40,
+  },
+];
+
+export const activeCard = {
+  cardNumber: "3481 2982 2821 5680",
+  balance: "5,340",
+  currency: "USD",
+  statusCard: "03/27",
+};

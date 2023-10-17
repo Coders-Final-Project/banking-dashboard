@@ -21,7 +21,7 @@ const CardsSummary = () => {
             $8,127<span>.90</span>
           </div>
           <div className="cards__summary__item__info__change">
-            <span>+24%</span> vs last month
+            <span className="income">+24%</span> vs last month
           </div>
         </div>
         <Image
@@ -49,7 +49,7 @@ const CardsSummary = () => {
             $1,325<span>.90</span>
           </div>
           <div className="cards__summary__item__info__change">
-            <span>-2%</span> vs last month
+            <span className="expense">-2%</span> vs last month
           </div>
         </div>
         <Image
