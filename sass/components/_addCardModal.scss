@@ -1,0 +1,76 @@
+@import "/sass/utils/colors";
+@import "/sass/utils/variables";
+@import "/sass/utils/mixins";
+@import "/sass/base/typography";
+
+.add__card__modal {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1000;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  @include flexbox($justify: center, $items: center);
+
+  .cards__detail__addModal {
+    background-color: $main-color-white;
+    border-radius: 10px;
+    padding: 30px;
+    @include flexbox(
+      $direction: column,
+      $justify: space-between,
+      $items: flex-start,
+      $gap: 1.5em
+    );
+
+    &__item {
+      @include flexbox($justify: flex-start, $items: center, $gap: 0.5em);
+
+      label {
+        color: $main-color-black;
+        font-size: 16px;
+      }
+
+      input {
+        border: none;
+        outline: none;
+        background-color: $greyscale-grey-200;
+        padding: 10px;
+        border-radius: 10px;
+      }
+    }
+
+    &__btn {
+      border: none;
+      outline: none;
+      background-color: $main-color-blue;
+      color: $main-color-white;
+      padding: 5px 10px;
+      border-radius: 10px;
+      font-size: 18px;
+      margin-left: auto;
+
+      &:hover {
+        cursor: pointer;
+        opacity: 0.9;
+      }
+    }
+  }
+
+  &__closeBtn {
+    position: fixed;
+    top: 40px;
+    right: 40px;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    color: $main-color-white;
+    font-size: 50px;
+
+    &:hover {
+      cursor: pointer;
+      color: $main-color-blue;
+    }
+  }
+}

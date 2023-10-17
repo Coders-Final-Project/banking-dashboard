@@ -3,8 +3,9 @@
 @import "/sass/utils/mixins";
 @import "/sass/base/typography";
 
-.home__content__payment {
-  max-width: 626px;
+.line__graph__content {
+  // width: 626px;
+  width: 100%;
   padding: 24px 0px;
   border-radius: 16px;
   border: 1px solid $greyscale-grey-200;

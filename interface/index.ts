@@ -10,6 +10,18 @@ export interface IUserPayment {
   };
 }
 
+export interface ICardReport {
+  [key: string]: {
+    labels: string[];
+    datasets: {
+      label: string;
+      data: (string | number)[];
+      backgroundColor: string;
+      borderColor: string;
+    }[];
+  };
+}
+
 export interface IContractItem {
   id: number;
   companyImg: string;
@@ -39,3 +51,11 @@ export interface FormData {
   paymentDue: string;
   isSigned: boolean;
 }
+
+export type DeepPartial<T> = {
+  [P in keyof T]?: T[P] extends (infer U)[]
+    ? DeepPartial<U>[]
+    : T[P] extends object
+    ? DeepPartial<T[P]>
+    : T[P];
+};

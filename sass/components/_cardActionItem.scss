@@ -1,0 +1,45 @@
+@import "/sass/utils/colors";
+@import "/sass/utils/variables";
+@import "/sass/utils/mixins";
+@import "/sass/base/typography";
+
+.cards__action__item {
+  @include flexbox($justify: space-between, $items: center);
+  width: 100%;
+
+  &:hover {
+    cursor: pointer;
+    background-color: $greyscale-grey-50;
+    border-radius: 50px;
+  }
+
+  &__preview {
+    @include flexbox($justify: space-between, $items: center, $gap: 1em);
+    width: 80px;
+
+    &__icon {
+      padding: 6px;
+      background-color: $main-color-black;
+      border-radius: 100px;
+    }
+
+    &__text {
+      @extend %body-medium;
+      color: $main-color-black;
+    }
+  }
+
+  &__date {
+    @extend %body-regular2;
+    color: $greyscale-grey-500;
+  }
+
+  &__amount {
+    @extend %body-bold;
+    color: $main-color-black;
+  }
+
+  &__switch {
+    color: $main-color-black;
+  }
+}

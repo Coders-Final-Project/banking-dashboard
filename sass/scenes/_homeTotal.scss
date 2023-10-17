@@ -8,7 +8,8 @@
   border-radius: 16px;
   border: 1px solid $greyscale-grey-200;
   @include flexbox($justify: space-between, $items: center, $gap: 2.5em);
-  max-width: 626px;
+  // max-width: 626px;
+  width: 100%;
 
   &__item {
     @include flexbox($justify: space-between, $items: flex-start, $gap: 1em);
