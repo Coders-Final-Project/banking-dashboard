@@ -1,0 +1,81 @@
+@import "/sass/utils/colors";
+@import "/sass/utils/variables";
+@import "/sass/utils/mixins";
+@import "/sass/base/typography";
+
+.cards__summary {
+  border-radius: 16px;
+  border: 1px solid $greyscale-grey-200;
+  padding: 24px;
+  @include flexbox($justify: space-between, $items: center, $gap: 1.5em);
+  width: 100%;
+
+  &__item {
+    @include flexbox($justify: space-between, $items: flex-start, $gap: 1em);
+
+    &__icon {
+      padding: 2px;
+      background-color: $shades-of-blue-98;
+      border-radius: 50%;
+      border: 4px solid $shades-of-blue-90;
+    }
+
+    &__info {
+      @include flexbox(
+        $direction: column,
+        $justify: space-between,
+        $items: flex-start,
+        $gap: 0.5em
+      );
+
+      &__title {
+        @extend %body-medium;
+        color: $greyscale-grey-500;
+      }
+
+      &__total {
+        color: $main-color-black;
+        @extend %title-size1;
+
+        span {
+          color: $greyscale-grey-400;
+          font-size: 24px;
+        }
+      }
+
+      &__change {
+        color: $greyscale-grey-500;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 160%;
+
+        span {
+          padding: 0px 8px;
+          @extend %body-medium;
+          border-radius: 50px;
+        }
+
+        span.income {
+          background-color: $action-green-20;
+          color: $action-green-100;
+        }
+
+        span.expense {
+          background-color: $action-red-20;
+          color: $action-red-100;
+        }
+      }
+    }
+
+    &__graph {
+      margin: auto 0 auto 16px;
+    }
+  }
+
+  &__divider {
+    width: 1px;
+    height: 118px;
+    background-color: $greyscale-grey-200;
+  }
+}
