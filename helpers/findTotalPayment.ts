@@ -1,5 +1,7 @@
 import { IUserPayment } from "@/interface";
 import { ICardReport } from "@/interface";
+import { IFilterTableProps } from "@/interface";
+import { stringify } from "querystring";
 
 export const findTotalPayment = ({
   duration,
@@ -42,13 +44,15 @@ export const checkActiveCard = (date: string) => {
   }
 };
 
-interface IFilterTableProps {
-  id: number;
-  name: string;
-  iconUrl: string;
-  date: string;
-  amount: number;
+interface IIinputTypes {
+  [index: string]: string;
 }
+
+const inputTypes: IIinputTypes = {
+  name: "name",
+  date: "date",
+  amount: "amount",
+};
 
 export const filterTable = ({
   input,
@@ -69,6 +73,7 @@ export const filterTable = ({
       !check ? (a.date > b.date ? 1 : -1) : a.date > b.date ? -1 : 1,
     );
   }
+
   if (input === "amount") {
     return [...data].sort((a, b) =>
       !check ? b.amount - a.amount : a.amount - b.amount,

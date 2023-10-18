@@ -59,3 +59,12 @@ export type DeepPartial<T> = {
     ? DeepPartial<T[P]>
     : T[P];
 };
+
+export interface IFilterTableProps {
+  [x: string]: any;
+  id: number;
+  name: string;
+  iconUrl: string;
+  date: string;
+  amount: number;
+}
