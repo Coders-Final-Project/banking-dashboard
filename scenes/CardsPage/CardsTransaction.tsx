@@ -10,7 +10,7 @@ import CardActionItem from "@/components/CardActionItem/CardActionItem";
 
 import { cardTransaction } from "@/db/card";
 
-import { filterTable } from "@/helpers/findTotalPayment";
+import { filterTable } from "@/helpers";
 
 const CardsTransaction = () => {
   const [cardData, setCardData] = useState(cardTransaction);

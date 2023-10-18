@@ -4,7 +4,7 @@ import "@/sass/components/_cardInfo.scss";
 
 import { activeCard } from "@/db/card";
 
-import { hideCardNumbers, checkActiveCard } from "@/helpers/findTotalPayment";
+import { hideCardNumbers, checkActiveCard } from "@/helpers";
 
 const CardInfo = () => {
   return (
