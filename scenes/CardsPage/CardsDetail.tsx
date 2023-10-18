@@ -13,6 +13,8 @@ import AddCardModal from "@/components/AddCardModal/AddCardModal";
 const CardsAdd = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  const [showAlert, setShowALert] = useState(false);
+
   const handleCardModal = () => {
     setIsModalOpen((prevValue) => !prevValue);
   };
@@ -48,7 +50,13 @@ const CardsAdd = () => {
           />
         </div>
       </div>
-      {isModalOpen && <AddCardModal handleCardModal={handleCardModal} />}
+      {isModalOpen && (
+        <AddCardModal
+          handleCardModal={handleCardModal}
+          setShowALert={setShowALert}
+        />
+      )}
+      {showAlert && <div className="success__msg">Card Added</div>}
     </div>
   );
 };

@@ -6,17 +6,18 @@ import "@/sass/layout/_lineGraph.scss";
 
 import HomeLineChart from "@/charts/HomeLineChart";
 
-import { findTotalPayment } from "@/helpers/findTotalPayment";
+import { findTotalPayment } from "@/helpers";
 
 import { IUserPayment } from "@/interface";
 import { ICardReport } from "@/interface";
 
 interface IProps {
+  title: string;
   isHeaderDetail: boolean;
   data: ICardReport | IUserPayment;
 }
 
-const LineGraph = ({ isHeaderDetail, data }: IProps) => {
+const LineGraph = ({ isHeaderDetail, data, title }: IProps) => {
   const [duration, setDuration] = useState("1M");
 
   const changeActiveBtn = (e: any) => {
@@ -31,9 +32,7 @@ const LineGraph = ({ isHeaderDetail, data }: IProps) => {
   return (
     <div className="line__graph__content">
       <div className="line__graph__content__firstLine">
-        <div className="line__graph__content__firstLine__title">
-          Payment History
-        </div>
+        <div className="line__graph__content__firstLine__title">{title}</div>
         <div className="line__graph__content__firstLine__btnGroups">
           <button
             className={`line__graph__content__firstLine__btnGroups__btn ${

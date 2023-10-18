@@ -1,5 +1,6 @@
 import { IUserPayment } from "@/interface";
 import { ICardReport } from "@/interface";
+import { IFilterTableProps } from "@/interface";
 
 export const findTotalPayment = ({
   duration,
@@ -41,14 +42,6 @@ export const checkActiveCard = (date: string) => {
     return "Active";
   }
 };
-
-interface IFilterTableProps {
-  id: number;
-  name: string;
-  iconUrl: string;
-  date: string;
-  amount: number;
-}
 
 export const filterTable = ({
   input,
