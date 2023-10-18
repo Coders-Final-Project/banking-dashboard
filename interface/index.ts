@@ -61,7 +61,6 @@ export type DeepPartial<T> = {
 };
 
 export interface IFilterTableProps {
-  [x: string]: any;
   id: number;
   name: string;
   iconUrl: string;
