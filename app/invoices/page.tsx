@@ -1,5 +1,5 @@
 import React from "react";
-import "@/sass/pages/_home.scss";
+import "@/sass/layout/_pageHeader.scss";
 import "@/sass/pages/_invoices.scss";
 import { user } from "@/db/user";
 import AvatarDetail from "@/shared/AvatarDetail/AvatarDetail";
@@ -8,10 +8,10 @@ import Image from "next/image";
 const Invoices = () => {
   return (
     <>
-      <main className="home">
-        <header className="home__header">
-          <div className="home__header__welcome">
-            <div className="home__header__welcome__title">Invoices</div>
+      <main className="page">
+        <header className="page__header">
+          <div className="page__header__welcome">
+            <div className="page__header__welcome__title">Invoices</div>
           </div>
           <AvatarDetail {...user} />
         </header>
