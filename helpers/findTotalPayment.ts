@@ -1,7 +1,6 @@
 import { IUserPayment } from "@/interface";
 import { ICardReport } from "@/interface";
 import { IFilterTableProps } from "@/interface";
-import { stringify } from "querystring";
 
 export const findTotalPayment = ({
   duration,
@@ -42,16 +41,6 @@ export const checkActiveCard = (date: string) => {
   } else {
     return "Active";
   }
-};
-
-interface IIinputTypes {
-  [index: string]: string;
-}
-
-const inputTypes: IIinputTypes = {
-  name: "name",
-  date: "date",
-  amount: "amount",
 };
 
 export const filterTable = ({
