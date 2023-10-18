@@ -1,0 +1,142 @@
+@import "/sass/utils/colors";
+@import "/sass/utils/variables";
+@import "/sass/utils/mixins";
+@import "/sass/base/typography";
+
+.insurance {
+  margin-left: 280px;
+
+  &__place {
+    width: 100%;
+    height: auto;
+    background-color: $main-color-white;
+    padding: 16px 32px 32px 32px;
+    @include flexbox($justify: flex-start, $items: center, $gap: 1.5em);
+
+    &__text {
+      @extend %body-medium;
+      color: $main-color-black;
+    }
+
+    &__options {
+      padding: 16px;
+      border-radius: 12px;
+      border: 1px solid $greyscale-grey-300;
+      width: 400px;
+      @extend %body-medium;
+      color: $main-color-black;
+      outline: none;
+    }
+  }
+
+  &__content {
+    background-color: $greyscale-grey-50;
+    padding: 32px;
+
+    &__card {
+      background-color: $main-color-white;
+      padding: 48px;
+      @include flexbox(
+        $direction: column,
+        $justify: space-between,
+        $items: flex-start,
+        $gap: 2em
+      );
+
+      &__header {
+        @include flexbox($justify: space-between, $items: center, $gap: 1.5em);
+        width: 100%;
+
+        &__img {
+          margin-right: auto;
+        }
+
+        &__price {
+          @extend %title-size1;
+          color: $main-color-black;
+
+          span {
+            color: $greyscale-grey-300;
+            @extend %body-medium2;
+          }
+        }
+
+        &__divider {
+          width: 1px;
+          height: 40px;
+          background-color: $greyscale-grey-200;
+        }
+
+        &__btn {
+          padding: 10px 20px;
+          border-radius: 100px;
+          background: $main-color-blue;
+          @extend %button-size4;
+          letter-spacing: -0.14px;
+          color: $main-color-white;
+          border: none;
+          outline: none;
+
+          &:hover {
+            cursor: pointer;
+            opacity: 0.9;
+          }
+        }
+      }
+
+      &__desc {
+        @extend %body-regular;
+        color: $main-color-black;
+      }
+
+      &__comment {
+        color: $greyscale-grey-400;
+        @extend %body-regular2;
+      }
+
+      &__icon {
+        background-color: $main-color-black;
+        padding: 8px;
+        border-radius: 50%;
+        margin-left: auto;
+      }
+
+      &__coverage {
+        @include flexbox(
+          $direction: column,
+          $justify: space-between,
+          $items: flex-start,
+          $gap: 1em
+        );
+        width: 100%;
+
+        &__title {
+          @include flexbox($justify: space-between, $items: center);
+          width: 100%;
+
+          &__btn {
+            @extend %body-medium4;
+            border: none;
+            outline: none;
+            background-color: transparent;
+            color: $main-color-black;
+            cursor: pointer;
+          }
+        }
+
+        &__content {
+          @include flexbox($justify: flex-start, $items: flex-start, $gap: 1em);
+          flex-wrap: wrap;
+          width: 100%;
+
+          &__item {
+            padding: 10px 16px;
+            border-radius: 16px;
+            background: $greyscale-grey-50;
+            @extend %body-regular2;
+          }
+        }
+      }
+    }
+  }
+}
