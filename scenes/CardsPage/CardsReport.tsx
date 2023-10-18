@@ -7,7 +7,11 @@ import { cardReport } from "@/db/card";
 const CardsReport = () => {
   return (
     <div className="cards__report">
-      <LineGraph isHeaderDetail={false} data={cardReport} />
+      <LineGraph
+        title="Monthly Report"
+        isHeaderDetail={false}
+        data={cardReport}
+      />
     </div>
   );
 };

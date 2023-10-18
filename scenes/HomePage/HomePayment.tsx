@@ -4,7 +4,11 @@ import { userPaymentHistory } from "@/db/user";
 const HomePayment = () => {
   return (
     <div>
-      <LineGraph isHeaderDetail={true} data={userPaymentHistory} />
+      <LineGraph
+        title="Payment History"
+        isHeaderDetail={true}
+        data={userPaymentHistory}
+      />
     </div>
   );
 };
