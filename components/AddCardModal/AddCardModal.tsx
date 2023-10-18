@@ -8,7 +8,7 @@ import { ICardFormVaues } from "@/interface";
 
 interface IProps {
   handleCardModal: () => void;
-  handleShowAlert: () => void;
+  setShowALert: (input: boolean) => void;
 }
 
 const INITIAL_VALUES = {
@@ -17,7 +17,7 @@ const INITIAL_VALUES = {
   securityCode: "",
 };
 
-const AddCardModal = ({ handleCardModal, handleShowAlert }: IProps) => {
+const AddCardModal = ({ handleCardModal, setShowALert }: IProps) => {
   const [cardValues, setCardValues] = useState<ICardFormVaues>(INITIAL_VALUES);
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -27,7 +27,12 @@ const AddCardModal = ({ handleCardModal, handleShowAlert }: IProps) => {
 
     console.log({ cardNumber, endDate, securityCode });
 
-    handleShowAlert();
+    setShowALert(true);
+
+    setTimeout(() => {
+      setShowALert(false);
+    }, 2000);
+
     handleCardModal();
   };
 
