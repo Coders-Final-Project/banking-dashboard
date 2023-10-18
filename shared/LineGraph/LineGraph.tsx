@@ -6,7 +6,7 @@ import "@/sass/layout/_lineGraph.scss";
 
 import HomeLineChart from "@/charts/HomeLineChart";
 
-import { findTotalPayment } from "@/helpers/findTotalPayment";
+import { findTotalPayment } from "@/helpers";
 
 import { IUserPayment } from "@/interface";
 import { ICardReport } from "@/interface";

@@ -19,7 +19,7 @@ import { user } from "@/db/user";
 import { FormEvent } from "react";
 import { FormData } from "@/interface";
 
-import { createProgressBar } from "@/helpers/findTotalPayment";
+import { createProgressBar } from "@/helpers";
 
 const INITIAL_DATA: FormData = {
   client: "",

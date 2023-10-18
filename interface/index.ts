@@ -59,3 +59,17 @@ export type DeepPartial<T> = {
     ? DeepPartial<T[P]>
     : T[P];
 };
+
+export interface ICardFormVaues {
+  cardNumber: string;
+  endDate: string;
+  securityCode: string;
+}
+
+export interface IFilterTableProps {
+  id: number;
+  name: string;
+  iconUrl: string;
+  date: string;
+  amount: number;
+}
