@@ -128,7 +128,7 @@ $line-height3: 110%;
   line-height: $line-height1;
   letter-spacing: -0.18px;
 }
-  
+
 %button-size3 {
   font-size: $font-size10;
   font-style: $font-style;
@@ -162,6 +162,13 @@ $line-height3: 110%;
 
 %body-medium3 {
   font-size: $font-size11;
+  font-style: $font-style;
+  font-weight: $font-weight2;
+  line-height: $line-height1;
+}
+
+%body-medium4 {
+  font-size: 20px;
   font-style: $font-style;
   font-weight: $font-weight2;
   line-height: $line-height1;
