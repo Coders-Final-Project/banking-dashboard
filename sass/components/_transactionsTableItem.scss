@@ -1,0 +1,9 @@
+@import "/sass/utils/colors";
+@import "/sass/utils/variables";
+@import "/sass/utils/mixins";
+@import "/sass/base/typography";
+
+.transactions__table__item {
+  @include flexbox($justify: space-between, $items: center);
+  width: 100%;
+}

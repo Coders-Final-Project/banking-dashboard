@@ -1,0 +1,12 @@
+@import "/sass/utils/colors";
+@import "/sass/utils/variables";
+@import "/sass/utils/mixins";
+@import "/sass/base/typography";
+
+.transactions__person__img {
+  padding: 6px;
+  border-radius: 28px;
+  border: 2px solid $main-color-white;
+  background-color: $shades-of-blue-96;
+  margin-right: -12px;
+}

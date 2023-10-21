@@ -1,0 +1,23 @@
+@import "/sass/utils/colors";
+@import "/sass/utils/variables";
+@import "/sass/utils/mixins";
+@import "/sass/base/typography";
+
+.transactions__table__btn {
+  border-radius: 100px;
+  border: 1px solid $greyscale-grey-200;
+  background: $main-color-white;
+  padding: 10px 20px;
+  @include flexbox($justify: space-between, $items: center, $gap: 0.5em);
+
+  &:hover {
+    cursor: pointer;
+    opacity: 0.9;
+  }
+
+  &__text {
+    @extend %button-size4;
+    letter-spacing: -0.14px;
+    color: $main-color-black;
+  }
+}

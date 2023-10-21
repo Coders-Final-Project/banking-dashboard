@@ -1,0 +1,71 @@
+@import "/sass/utils/colors";
+@import "/sass/utils/variables";
+@import "/sass/utils/mixins";
+@import "/sass/base/typography";
+
+.transactions__table {
+  border-radius: 16px;
+  border: 1px solid $greyscale-grey-200;
+  padding: 24px;
+  width: 100%;
+  @include flexbox(
+    $direction: column,
+    $justify: space-between,
+    $items: flex-start,
+    $gap: 1.5em
+  );
+
+  &__header {
+    @include flexbox($justify: space-between, $items: center);
+    width: 100%;
+
+    &__title {
+      @extend %body-medium4;
+      color: $main-color-black;
+    }
+
+    &__btns {
+      @include flexbox($justify: space-between, $items: center, $gap: 1em);
+    }
+  }
+
+  &__content {
+    @include flexbox(
+      $direction: column,
+      $justify: space-between,
+      $items: flex-start,
+      $gap: 1.5em
+    );
+    width: 100%;
+
+    &__sortBtns {
+      border-radius: 16px;
+      border: 1px solid $greyscale-grey-300;
+      background: $greyscale-grey-50;
+      width: 100%;
+      @include flexbox($justify: space-between, $items: center);
+      padding: 10px;
+
+      &__item {
+        @include flexbox($justify: space-between, $items: center, $gap: 0.5em);
+        @extend %body-medium;
+        color: $main-color-black;
+
+        &:hover {
+          cursor: pointer;
+          opacity: 0.9;
+        }
+      }
+    }
+
+    &__actions {
+      @include flexbox(
+        $direction: column,
+        $justify: space-between,
+        $items: flex-start,
+        $gap: 1.5em
+      );
+      width: 100%;
+    }
+  }
+}
