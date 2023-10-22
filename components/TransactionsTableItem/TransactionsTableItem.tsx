@@ -2,17 +2,7 @@ import Image from "next/image";
 
 import "@/sass/components/_transactionsTableItem.scss";
 
-interface IProps {
-  personName: string;
-  personImg: string;
-  company: string;
-  paymentDate: string;
-  paymentHour: string;
-  paymentMethodUrl: string;
-  paymentTitle: string;
-  paidDate: string;
-  price: string;
-}
+import { IActionsTableProps } from "@/interface";
 
 const TransactionsTableItem = ({
   personName,
@@ -24,22 +14,24 @@ const TransactionsTableItem = ({
   paymentTitle,
   paidDate,
   price,
-}: IProps) => {
+}: IActionsTableProps) => {
   return (
     <div className="transactions__table__item">
-      <Image
-        src={personImg}
-        alt={personName}
-        width={40}
-        height={40}
-        className="transactions__table__item__img"
-      />
-      <div className="transactions__table__item__personDetail">
-        <div className="transactions__table__item__personDetail__name">
-          {personName}
-        </div>
-        <div className="transactions__table__item__personDetail__company">
-          {company}
+      <div className="transactions__table__item__person">
+        <Image
+          src={personImg}
+          alt={personName}
+          width={48}
+          height={48}
+          className="transactions__table__item__person__img"
+        />
+        <div className="transactions__table__item__person__detail">
+          <div className="transactions__table__item__person__detail__name">
+            {personName}
+          </div>
+          <div className="transactions__table__item__person__detail__company">
+            {company}
+          </div>
         </div>
       </div>
       <div className="transactions__table__item__payment">
@@ -64,7 +56,7 @@ const TransactionsTableItem = ({
       </div>
       <div className="transactions__table__item__paidDate">
         <div className="transactions__table__item__paidDate__amount">
-          {price}
+          ${price}
         </div>
         <div className="transactions__table__item__paidDate__date">
           {paidDate}

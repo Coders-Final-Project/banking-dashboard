@@ -1,6 +1,6 @@
 import { IUserPayment } from "@/interface";
 import { ICardReport } from "@/interface";
-import { IFilterTableProps } from "@/interface";
+import { IFilterTableProps, IActionsTableProps } from "@/interface";
 
 export const findTotalPayment = ({
   duration,
@@ -43,7 +43,7 @@ export const checkActiveCard = (date: string) => {
   }
 };
 
-export const filterTable = ({
+export const filterCardsTable = ({
   input,
   data,
   check,
@@ -65,6 +65,55 @@ export const filterTable = ({
   if (input === "amount") {
     return [...data].sort((a, b) =>
       !check ? b.amount - a.amount : a.amount - b.amount,
+    );
+  }
+};
+
+export const filterActionsTable = ({
+  input,
+  data,
+  check,
+}: {
+  input: string;
+  data: IActionsTableProps[];
+  check: boolean;
+}) => {
+  if (input === "client") {
+    return [...data].sort((a, b) =>
+      !check
+        ? a.personName > b.personName
+          ? 1
+          : -1
+        : a.personName > b.personName
+        ? -1
+        : 1,
+    );
+  }
+  if (input === "payment") {
+    return [...data].sort((a, b) =>
+      !check
+        ? a.paymentDate > b.paymentDate
+          ? 1
+          : -1
+        : a.paymentDate > b.paymentDate
+        ? -1
+        : 1,
+    );
+  }
+  if (input === "method") {
+    return [...data].sort((a, b) =>
+      !check
+        ? a.paymentTitle > b.paymentTitle
+          ? 1
+          : -1
+        : a.paymentTitle > b.paymentTitle
+        ? -1
+        : 1,
+    );
+  }
+  if (input === "date") {
+    return [...data].sort((a, b) =>
+      !check ? b.price - a.price : a.price - b.price,
     );
   }
 };

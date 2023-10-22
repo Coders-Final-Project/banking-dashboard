@@ -10,7 +10,7 @@ import CardActionItem from "@/components/CardActionItem/CardActionItem";
 
 import { cardTransaction } from "@/db/card";
 
-import { filterTable } from "@/helpers";
+import { filterCardsTable } from "@/helpers";
 
 const CardsTransaction = () => {
   const [cardData, setCardData] = useState(cardTransaction);
@@ -21,7 +21,7 @@ const CardsTransaction = () => {
 
     if (input === "name" || input === "date" || input === "amount") {
       const sortedData =
-        filterTable({ input, data: cardTransaction, check }) || [];
+        filterCardsTable({ input, data: cardTransaction, check }) || [];
       setCardData(sortedData);
     }
   };

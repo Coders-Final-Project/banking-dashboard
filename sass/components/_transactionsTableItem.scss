@@ -6,4 +6,110 @@
 .transactions__table__item {
   @include flexbox($justify: space-between, $items: center);
   width: 100%;
+  padding: 0 16px;
+
+  &:hover {
+    background-color: $shades-of-blue-98;
+    border-radius: 20px;
+  }
+
+  &__person {
+    @include flexbox($justify: space-between, $items: center, $gap: 1em);
+
+    &__img {
+      padding: 6px;
+      border-radius: 25px;
+      background-color: $shades-of-blue-96;
+    }
+
+    &__detail {
+      @include flexbox(
+        $direction: column,
+        $justify: space-between,
+        $items: flex-start,
+        $gap: 0.25em
+      );
+
+      &__name {
+        @extend %body-medium;
+        color: $main-color-black;
+      }
+
+      &__company {
+        @extend %body-regular2;
+        color: $greyscale-grey-500;
+      }
+    }
+  }
+
+  &__payment {
+    @include flexbox(
+      $direction: column,
+      $justify: space-between,
+      $items: flex-start,
+      $gap: 0.25em
+    );
+
+    &__date {
+      @extend %body-medium;
+      color: $main-color-black;
+    }
+
+    &__hour {
+      @extend %body-regular2;
+      color: $greyscale-grey-500;
+    }
+  }
+
+  &__method {
+    @include flexbox($justify: space-between, $items: flex-start, $gap: 0.25em);
+
+    &__text {
+      @extend %body-medium;
+      color: $main-color-black;
+    }
+  }
+
+  &__paidDate {
+    @include flexbox(
+      $direction: column,
+      $justify: space-between,
+      $items: flex-start,
+      $gap: 0.25em
+    );
+
+    &__amount {
+      @extend %body-medium;
+      color: $main-color-black;
+    }
+
+    &__date {
+      @extend %body-regular2;
+      color: $greyscale-grey-500;
+
+      span {
+        color: $greyscale-grey-300;
+        @extend %body-medium3;
+      }
+    }
+  }
+
+  &__invoiceBtn {
+    border-radius: 100px;
+    border: 1px solid $greyscale-grey-200;
+    background: $main-color-white;
+    padding: 10px 20px;
+    @include flexbox($justify: space-between, $items: center, $gap: 0.75em);
+    @extend %button-size4;
+    color: $main-color-black;
+
+    &:hover {
+      cursor: pointer;
+      opacity: 0.9;
+    }
+  }
+
+  &__dotIcon {
+    cursor: pointer;
+  }
 }
