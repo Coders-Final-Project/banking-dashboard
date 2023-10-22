@@ -1,4 +1,4 @@
-import { IUserPayment } from "@/interface";
+import { IInvoicesData, IUserPayment } from "@/interface";
 import { ICardReport } from "@/interface";
 import { IFilterTableProps } from "@/interface";
 
@@ -66,5 +66,32 @@ export const filterTable = ({
     return [...data].sort((a, b) =>
       !check ? b.amount - a.amount : a.amount - b.amount,
     );
+  }
+};
+
+export const filterInvoiceTable = ({
+  input,
+  data,
+  changeState,
+}: {
+  input: string;
+  data: IInvoicesData[];
+  changeState: boolean;
+}) => {
+  if (input == "amount") {
+    const filterAmounts = data.sort((a, b) => {
+      return !changeState ? b.amount - a.amount : a.amount - b.amount;
+    });
+
+    return filterAmounts;
+  }
+
+  if (input == "PENDING") {
+    const filteredPendings = data.filter((item) => {
+      return !changeState ? item.status == "PENDING" : item.status;
+    });
+    console.log(filteredPendings);
+
+    return filteredPendings;
   }
 };

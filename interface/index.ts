@@ -73,3 +73,11 @@ export interface IFilterTableProps {
   date: string;
   amount: number;
 }
+
+export interface IInvoicesData {
+  no: string;
+  date: string;
+  client: string;
+  amount: number;
+  status: string;
+}

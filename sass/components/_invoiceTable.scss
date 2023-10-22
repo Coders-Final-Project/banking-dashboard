@@ -1,0 +1,39 @@
+@import "/sass/utils/_colors";
+@import "/sass/utils/_variables";
+@import "/sass/utils/_mixins";
+@import "/sass/base/_typography";
+
+.invoiceTable__container {
+  display: grid;
+  grid-template-columns: repeat(6, 220px);
+  padding: 0 0 0px 16px;
+
+  &__item {
+    font-weight: 600;
+    @extend %body-regular;
+    padding-top: 24px;
+    color: $main-color-black;
+
+    .functional--btns {
+      cursor: pointer;
+    }
+
+    .yellow {
+      @extend %body-regular2;
+      padding: 4px 12px;
+      border-radius: 100px;
+      border: 1px solid;
+      background-color: $action-orange-20;
+      color: $action-orange-100;
+    }
+
+    .green {
+      @extend %body-regular2;
+      padding: 4px 12px;
+      border-radius: 100px;
+      border: 1px solid;
+      background-color: $action-orange-20;
+      color: $action-green-100;
+    }
+  }
+}
