@@ -73,3 +73,16 @@ export interface IFilterTableProps {
   date: string;
   amount: number;
 }
+
+export interface IActionsTableProps {
+  id: number;
+  personName: string;
+  personImg: string;
+  company: string;
+  paymentDate: string;
+  paymentHour: string;
+  paymentMethodUrl: string;
+  paymentTitle: string;
+  paidDate: string;
+  price: number;
+}

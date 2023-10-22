@@ -5,4 +5,19 @@
 
 .transactions {
   margin-left: 280px;
+
+  &__content {
+    padding: 24px;
+    @include flexbox(
+      $direction: column,
+      $justify: space-between,
+      $items: flex-start,
+      $gap: 2em
+    );
+
+    &__boxes {
+      @include flexbox($justify: space-between, $items: center, $gap: 2em);
+      width: 100%;
+    }
+  }
 }
