@@ -4,7 +4,7 @@ import { IFilterTableProps, IActionsTableProps } from "@/interface";
 
 export const findTotalPayment = ({
   duration,
-  data, 
+  data,
 }: {
   duration: string;
   data: IUserPayment | ICardReport;
@@ -90,11 +90,10 @@ export const filterInvoiceTable = ({
     const filteredPendings = data.filter((item) => {
       return !changeState ? item.status == "PENDING" : item.status;
     });
-    console.log(filteredPendings);
-
     return filteredPendings;
   }
-  
+};
+
 export const filterActionsTable = ({
   input,
   data,
