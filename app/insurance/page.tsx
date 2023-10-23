@@ -12,7 +12,7 @@ import { user } from "@/db/user";
 import { insuranceCoverages } from "@/db/insurance";
 
 const Insurance = () => {
-  const [isCoverageOpen, setIsCoverageOpen] = useState(false);
+  const [isCoverageOpen, setIsCoverageOpen] = useState(true);
 
   const handleCoverage = () => {
     setIsCoverageOpen((prevValue) => !prevValue);

@@ -4,6 +4,10 @@ import "@/sass/layout/_pageHeader.scss";
 import AvatarDetail from "@/shared/AvatarDetail/AvatarDetail";
 import { user } from "@/db/user";
 
+import TransactionsUp from "@/scenes/TransactionsPage/TransactionsUp";
+import TransactionsDetail from "@/scenes/TransactionsPage/TransactionsDetail";
+import TransactionTable from "@/scenes/TransactionsPage/TransactionTable";
+
 const Transactions = () => {
   return (
     <main className="transactions">
@@ -13,7 +17,13 @@ const Transactions = () => {
         </div>
         <AvatarDetail {...user} />
       </header>
-      <div className="transactions__content">transactions</div>
+      <div className="transactions__content">
+        <div className="transactions__content__boxes">
+          <TransactionsUp />
+          <TransactionsDetail />
+        </div>
+        <TransactionTable />
+      </div>
     </main>
   );
 };

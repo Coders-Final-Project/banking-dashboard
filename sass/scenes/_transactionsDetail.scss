@@ -1,0 +1,144 @@
+@import "/sass/utils/colors";
+@import "/sass/utils/variables";
+@import "/sass/utils/mixins";
+@import "/sass/base/typography";
+
+.transactions__detail {
+  border-radius: 16px;
+  border: 1px solid $greyscale-grey-200;
+  flex: 1;
+  @include flexbox($justify: space-between, $items: center, $gap: 1.5em);
+
+  &__forMonth {
+    @include flexbox($justify: space-between, $items: flex-start, $gap: 1em);
+    padding: 24px;
+    height: 200px;
+
+    &__content {
+      @include flexbox(
+        $direction: column,
+        $justify: space-between,
+        $items: flex-start,
+        $gap: 0.75em
+      );
+      width: 100%;
+
+      &__title {
+        @extend %body-medium;
+        color: $greyscale-grey-500;
+      }
+
+      &__result {
+        @include flexbox($justify: space-between, $items: center, $gap: 0.5em);
+        width: 100%;
+
+        &__number {
+          @extend %title-size1;
+          color: $main-color-black;
+        }
+
+        &__pers {
+          padding: 0px 8px;
+          border-radius: 100px;
+          background: $action-green-20;
+          @extend %body-medium;
+          color: $action-green-100;
+          display: block;
+          margin-right: 87px;
+        }
+      }
+
+      &__persons {
+        @include flexbox($justify: space-between, $items: center, $gap: 1em);
+        width: 100%;
+
+        &__list {
+          @include flexbox($justify: space-between, $items: center);
+        }
+
+        &__btn {
+          border: none;
+          outline: none;
+          background-color: transparent;
+          color: $main-color-blue;
+          @extend %body-medium3;
+          text-transform: capitalize;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+
+  &__divider {
+    width: 1px;
+    height: 148px;
+    background-color: $greyscale-grey-200;
+  }
+
+  &__balance {
+    @include flexbox($justify: space-between, $items: flex-start, $gap: 1em);
+    padding: 24px;
+    height: 200px;
+
+    &__icon {
+      padding: 8px;
+      background-color: $shades-of-blue-90;
+      border-radius: 20px;
+      border: 2px solid $main-color-blue;
+    }
+
+    &__content {
+      @include flexbox(
+        $direction: column,
+        $justify: space-between,
+        $items: flex-start,
+        $gap: 0.5em
+      );
+
+      &__title {
+        @extend %body-medium;
+        color: $greyscale-grey-500;
+        text-transform: capitalize;
+      }
+
+      &__number {
+        @extend %title-size1;
+        color: $main-color-black;
+
+        span {
+          color: $greyscale-grey-300;
+          @extend %body-medium2;
+        }
+      }
+
+      &__annual {
+        margin-top: 10px;
+        @include flexbox($justify: space-between, $items: center, $gap: 0.5em);
+        border-radius: 16px;
+        border: 1px solid $greyscale-grey-300;
+        padding: 16px;
+
+        &__title {
+          @extend %body-medium;
+          color: $main-color-black;
+          margin-right: 45px;
+        }
+
+        &__icon {
+          background-color: $shades-of-blue-90;
+          border-radius: 20px;
+          padding: 6px;
+        }
+
+        &__number {
+          @extend %body-medium;
+          color: $main-color-black;
+
+          span {
+            color: $greyscale-grey-300;
+          }
+        }
+      }
+    }
+  }
+}

@@ -74,10 +74,24 @@ export interface IFilterTableProps {
   amount: number;
 }
 
+
 export interface IInvoicesData {
   no: string;
   date: string;
   client: string;
   amount: number;
   status: string;
+}
+
+export interface IActionsTableProps {
+  id: number;
+  personName: string;
+  personImg: string;
+  company: string;
+  paymentDate: string;
+  paymentHour: string;
+  paymentMethodUrl: string;
+  paymentTitle: string;
+  paidDate: string;
+  price: number;
 }
