@@ -1,0 +1,195 @@
+@import "/sass/utils/colors";
+@import "/sass/utils/variables";
+@import "/sass/utils/mixins";
+@import "/sass/base/typography";
+
+.signup {
+  width: 100%;
+  min-height: 622px;
+  height: auto;
+  background-color: $second-color-black;
+  padding: 36px;
+  @include flexbox($justify: space-between, $items: center, $gap: 2em);
+
+  &__info {
+    @include flexbox(
+      $direction: column,
+      $justify: center,
+      $items: flex-start,
+      $gap: 1.5em
+    );
+    width: 50%;
+
+    &__title {
+      font-size: 48px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: 68px;
+      color: $main-color-white;
+    }
+
+    &__desc {
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 20px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+      width: 80%;
+    }
+  }
+
+  &__form {
+    padding: 48px 88px 54px 88px;
+    border-radius: 24px;
+    border: 1px solid rgba(102, 102, 102, 0.5);
+    background: $main-color-white;
+    width: 50%;
+    @include flexbox(
+      $direction: column,
+      $justify: space-between,
+      $items: flex-start,
+      $gap: 2em
+    );
+
+    &__title {
+      font-size: 32px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: normal;
+      color: $main-color-black;
+    }
+
+    &__content {
+      @include flexbox(
+        $direction: column,
+        $justify: space-between,
+        $items: flex-start,
+        $gap: 1em
+      );
+
+      &__namePart {
+        @include flexbox($justify: space-between, $items: center, $gap: 1em);
+        width: 100%;
+      }
+
+      &__namePart__item,
+      &__item {
+        @include flexbox(
+          $direction: column,
+          $justify: space-between,
+          $items: flex-start,
+          $gap: 0.25em
+        );
+        width: 100%;
+
+        label {
+          font-size: 16px;
+          font-style: normal;
+          font-weight: 400;
+          line-height: normal;
+          color: $greyscale-grey-500;
+        }
+
+        input {
+          border: none;
+          outline: none;
+          border-radius: 12px;
+          border: 1px solid rgba(102, 102, 102, 0.35);
+          padding: 15px;
+          width: 100%;
+        }
+
+        p {
+          font-size: 14px;
+          font-style: normal;
+          font-weight: 400;
+          line-height: normal;
+          color: $greyscale-grey-500;
+        }
+
+        &__passwordLabel {
+          @include flexbox($justify: space-between, $items: center);
+          width: 100%;
+
+          label {
+            margin-right: auto;
+          }
+
+          .toggle__password {
+            @include flexbox(
+              $justify: space-between,
+              $items: center,
+              $gap: 0.4em
+            );
+            padding-right: 10px;
+            border: none;
+            outline: none;
+            background-color: transparent;
+            height: 24px;
+
+            &:hover {
+              cursor: pointer;
+            }
+          }
+        }
+      }
+    }
+
+    &__privacy {
+      @include flexbox(
+        $direction: column,
+        $justify: space-between,
+        $items: flex-start,
+        $gap: 1em
+      );
+
+      label {
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        color: $main-color-black;
+      }
+
+      input[type="checkbox"] {
+        appearance: checkbox !important;
+      }
+    }
+
+    &__btns {
+      @include flexbox($justify: space-between, $items: center, $gap: 1.5em);
+
+      &__submit {
+        padding: 15px 40px 16px 40px;
+        border-radius: 40px;
+        opacity: 0.25;
+        background: $main-color-black;
+        color: $main-color-white;
+        text-align: center;
+        font-size: 22px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+        border: none;
+        outline: none;
+
+        &:hover {
+          cursor: pointer;
+        }
+      }
+
+      p {
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        color: $main-color-black;
+
+        .singup__switch {
+          text-decoration-line: underline;
+          color: $main-color-black;
+        }
+      }
+    }
+  }
+}

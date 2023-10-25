@@ -82,7 +82,7 @@ const Invoices = () => {
               </div>
               <div>
                 <button>
-                  <img
+                  <Image
                     src="/assets/invoices/edit.png"
                     alt="copy"
                     height={24}
@@ -90,7 +90,7 @@ const Invoices = () => {
                   />
                 </button>
                 <button>
-                  <img
+                  <Image
                     src="/assets/invoices/copy.png"
                     alt="copy"
                     height={24}

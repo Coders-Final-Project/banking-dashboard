@@ -2,9 +2,9 @@ import "@/sass/pages/_contracts.scss";
 import "@/sass/layout/_pageHeader.scss";
 
 import AvatarDetail from "@/shared/AvatarDetail/AvatarDetail";
-import ContractsSummary from "../../scenes/ContractPage/ContractsSummary";
-import ContractsActive from "../../scenes/ContractPage/ContractsActive";
-import ContractsClient from "../../scenes/ContractPage/ContractsClient";
+import ContractsSummary from "@/scenes/ContractPage/ContractsSummary";
+import ContractsActive from "@/scenes/ContractPage/ContractsActive";
+import ContractsClient from "@/scenes/ContractPage/ContractsClient";
 
 import { user } from "@/db/user";
 
