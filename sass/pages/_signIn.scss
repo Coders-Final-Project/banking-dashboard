@@ -136,6 +136,10 @@
       }
     }
 
+    &__btn.active {
+      opacity: 1;
+    }
+
     &__forgetPass {
       width: 100%;
       text-align: center;

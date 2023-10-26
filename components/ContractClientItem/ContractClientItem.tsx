@@ -2,8 +2,6 @@ import Image from "next/image";
 
 import "@/sass/components/_contractClientItem.scss";
 
-import Button from "../Button/Button";
-
 import { IContractClient } from "@/interface";
 
 const ContractClientItem = ({

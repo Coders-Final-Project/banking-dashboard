@@ -3,12 +3,44 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import "@/sass/pages/_signUp.scss";
 
+const initialValues = {
+  firstName: "",
+  lastName: "",
+  email: "",
+  phone: "",
+  password: "",
+};
+
 const SignUp = () => {
   const [passwordType, setPasswordType] = useState("password");
+  const [formValues, setFormValues] = useState(initialValues);
+  const [privacyAgree, serPrivacyAgree] = useState(false);
+  const [error, setError] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [serverError, setServerError] = useState("");
+
+  useEffect(() => {
+    if (success) {
+      setTimeout(() => {
+        setSuccess(false);
+      }, 1000);
+    }
+    if (error) {
+      setTimeout(() => {
+        setError(false);
+      }, 1000);
+    }
+    if (serverError !== "") {
+      setTimeout(() => {
+        setServerError("");
+      }, 1000);
+    }
+  }, [success, error, serverError]);
 
   const handlePasswordHide = (e: React.FormEvent) => {
     e.preventDefault();
@@ -20,6 +52,53 @@ const SignUp = () => {
     }
   };
 
+  const handleChange = ({
+    target,
+  }: {
+    target: { name: string; value: string };
+  }) => {
+    setFormValues((prevValues) => ({
+      ...prevValues,
+      [target.name]: target.value,
+    }));
+  };
+
+  const handlePrivacy = () => {
+    serPrivacyAgree(!privacyAgree);
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const { firstName, lastName, email, phone, password } = formValues;
+
+    if (!firstName || !lastName || !email || !phone || !password) {
+      setError(true);
+      return;
+    }
+
+    try {
+      setSending(true);
+      await fetchMockData();
+      setFormValues(initialValues);
+      setSuccess(true);
+      setSending(false);
+    } catch (error: any) {
+      setServerError(error.message);
+      setFormValues(initialValues);
+      setSending(false);
+    }
+  };
+
+  //WILL CHANGE
+  function fetchMockData() {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve("s");
+        console.log(formValues);
+      }, 2000);
+    });
+  }
+
   return (
     <section className="signup">
       <div className="signup__info">
@@ -29,26 +108,50 @@ const SignUp = () => {
           all your card info in one place. No more juggling, just joy! 🚀
         </div>
       </div>
-      <form className="signup__form">
+      <form className="signup__form" onSubmit={handleSubmit}>
         <div className="signup__form__title">Sign up now</div>
         <div className="signup__form__content">
           <div className="signup__form__content__namePart">
             <div className="signup__form__content__namePart__item">
               <label htmlFor="firstname">First name</label>
-              <input type="text" id="firstname" />
+              <input
+                type="text"
+                id="firstname"
+                name="firstName"
+                value={formValues.firstName}
+                onChange={handleChange}
+              />
             </div>
             <div className="signup__form__content__namePart__item">
               <label htmlFor="lastname">Last name</label>
-              <input type="text" id="lastname" />
+              <input
+                type="text"
+                id="lastname"
+                name="lastName"
+                value={formValues.lastName}
+                onChange={handleChange}
+              />
             </div>
           </div>
           <div className="signup__form__content__item">
             <label htmlFor="email">Email address</label>
-            <input type="mail" id="email" />
+            <input
+              type="email"
+              id="email"
+              name="email"
+              value={formValues.email}
+              onChange={handleChange}
+            />
           </div>
           <div className="signup__form__content__item">
             <label htmlFor="phone">Phone number</label>
-            <input type="phone" id="phone" />
+            <input
+              type="phone"
+              id="phone"
+              name="phone"
+              value={formValues.phone}
+              onChange={handleChange}
+            />
           </div>
           <div className="signup__form__content__item">
             <div className="signup__form__content__item__passwordLabel">
@@ -66,7 +169,13 @@ const SignUp = () => {
                 <p className="toggle__password__text">Hide</p>
               </button>
             </div>
-            <input type={passwordType} id="password" />
+            <input
+              type={passwordType}
+              id="password"
+              name="password"
+              value={formValues.password}
+              onChange={handleChange}
+            />
             <p>
               Use 8 or more characters with a mix of letters, numbers & symbols
             </p>
@@ -74,23 +183,30 @@ const SignUp = () => {
         </div>
         <div className="signup__form__privacy">
           <div className="signup__form__privacy__item">
-            <input type="checkbox" id="terms" />
+            <input type="checkbox" id="terms" onChange={handlePrivacy} />
             <label htmlFor="terms">
-              By creating an account, I agree to our Terms of use and Privacy
-              Policy.
-            </label>
-          </div>
-          <div className="signup__form__privacy__item">
-            <input type="checkbox" id="adds" />
-            <label htmlFor="adds">
-              By creating an account, I am also consenting to receive SMS
-              messages and emails, including product new feature updates,
-              events, and marketing promotions.
+              I agree to our{" "}
+              <Link href="#" className="link">
+                Terms of use
+              </Link>{" "}
+              and{" "}
+              <Link href="#" className="link">
+                Privacy Policy
+              </Link>
+              .
             </label>
           </div>
         </div>
         <div className="signup__form__btns">
-          <button className="signup__form__btns__submit">Sign up</button>
+          <button
+            className={`signup__form__btns__submit ${
+              privacyAgree && !sending && "active"
+            }`}
+            disabled={sending || !privacyAgree}
+            type="submit"
+          >
+            {sending ? "Sending..." : "Sign Up"}
+          </button>
           <p>
             Already have an ccount?{" "}
             <Link href="/signin" className="singup__switch">
@@ -99,6 +215,23 @@ const SignUp = () => {
           </p>
         </div>
       </form>
+      {success && (
+        <div className="pop-up pop-up__success">
+          <h2 className="pop-up__text__success">
+            Message was successfully sent!
+          </h2>
+        </div>
+      )}
+      {error && (
+        <div className="pop-up pop-up__error">
+          <h2 className="pop-up__text__error">Please, fill all the fields!</h2>
+        </div>
+      )}
+      {serverError !== "" && (
+        <div className="pop-up pop-up__error">
+          <h2 className="pop-up__text__error">{serverError}</h2>
+        </div>
+      )}
     </section>
   );
 };

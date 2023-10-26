@@ -7,8 +7,14 @@ import Image from "next/image";
 import "@/sass/pages/_signIn.scss";
 import Link from "next/link";
 
+const initialValues = {
+  key: "",
+  password: "",
+};
+
 const SignIn = () => {
   const [passwordType, setPasswordType] = useState("password");
+  const [formValues, setFormValues] = useState(initialValues);
 
   const handlePasswordHide = (e: React.FormEvent) => {
     e.preventDefault();
@@ -20,13 +26,43 @@ const SignIn = () => {
     }
   };
 
+  const handleChange = ({
+    target,
+  }: {
+    target: { name: string; value: string };
+  }) => {
+    setFormValues((prevValues) => ({
+      ...prevValues,
+      [target.name]: target.value,
+    }));
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const { key, password } = formValues;
+
+    if (!key || !password) {
+      return;
+    }
+
+    //WILL CHANGE
+    setFormValues(initialValues);
+    console.log(formValues);
+  };
+
   return (
     <section className="signIn">
-      <form className="signIn__form">
+      <form className="signIn__form" onSubmit={handleSubmit}>
         <div className="signIn__form__title">Log in</div>
         <div className="signIn__form__item">
           <label htmlFor="key">Email address or user name</label>
-          <input type="text" id="key" />
+          <input
+            type="text"
+            id="key"
+            name="key"
+            value={formValues.key}
+            onChange={handleChange}
+          />
         </div>
         <div className="signIn__form__item">
           <div className="signIn__form__item__passwordLabel">
@@ -44,7 +80,13 @@ const SignIn = () => {
               <p className="toggle__password__text">Hide</p>
             </button>
           </div>
-          <input type={passwordType} id="pass" />
+          <input
+            type={passwordType}
+            id="pass"
+            name="password"
+            value={formValues.password}
+            onChange={handleChange}
+          />
           <div className="remember__me">
             <input type="checkbox" id="remember" />
             <label htmlFor="remember">Remember me</label>
@@ -61,7 +103,15 @@ const SignIn = () => {
           </Link>
           .
         </div>
-        <button className="signIn__form__btn">Log in</button>
+        <button
+          className={`signIn__form__btn ${
+            formValues.key && formValues.password && "active"
+          }`}
+          disabled={!formValues.key || !formValues.password}
+          type="submit"
+        >
+          Log in
+        </button>
         <Link href="#" className="signIn__form__forgetPass">
           Forget your password
         </Link>
