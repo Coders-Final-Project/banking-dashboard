@@ -12,6 +12,8 @@ export const metadata: Metadata = {
   description: "Coders Final Project",
 };
 
+const x = "asds";
+
 export default function RootLayout({
   children,
 }: {

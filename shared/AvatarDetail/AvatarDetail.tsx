@@ -1,4 +1,12 @@
+"use client";
+
 import Image from "next/image";
+import Link from "next/link";
+
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+
+import axios from "axios";
 
 import "@/sass/layout/_avatarDetail.scss";
 
@@ -13,6 +21,19 @@ interface Props {
 }
 
 const AvatarDetail = ({ name, position, imgUrl, hasBtn }: Props) => {
+  const [serverError, setServerError] = useState("");
+
+  const router = useRouter();
+
+  const handleLogout = async () => {
+    try {
+      await axios.get("/api/user/logout");
+      router.push("/signin");
+    } catch (error: any) {
+      setServerError(error.message);
+    }
+  };
+
   return (
     <div className="avatar__detail">
       {hasBtn && (
@@ -43,7 +64,26 @@ const AvatarDetail = ({ name, position, imgUrl, hasBtn }: Props) => {
             {position}
           </div>
         </div>
+        <div className="avatar__detail__person__dropdown">
+          <Link
+            href="/settings"
+            className="avatar__detail__person__dropdown__profile"
+          >
+            Profile
+          </Link>
+          <button
+            onClick={handleLogout}
+            className="avatar__detail__person__dropdown__logoutBtn"
+          >
+            Logout
+          </button>
+        </div>
       </div>
+      {serverError !== "" && (
+        <div className="pop-up pop-up__error">
+          <h2 className="pop-up__text__error">{serverError}</h2>
+        </div>
+      )}
     </div>
   );
 };

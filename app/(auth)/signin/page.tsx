@@ -1,20 +1,36 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+
+import axios from "axios";
 
 import Image from "next/image";
 
 import "@/sass/pages/_signIn.scss";
 import Link from "next/link";
 
+import { useRouter } from "next/navigation";
+
 const initialValues = {
-  key: "",
+  email: "",
   password: "",
 };
 
 const SignIn = () => {
   const [passwordType, setPasswordType] = useState("password");
   const [formValues, setFormValues] = useState(initialValues);
+  const [sending, setSending] = useState(false);
+  const [serverError, setServerError] = useState("");
+
+  const router = useRouter();
+
+  useEffect(() => {
+    if (serverError !== "") {
+      setTimeout(() => {
+        setServerError("");
+      }, 1000);
+    }
+  }, [serverError]);
 
   const handlePasswordHide = (e: React.FormEvent) => {
     e.preventDefault();
@@ -37,17 +53,25 @@ const SignIn = () => {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const { key, password } = formValues;
+    const { email, password } = formValues;
 
-    if (!key || !password) {
+    if (!email || !password) {
       return;
     }
 
-    //WILL CHANGE
-    setFormValues(initialValues);
-    console.log(formValues);
+    try {
+      setSending(true);
+      const response = await axios.post("/api/user/signin", formValues);
+      console.log(response.data);
+      router.push("/");
+    } catch (error: any) {
+      setServerError(error.message);
+    } finally {
+      setSending(false);
+      setFormValues(initialValues);
+    }
   };
 
   return (
@@ -55,12 +79,12 @@ const SignIn = () => {
       <form className="signIn__form" onSubmit={handleSubmit}>
         <div className="signIn__form__title">Log in</div>
         <div className="signIn__form__item">
-          <label htmlFor="key">Email address or user name</label>
+          <label htmlFor="email">Email address</label>
           <input
-            type="text"
-            id="key"
-            name="key"
-            value={formValues.key}
+            type="email"
+            id="email"
+            name="email"
+            value={formValues.email}
             onChange={handleChange}
           />
         </div>
@@ -105,12 +129,12 @@ const SignIn = () => {
         </div>
         <button
           className={`signIn__form__btn ${
-            formValues.key && formValues.password && "active"
+            formValues.email && formValues.password && !sending && "active"
           }`}
-          disabled={!formValues.key || !formValues.password}
+          disabled={!formValues.email || !formValues.password}
           type="submit"
         >
-          Log in
+          {sending ? "Sending..." : "Log In"}
         </button>
         <Link href="#" className="signIn__form__forgetPass">
           Forget your password
@@ -122,6 +146,11 @@ const SignIn = () => {
           </Link>
         </div>
       </form>
+      {serverError !== "" && (
+        <div className="pop-up pop-up__error">
+          <h2 className="pop-up__text__error">{serverError}</h2>
+        </div>
+      )}
     </section>
   );
 };

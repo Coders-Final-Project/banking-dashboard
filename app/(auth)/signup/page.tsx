@@ -3,6 +3,10 @@
 import Image from "next/image";
 import Link from "next/link";
 
+import axios from "axios";
+
+import { useRouter } from "next/navigation";
+
 import { useState, useEffect } from "react";
 
 import "@/sass/pages/_signUp.scss";
@@ -13,6 +17,8 @@ const initialValues = {
   email: "",
   phone: "",
   password: "",
+  job: "",
+  image: "",
 };
 
 const SignUp = () => {
@@ -23,6 +29,8 @@ const SignUp = () => {
   const [success, setSuccess] = useState(false);
   const [sending, setSending] = useState(false);
   const [serverError, setServerError] = useState("");
+
+  const router = useRouter();
 
   useEffect(() => {
     if (success) {
@@ -69,35 +77,37 @@ const SignUp = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const { firstName, lastName, email, phone, password } = formValues;
+    const { firstName, lastName, email, phone, password, job, image } =
+      formValues;
 
-    if (!firstName || !lastName || !email || !phone || !password) {
+    if (
+      !firstName ||
+      !lastName ||
+      !email ||
+      !phone ||
+      !password ||
+      !job ||
+      !image
+    ) {
       setError(true);
       return;
     }
 
     try {
       setSending(true);
-      await fetchMockData();
+      const response = await axios.post("/api/user/signup", formValues);
+
+      router.push("/signin");
+
       setFormValues(initialValues);
       setSuccess(true);
-      setSending(false);
     } catch (error: any) {
       setServerError(error.message);
       setFormValues(initialValues);
+    } finally {
       setSending(false);
     }
   };
-
-  //WILL CHANGE
-  function fetchMockData() {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        resolve("s");
-        console.log(formValues);
-      }, 2000);
-    });
-  }
 
   return (
     <section className="signup">
@@ -140,6 +150,26 @@ const SignUp = () => {
               id="email"
               name="email"
               value={formValues.email}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="signup__form__content__item">
+            <label htmlFor="job">Your job</label>
+            <input
+              type="text"
+              id="job"
+              name="job"
+              value={formValues.job}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="signup__form__content__item">
+            <label htmlFor="image">Your Image</label>
+            <input
+              type="file"
+              id="image"
+              name="image"
+              value={formValues.image}
               onChange={handleChange}
             />
           </div>
