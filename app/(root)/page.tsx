@@ -15,13 +15,13 @@ export default function Home() {
       <header className="page__header">
         <div className="page__header__welcome">
           <div className="page__header__welcome__title">
-            Good morning, {user.name.split(" ")[0]}
+            Welcome, {user.name.split(" ")[0]}
           </div>
           <div className="page__header__welcome__desc">
             Here is your dashboard overview.
           </div>
         </div>
-        <AvatarDetail {...user} hasBtn />
+        <AvatarDetail hasBtn />
       </header>
       <div className="home__content">
         <HomeTotal />

@@ -8,7 +8,6 @@ import "@/sass/pages/_insurance.scss";
 import "@/sass/layout/_pageHeader.scss";
 
 import AvatarDetail from "@/shared/AvatarDetail/AvatarDetail";
-import { user } from "@/db/user";
 import { insuranceCoverages } from "@/db/insurance";
 
 const Insurance = () => {
@@ -28,7 +27,7 @@ const Insurance = () => {
             money on insurance.
           </div>
         </div>
-        <AvatarDetail {...user} />
+        <AvatarDetail />
       </header>
       <div className="insurance__place">
         <div className="insurance__place__text">I live in</div>

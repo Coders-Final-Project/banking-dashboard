@@ -15,7 +15,6 @@ import ContractPayment from "@/scenes/ContractForms/ContractPayment";
 import ContractScope from "@/scenes/ContractForms/ContractScope";
 import ContractSign from "@/scenes/ContractForms/ContractSign";
 
-import { user } from "@/db/user";
 import { FormEvent } from "react";
 import { FormData } from "@/interface";
 
@@ -125,7 +124,7 @@ const ContractCreate = () => {
             </p>
           </div>
         </div>
-        <AvatarDetail {...user} />
+        <AvatarDetail />
       </header>
       <div
         className="contract__create__progressBar"

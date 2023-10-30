@@ -46,8 +46,9 @@
         color: $greyscale-grey-500;
       }
 
+      input[type="password"],
       input[type="email"],
-      input[type="password"] {
+      input[type="text"] {
         border: none;
         outline: none;
         border-radius: 12px;
@@ -87,10 +88,10 @@
       }
 
       .remember__me {
-        @include flexbox($justify: space-between, $items: center, $gap: 0.2em);
+        @include flexbox($justify: flex-start, $items: center, $gap: 0.2em);
         margin-top: 0.5em;
 
-        input[type="checkbox"] {
+        input {
           appearance: checkbox !important;
         }
 

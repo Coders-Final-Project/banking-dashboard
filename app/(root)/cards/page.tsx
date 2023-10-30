@@ -9,8 +9,6 @@ import CardsReport from "@/scenes/CardsPage/CardsReport";
 import CardsTransaction from "@/scenes/CardsPage/CardsTransaction";
 import CardsDetail from "@/scenes/CardsPage/CardsDetail";
 
-import { user } from "@/db/user";
-
 const Cards = () => {
   return (
     <main className="cards">
@@ -18,7 +16,7 @@ const Cards = () => {
         <div className="page__header__welcome">
           <div className="page__header__welcome__title">Cards</div>
         </div>
-        <AvatarDetail {...user} />
+        <AvatarDetail />
       </header>
       <div className="cards__content">
         <div className="cards__content__stats">

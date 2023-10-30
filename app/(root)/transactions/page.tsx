@@ -2,7 +2,6 @@ import "@/sass/pages/_transactions.scss";
 import "@/sass/layout/_pageHeader.scss";
 
 import AvatarDetail from "@/shared/AvatarDetail/AvatarDetail";
-import { user } from "@/db/user";
 
 import TransactionsUp from "@/scenes/TransactionsPage/TransactionsUp";
 import TransactionsDetail from "@/scenes/TransactionsPage/TransactionsDetail";
@@ -15,7 +14,7 @@ const Transactions = () => {
         <div className="page__header__welcome">
           <div className="page__header__welcome__title">Transactions</div>
         </div>
-        <AvatarDetail {...user} />
+        <AvatarDetail />
       </header>
       <div className="transactions__content">
         <div className="transactions__content__boxes">

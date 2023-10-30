@@ -3,7 +3,6 @@
 import React, { useState } from "react";
 import "@/sass/layout/_pageHeader.scss";
 import "@/sass/pages/_invoices.scss";
-import { user } from "@/db/user";
 import { invoicesData } from "@/db/invoices";
 import AvatarDetail from "@/shared/AvatarDetail/AvatarDetail";
 import Image from "next/image";
@@ -35,7 +34,7 @@ const Invoices = () => {
           <div className="page__header__welcome">
             <div className="page__header__welcome__title">Invoices</div>
           </div>
-          <AvatarDetail {...user} />
+          <AvatarDetail />
         </header>
 
         <div className="grid__container">

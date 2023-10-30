@@ -3,8 +3,10 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+
+import { user } from "@/db/user";
 
 import axios from "axios";
 
@@ -13,14 +15,10 @@ import "@/sass/layout/_avatarDetail.scss";
 import Button from "@/components/Button/Button";
 
 interface Props {
-  id: number;
-  name: string;
-  position: string;
-  imgUrl: string;
   hasBtn?: boolean;
 }
 
-const AvatarDetail = ({ name, position, imgUrl, hasBtn }: Props) => {
+const AvatarDetail = ({ hasBtn }: Props) => {
   const [serverError, setServerError] = useState("");
 
   const router = useRouter();
@@ -52,16 +50,16 @@ const AvatarDetail = ({ name, position, imgUrl, hasBtn }: Props) => {
       />
       <div className="avatar__detail__person">
         <Image
-          src={`/assets/home/${imgUrl}`}
-          alt={name}
+          src={`/assets/home/person-chris.png`}
+          alt={user.name}
           width={40}
           height={40}
           className="avatar__detail__person__img"
         />
         <div className="avatar__detail__person__info">
-          <div className="avatar__detail__person__info__name">{name}</div>
+          <div className="avatar__detail__person__info__name">{user.name}</div>
           <div className="avatar__detail__person__info__position">
-            {position}
+            {user.position}
           </div>
         </div>
         <div className="avatar__detail__person__dropdown">

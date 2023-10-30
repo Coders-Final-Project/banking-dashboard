@@ -3,7 +3,6 @@ import Image from "next/image";
 import "@/sass/pages/_documents.scss";
 import "@/sass/layout/_pageHeader.scss";
 
-import { user } from "@/db/user";
 import AvatarDetail from "@/shared/AvatarDetail/AvatarDetail";
 import DocumentItem from "@/scenes/DocumentsPage/DocumentItem";
 import DocumentAside from "@/scenes/DocumentsPage/DocumentAside";
@@ -21,10 +20,9 @@ const Documents = () => {
             local laws and your legal structure.
           </div>
         </div>
-        <AvatarDetail {...user} />
+        <AvatarDetail />
       </header>
 
-      
       <div className="documents__content">
         <div className="documents__content__warning">
           <Image
