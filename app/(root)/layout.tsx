@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { GlobalContextProvider } from "@/context/store";
 
 import "@/sass/style.scss";
 
@@ -12,8 +13,6 @@ export const metadata: Metadata = {
   description: "Coders Final Project",
 };
 
-const x = "asds";
-
 export default function RootLayout({
   children,
 }: {
@@ -22,8 +21,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Sidebar />
-        {children}
+        <GlobalContextProvider>
+          <Sidebar />
+          {children}
+        </GlobalContextProvider>
       </body>
     </html>
   );

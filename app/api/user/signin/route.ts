@@ -44,6 +44,8 @@ export async function POST(request: NextRequest) {
       expiresIn: process.env.TOKEN_EXPIRES_IN,
     });
 
+    NextResponse.next();
+
     const response = NextResponse.json({
       message: "Login successful",
       success: true,

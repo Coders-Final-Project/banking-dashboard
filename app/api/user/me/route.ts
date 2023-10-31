@@ -10,7 +10,7 @@ export async function GET(request: NextRequest) {
   connectToDB();
 
   try {
-    const userId = getDataFromToken(request);
+    const userId = await getDataFromToken(request);
     const user = await User.findOne({ _id: userId }).select("firstName job");
 
     return NextResponse.json({
