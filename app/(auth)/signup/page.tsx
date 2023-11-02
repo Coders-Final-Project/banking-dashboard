@@ -7,7 +7,7 @@ import axios from "axios";
 
 import { useRouter } from "next/navigation";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 import "@/sass/pages/_signUp.scss";
 
@@ -18,7 +18,6 @@ const initialValues = {
   phone: "",
   password: "",
   job: "",
-  image: "",
 };
 
 const SignUp = () => {
@@ -77,24 +76,16 @@ const SignUp = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const { firstName, lastName, email, phone, password, job, image } =
-      formValues;
+    const { firstName, lastName, email, phone, password, job } = formValues;
 
-    if (
-      !firstName ||
-      !lastName ||
-      !email ||
-      !phone ||
-      !password ||
-      !job ||
-      !image
-    ) {
+    if (!firstName || !lastName || !email || !phone || !password || !job) {
       setError(true);
       return;
     }
 
     try {
       setSending(true);
+
       const response = await axios.post("/api/user/signup", formValues);
 
       router.push("/signin");
@@ -160,16 +151,6 @@ const SignUp = () => {
               id="job"
               name="job"
               value={formValues.job}
-              onChange={handleChange}
-            />
-          </div>
-          <div className="signup__form__content__item">
-            <label htmlFor="image">Your Image</label>
-            <input
-              type="file"
-              id="image"
-              name="image"
-              value={formValues.image}
               onChange={handleChange}
             />
           </div>

@@ -11,7 +11,7 @@ export async function POST(request: NextRequest) {
 
   const reqBody = await request.json();
 
-  const { firstName, lastName, email, phone, password, job, image } = reqBody;
+  const { firstName, lastName, email, phone, password, job } = reqBody;
 
   const user = await User.findOne({ email });
 
@@ -30,7 +30,6 @@ export async function POST(request: NextRequest) {
     lastName,
     email,
     job,
-    image,
     phone,
     password: hashedPassword,
   });
