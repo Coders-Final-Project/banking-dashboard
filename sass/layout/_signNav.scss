@@ -1,0 +1,40 @@
+@import "/sass/utils/colors";
+@import "/sass/utils/variables";
+@import "/sass/utils/mixins";
+@import "/sass/base/typography";
+
+.sign__nav {
+  background-color: $main-color-white;
+  height: 73px;
+  width: 100%;
+  padding: 17px 40px 16px 40px;
+  @include flexbox($justify: space-between, $items: center, $gap: 1em);
+  border-bottom: 1px solid $main-color-black;
+  position: relative;
+  overflow: hidden;
+
+  &__langOptions {
+    margin-left: auto;
+    border: none;
+    outline: none;
+    color: $main-color-black;
+    font-size: 16px;
+    width: 50px;
+  }
+
+  &__loginBtn {
+    padding: 7.5px 25.5px 8.5px 25.5px;
+    background-color: $main-color-black;
+    color: $main-color-white;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    text-decoration: none;
+
+    &:hover {
+      cursor: pointer;
+      opacity: 0.9;
+    }
+  }
+}
