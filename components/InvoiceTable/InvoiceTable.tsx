@@ -17,39 +17,35 @@ const InvoiceTable = ({ invoicesData }: IInvoicesProps) => {
   return (
     <>
       <div>
-        {invoicesData?.map((item) => {
+        {invoicesData?.map((item, index) => {
           return (
-            <>
-              <div className="invoiceTable__container">
-                <div className="invoiceTable__container__item">{item.no}</div>
-                <div className="invoiceTable__container__item">{item.date}</div>
-                <div className="invoiceTable__container__item">
-                  {item.client}
-                </div>
-                <div className="invoiceTable__container__item">
-                  ${item.amount}
-                </div>
-                <div
-                  className="invoiceTable__container__item"
-                  style={{ display: "flex", justifyContent: "space-between" }}
-                >
-                  <div
-                    {...(item.status == "PENDING"
-                      ? { className: "yellow" }
-                      : { className: "green" })}
-                  >
-                    {item.status}
-                  </div>
-                  <Image
-                    src="/assets/invoices/3dots.png"
-                    alt="dots"
-                    width={24}
-                    height={24}
-                    className="functional--btns"
-                  />
-                </div>
+            <div className="invoiceTable__container" key={index}>
+              <div className="invoiceTable__container__item">{item.no}</div>
+              <div className="invoiceTable__container__item">{item.date}</div>
+              <div className="invoiceTable__container__item">{item.client}</div>
+              <div className="invoiceTable__container__item">
+                ${item.amount}
               </div>
-            </>
+              <div
+                className="invoiceTable__container__item"
+                style={{ display: "flex", justifyContent: "space-between" }}
+              >
+                <div
+                  {...(item.status == "PENDING"
+                    ? { className: "yellow" }
+                    : { className: "green" })}
+                >
+                  {item.status}
+                </div>
+                <Image
+                  src="/assets/invoices/3dots.png"
+                  alt="dots"
+                  width={24}
+                  height={24}
+                  className="functional--btns"
+                />
+              </div>
+            </div>
           );
         })}
 

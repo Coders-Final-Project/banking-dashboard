@@ -4,10 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import "@/sass/scenes/_cardsTransaction.scss";
 import CardActionItem from "@/components/CardActionItem/CardActionItem";
-import { cardTransaction } from "@/db/card"
-
-import { filterTable } from "@/helpers";
-
+import { cardTransaction } from "@/db/card";
 import { filterCardsTable } from "@/helpers";
 
 const CardsTransaction = () => {
