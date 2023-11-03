@@ -228,9 +228,7 @@ const SignUp = () => {
       </form>
       {success && (
         <div className="pop-up pop-up__success">
-          <h2 className="pop-up__text__success">
-            Message was successfully sent!
-          </h2>
+          <h2 className="pop-up__text__success">Successfully Signed Up!</h2>
         </div>
       )}
       {error && (
