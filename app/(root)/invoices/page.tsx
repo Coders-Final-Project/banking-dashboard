@@ -3,7 +3,6 @@
 import React, { useState } from "react";
 import "@/sass/layout/_pageHeader.scss";
 import "@/sass/pages/_invoices.scss";
-import { user } from "@/db/user";
 import { invoicesData } from "@/db/invoices";
 import AvatarDetail from "@/shared/AvatarDetail/AvatarDetail";
 import Image from "next/image";
@@ -82,7 +81,7 @@ const Invoices = () => {
               </div>
               <div>
                 <button>
-                  <img
+                  <Image
                     src="/assets/invoices/edit.png"
                     alt="copy"
                     height={24}
@@ -90,7 +89,7 @@ const Invoices = () => {
                   />
                 </button>
                 <button>
-                  <img
+                  <Image
                     src="/assets/invoices/copy.png"
                     alt="copy"
                     height={24}
