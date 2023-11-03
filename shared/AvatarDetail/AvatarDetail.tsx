@@ -52,7 +52,7 @@ const AvatarDetail = ({ hasBtn }: Props) => {
       />
       <div className="avatar__detail__person">
         <Image
-          src={`/assets/home/person-chris.png`}
+          src={`/assets/user/user.png`}
           alt={data.firstName}
           width={40}
           height={40}
