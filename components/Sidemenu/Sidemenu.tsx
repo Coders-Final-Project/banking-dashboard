@@ -26,7 +26,6 @@ const Sidemenu = ({ setOpenSideMenu }: IProps) => {
   const [inputs, setInputs] = useState([
     { item: "", rate: "", hours: "", total: "" },
   ]);
-  console.log(inputs);
 
   const handleAddInput = () => {
     setInputs([...inputs, { item: "", rate: "", hours: "", total: "" }]);
