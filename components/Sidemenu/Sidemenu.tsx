@@ -36,9 +36,12 @@ const Sidemenu = ({ setOpenSideMenu }: IProps) => {
     index: number,
   ) => {
     let { name, value } = event.target;
+
     let onChangeValue = [...inputs];
     onChangeValue[index][name] = value;
     setInputs(onChangeValue);
+
+    console.log(onChangeValue);
   };
 
   // const handleDeleteInput = (index: number) => {
@@ -82,13 +85,9 @@ const Sidemenu = ({ setOpenSideMenu }: IProps) => {
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const obj = {};
+    let newObj = inputs.reduce((a, b) => Object.assign(a, b), {});
 
-    inputs.forEach((element, index: number | string) => {
-      obj[`key${index}`] = element;
-    });
-
-    console.log({ ...inputValues, ...obj });
+    console.log({ ...inputValues, ...newObj });
 
     setInputValues({
       email: "",
