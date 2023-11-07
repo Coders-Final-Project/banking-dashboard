@@ -13,8 +13,6 @@ export async function GET(request: NextRequest) {
     const userId = await getDataFromToken(request);
     const user = await User.findOne({ _id: userId }).select("firstName job");
 
-    console.log(user);
-
     return NextResponse.json({
       message: "User found",
       data: user,
