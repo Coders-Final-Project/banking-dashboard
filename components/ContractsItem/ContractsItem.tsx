@@ -2,6 +2,8 @@ import Image from "next/image";
 
 import "@/sass/components/_contractsItem.scss";
 
+import { defineCompanyImage } from "@/helpers";
+
 import { ICompanyContracts } from "@/interface";
 
 const ContractsItem = ({ client, company, rate, date }: ICompanyContracts) => {
@@ -9,7 +11,7 @@ const ContractsItem = ({ client, company, rate, date }: ICompanyContracts) => {
     <div className="contracts__content__active__body__item">
       <div className="contracts__content__active__body__item__main">
         <Image
-          src="/assets/contracts/pashaBank.jpg"
+          src={`/assets/contracts/${defineCompanyImage(company)}`}
           alt={company}
           width={48}
           height={48}

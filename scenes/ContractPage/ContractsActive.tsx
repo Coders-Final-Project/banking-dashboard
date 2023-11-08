@@ -27,7 +27,7 @@ const ContractsActive = () => {
   );
 
   useEffect(() => {
-    const fetchCompanyContracts = cache(async () => {
+    const fetchCompanyContracts = async () => {
       try {
         if (data._id) {
           const response = await axios.post("/api/contracts/fetch", {
@@ -38,7 +38,7 @@ const ContractsActive = () => {
       } catch (error: any) {
         console.log(error);
       }
-    });
+    };
 
     fetchCompanyContracts();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -68,5 +68,3 @@ const ContractsActive = () => {
 };
 
 export default ContractsActive;
-
-export const revalidate = 10;

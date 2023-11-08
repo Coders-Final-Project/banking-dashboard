@@ -142,3 +142,17 @@ export const filterActionsTable = ({
     );
   }
 };
+
+type CompanyImages = {
+  [key: string]: string;
+};
+
+export const defineCompanyImage = (companyName: string): string | undefined => {
+  const companies: CompanyImages = {
+    "Pasha Bank": "pashaBank.jpg",
+    "Kapital Bank": "kapitalBank.png",
+    "Bank of Bank": "bankOfBaku.jpg",
+  };
+
+  return companies[companyName];
+};
