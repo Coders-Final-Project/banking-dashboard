@@ -4,7 +4,11 @@ import { useState, useEffect } from "react";
 
 import { useRouter } from "next/navigation";
 
+import axios from "axios";
+
 import AvatarDetail from "@/shared/AvatarDetail/AvatarDetail";
+
+import { useGlobalContext } from "@/context/store";
 
 import { useMultiplestepForm } from "@/hooks/useMultiplestepForm";
 
@@ -22,8 +26,8 @@ import { createProgressBar } from "@/helpers";
 
 const INITIAL_DATA: FormData = {
   client: "",
-  compnay: "",
-  job: "",
+  company: "Pasha Bank",
+  rate: "",
   projectName: "",
   currency: "USD",
   date: "",
@@ -39,6 +43,8 @@ const ContractCreate = () => {
   const [successAlert, setSuccessAlert] = useState(false);
 
   const router = useRouter();
+
+  const userData = useGlobalContext();
 
   const updateFields = (fields: Partial<FormData>) => {
     setData((prev) => {
@@ -86,7 +92,7 @@ const ContractCreate = () => {
     }
   }, [errorAlert, successAlert]);
 
-  const onSubmit = (e: FormEvent) => {
+  const onSubmit = async (e: FormEvent) => {
     e.preventDefault();
     if (!isLastStep) return next();
 
@@ -95,7 +101,11 @@ const ContractCreate = () => {
       setTimeout(() => {
         router.replace("/contracts");
       }, 1000);
-      console.log(data);
+
+      const response = await axios.post(`/api/contracts/company`, {
+        data,
+        userID: userData.data._id,
+      });
     } else {
       setErrorAlert(true);
     }

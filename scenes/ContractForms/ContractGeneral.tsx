@@ -4,8 +4,8 @@ import ContractFormWrapper from "@/components/ContractFormWrapper/ContractFormWr
 
 type GeneralFormData = {
   client: string;
-  compnay: string;
-  job: string;
+  company: string;
+  rate: string;
   projectName: string;
   currency: string;
   date: string;
@@ -17,8 +17,8 @@ type GeneralFormProps = GeneralFormData & {
 
 const ContractGeneral = ({
   client,
-  compnay,
-  job,
+  company,
+  rate,
   projectName,
   currency,
   date,
@@ -40,24 +40,26 @@ const ContractGeneral = ({
       <div className="contract__general__twoColumn">
         <div className="contract__general__oneColumn">
           <label htmlFor="company">Company</label>
-          <input
-            type="text"
+          <select
             id="company"
+            value={company}
+            onChange={(e) => updateFields({ company: e.target.value })}
             required
-            placeholder="Enter company name"
-            value={compnay}
-            onChange={(e) => updateFields({ compnay: e.target.value })}
-          />
+          >
+            <option value="Pasha Bank">Pasha Bank</option>
+            <option value="Kapital Bank">Kapital Bank</option>
+            <option value="Bank of Baku">Bank of Baku</option>
+          </select>
         </div>
         <div className="contract__general__oneColumn">
-          <label htmlFor="job">Job title</label>
+          <label htmlFor="job">Fixed Rate</label>
           <input
             type="text"
-            id="job"
+            id="rate"
             required
-            placeholder="Enter job title"
-            value={job}
-            onChange={(e) => updateFields({ job: e.target.value })}
+            placeholder="Enter fixed rate"
+            value={rate}
+            onChange={(e) => updateFields({ rate: e.target.value })}
           />
         </div>
       </div>

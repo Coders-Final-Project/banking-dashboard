@@ -2,22 +2,14 @@ import Image from "next/image";
 
 import "@/sass/components/_contractsItem.scss";
 
-import { IContractItem } from "@/interface";
+import { ICompanyContracts } from "@/interface";
 
-const ContractsItem = ({
-  companyImg,
-  company,
-  companyLocation,
-  amount,
-  clientName,
-  startDate,
-  endDate,
-}: IContractItem) => {
+const ContractsItem = ({ client, company, rate, date }: ICompanyContracts) => {
   return (
     <div className="contracts__content__active__body__item">
       <div className="contracts__content__active__body__item__main">
         <Image
-          src={companyImg}
+          src="/assets/contracts/pashaBank.jpg"
           alt={company}
           width={48}
           height={48}
@@ -28,12 +20,12 @@ const ContractsItem = ({
             {company}
           </div>
           <div className="contracts__content__active__body__item__main__detail__location">
-            {companyLocation}
+            Azerbaijan
           </div>
         </div>
         <div className="contracts__content__active__body__item__main__amount">
           <div className="contracts__content__active__body__item__main__amount__number">
-            ${amount}
+            ${rate}
           </div>
           <div className="contracts__content__active__body__item__main__amount__rate">
             Fixed Rate
@@ -47,7 +39,8 @@ const ContractsItem = ({
             Contract Period
           </div>
           <div className="contracts__content__active__body__item__secondary__period__date">
-            {startDate} - {endDate}
+            {/* {startDate} - {endDate} */}
+            {date}
           </div>
         </div>
         <div className="contracts__content__active__body__item__secondary__client">
@@ -55,7 +48,7 @@ const ContractsItem = ({
             Client Name
           </div>
           <div className="contracts__content__active__body__item__secondary__client__name">
-            {clientName}
+            {client}
           </div>
         </div>
       </div>
