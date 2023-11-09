@@ -3,16 +3,19 @@
 import React, { useState } from "react";
 import "@/sass/layout/_pageHeader.scss";
 import "@/sass/pages/_invoices.scss";
+import { user } from "@/db/user";
 import { invoicesData } from "@/db/invoices";
 import AvatarDetail from "@/shared/AvatarDetail/AvatarDetail";
 import Image from "next/image";
 import InvoiceTable from "@/components/InvoiceTable/InvoiceTable";
 import { IInvoicesData } from "@/interface";
 import { filterInvoiceTable } from "@/helpers";
+import Sidemenu from "@/components/Sidemenu/Sidemenu";
 
 const Invoices = () => {
   const [invoiceData, setInvoiceData] = useState<IInvoicesData[]>(invoicesData);
-  const [changeState, setChangeState] = useState(false);
+  const [changeState, setChangeState] = useState<boolean>(false);
+  const [openSideMenu, setOpenSideMenu] = useState<boolean>(false);
 
   const handleSubmit = (input: string) => {
     setChangeState((prev) => !prev);
@@ -27,9 +30,15 @@ const Invoices = () => {
     }
   };
 
+  const openSidemenu = () => {
+    setOpenSideMenu((prev) => !prev);
+  };
+
   return (
     <>
       <main className="page">
+        {openSideMenu ? <Sidemenu setOpenSideMenu={setOpenSideMenu} /> : null}
+
         <header className="page__header">
           <div className="page__header__welcome">
             <div className="page__header__welcome__title">Invoices</div>
@@ -80,16 +89,17 @@ const Invoices = () => {
                 invopay.to/<span>clientname</span>
               </div>
               <div>
-                <button>
-                  <Image
+                <button onClick={openSidemenu}>
+                  <img
                     src="/assets/invoices/edit.png"
                     alt="copy"
                     height={24}
                     width={24}
+                    style={{ cursor: "pointer" }}
                   />
                 </button>
                 <button>
-                  <Image
+                  <img
                     src="/assets/invoices/copy.png"
                     alt="copy"
                     height={24}
@@ -155,7 +165,7 @@ const Invoices = () => {
               <div>
                 <p>No</p>
                 <Image
-                  src="/assets/cards/arrows.png"
+                  src="/assets/invoices/arrows.png"
                   alt="arrow"
                   width={24}
                   height={24}
@@ -164,7 +174,7 @@ const Invoices = () => {
               <div>
                 <p> Date Created</p>
                 <Image
-                  src="/assets/cards/arrows.png"
+                  src="/assets/invoices/arrows.png"
                   alt="arrow"
                   width={24}
                   height={24}
@@ -173,7 +183,7 @@ const Invoices = () => {
               <div>
                 <p>Client</p>
                 <Image
-                  src="/assets/cards/arrows.png"
+                  src="/assets/invoices/arrows.png"
                   alt="arrow"
                   width={24}
                   height={24}
@@ -182,7 +192,7 @@ const Invoices = () => {
               <div>
                 <p onClick={() => handleSubmit("amount")}>Amount</p>
                 <Image
-                  src="/assets/cards/arrows.png"
+                  src="/assets/invoices/arrows.png"
                   alt="arrow"
                   width={24}
                   height={24}
@@ -191,7 +201,7 @@ const Invoices = () => {
               <div>
                 <p onClick={() => handleSubmit("PENDING")}>Status</p>
                 <Image
-                  src="/assets/cards/arrows.png"
+                  src="/assets/invoices/arrows.png"
                   alt="arrow"
                   width={24}
                   height={24}
