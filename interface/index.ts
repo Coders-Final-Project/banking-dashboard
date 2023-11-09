@@ -41,8 +41,8 @@ export interface IContractClient {
 
 export interface FormData {
   client: string;
-  compnay: string;
-  job: string;
+  company: string;
+  rate: string;
   projectName: string;
   currency: string;
   date: string;
@@ -74,7 +74,6 @@ export interface IFilterTableProps {
   amount: number;
 }
 
-
 export interface IInvoicesData {
   no: string;
   date: string;
@@ -94,4 +93,23 @@ export interface IActionsTableProps {
   paymentTitle: string;
   paidDate: string;
   price: number;
+}
+
+export interface ICompanyContracts {
+  _id: number;
+  userID: number;
+  client: string;
+  company: string;
+  rate: string;
+  projectName: string;
+  currency: string;
+  date: string;
+  workSpace: string;
+  cycleEnd: string;
+  paymentDue: string;
+  isSIgned: boolean;
+}
+
+export interface StateProps {
+  companyContracts: ICompanyContracts[];
 }

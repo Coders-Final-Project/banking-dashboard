@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { GlobalContextProvider } from "@/context/store";
+import { Providers } from "@/globalRedux/provider";
 
 import "@/sass/style.scss";
 
@@ -22,8 +23,10 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <GlobalContextProvider>
-          <Sidebar />
-          {children}
+          <Providers>
+            <Sidebar />
+            {children}
+          </Providers>
         </GlobalContextProvider>
       </body>
     </html>

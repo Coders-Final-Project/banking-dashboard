@@ -45,31 +45,31 @@ const userSchema = new mongoose.Schema(
     cards: [
       {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Cards",
+        ref: "Card",
       },
     ],
     companyContracts: [
       {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "CompanyContracts",
+        ref: "CompanyContract",
       },
     ],
     clientContracts: [
       {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "ClientContracts",
+        ref: "ClientContract",
       },
     ],
     invoices: [
       {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Invoices",
+        ref: "Invoice",
       },
     ],
     transactions: [
       {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Transactions",
+        ref: "Transaction",
       },
     ],
   },

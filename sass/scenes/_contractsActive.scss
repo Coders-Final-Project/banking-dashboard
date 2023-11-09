@@ -43,7 +43,7 @@
   &__body {
     @include flexbox(
       $direction: column,
-      $justify: space-between,
+      $justify: flex-start,
       $items: flex-start,
       $gap: 1em
     );

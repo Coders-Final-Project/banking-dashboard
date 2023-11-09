@@ -1,5 +1,6 @@
 "use client";
 
+import { ICompanyContracts } from "@/interface";
 import axios from "axios";
 
 import {
