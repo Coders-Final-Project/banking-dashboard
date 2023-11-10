@@ -9,9 +9,12 @@ const initialState: StateProps = {
   companyContracts: [],
   userCard: {
     _id: -1,
+    userName: "",
+    userSurname: "",
     securityCode: "",
     cardNumber: "",
     endDate: "",
+    balance: 0,
   },
 };
 

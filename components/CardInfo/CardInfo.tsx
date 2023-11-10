@@ -5,8 +5,12 @@ import "@/sass/components/_cardInfo.scss";
 import { activeCard } from "@/db/card";
 
 import { hideCardNumbers, checkActiveCard } from "@/helpers";
+import { useSelector } from "react-redux";
+import { StateProps } from "@/interface";
 
 const CardInfo = () => {
+  const userCard = useSelector((state: StateProps) => state.userCard);
+
   return (
     <div className="cards__detail__info">
       <div className="cards__detail__info__heading">
@@ -25,7 +29,8 @@ const CardInfo = () => {
             Card Number
           </div>
           <div className="cards__detail__info__content__item__value">
-            {hideCardNumbers(activeCard.cardNumber)}
+            {hideCardNumbers(userCard.cardNumber)}{" "}
+            {!userCard.cardNumber && "1234"}
           </div>
         </div>
         <div className="cards__detail__info__content__item">
@@ -33,7 +38,7 @@ const CardInfo = () => {
             Balance
           </div>
           <div className="cards__detail__info__content__item__value">
-            {activeCard.balance}
+            ${userCard.balance !== 0 ? userCard.balance : "0,000"}
           </div>
         </div>
         <div className="cards__detail__info__content__item">
@@ -41,7 +46,8 @@ const CardInfo = () => {
             Currency
           </div>
           <div className="cards__detail__info__content__item__value">
-            {activeCard.currency}
+            {/* {activeCard.currency} */}
+            USD
           </div>
         </div>
         <div className="cards__detail__info__content__item">
@@ -49,7 +55,7 @@ const CardInfo = () => {
             Status Card
           </div>
           <div className="cards__detail__info__content__item__value">
-            {activeCard.statusCard}
+            {userCard.endDate !== "" ? userCard.endDate : "04/03"}{" "}
             <span>({checkActiveCard(activeCard.statusCard)})</span>
           </div>
         </div>

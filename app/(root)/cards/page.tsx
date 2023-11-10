@@ -3,6 +3,8 @@ import "@/sass/layout/_pageHeader.scss";
 
 import "@/sass/pages/_cards.scss";
 
+import axios from "axios";
+
 import AvatarDetail from "@/shared/AvatarDetail/AvatarDetail";
 import CardsSummary from "@/scenes/CardsPage/CardsSummary";
 import CardsReport from "@/scenes/CardsPage/CardsReport";

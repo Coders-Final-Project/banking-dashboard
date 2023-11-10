@@ -8,7 +8,7 @@ import { useSelector, useDispatch } from "react-redux";
 
 import { setUserCardInfo } from "@/globalRedux/features/appSlice";
 
-import { ICardFormVaues } from "@/interface";
+import { ICardFormVaues, StateProps } from "@/interface";
 import axios from "axios";
 import { useGlobalContext } from "@/context/store";
 
@@ -33,16 +33,11 @@ const AddCardModal = ({ handleCardModal, setShowALert }: IProps) => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const { cardNumber, endDate, securityCode } = cardValues;
-
-    console.log({ cardNumber, endDate, securityCode });
-
     const response = await axios.post("api/card", {
       cardValues,
       userID: data._id,
     });
-    // dispatch(setUserCardInfo(response.data));
-    console.log(response);
+    dispatch(setUserCardInfo(response.data.savedCard));
 
     setShowALert(true);
 
