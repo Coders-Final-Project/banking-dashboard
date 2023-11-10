@@ -110,6 +110,14 @@ export interface ICompanyContracts {
   isSIgned: boolean;
 }
 
+export interface CardProps {
+  _id: number;
+  cardNumber: string;
+  endDate: string;
+  securityCode: string;
+}
+
 export interface StateProps {
   companyContracts: ICompanyContracts[];
+  userCard: CardProps;
 }

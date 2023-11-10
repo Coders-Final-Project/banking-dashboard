@@ -3,10 +3,16 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 
-import { ICompanyContracts, StateProps } from "@/interface";
+import { ICompanyContracts, StateProps, CardProps } from "@/interface";
 
 const initialState: StateProps = {
   companyContracts: [],
+  userCard: {
+    _id: -1,
+    securityCode: "",
+    cardNumber: "",
+    endDate: "",
+  },
 };
 
 export const appSlice = createSlice({
@@ -19,9 +25,12 @@ export const appSlice = createSlice({
     ) => {
       state.companyContracts = action.payload;
     },
+    setUserCardInfo: (state, action: PayloadAction<CardProps>) => {
+      state.userCard = action.payload;
+    },
   },
 });
 
-export const { setCompanyContracts } = appSlice.actions;
+export const { setCompanyContracts, setUserCardInfo } = appSlice.actions;
 
 export default appSlice.reducer;

@@ -4,7 +4,13 @@ import { useState } from "react";
 
 import "@/sass/components/_addCardModal.scss";
 
+import { useSelector, useDispatch } from "react-redux";
+
+import { setUserCardInfo } from "@/globalRedux/features/appSlice";
+
 import { ICardFormVaues } from "@/interface";
+import axios from "axios";
+import { useGlobalContext } from "@/context/store";
 
 interface IProps {
   handleCardModal: () => void;
@@ -20,12 +26,23 @@ const INITIAL_VALUES = {
 const AddCardModal = ({ handleCardModal, setShowALert }: IProps) => {
   const [cardValues, setCardValues] = useState<ICardFormVaues>(INITIAL_VALUES);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const dispatch = useDispatch();
+
+  const { data } = useGlobalContext();
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     const { cardNumber, endDate, securityCode } = cardValues;
 
     console.log({ cardNumber, endDate, securityCode });
+
+    const response = await axios.post("api/card", {
+      cardValues,
+      userID: data._id,
+    });
+    // dispatch(setUserCardInfo(response.data));
+    console.log(response);
 
     setShowALert(true);
 
@@ -64,7 +81,11 @@ const AddCardModal = ({ handleCardModal, setShowALert }: IProps) => {
   };
 
   return (
-    <form className="add__card__modal" onSubmit={handleSubmit}>
+    <form
+      className="add__card__modal"
+      autoComplete="off"
+      onSubmit={handleSubmit}
+    >
       <div className="cards__detail__addModal">
         <div className="cards__detail__addModal__item">
           <label htmlFor="cardNumber">Card Number</label>

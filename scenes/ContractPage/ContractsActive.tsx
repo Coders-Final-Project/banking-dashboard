@@ -15,7 +15,7 @@ import { setCompanyContracts } from "@/globalRedux/features/appSlice";
 
 import { StateProps } from "@/interface";
 
-import { cache, useEffect } from "react";
+import { useEffect } from "react";
 
 const ContractsActive = () => {
   const dispatch = useDispatch();
