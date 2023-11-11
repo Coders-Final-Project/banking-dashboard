@@ -16,6 +16,7 @@ export async function POST(request: NextRequest) {
   const user = await User.findById(userID);
 
   const newCard = new Card({
+    userID,
     userName: user.firstName,
     userSurname: user.lastName,
     cardNumber,
@@ -26,6 +27,9 @@ export async function POST(request: NextRequest) {
 
   try {
     const savedCard = await newCard.save();
+
+    await user.cards.push(savedCard._id);
+    await user.save();
 
     return NextResponse.json({
       message: "Card created successfully",

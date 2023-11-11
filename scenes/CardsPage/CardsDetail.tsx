@@ -28,9 +28,11 @@ const CardsAdd = () => {
     <div className="cards__detail">
       <div className="cards__detail__add">
         <div className="cards__detail__add__title">Your Cards</div>
-        <button className="cards__detail__add__btn" onClick={handleCardModal}>
-          Add Card <span>+</span>
-        </button>
+        {userCard._id === -1 && (
+          <button className="cards__detail__add__btn" onClick={handleCardModal}>
+            Add Card <span>+</span>
+          </button>
+        )}
       </div>
       <div className="cards__detail__ownCard">
         <div className="cards__detail__ownCard__content">
@@ -105,8 +107,8 @@ const CardsAdd = () => {
           </div>
         </div>
         <div className="cards__detail__ownCard__personName">
-          {userCard.userName !== "" ? userCard.userName : "John"}{" "}
-          {userCard.userSurname !== "" ? userCard.userSurname : "Doe"}
+          {userCard.userName !== "" ? userCard.userName : "Name"}{" "}
+          {userCard.userSurname !== "" ? userCard.userSurname : "Surname"}
         </div>
       </div>
       <CardInfo />

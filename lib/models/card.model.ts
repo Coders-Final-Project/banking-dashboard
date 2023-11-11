@@ -16,6 +16,6 @@ const cardSchema = new mongoose.Schema(
   { timestamps: true },
 );
 
-const Card = mongoose.model("Card", cardSchema);
+const Card = mongoose.models.Card || mongoose.model("Card", cardSchema);
 
 export default Card;

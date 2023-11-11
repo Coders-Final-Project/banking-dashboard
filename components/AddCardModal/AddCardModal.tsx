@@ -33,11 +33,13 @@ const AddCardModal = ({ handleCardModal, setShowALert }: IProps) => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const response = await axios.post("api/card", {
-      cardValues,
-      userID: data._id,
-    });
-    dispatch(setUserCardInfo(response.data.savedCard));
+    if (data._id) {
+      const response = await axios.post("api/card", {
+        cardValues,
+        userID: data._id,
+      });
+      dispatch(setUserCardInfo(response.data.savedCard));
+    }
 
     setShowALert(true);
 
