@@ -27,7 +27,7 @@ const ContractsItem = ({ client, company, rate, date }: ICompanyContracts) => {
         </div>
         <div className="contracts__content__active__body__item__main__amount">
           <div className="contracts__content__active__body__item__main__amount__number">
-            ${rate}
+            {rate} ₼
           </div>
           <div className="contracts__content__active__body__item__main__amount__rate">
             Fixed Rate

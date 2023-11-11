@@ -38,7 +38,7 @@ const CardInfo = () => {
             Balance
           </div>
           <div className="cards__detail__info__content__item__value">
-            ${userCard.balance !== 0 ? userCard.balance : "0,000"}
+            {userCard.balance !== 0 ? userCard.balance : "0,000"} ₼
           </div>
         </div>
         <div className="cards__detail__info__content__item">
@@ -47,7 +47,7 @@ const CardInfo = () => {
           </div>
           <div className="cards__detail__info__content__item__value">
             {/* {activeCard.currency} */}
-            USD
+            AZN
           </div>
         </div>
         <div className="cards__detail__info__content__item">

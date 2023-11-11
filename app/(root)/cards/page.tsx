@@ -44,7 +44,7 @@ const Cards = () => {
 
     fetchCardInfo();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [data]);
 
   return (
     <main className="cards">
