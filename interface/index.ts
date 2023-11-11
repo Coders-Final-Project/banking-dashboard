@@ -112,9 +112,12 @@ export interface ICompanyContracts {
 
 export interface CardProps {
   _id: number;
+  userName: string;
+  userSurname: string;
   cardNumber: string;
   endDate: string;
   securityCode: string;
+  balance: number;
 }
 
 export interface StateProps {

@@ -6,9 +6,12 @@ import Image from "next/image";
 
 import "@/sass/scenes/_cardsDetail.scss";
 
+import { useSelector } from "react-redux";
+
 import CardInfo from "@/components/CardInfo/CardInfo";
 import CardReportItem from "@/components/CardReportItem/CardReportItem";
 import AddCardModal from "@/components/AddCardModal/AddCardModal";
+import { StateProps } from "@/interface";
 
 const CardsAdd = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -19,13 +22,17 @@ const CardsAdd = () => {
     setIsModalOpen((prevValue) => !prevValue);
   };
 
+  const userCard = useSelector((state: StateProps) => state.userCard);
+
   return (
     <div className="cards__detail">
       <div className="cards__detail__add">
         <div className="cards__detail__add__title">Your Cards</div>
-        <button className="cards__detail__add__btn" onClick={handleCardModal}>
-          Add Card <span>+</span>
-        </button>
+        {userCard._id === -1 && (
+          <button className="cards__detail__add__btn" onClick={handleCardModal}>
+            Add Card <span>+</span>
+          </button>
+        )}
       </div>
       <div className="cards__detail__ownCard">
         <div className="cards__detail__ownCard__content">
@@ -34,7 +41,7 @@ const CardsAdd = () => {
               Currenct Balance
             </div>
             <div className="cards__detail__ownCard__content__balance__amount">
-              $0,000
+              {userCard.balance !== 0 ? userCard.balance : "0,000"} ₼
             </div>
           </div>
           <div className="cards__detail__ownCard__content__logo">
@@ -52,9 +59,13 @@ const CardsAdd = () => {
         </div>
         <div className="cards__detail__ownCard__additional">
           <div className="cards__detail__ownCard__additional__cardNumber">
-            1234 5678 9123 4567
+            {userCard.cardNumber !== ""
+              ? userCard.cardNumber
+              : "1234 5678 9123 4567"}
           </div>
-          <div className="cards__detail__ownCard__additional__date">04/03</div>
+          <div className="cards__detail__ownCard__additional__date">
+            {userCard.endDate !== "" ? userCard.endDate : "04/03"}
+          </div>
         </div>
         <div className="cards__detail__ownCard__cvv">
           <div className="cards__detail__ownCard__cvv__resource">
@@ -71,7 +82,9 @@ const CardsAdd = () => {
           </div>
           <div className="cards__detail__ownCard__cvv__info">
             <div className="cards__detail__ownCard__cvv__info__text">CVV</div>
-            <div className="cards__detail__ownCard__cvv__info__value">999</div>
+            <div className="cards__detail__ownCard__cvv__info__value">
+              {userCard.securityCode !== "" ? userCard.securityCode : "123"}
+            </div>
           </div>
           <div className="cards__detail__ownCard__cvv__logos">
             <Image
@@ -89,11 +102,14 @@ const CardsAdd = () => {
               className="cards__detail__ownCard__cvv__frame"
             />
             <div className="cards__detail__ownCard__cvv__logos__date">
-              03/04
+              {userCard.endDate !== "" ? userCard.endDate : "04/03"}
             </div>
           </div>
         </div>
-        <div className="cards__detail__ownCard__personName">John Doe</div>
+        <div className="cards__detail__ownCard__personName">
+          {userCard.userName !== "" ? userCard.userName : "Name"}{" "}
+          {userCard.userSurname !== "" ? userCard.userSurname : "Surname"}
+        </div>
       </div>
       <CardInfo />
       <div className="cards__detail__divider" />

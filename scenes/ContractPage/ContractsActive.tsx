@@ -11,7 +11,10 @@ import axios from "axios";
 import { useGlobalContext } from "@/context/store";
 
 import { useSelector, useDispatch } from "react-redux";
-import { setCompanyContracts } from "@/globalRedux/features/appSlice";
+import {
+  setCompanyContracts,
+  setUserCardInfo,
+} from "@/globalRedux/features/appSlice";
 
 import { StateProps } from "@/interface";
 

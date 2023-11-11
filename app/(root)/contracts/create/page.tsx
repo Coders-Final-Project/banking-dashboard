@@ -29,7 +29,7 @@ const INITIAL_DATA: FormData = {
   company: "Pasha Bank",
   rate: "",
   projectName: "",
-  currency: "USD",
+  currency: "AZN",
   date: "",
   workScope: "",
   cycleEnd: "Last day of the month",
