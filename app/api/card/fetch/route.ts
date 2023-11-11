@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
 import { connectToDB } from "@/lib/mongoose";
+
 import Card from "@/lib/models/card.model";
 
 export async function POST(request: NextRequest) {
