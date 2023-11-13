@@ -3,7 +3,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 
-import { ICompanyContracts, StateProps, CardProps } from "@/interface";
+import {
+  ICompanyContracts,
+  StateProps,
+  CardProps,
+  CurrenctLangProps,
+} from "@/interface";
 
 const initialState: StateProps = {
   companyContracts: [],
@@ -15,6 +20,9 @@ const initialState: StateProps = {
     cardNumber: "",
     endDate: "",
     balance: 0,
+  },
+  curLang: {
+    value: "en",
   },
 };
 
@@ -31,9 +39,13 @@ export const appSlice = createSlice({
     setUserCardInfo: (state, action: PayloadAction<CardProps>) => {
       state.userCard = action.payload;
     },
+    setCurrenctLang: (state, action: PayloadAction<CurrenctLangProps>) => {
+      state.curLang = action.payload;
+    },
   },
 });
 
-export const { setCompanyContracts, setUserCardInfo } = appSlice.actions;
+export const { setCompanyContracts, setUserCardInfo, setCurrenctLang } =
+  appSlice.actions;
 
 export default appSlice.reducer;

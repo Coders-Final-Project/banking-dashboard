@@ -16,15 +16,23 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
+  params,
 }: {
   children: React.ReactNode;
+  params: { locale: string };
 }) {
+  const { locale } = params;
+
   return (
-    <html lang="en">
+    <html lang={locale}>
       <body className={inter.className}>
         <GlobalContextProvider>
           <Providers>
-            <Sidebar />
+            <Sidebar
+              params={{
+                locale,
+              }}
+            />
             {children}
           </Providers>
         </GlobalContextProvider>
