@@ -91,6 +91,6 @@ export const config = {
     "/transactions",
     "/signin",
     "/signup",
-    "/((?!api|_next/static|_next/image|img/|favicon.ico).*)",
+    // "/((?!api|_next/static|_next/image|img/|favicon.ico).*)",
   ],
 };

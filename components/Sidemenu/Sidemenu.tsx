@@ -38,6 +38,7 @@ const Sidemenu = ({ setOpenSideMenu }: IProps) => {
     let { name, value } = event.target;
 
     let onChangeValue = [...inputs];
+    //@ts-ignore
     onChangeValue[index][name] = value;
     setInputs(onChangeValue);
 
@@ -111,7 +112,7 @@ const Sidemenu = ({ setOpenSideMenu }: IProps) => {
           <div className="sidemenu__code--codeid">#MF-235712</div>
           <div className="sidemenu__code--codecopy">
             <Image
-              src="/assets/invoices/copy.svg"
+              src="/assets/invoices/copy.png"
               alt="copy-icon"
               width={20}
               height={20}

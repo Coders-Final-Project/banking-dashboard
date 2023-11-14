@@ -92,7 +92,7 @@ const Invoices = () => {
                 <button onClick={openSidemenu}>
                   <Image
                     src="/assets/invoices/edit.png"
-                    alt="copy"
+                    alt="edit"
                     height={24}
                     width={24}
                     style={{ cursor: "pointer" }}

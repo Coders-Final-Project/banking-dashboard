@@ -22,7 +22,7 @@ input {
   opacity: 0.4;
   background-color: $main-color-black;
   overflow-x: hidden;
-  z-index: 1;
+  z-index: 999;
 }
 
 .sidemenu {
