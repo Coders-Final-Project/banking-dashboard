@@ -24,9 +24,10 @@ const initialState: StateProps = {
   curLang: {
     value: "en",
   },
+  insuranceCompleted: false,
 };
 
-export const appSlice = createSlice({
+export const appSlice: any = createSlice({
   name: "app",
   initialState,
   reducers: {
@@ -42,10 +43,17 @@ export const appSlice = createSlice({
     setCurrenctLang: (state, action: PayloadAction<CurrenctLangProps>) => {
       state.curLang = action.payload;
     },
+    setInsuranceCompleted: (state, action: PayloadAction<boolean>) => {
+      state.insuranceCompleted = true;
+    },
   },
 });
 
-export const { setCompanyContracts, setUserCardInfo, setCurrenctLang } =
-  appSlice.actions;
+export const {
+  setCompanyContracts,
+  setUserCardInfo,
+  setCurrenctLang,
+  setInsuranceCompleted,
+} = appSlice.actions;
 
 export default appSlice.reducer;

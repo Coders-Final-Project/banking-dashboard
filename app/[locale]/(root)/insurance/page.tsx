@@ -7,14 +7,48 @@ import Image from "next/image";
 import "@/sass/pages/_insurance.scss";
 import "@/sass/layout/_pageHeader.scss";
 
+import axios from "axios";
+import { useGlobalContext } from "@/context/store";
+
+import { useRouter } from "next/navigation";
+
 import AvatarDetail from "@/shared/AvatarDetail/AvatarDetail";
 import { insuranceCoverages } from "@/db/insurance";
+import { StateProps } from "@/interface";
+import { useSelector } from "react-redux";
 
 const Insurance = () => {
   const [isCoverageOpen, setIsCoverageOpen] = useState(true);
 
+  const router = useRouter();
+
+  const { data } = useGlobalContext();
+
+  const { userCard, insuranceCompleted } = useSelector(
+    (state: StateProps) => state,
+  );
+
   const handleCoverage = () => {
     setIsCoverageOpen((prevValue) => !prevValue);
+  };
+
+  const handleAddInsurance = async () => {
+    if (userCard._id === -1) {
+      router.push("/cards");
+      return;
+    }
+
+    try {
+      if (data._id) {
+        const response = await axios.post("/api/insurance", {
+          userID: data._id,
+        });
+
+        console.log(response);
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -52,9 +86,20 @@ const Insurance = () => {
               $50<span>/month</span>
             </div>
             <div className="insurance__content__card__header__divider" />
-            <button className="insurance__content__card__header__btn">
-              Apply for Coverage
-            </button>
+            {insuranceCompleted ? (
+              <div className="insurance__content__card__header__done">
+                You applied already!
+              </div>
+            ) : (
+              <button
+                className="insurance__content__card__header__btn"
+                onClick={handleAddInsurance}
+              >
+                {userCard._id === -1
+                  ? "Add Card Before Apply"
+                  : "Apply for Coverage"}
+              </button>
+            )}
           </div>
           <div className="insurance__content__card__divider" />
           <div className="insurance__content__card__desc">

@@ -10,9 +10,13 @@ import { useGlobalContext } from "@/context/store";
 
 import axios from "axios";
 
+import { useSelector, useDispatch } from "react-redux";
+
 import "@/sass/layout/_avatarDetail.scss";
 
 import Button from "@/components/Button/Button";
+import { StateProps } from "@/interface";
+import { setUserCardInfo } from "@/globalRedux/features/appSlice";
 
 interface Props {
   hasBtn?: boolean;
@@ -23,7 +27,32 @@ const AvatarDetail = ({ hasBtn }: Props) => {
 
   const { data } = useGlobalContext();
 
+  const dispatch = useDispatch();
+
   const router = useRouter();
+
+  useEffect(() => {
+    const fetchCardInfo = async () => {
+      try {
+        if (data._id) {
+          const response = await axios.post("/api/card/fetch", {
+            userID: data._id,
+          });
+
+          if (response.data.card[0] !== undefined) {
+            dispatch(setUserCardInfo(response.data.card[0]));
+          }
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchCardInfo();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data]);
+
+  const userCard = useSelector((state: StateProps) => state.userCard);
 
   const handleLogout = async () => {
     try {
@@ -36,11 +65,11 @@ const AvatarDetail = ({ hasBtn }: Props) => {
 
   return (
     <div className="avatar__detail">
-      {hasBtn && (
+      {hasBtn && userCard._id !== -1 && (
         <Button
           text="create a contract"
           icon="frame.png"
-          url="/contracts/create"
+          url="en/contracts/create"
         />
       )}
       <Image

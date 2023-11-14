@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 
 import "@/sass/scenes/_contractsActive.scss";
 
@@ -25,8 +26,8 @@ const ContractsActive = () => {
 
   const { data } = useGlobalContext();
 
-  const companyContracts = useSelector(
-    (state: StateProps) => state.companyContracts,
+  const { companyContracts, userCard } = useSelector(
+    (state: StateProps) => state,
   );
 
   useEffect(() => {
@@ -62,6 +63,15 @@ const ContractsActive = () => {
         />
       </div>
       <div className="contracts__content__active__body">
+        {userCard._id === -1 && (
+          <Link
+            href="/cards"
+            className="contracts__content__active__body__empty"
+          >
+            Add card in order to create any contract
+          </Link>
+        )}
+
         {companyContracts?.map((contract) => (
           <ContractsItem key={contract._id} {...contract} />
         ))}

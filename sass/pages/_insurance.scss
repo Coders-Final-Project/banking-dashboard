@@ -82,6 +82,12 @@
             opacity: 0.9;
           }
         }
+
+        &__done {
+          color: $main-color-blue;
+          font-size: 17px;
+          font-weight: 500;
+        }
       }
 
       &__desc {

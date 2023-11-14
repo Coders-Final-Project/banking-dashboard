@@ -16,6 +16,7 @@ type DataType = {
   _id: string;
   firstName: string;
   job: string;
+  insuranceCompleted: boolean;
 };
 
 interface ContextProps {
@@ -23,7 +24,7 @@ interface ContextProps {
 }
 
 const GlobalContext = createContext<ContextProps>({
-  data: { _id: "", firstName: "", job: "" },
+  data: { _id: "", firstName: "", job: "", insuranceCompleted: false },
 });
 
 export const GlobalContextProvider = ({
@@ -35,6 +36,7 @@ export const GlobalContextProvider = ({
     _id: "",
     firstName: "",
     job: "",
+    insuranceCompleted: false,
   });
 
   useEffect(() => {
