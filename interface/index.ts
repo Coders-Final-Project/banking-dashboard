@@ -120,7 +120,12 @@ export interface CardProps {
   balance: number;
 }
 
+export interface CurrenctLangProps {
+  value: string;
+}
+
 export interface StateProps {
   companyContracts: ICompanyContracts[];
   userCard: CardProps;
+  curLang: CurrenctLangProps;
 }

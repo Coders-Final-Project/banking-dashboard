@@ -90,16 +90,16 @@ const Invoices = () => {
               </div>
               <div>
                 <button onClick={openSidemenu}>
-                  <img
+                  <Image
                     src="/assets/invoices/edit.png"
-                    alt="copy"
+                    alt="edit"
                     height={24}
                     width={24}
                     style={{ cursor: "pointer" }}
                   />
                 </button>
                 <button>
-                  <img
+                  <Image
                     src="/assets/invoices/copy.png"
                     alt="copy"
                     height={24}
