@@ -42,6 +42,10 @@ const userSchema = new mongoose.Schema(
       type: String,
       default: "",
     },
+    insuranceCompleted: {
+      type: Boolean,
+      default: false,
+    },
     cards: [
       {
         type: mongoose.Schema.Types.ObjectId,

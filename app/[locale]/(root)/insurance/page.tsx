@@ -1,20 +1,67 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import Image from "next/image";
 
 import "@/sass/pages/_insurance.scss";
 import "@/sass/layout/_pageHeader.scss";
 
+import axios from "axios";
+import { useGlobalContext } from "@/context/store";
+
+import { useRouter } from "next/navigation";
+
 import AvatarDetail from "@/shared/AvatarDetail/AvatarDetail";
 import { insuranceCoverages } from "@/db/insurance";
+import { StateProps } from "@/interface";
+import { useSelector, useDispatch } from "react-redux";
+import { setInsuranceCompleted } from "@/globalRedux/features/appSlice";
 
 const Insurance = () => {
   const [isCoverageOpen, setIsCoverageOpen] = useState(true);
+  const [successAlert, setSuccessAlert] = useState(false);
+
+  const router = useRouter();
+
+  const dispatch = useDispatch();
+
+  const { data } = useGlobalContext();
+
+  const { userCard, insuranceCompleted } = useSelector(
+    (state: StateProps) => state,
+  );
+
+  useEffect(() => {
+    if (successAlert) {
+      setTimeout(() => {
+        setSuccessAlert(false);
+      }, 2000);
+    }
+  }, [successAlert]);
 
   const handleCoverage = () => {
     setIsCoverageOpen((prevValue) => !prevValue);
+  };
+
+  const handleAddInsurance = async () => {
+    if (userCard._id === -1) {
+      router.push("/cards");
+      return;
+    }
+
+    try {
+      if (data._id) {
+        const response = await axios.post("/api/insurance", {
+          userID: data._id,
+        });
+
+        dispatch(setInsuranceCompleted(response.data));
+        setSuccessAlert(true);
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -49,12 +96,23 @@ const Insurance = () => {
               className="insurance__content__card__header__img"
             />
             <div className="insurance__content__card__header__price">
-              $50<span>/month</span>
+              100₼<span>/year</span>
             </div>
             <div className="insurance__content__card__header__divider" />
-            <button className="insurance__content__card__header__btn">
-              Apply for Coverage
-            </button>
+            {insuranceCompleted ? (
+              <div className="insurance__content__card__header__done">
+                You applied already!
+              </div>
+            ) : (
+              <button
+                className="insurance__content__card__header__btn"
+                onClick={handleAddInsurance}
+              >
+                {userCard._id === -1
+                  ? "Add Card Before Apply"
+                  : "Apply for Coverage"}
+              </button>
+            )}
           </div>
           <div className="insurance__content__card__divider" />
           <div className="insurance__content__card__desc">
@@ -115,6 +173,11 @@ const Insurance = () => {
           />
         </div>
       </div>
+      {successAlert && (
+        <div className="insurance__alert--success">
+          Insurance Successfully Applied
+        </div>
+      )}
     </main>
   );
 };

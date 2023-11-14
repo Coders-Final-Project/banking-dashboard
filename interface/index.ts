@@ -128,4 +128,5 @@ export interface StateProps {
   companyContracts: ICompanyContracts[];
   userCard: CardProps;
   curLang: CurrenctLangProps;
+  insuranceCompleted: boolean;
 }
