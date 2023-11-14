@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import Image from "next/image";
 
@@ -15,18 +15,30 @@ import { useRouter } from "next/navigation";
 import AvatarDetail from "@/shared/AvatarDetail/AvatarDetail";
 import { insuranceCoverages } from "@/db/insurance";
 import { StateProps } from "@/interface";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { setInsuranceCompleted } from "@/globalRedux/features/appSlice";
 
 const Insurance = () => {
   const [isCoverageOpen, setIsCoverageOpen] = useState(true);
+  const [successAlert, setSuccessAlert] = useState(false);
 
   const router = useRouter();
+
+  const dispatch = useDispatch();
 
   const { data } = useGlobalContext();
 
   const { userCard, insuranceCompleted } = useSelector(
     (state: StateProps) => state,
   );
+
+  useEffect(() => {
+    if (successAlert) {
+      setTimeout(() => {
+        setSuccessAlert(false);
+      }, 2000);
+    }
+  }, [successAlert]);
 
   const handleCoverage = () => {
     setIsCoverageOpen((prevValue) => !prevValue);
@@ -44,7 +56,8 @@ const Insurance = () => {
           userID: data._id,
         });
 
-        console.log(response);
+        dispatch(setInsuranceCompleted(response.data));
+        setSuccessAlert(true);
       }
     } catch (error) {
       console.log(error);
@@ -83,7 +96,7 @@ const Insurance = () => {
               className="insurance__content__card__header__img"
             />
             <div className="insurance__content__card__header__price">
-              $50<span>/month</span>
+              100₼<span>/year</span>
             </div>
             <div className="insurance__content__card__header__divider" />
             {insuranceCompleted ? (
@@ -160,6 +173,11 @@ const Insurance = () => {
           />
         </div>
       </div>
+      {successAlert && (
+        <div className="insurance__alert--success">
+          Insurance Successfully Applied
+        </div>
+      )}
     </main>
   );
 };

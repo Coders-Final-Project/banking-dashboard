@@ -44,7 +44,7 @@ export const appSlice: any = createSlice({
       state.curLang = action.payload;
     },
     setInsuranceCompleted: (state, action: PayloadAction<boolean>) => {
-      state.insuranceCompleted = true;
+      state.insuranceCompleted = action.payload;
     },
   },
 });

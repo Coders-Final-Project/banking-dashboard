@@ -16,7 +16,10 @@ import "@/sass/layout/_avatarDetail.scss";
 
 import Button from "@/components/Button/Button";
 import { StateProps } from "@/interface";
-import { setUserCardInfo } from "@/globalRedux/features/appSlice";
+import {
+  setUserCardInfo,
+  setInsuranceCompleted,
+} from "@/globalRedux/features/appSlice";
 
 interface Props {
   hasBtn?: boolean;
@@ -47,6 +50,8 @@ const AvatarDetail = ({ hasBtn }: Props) => {
         console.log(error);
       }
     };
+
+    dispatch(setInsuranceCompleted(data.insuranceCompleted));
 
     fetchCardInfo();
     // eslint-disable-next-line react-hooks/exhaustive-deps
