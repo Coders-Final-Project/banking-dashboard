@@ -9,7 +9,7 @@ import "@/sass/scenes/_cardsDetail.scss";
 import { useSelector } from "react-redux";
 
 import CardInfo from "@/components/CardInfo/CardInfo";
-import CardReportItem from "@/components/CardReportItem/CardReportItem";
+import CardTransferItem from "@/components/CardTransferItem/CardTransferItem";
 import AddCardModal from "@/components/AddCardModal/AddCardModal";
 import { StateProps } from "@/interface";
 
@@ -113,18 +113,10 @@ const CardsAdd = () => {
       </div>
       <CardInfo />
       <div className="cards__detail__divider" />
-      <div className="cards__detail__report">
-        <div className="cards__detail__report__title">Your Report</div>
-        <div className="cards__detail__report__content">
-          <CardReportItem imgUrlEnd="goal.png" text="Goal" />
-          <CardReportItem
-            imgUrlEnd="monthly-expense.png"
-            text="Monthly Expense"
-          />
-          <CardReportItem
-            imgUrlEnd="invoice-income.png"
-            text="Invoice Income"
-          />
+      <div className="cards__detail__transfer">
+        <div className="cards__detail__transfer__title">Transfer funds</div>
+        <div className="cards__detail__transfer__content">
+          <CardTransferItem imgUrlEnd="payment.png" text="Forward funds" />
         </div>
       </div>
       {isModalOpen && (
