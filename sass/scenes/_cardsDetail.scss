@@ -207,7 +207,7 @@
     background-color: $greyscale-grey-200;
   }
 
-  &__report {
+  &__transfer {
     @include flexbox(
       $direction: column,
       $justify: space-between,

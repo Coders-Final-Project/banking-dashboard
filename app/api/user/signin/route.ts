@@ -8,6 +8,16 @@ import bcrypt from "bcrypt";
 
 import jwt from "jsonwebtoken";
 
+export const corsHeaders = {
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+  "Access-Control-Allow-Headers": "Content-Type, Authorization",
+};
+
+export async function OPTIONS(req: NextRequest) {
+  return NextResponse.json({}, { headers: corsHeaders });
+}
+
 export async function POST(request: NextRequest) {
   connectToDB();
 
@@ -20,8 +30,8 @@ export async function POST(request: NextRequest) {
 
     if (!user) {
       return NextResponse.json(
-        { message: "User doesn't exist" },
-        { status: 400 },
+        { message: "User doesn't exist", status: 400 },
+        { headers: corsHeaders },
       );
     }
 
@@ -55,6 +65,6 @@ export async function POST(request: NextRequest) {
 
     return response;
   } catch (error: any) {
-    return NextResponse.json({ message: error.message }, { status: 5000 });
+    return NextResponse.json({ message: error.message }, { status: 500 });
   }
 }
