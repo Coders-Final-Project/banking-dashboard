@@ -72,6 +72,10 @@ const ContractsActive = () => {
           </Link>
         )}
 
+        {companyContracts.length === 0 && userCard._id !== -1 && (
+          <div className="no__contract">There is no contract yet!</div>
+        )}
+
         {companyContracts?.map((contract) => (
           <ContractsItem key={contract._id} {...contract} />
         ))}

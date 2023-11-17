@@ -46,6 +46,12 @@ export const appSlice: any = createSlice({
     setInsuranceCompleted: (state, action: PayloadAction<boolean>) => {
       state.insuranceCompleted = action.payload;
     },
+    removeContract: (state, action) => {
+      const contractIdToRemove = action.payload;
+      state.companyContracts = state.companyContracts.filter(
+        (contract) => contract._id !== contractIdToRemove,
+      );
+    },
   },
 });
 
@@ -54,6 +60,7 @@ export const {
   setUserCardInfo,
   setCurrenctLang,
   setInsuranceCompleted,
+  removeContract,
 } = appSlice.actions;
 
 export default appSlice.reducer;

@@ -4,6 +4,7 @@ import CompanyContract from "@/lib/models/company.contract.model";
 
 import { connectToDB } from "@/lib/mongoose";
 import User from "@/lib/models/user.model";
+import Card from "@/lib/models/card.model";
 
 export async function POST(request: NextRequest) {
   connectToDB();
@@ -39,12 +40,24 @@ export async function POST(request: NextRequest) {
     userID,
   });
 
+  if (Number(rate) > 1000) {
+    return NextResponse.json(
+      { message: "Max allowed rate is 1000₼" },
+      { status: 500 },
+    );
+  }
+
   try {
     const savedContract = await newContract.save();
 
     const user = await User.findById(userID);
+    const card = await Card.find({ userID });
+
     await user.companyContracts.push(savedContract._id);
+    card[0].balance = card[0].balance + Number(rate);
+
     await user.save();
+    await card[0].save();
 
     return NextResponse.json({
       message: "Company contract created successfully",

@@ -8,6 +8,8 @@ import { useRouter } from "next/navigation";
 
 import { useGlobalContext } from "@/context/store";
 
+import { definedContracts } from "@/constants";
+
 import axios from "axios";
 
 import { useSelector, useDispatch } from "react-redux";
@@ -27,6 +29,10 @@ interface Props {
 
 const AvatarDetail = ({ hasBtn }: Props) => {
   const [serverError, setServerError] = useState("");
+
+  const { userCard, companyContracts } = useSelector(
+    (state: StateProps) => state,
+  );
 
   const { data } = useGlobalContext();
 
@@ -57,7 +63,12 @@ const AvatarDetail = ({ hasBtn }: Props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
 
-  const userCard = useSelector((state: StateProps) => state.userCard);
+  const activeContracts = companyContracts.map(
+    (contract: any) => contract.company,
+  );
+
+  const isContractAvailable =
+    definedContracts.length !== activeContracts.length;
 
   const handleLogout = async () => {
     try {
@@ -70,7 +81,7 @@ const AvatarDetail = ({ hasBtn }: Props) => {
 
   return (
     <div className="avatar__detail">
-      {hasBtn && userCard._id !== -1 && (
+      {hasBtn && userCard._id !== -1 && isContractAvailable && (
         <Button
           text="create a contract"
           icon="frame.png"
