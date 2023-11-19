@@ -47,7 +47,7 @@ const AvatarDetail = ({ hasBtn }: Props) => {
   useEffect(() => {
     const fetchCardInfo = async () => {
       try {
-        if (data._id && currentPage === "/") {
+        if (data._id && (currentPage === "/" || currentPage === "/contracts")) {
           const response = await axios.post("/api/card/fetch", {
             userID: data._id,
           });
