@@ -3,13 +3,17 @@ import Image from "next/image";
 import "@/sass/components/_transactionsTableItem.scss";
 
 import { ITransactions } from "@/interface";
+import { getFormattedDate } from "@/helpers";
 
 const TransactionsTableItem = ({
   receiverName,
   receiverSurname,
   receiverJob,
   amount,
+  createdAt,
 }: ITransactions) => {
+  const { formattedDate, formattedTime } = getFormattedDate(createdAt);
+
   return (
     <div className="transactions__table__item">
       <div className="transactions__table__item__person">
@@ -31,12 +35,10 @@ const TransactionsTableItem = ({
       </div>
       <div className="transactions__table__item__payment">
         <div className="transactions__table__item__payment__date">
-          {/* {paymentDate} */}
-          18 November
+          {formattedDate}
         </div>
         <div className="transactions__table__item__payment__hour">
-          {/* {paymentHour} */}
-          16:00
+          {formattedTime}
         </div>
       </div>
       <div className="transactions__table__item__method">
@@ -54,8 +56,7 @@ const TransactionsTableItem = ({
           {amount}₼
         </div>
         <div className="transactions__table__item__paidDate__date">
-          {/* {paidDate} */}
-          18 November
+          {formattedDate}
         </div>
       </div>
       <button className="transactions__table__item__invoiceBtn">

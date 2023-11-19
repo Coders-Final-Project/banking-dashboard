@@ -23,7 +23,7 @@ const HomeTransaction = () => {
 
   const { data } = useGlobalContext();
 
-  const { transactions } = useSelector((state: StateProps) => state);
+  const transactions = useSelector((state: StateProps) => state.transactions);
 
   useEffect(() => {
     const fetchCompanyContracts = async () => {

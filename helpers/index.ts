@@ -156,3 +156,22 @@ export const defineCompanyImage = (companyName: string): string | undefined => {
 
   return companies[companyName];
 };
+
+export const getFormattedDate = (createdAt: string) => {
+  const createdDate = new Date(createdAt);
+
+  const hour = createdDate.getHours();
+  const minute = createdDate.getMinutes();
+
+  const formattedDate = new Intl.DateTimeFormat("en-US", {
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+  }).format(createdDate);
+
+  const formattedTime = `${hour.toString().padStart(2, "0")}:${minute
+    .toString()
+    .padStart(2, "0")}`;
+
+  return { formattedDate, formattedTime };
+};

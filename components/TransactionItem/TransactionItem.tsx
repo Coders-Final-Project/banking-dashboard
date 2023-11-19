@@ -4,6 +4,8 @@ import "@/sass/components/_transactionItem.scss";
 
 import { ITransactions } from "@/interface";
 
+import { getFormattedDate } from "@/helpers";
+
 interface ITransactionItem {
   receiverName: string;
   receiverSurname: string;
@@ -17,7 +19,10 @@ const TransactionItem = ({
   receiverSurname,
   receiverJob,
   amount,
+  createdAt,
 }: ITransactions) => {
+  const { formattedDate } = getFormattedDate(createdAt);
+
   return (
     <div className="home__content__transaction__body__person">
       <Image
@@ -40,7 +45,7 @@ const TransactionItem = ({
           {amount}₼
         </div>
         <div className="home__content__transaction__body__person__amount__date">
-          19 November
+          {formattedDate}
         </div>
       </div>
     </div>
