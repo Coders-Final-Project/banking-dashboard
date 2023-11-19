@@ -3,6 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { connectToDB } from "@/lib/mongoose";
 import User from "@/lib/models/user.model";
 import Card from "@/lib/models/card.model";
+import Transactions from "@/lib/models/transactions.model";
 
 export async function POST(request: NextRequest) {
   connectToDB();
@@ -37,8 +38,25 @@ export async function POST(request: NextRequest) {
     senderCard[0].balance = senderCard[0].balance - parseFloat(amount);
     receiverCard[0].balance = receiverCard[0].balance + parseFloat(amount);
 
+    //transactions
+    const receiverUserID = await receiverCard[0].userID;
+
+    const { firstName, lastName, job } = await User.findById(
+      receiverUserID,
+    ).populate("firstName lastName job");
+
+    const newTransaction = new Transactions({
+      senderId: userID,
+      receiverId: receiverUserID,
+      receiverName: firstName,
+      receiverSurname: lastName,
+      receiverJob: job,
+      amount,
+    });
+
     await senderCard[0].save();
     await receiverCard[0].save();
+    await newTransaction.save();
 
     return NextResponse.json({
       message: "Insurance created successfully",

@@ -6,16 +6,20 @@ import Image from "next/image";
 
 import "@/sass/scenes/_transactionsTable.scss";
 
-import TransactionTableButton from "@/components/TransactionTableButton/TransactionTableButton";
 import TransactionsTableItem from "@/components/TransactionsTableItem/TransactionsTableItem";
 
 import { transactionsHistory } from "@/db/transactions";
 
 import { filterActionsTable } from "@/helpers";
 
+import { useSelector } from "react-redux";
+import { StateProps } from "@/interface";
+
 const TransactionTable = () => {
   const [actionsData, setActionsData] = useState(transactionsHistory);
   const [check, setCheck] = useState(false);
+
+  const { transactions } = useSelector((state: StateProps) => state);
 
   const handleSort = (input: string) => {
     setCheck((prevValue) => !prevValue);
@@ -30,10 +34,6 @@ const TransactionTable = () => {
       <div className="transactions__table__header">
         <div className="transactions__table__header__title">
           Transaction History
-        </div>
-        <div className="transactions__table__header__btns">
-          <TransactionTableButton img="sort.png" text="Sort & Filter" />
-          <TransactionTableButton img="csv.png" text="CSV" />
         </div>
       </div>
       <div className="transactions__table__content">
@@ -90,7 +90,7 @@ const TransactionTable = () => {
           </div>
 
           <button className="transactions__table__content__sortBtns__item">
-            Invoice
+            Funds
             <Image
               src="/assets/transactions/arrows.png"
               alt="arrows"
@@ -100,8 +100,8 @@ const TransactionTable = () => {
           </button>
         </div>
         <div className="transactions__table__content__actions">
-          {actionsData.map((item) => (
-            <TransactionsTableItem key={item.id} {...item} />
+          {transactions.map((action) => (
+            <TransactionsTableItem key={action._id} {...action} />
           ))}
         </div>
       </div>

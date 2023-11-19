@@ -2,64 +2,60 @@ import Image from "next/image";
 
 import "@/sass/components/_transactionsTableItem.scss";
 
-import { IActionsTableProps } from "@/interface";
+import { ITransactions } from "@/interface";
 
 const TransactionsTableItem = ({
-  personName,
-  personImg,
-  company,
-  paymentDate,
-  paymentHour,
-  paymentMethodUrl,
-  paymentTitle,
-  paidDate,
-  price,
-}: IActionsTableProps) => {
+  receiverName,
+  receiverSurname,
+  receiverJob,
+  amount,
+}: ITransactions) => {
   return (
     <div className="transactions__table__item">
       <div className="transactions__table__item__person">
         <Image
-          src={personImg}
-          alt={personName}
+          src="/assets/transactions/people.png"
+          alt={receiverName}
           width={48}
           height={48}
           className="transactions__table__item__person__img"
         />
         <div className="transactions__table__item__person__detail">
           <div className="transactions__table__item__person__detail__name">
-            {personName}
+            {receiverName} {receiverSurname}
           </div>
           <div className="transactions__table__item__person__detail__company">
-            {company}
+            {receiverJob}
           </div>
         </div>
       </div>
       <div className="transactions__table__item__payment">
         <div className="transactions__table__item__payment__date">
-          {paymentDate}
+          {/* {paymentDate} */}
+          18 November
         </div>
         <div className="transactions__table__item__payment__hour">
-          {paymentHour}
+          {/* {paymentHour} */}
+          16:00
         </div>
       </div>
       <div className="transactions__table__item__method">
         <Image
-          src={paymentMethodUrl}
-          alt={paymentTitle}
+          src="/assets/transactions/paypal.png"
+          alt="Paypal"
           width={20}
           height={20}
           className="transactions__table__item__method__img"
         />
-        <div className="transactions__table__item__method__text">
-          {paymentTitle}
-        </div>
+        <div className="transactions__table__item__method__text">Paypal</div>
       </div>
       <div className="transactions__table__item__paidDate">
         <div className="transactions__table__item__paidDate__amount">
-          ${price}
+          {amount}₼
         </div>
         <div className="transactions__table__item__paidDate__date">
-          {paidDate}
+          {/* {paidDate} */}
+          18 November
         </div>
       </div>
       <button className="transactions__table__item__invoiceBtn">
@@ -70,7 +66,7 @@ const TransactionsTableItem = ({
           height={24}
           className="transactions__table__item__invoiceBtn__icon"
         />
-        Send Invoice
+        Send Funds
       </button>
       <Image
         src="/assets/transactions/dot.png"

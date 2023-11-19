@@ -131,9 +131,19 @@ export interface CurrenctLangProps {
   value: string;
 }
 
+export interface ITransactions {
+  _id: string;
+  receiverName: string;
+  receiverSurname: string;
+  receiverJob: string;
+  createdAt: string;
+  amount: string;
+}
+
 export interface StateProps {
   companyContracts: ICompanyContracts[];
   allCustomers: IAllCustomers[];
+  transactions: ITransactions[];
   userCard: CardProps;
   curLang: CurrenctLangProps;
   insuranceCompleted: boolean;

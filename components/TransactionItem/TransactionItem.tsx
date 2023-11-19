@@ -2,39 +2,45 @@ import Image from "next/image";
 
 import "@/sass/components/_transactionItem.scss";
 
+import { ITransactions } from "@/interface";
+
 interface ITransactionItem {
-  id: number;
-  imgUrl: string;
-  personName: string;
-  company: string;
+  receiverName: string;
+  receiverSurname: string;
+  receiverJob: string;
+  createdAt: string;
   amount: string;
-  date: string;
 }
 
-const TransactionItem = (person: ITransactionItem) => {
+const TransactionItem = ({
+  receiverName,
+  receiverSurname,
+  receiverJob,
+  amount,
+}: ITransactions) => {
   return (
     <div className="home__content__transaction__body__person">
       <Image
-        src={person.imgUrl}
-        alt={person.personName}
+        src="/assets/home/people.png"
+        alt={receiverName}
         width={48}
         height={48}
         className="home__content__transaction__body__person__img"
       />
       <div className="home__content__transaction__body__person__info">
         <div className="home__content__transaction__body__person__info__name">
-          {person.personName}
+          {receiverName} {receiverSurname}
         </div>
         <div className="home__content__transaction__body__person__info__company">
-          {person.company}
+          {receiverJob}
         </div>
       </div>
       <div className="home__content__transaction__body__person__amount">
         <div className="home__content__transaction__body__person__amount__number">
-          ${person.amount}
+          {amount}₼
         </div>
         <div className="home__content__transaction__body__person__amount__date">
-          {person.date}
+          19 November
         </div>
       </div>
     </div>
