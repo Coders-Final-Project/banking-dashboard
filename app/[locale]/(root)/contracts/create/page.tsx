@@ -96,18 +96,23 @@ const ContractCreate = () => {
     e.preventDefault();
     if (!isLastStep) return next();
 
-    if (data.isSigned) {
-      setSuccessAlert(true);
+    try {
+      if (data.isSigned) {
+        const response = await axios.post(`/api/contracts/company`, {
+          data,
+          userID: userData.data._id,
+        });
+
+        setSuccessAlert(true);
+      } else {
+        setErrorAlert(true);
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
       setTimeout(() => {
         router.replace("/contracts");
       }, 1000);
-
-      const response = await axios.post(`/api/contracts/company`, {
-        data,
-        userID: userData.data._id,
-      });
-    } else {
-      setErrorAlert(true);
     }
   };
 

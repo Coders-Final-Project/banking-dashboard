@@ -1,12 +1,53 @@
+"use client";
+
 import Image from "next/image";
 
 import "@/sass/components/_contractsItem.scss";
 
 import { defineCompanyImage } from "@/helpers";
 
+import { useState } from "react";
+
 import { ICompanyContracts } from "@/interface";
 
-const ContractsItem = ({ client, company, rate, date }: ICompanyContracts) => {
+import { useDispatch } from "react-redux";
+import { removeContract } from "@/globalRedux/features/appSlice";
+
+import axios from "axios";
+
+const ContractsItem = ({
+  client,
+  company,
+  rate,
+  date,
+  _id,
+}: ICompanyContracts) => {
+  const [isDeleteBtnClicked, setIsDeleteBtnClicked] = useState(false);
+
+  const dispatch = useDispatch();
+
+  const handleOpenContract = () => {
+    setIsDeleteBtnClicked(true);
+  };
+
+  const handleCancelDelete = () => {
+    setIsDeleteBtnClicked(false);
+  };
+
+  const handleDeleteContract = async () => {
+    try {
+      await axios.post("api/contracts/delete", {
+        contractID: _id,
+      });
+
+      setIsDeleteBtnClicked(false);
+
+      dispatch(removeContract(_id));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div className="contracts__content__active__body__item">
       <div className="contracts__content__active__body__item__main">
@@ -54,6 +95,38 @@ const ContractsItem = ({ client, company, rate, date }: ICompanyContracts) => {
           </div>
         </div>
       </div>
+      <button className="contract__delete__btn" onClick={handleOpenContract}>
+        <Image
+          src="/assets/contracts/remove.png"
+          alt="remove"
+          width={24}
+          height={24}
+        />
+      </button>
+      {isDeleteBtnClicked && (
+        <div className="notify__user__modal">
+          <div className="notify__user__modal__content">
+            <div className="notify__user__modal__content__text">
+              If this contract is removed, an additional 50 AZN will be deducted
+              from your balance. Are you sure?
+            </div>
+            <div className="notify__user__modal__content__btns">
+              <button
+                className="notify__user__modal__content__btns__cancel"
+                onClick={handleCancelDelete}
+              >
+                Cancel
+              </button>
+              <button
+                className="notify__user__modal__content__btns__confirm"
+                onClick={handleDeleteContract}
+              >
+                Confirm
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

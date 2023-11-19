@@ -8,10 +8,12 @@ import {
   StateProps,
   CardProps,
   CurrenctLangProps,
+  IAllCustomers,
 } from "@/interface";
 
 const initialState: StateProps = {
   companyContracts: [],
+  allCustomers: [],
   userCard: {
     _id: -1,
     userName: "",
@@ -37,6 +39,9 @@ export const appSlice: any = createSlice({
     ) => {
       state.companyContracts = action.payload;
     },
+    setAllCustomers: (state, action: PayloadAction<IAllCustomers[]>) => {
+      state.allCustomers = action.payload;
+    },
     setUserCardInfo: (state, action: PayloadAction<CardProps>) => {
       state.userCard = action.payload;
     },
@@ -46,6 +51,12 @@ export const appSlice: any = createSlice({
     setInsuranceCompleted: (state, action: PayloadAction<boolean>) => {
       state.insuranceCompleted = action.payload;
     },
+    removeContract: (state, action) => {
+      const contractIdToRemove = action.payload;
+      state.companyContracts = state.companyContracts.filter(
+        (contract) => contract._id !== contractIdToRemove,
+      );
+    },
   },
 });
 
@@ -54,6 +65,8 @@ export const {
   setUserCardInfo,
   setCurrenctLang,
   setInsuranceCompleted,
+  removeContract,
+  setAllCustomers,
 } = appSlice.actions;
 
 export default appSlice.reducer;

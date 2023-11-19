@@ -57,43 +57,6 @@ const CardTransferItem = ({ imgUrlEnd, text }: IProps) => {
     setCardNumber(formattedValue);
   };
 
-  // const handleFundTransfer = async () => {
-  //   try {
-  //     if (data._id && cardNumber.length === 19 && amount !== "") {
-  //       const response = await axios.post("/api/card/transfer", {
-  //         userID: data._id,
-  //         cardNumber,
-  //         amount,
-  //       });
-
-  //       console.log(response);
-
-  //       if (
-  //         response.data &&
-  //         response.data.card &&
-  //         response.data.card[0] !== undefined
-  //       ) {
-  //         dispatch(setUserCardInfo(response.data.card[0]));
-  //         setSuccessAlert(true);
-  //       } else {
-  //         setErrorAlert(true);
-  //       }
-
-  //       setSuccessAlert(true);
-  //     } else {
-  //       setCardNumber("");
-  //       setAmount("");
-  //       setErrorAlert(true);
-  //     }
-  //   } catch (error) {
-  //     console.log(error);
-  //     setErrorAlert(true);
-  //   } finally {
-  //     setCardNumber("");
-  //     setAmount("");
-  //   }
-  // };
-
   const handleFundTransfer = async () => {
     try {
       if (data?._id && cardNumber.length === 19 && amount !== "") {

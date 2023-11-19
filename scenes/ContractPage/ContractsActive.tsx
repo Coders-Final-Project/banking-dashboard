@@ -45,8 +45,7 @@ const ContractsActive = () => {
     };
 
     fetchCompanyContracts();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [data]);
+  }, [data, dispatch]);
 
   return (
     <div className="contracts__content__active">
@@ -70,6 +69,10 @@ const ContractsActive = () => {
           >
             Add card in order to create any contract
           </Link>
+        )}
+
+        {companyContracts.length === 0 && userCard._id !== -1 && (
+          <div className="no__contract">There is no contract yet!</div>
         )}
 
         {companyContracts?.map((contract) => (

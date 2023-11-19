@@ -4,13 +4,16 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
 
 import { useGlobalContext } from "@/context/store";
+
+import { definedContracts } from "@/constants";
 
 import axios from "axios";
 
 import { useSelector, useDispatch } from "react-redux";
+
+import { usePathname, useRouter } from "next/navigation";
 
 import "@/sass/layout/_avatarDetail.scss";
 
@@ -28,16 +31,21 @@ interface Props {
 const AvatarDetail = ({ hasBtn }: Props) => {
   const [serverError, setServerError] = useState("");
 
+  const { userCard, companyContracts } = useSelector(
+    (state: StateProps) => state,
+  );
+
   const { data } = useGlobalContext();
 
   const dispatch = useDispatch();
 
+  const currentPage = usePathname();
   const router = useRouter();
 
   useEffect(() => {
     const fetchCardInfo = async () => {
       try {
-        if (data._id) {
+        if (data._id && (currentPage === "/" || currentPage === "/cards")) {
           const response = await axios.post("/api/card/fetch", {
             userID: data._id,
           });
@@ -54,10 +62,14 @@ const AvatarDetail = ({ hasBtn }: Props) => {
     dispatch(setInsuranceCompleted(data.insuranceCompleted));
 
     fetchCardInfo();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [data]);
+  }, [currentPage, data, dispatch]);
 
-  const userCard = useSelector((state: StateProps) => state.userCard);
+  const activeContracts = companyContracts.map(
+    (contract: any) => contract.company,
+  );
+
+  const isContractAvailable =
+    definedContracts.length !== activeContracts.length;
 
   const handleLogout = async () => {
     try {
@@ -70,7 +82,7 @@ const AvatarDetail = ({ hasBtn }: Props) => {
 
   return (
     <div className="avatar__detail">
-      {hasBtn && userCard._id !== -1 && (
+      {hasBtn && userCard._id !== -1 && isContractAvailable && (
         <Button
           text="create a contract"
           icon="frame.png"

@@ -2,6 +2,11 @@ import "@/sass/scenes/_contractGeneralForm.scss";
 
 import ContractFormWrapper from "@/components/ContractFormWrapper/ContractFormWrapper";
 
+import { useSelector } from "react-redux";
+import { StateProps } from "@/interface";
+
+import { definedContracts } from "@/constants";
+
 type GeneralFormData = {
   client: string;
   company: string;
@@ -24,6 +29,14 @@ const ContractGeneral = ({
   date,
   updateFields,
 }: GeneralFormProps) => {
+  const companyContracts: any = useSelector(
+    (state: StateProps) => state.companyContracts,
+  );
+
+  const activeContracts = companyContracts.map(
+    (contract: any) => contract.company,
+  );
+
   return (
     <ContractFormWrapper title="General Info">
       <div className="contract__general__oneColumn">
@@ -46,18 +59,24 @@ const ContractGeneral = ({
             onChange={(e) => updateFields({ company: e.target.value })}
             required
           >
-            <option value="Pasha Bank">Pasha Bank</option>
-            <option value="Kapital Bank">Kapital Bank</option>
-            <option value="Bank of Baku">Bank of Baku</option>
+            {definedContracts.map((contract, index) => {
+              if (!activeContracts.includes(contract)) {
+                return (
+                  <option key={index} value={contract}>
+                    {contract}
+                  </option>
+                );
+              }
+            })}
           </select>
         </div>
         <div className="contract__general__oneColumn">
           <label htmlFor="job">Fixed Rate</label>
           <input
-            type="text"
+            type="number"
             id="rate"
             required
-            placeholder="Enter fixed rate"
+            placeholder="Enter fixed rate (Max,1000₼)"
             value={rate}
             onChange={(e) => updateFields({ rate: e.target.value })}
           />
