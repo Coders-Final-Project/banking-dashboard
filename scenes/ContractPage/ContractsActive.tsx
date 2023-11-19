@@ -45,8 +45,7 @@ const ContractsActive = () => {
     };
 
     fetchCompanyContracts();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [data]);
+  }, [data, dispatch]);
 
   return (
     <div className="contracts__content__active">
