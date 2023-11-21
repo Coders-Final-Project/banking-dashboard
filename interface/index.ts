@@ -114,6 +114,14 @@ export interface CardProps {
   balance: number;
 }
 
+export interface IContractual {
+  _id: string;
+  company: string;
+  projectName: string;
+  rate: string;
+  createdAt: string;
+}
+
 export interface CurrenctLangProps {
   value: string;
 }
@@ -131,6 +139,7 @@ export interface StateProps {
   companyContracts: ICompanyContracts[];
   allCustomers: IAllCustomers[];
   transactions: ITransactions[];
+  contractual: IContractual[];
   userCard: CardProps;
   curLang: CurrenctLangProps;
   insuranceCompleted: boolean;

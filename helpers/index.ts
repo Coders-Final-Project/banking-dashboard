@@ -1,6 +1,11 @@
-import { IInvoicesData, ITransactions, IUserPayment } from "@/interface";
+import {
+  IInvoicesData,
+  ITransactions,
+  IUserPayment,
+  ICompanyContracts,
+  IContractual,
+} from "@/interface";
 import { ICardReport } from "@/interface";
-import { IFilterTableProps } from "@/interface";
 
 export const findTotalPayment = ({
   duration,
@@ -49,22 +54,36 @@ export const filterCardsTable = ({
   check,
 }: {
   input: string;
-  data: IFilterTableProps[];
+  data: IContractual[];
   check: boolean;
 }) => {
   if (input === "name") {
     return [...data].sort((a, b) =>
-      !check ? (a.name > b.name ? 1 : -1) : a.name > b.name ? -1 : 1,
+      !check
+        ? a.projectName > b.projectName
+          ? 1
+          : -1
+        : a.projectName > b.projectName
+        ? -1
+        : 1,
     );
   }
   if (input === "date") {
     return [...data].sort((a, b) =>
-      !check ? (a.date > b.date ? 1 : -1) : a.date > b.date ? -1 : 1,
+      !check
+        ? a.createdAt > b.createdAt
+          ? 1
+          : -1
+        : a.createdAt > b.createdAt
+        ? -1
+        : 1,
     );
   }
   if (input === "amount") {
     return [...data].sort((a, b) =>
-      !check ? b.amount - a.amount : a.amount - b.amount,
+      !check
+        ? Number(b.rate) - Number(a.rate)
+        : Number(a.rate) - Number(b.rate),
     );
   }
 };

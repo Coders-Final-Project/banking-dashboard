@@ -23,9 +23,11 @@ const ContractsActive = () => {
 
   const { data } = useGlobalContext();
 
-  const { companyContracts, userCard } = useSelector(
-    (state: StateProps) => state,
+  const companyContracts = useSelector(
+    (state: StateProps) => state.companyContracts,
   );
+
+  const userCard = useSelector((state: StateProps) => state.userCard);
 
   useEffect(() => {
     const fetchCompanyContracts = async () => {

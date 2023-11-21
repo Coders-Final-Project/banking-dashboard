@@ -18,14 +18,15 @@
     width: 80px;
 
     &__icon {
-      padding: 6px;
-      background-color: $main-color-black;
+      padding: 3px;
+      background-color: $main-color-blue;
       border-radius: 100px;
     }
 
     &__text {
       @extend %body-medium;
       color: $main-color-black;
+      text-transform: capitalize;
     }
   }
 
