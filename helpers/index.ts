@@ -1,6 +1,11 @@
-import { IInvoicesData, IUserPayment } from "@/interface";
+import {
+  IInvoicesData,
+  ITransactions,
+  IUserPayment,
+  ICompanyContracts,
+  IContractual,
+} from "@/interface";
 import { ICardReport } from "@/interface";
-import { IFilterTableProps, IActionsTableProps } from "@/interface";
 
 export const findTotalPayment = ({
   duration,
@@ -49,22 +54,36 @@ export const filterCardsTable = ({
   check,
 }: {
   input: string;
-  data: IFilterTableProps[];
+  data: IContractual[];
   check: boolean;
 }) => {
   if (input === "name") {
     return [...data].sort((a, b) =>
-      !check ? (a.name > b.name ? 1 : -1) : a.name > b.name ? -1 : 1,
+      !check
+        ? a.projectName > b.projectName
+          ? 1
+          : -1
+        : a.projectName > b.projectName
+        ? -1
+        : 1,
     );
   }
   if (input === "date") {
     return [...data].sort((a, b) =>
-      !check ? (a.date > b.date ? 1 : -1) : a.date > b.date ? -1 : 1,
+      !check
+        ? a.createdAt > b.createdAt
+          ? 1
+          : -1
+        : a.createdAt > b.createdAt
+        ? -1
+        : 1,
     );
   }
   if (input === "amount") {
     return [...data].sort((a, b) =>
-      !check ? b.amount - a.amount : a.amount - b.amount,
+      !check
+        ? Number(b.rate) - Number(a.rate)
+        : Number(a.rate) - Number(b.rate),
     );
   }
 };
@@ -100,16 +119,16 @@ export const filterActionsTable = ({
   check,
 }: {
   input: string;
-  data: IActionsTableProps[];
+  data: ITransactions[];
   check: boolean;
 }) => {
   if (input === "client") {
     return [...data].sort((a, b) =>
       !check
-        ? a.personName > b.personName
+        ? a.receiverName > b.receiverName
           ? 1
           : -1
-        : a.personName > b.personName
+        : a.receiverName > b.receiverName
         ? -1
         : 1,
     );
@@ -117,28 +136,19 @@ export const filterActionsTable = ({
   if (input === "payment") {
     return [...data].sort((a, b) =>
       !check
-        ? a.paymentDate > b.paymentDate
+        ? a.createdAt > b.createdAt
           ? 1
           : -1
-        : a.paymentDate > b.paymentDate
+        : a.createdAt > b.createdAt
         ? -1
         : 1,
     );
   }
-  if (input === "method") {
+  if (input === "amount") {
     return [...data].sort((a, b) =>
       !check
-        ? a.paymentTitle > b.paymentTitle
-          ? 1
-          : -1
-        : a.paymentTitle > b.paymentTitle
-        ? -1
-        : 1,
-    );
-  }
-  if (input === "date") {
-    return [...data].sort((a, b) =>
-      !check ? b.price - a.price : a.price - b.price,
+        ? Number(b.amount) - Number(a.amount)
+        : Number(a.amount) - Number(b.amount),
     );
   }
 };
@@ -155,4 +165,23 @@ export const defineCompanyImage = (companyName: string): string | undefined => {
   };
 
   return companies[companyName];
+};
+
+export const getFormattedDate = (createdAt: string) => {
+  const createdDate = new Date(createdAt);
+
+  const hour = createdDate.getHours();
+  const minute = createdDate.getMinutes();
+
+  const formattedDate = new Intl.DateTimeFormat("en-US", {
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+  }).format(createdDate);
+
+  const formattedTime = `${hour.toString().padStart(2, "0")}:${minute
+    .toString()
+    .padStart(2, "0")}`;
+
+  return { formattedDate, formattedTime };
 };

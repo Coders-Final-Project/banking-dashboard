@@ -82,19 +82,6 @@ export interface IInvoicesData {
   status: string;
 }
 
-export interface IActionsTableProps {
-  id: number;
-  personName: string;
-  personImg: string;
-  company: string;
-  paymentDate: string;
-  paymentHour: string;
-  paymentMethodUrl: string;
-  paymentTitle: string;
-  paidDate: string;
-  price: number;
-}
-
 export interface ICompanyContracts {
   _id: number;
   userID: number;
@@ -127,13 +114,32 @@ export interface CardProps {
   balance: number;
 }
 
+export interface IContractual {
+  _id: string;
+  company: string;
+  projectName: string;
+  rate: string;
+  createdAt: string;
+}
+
 export interface CurrenctLangProps {
   value: string;
+}
+
+export interface ITransactions {
+  _id: string;
+  receiverName: string;
+  receiverSurname: string;
+  receiverJob: string;
+  createdAt: string;
+  amount: string;
 }
 
 export interface StateProps {
   companyContracts: ICompanyContracts[];
   allCustomers: IAllCustomers[];
+  transactions: ITransactions[];
+  contractual: IContractual[];
   userCard: CardProps;
   curLang: CurrenctLangProps;
   insuranceCompleted: boolean;

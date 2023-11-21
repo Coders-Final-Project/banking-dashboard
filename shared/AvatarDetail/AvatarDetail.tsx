@@ -31,8 +31,10 @@ interface Props {
 const AvatarDetail = ({ hasBtn }: Props) => {
   const [serverError, setServerError] = useState("");
 
-  const { userCard, companyContracts } = useSelector(
-    (state: StateProps) => state,
+  const userCard = useSelector((state: StateProps) => state.userCard);
+
+  const companyContracts = useSelector(
+    (state: StateProps) => state.companyContracts,
   );
 
   const { data } = useGlobalContext();
@@ -48,8 +50,8 @@ const AvatarDetail = ({ hasBtn }: Props) => {
         if (
           data._id &&
           (currentPage === "/" ||
-            currentPage === "/cards" ||
-            currentPage === "/contracts")
+            currentPage === "/contracts" ||
+            currentPage === "/cards")
         ) {
           const response = await axios.post("/api/card/fetch", {
             userID: data._id,

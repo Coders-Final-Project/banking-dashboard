@@ -62,11 +62,11 @@
       }
 
       &__item:first-child {
-        margin-right: 60px;
+        margin-right: 90px;
       }
 
       &__middleGroup {
-        @include flexbox($justify: center, $items: center, $gap: 3em);
+        @include flexbox($justify: center, $items: center, $gap: 5.5em);
       }
     }
 
@@ -78,6 +78,20 @@
         $gap: 1.5em
       );
       width: 100%;
+      max-height: 300px;
+      overflow: scroll;
+    }
+
+    &__actions::-webkit-scrollbar {
+      display: none;
     }
   }
+}
+
+.no__action {
+  text-align: center;
+  width: 100%;
+  font-size: 18px;
+  color: $main-color-blue;
+  margin-top: 20px;
 }

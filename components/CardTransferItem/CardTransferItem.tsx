@@ -2,11 +2,11 @@
 
 import Image from "next/image";
 
-import { use, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 import axios from "axios";
 
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 
 import { useGlobalContext } from "@/context/store";
 
@@ -107,7 +107,7 @@ const CardTransferItem = ({ imgUrlEnd, text }: IProps) => {
       {isTransferOpen && (
         <div className="transfer__content__body">
           <input
-            type="text"
+            type="string"
             className="transfer__content__body__input"
             placeholder="Card number"
             value={cardNumber}
