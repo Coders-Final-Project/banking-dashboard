@@ -99,6 +99,10 @@ const TransactionTable = () => {
           {actionsData.map((action) => (
             <TransactionsTableItem key={action._id} {...action} />
           ))}
+
+          {actionsData.length === 0 && (
+            <div className="no__action">There is no action yet!</div>
+          )}
         </div>
       </div>
     </div>

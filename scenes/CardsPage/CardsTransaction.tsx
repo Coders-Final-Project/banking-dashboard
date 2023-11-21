@@ -106,6 +106,10 @@ const CardsTransaction = () => {
           {cardData.map((action) => (
             <CardActionItem key={action._id} {...action} />
           ))}
+
+          {cardData.length === 0 && (
+            <div className="no__action">There is no action yet!</div>
+          )}
         </div>
       </div>
     </div>

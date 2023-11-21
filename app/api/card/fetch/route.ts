@@ -12,7 +12,14 @@ export async function POST(request: NextRequest) {
 
     const userID = reqBody.userID;
 
-    const card = await Card.find({ userID });
+    const card = await Card.findOne({ userID: userID });
+
+    if (!card) {
+      return NextResponse.json(
+        { message: "There is no card!" },
+        { status: 500 },
+      );
+    }
 
     return NextResponse.json({
       card,
