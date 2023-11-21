@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import Image from "next/image";
 
@@ -8,24 +8,23 @@ import "@/sass/scenes/_transactionsTable.scss";
 
 import TransactionsTableItem from "@/components/TransactionsTableItem/TransactionsTableItem";
 
-import { transactionsHistory } from "@/db/transactions";
-
 import { filterActionsTable } from "@/helpers";
 
 import { useSelector } from "react-redux";
 import { StateProps } from "@/interface";
 
 const TransactionTable = () => {
-  const [actionsData, setActionsData] = useState(transactionsHistory);
   const [check, setCheck] = useState(false);
 
-  const { transactions } = useSelector((state: StateProps) => state);
+  const transactions = useSelector((state: StateProps) => state.transactions);
+
+  const [actionsData, setActionsData] = useState(transactions);
 
   const handleSort = (input: string) => {
     setCheck((prevValue) => !prevValue);
 
     const sortedData =
-      filterActionsTable({ input, data: transactionsHistory, check }) || [];
+      filterActionsTable({ input, data: transactions, check }) || [];
     setActionsData(sortedData);
   };
 
@@ -55,7 +54,16 @@ const TransactionTable = () => {
               className="transactions__table__content__sortBtns__element"
               onClick={() => handleSort("payment")}
             >
-              Payment
+              Date
+              <Image
+                src="/assets/transactions/arrows.png"
+                alt="arrows"
+                width={24}
+                height={24}
+              />
+            </button>
+            <button className="transactions__table__content__sortBtns__element">
+              Method
               <Image
                 src="/assets/transactions/arrows.png"
                 alt="arrows"
@@ -65,21 +73,9 @@ const TransactionTable = () => {
             </button>
             <button
               className="transactions__table__content__sortBtns__element"
-              onClick={() => handleSort("method")}
+              onClick={() => handleSort("amount")}
             >
-              Payment Method
-              <Image
-                src="/assets/transactions/arrows.png"
-                alt="arrows"
-                width={24}
-                height={24}
-              />
-            </button>
-            <button
-              className="transactions__table__content__sortBtns__element"
-              onClick={() => handleSort("date")}
-            >
-              Paid Date
+              Amount
               <Image
                 src="/assets/transactions/arrows.png"
                 alt="arrows"
@@ -100,7 +96,7 @@ const TransactionTable = () => {
           </button>
         </div>
         <div className="transactions__table__content__actions">
-          {transactions.map((action) => (
+          {actionsData.map((action) => (
             <TransactionsTableItem key={action._id} {...action} />
           ))}
         </div>

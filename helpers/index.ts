@@ -1,6 +1,6 @@
-import { IInvoicesData, IUserPayment } from "@/interface";
+import { IInvoicesData, ITransactions, IUserPayment } from "@/interface";
 import { ICardReport } from "@/interface";
-import { IFilterTableProps, IActionsTableProps } from "@/interface";
+import { IFilterTableProps } from "@/interface";
 
 export const findTotalPayment = ({
   duration,
@@ -100,16 +100,16 @@ export const filterActionsTable = ({
   check,
 }: {
   input: string;
-  data: IActionsTableProps[];
+  data: ITransactions[];
   check: boolean;
 }) => {
   if (input === "client") {
     return [...data].sort((a, b) =>
       !check
-        ? a.personName > b.personName
+        ? a.receiverName > b.receiverName
           ? 1
           : -1
-        : a.personName > b.personName
+        : a.receiverName > b.receiverName
         ? -1
         : 1,
     );
@@ -117,28 +117,19 @@ export const filterActionsTable = ({
   if (input === "payment") {
     return [...data].sort((a, b) =>
       !check
-        ? a.paymentDate > b.paymentDate
+        ? a.createdAt > b.createdAt
           ? 1
           : -1
-        : a.paymentDate > b.paymentDate
+        : a.createdAt > b.createdAt
         ? -1
         : 1,
     );
   }
-  if (input === "method") {
+  if (input === "amount") {
     return [...data].sort((a, b) =>
       !check
-        ? a.paymentTitle > b.paymentTitle
-          ? 1
-          : -1
-        : a.paymentTitle > b.paymentTitle
-        ? -1
-        : 1,
-    );
-  }
-  if (input === "date") {
-    return [...data].sort((a, b) =>
-      !check ? b.price - a.price : a.price - b.price,
+        ? Number(b.amount) - Number(a.amount)
+        : Number(a.amount) - Number(b.amount),
     );
   }
 };

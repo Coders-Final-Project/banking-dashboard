@@ -8,7 +8,7 @@ const cardSchema = new mongoose.Schema(
     },
     userName: { type: String, required: true },
     userSurname: { type: String, required: true },
-    cardNumber: { type: String, required: true },
+    cardNumber: { type: String, required: true, unique: true },
     endDate: { type: String, required: true },
     securityCode: { type: String, required: true },
     balance: { type: Number, required: true },

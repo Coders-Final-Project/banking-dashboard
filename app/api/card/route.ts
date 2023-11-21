@@ -14,6 +14,14 @@ export async function POST(request: NextRequest) {
   const { cardNumber, endDate, securityCode } = reqBody.cardValues;
 
   const user = await User.findById(userID);
+  const checkCard = await Card.find(cardNumber);
+
+  if (checkCard) {
+    return NextResponse.json(
+      { message: "Card number already taken!" },
+      { status: 500 },
+    );
+  }
 
   const newCard = new Card({
     userID,

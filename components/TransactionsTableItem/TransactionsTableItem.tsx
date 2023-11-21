@@ -1,9 +1,21 @@
+"use client";
+
+import { useState, useEffect } from "react";
+
 import Image from "next/image";
 
 import "@/sass/components/_transactionsTableItem.scss";
 
 import { ITransactions } from "@/interface";
 import { getFormattedDate } from "@/helpers";
+
+import axios from "axios";
+
+import { useDispatch } from "react-redux";
+
+import { useGlobalContext } from "@/context/store";
+
+import { setUserCardInfo } from "@/globalRedux/features/appSlice";
 
 const TransactionsTableItem = ({
   receiverName,
@@ -13,6 +25,70 @@ const TransactionsTableItem = ({
   createdAt,
 }: ITransactions) => {
   const { formattedDate, formattedTime } = getFormattedDate(createdAt);
+  const [isTransferOpen, setIsTransferOpen] = useState(false);
+
+  const [cardNumber, setCardNumber] = useState("");
+  const [fundAmount, setFundAmount] = useState("");
+  const [errorAlert, setErrorAlert] = useState(false);
+  const [successAlert, setSuccessAlert] = useState(false);
+
+  const { data } = useGlobalContext();
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (errorAlert) {
+      setTimeout(() => {
+        setErrorAlert(false);
+      }, 2000);
+    }
+
+    if (successAlert) {
+      setTimeout(() => {
+        setSuccessAlert(false);
+      }, 2000);
+    }
+  }, [errorAlert, successAlert]);
+
+  const handleTransferOpen = () => {
+    setIsTransferOpen((prevValue) => !prevValue);
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    let formattedValue = String(e.target.value.replace(/\s/g, ""));
+    if (formattedValue.length > 0) {
+      formattedValue = formattedValue
+        .match(new RegExp(".{1,4}", "g"))!
+        .join(" ");
+    }
+    setCardNumber(formattedValue);
+  };
+
+  const handleFundTransfer = async () => {
+    try {
+      if (data?._id && cardNumber.length === 19 && amount !== "") {
+        const response = await axios.post("/api/card/transfer", {
+          userID: data._id,
+          cardNumber,
+          amount,
+        });
+
+        handleTransferOpen();
+        dispatch(setUserCardInfo(response.data.data[0]));
+        setSuccessAlert(true);
+      } else {
+        setCardNumber("");
+        setFundAmount("");
+        setErrorAlert(true);
+      }
+    } catch (error) {
+      console.log(error);
+      setErrorAlert(true);
+    } finally {
+      setCardNumber("");
+      setFundAmount("");
+    }
+  };
 
   return (
     <div className="transactions__table__item">
@@ -59,7 +135,10 @@ const TransactionsTableItem = ({
           {formattedDate}
         </div>
       </div>
-      <button className="transactions__table__item__invoiceBtn">
+      <button
+        className="transactions__table__item__invoiceBtn"
+        onClick={handleTransferOpen}
+      >
         <Image
           src="/assets/transactions/invoice.png"
           alt="invoice"
@@ -76,6 +155,56 @@ const TransactionsTableItem = ({
         height={24}
         className="transactions__table__item__dotIcon"
       />
+      {isTransferOpen && (
+        <div className="action__item__modal">
+          <div className="action__item__modal__content">
+            <input
+              type="text"
+              className="action__item__modal__content__input"
+              placeholder="Card number"
+              value={cardNumber}
+              onChange={handleChange}
+              minLength={19}
+              maxLength={19}
+            />
+            <input
+              type="number"
+              className="action__item__modal__content__input"
+              placeholder="Amount (AZN)"
+              value={fundAmount}
+              onChange={(e) => setFundAmount(e.target.value)}
+            />
+            <button
+              className="action__item__modal__content__btn"
+              onClick={handleFundTransfer}
+            >
+              Send
+            </button>
+          </div>
+          <button
+            className="action__item__modal__closeBtn"
+            onClick={handleTransferOpen}
+          >
+            <Image
+              src="/assets/transactions/closeModal.png"
+              alt="close"
+              width={30}
+              height={30}
+              className="action__item__modal__closeBtn__img"
+            />
+          </button>
+        </div>
+      )}
+      {errorAlert && (
+        <div className="transactions__table__item__alert--error">
+          Something went wrong!
+        </div>
+      )}
+      {successAlert && (
+        <div className="transactions__table__item__alert--success">
+          Successfull transfer!
+        </div>
+      )}
     </div>
   );
 };

@@ -14,9 +14,9 @@ export async function POST(request: NextRequest) {
   const cardNumber = reqBody.cardNumber;
   const amount = reqBody.amount;
 
-  if (!userID && !cardNumber && !amount) {
+  if (!userID && !cardNumber && !(amount > 0)) {
     return NextResponse.json(
-      { message: "Provide card value!" },
+      { message: "Invalid card value or amount!" },
       { status: 400 },
     );
   }

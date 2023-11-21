@@ -81,8 +81,6 @@ const Insurance = () => {
         <select className="insurance__place__options">
           <option value="azerbaijan">Azerbaijan</option>
           <option value="turkey">Turkey</option>
-          <option value="germany">Germany</option>
-          <option value="spain">Spain</option>
         </select>
       </div>
       <div className="insurance__content">
