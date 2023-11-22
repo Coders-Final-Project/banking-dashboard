@@ -86,7 +86,7 @@ const CardsTransaction = () => {
           ))}
 
           {cardData.length === 0 && (
-            <div className="no__action">There is no action yet!</div>
+            <div className="no__action">There is no contract yet!</div>
           )}
         </div>
       </div>
