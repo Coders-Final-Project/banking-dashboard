@@ -78,7 +78,7 @@ const ContractGeneral = ({
             required
             placeholder="Enter fixed rate (Max,1000₼)"
             value={rate}
-            style={{ padding: "13px" }}
+            style={{ padding: "10px" }}
             onChange={(e) => updateFields({ rate: e.target.value })}
           />
         </div>
