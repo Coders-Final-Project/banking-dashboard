@@ -51,7 +51,7 @@ const ContractGeneral = ({
         />
       </div>
       <div className="contract__general__twoColumn">
-        <div className="contract__general__oneColumn">
+        <div className="contract__general__oneColumn select">
           <label htmlFor="company">Company</label>
           <select
             id="company"
