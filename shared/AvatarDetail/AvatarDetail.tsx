@@ -39,6 +39,10 @@ const AvatarDetail = ({ hasBtn }: Props) => {
     (state: StateProps) => state.companyContracts,
   );
 
+  const insuranceCompleted = useSelector(
+    (state: StateProps) => state.insuranceCompleted,
+  );
+
   const { data } = useGlobalContext();
 
   const dispatch = useDispatch();
@@ -87,7 +91,7 @@ const AvatarDetail = ({ hasBtn }: Props) => {
 
     const fetchCompanyContracts = async () => {
       try {
-        if (data._id) {
+        if (data._id && currentPage === "/cards") {
           const response = await axios.post("/api/contractual", {
             userID: data._id,
           });

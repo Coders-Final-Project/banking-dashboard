@@ -22,15 +22,17 @@ const Insurance = () => {
   const [isCoverageOpen, setIsCoverageOpen] = useState(true);
   const [successAlert, setSuccessAlert] = useState(false);
 
+  const insuranceCompleted = useSelector(
+    (state: StateProps) => state.insuranceCompleted,
+  );
+
   const router = useRouter();
 
   const dispatch = useDispatch();
 
   const { data } = useGlobalContext();
 
-  const { userCard, insuranceCompleted } = useSelector(
-    (state: StateProps) => state,
-  );
+  const userCard = useSelector((state: StateProps) => state.userCard);
 
   useEffect(() => {
     if (successAlert) {
@@ -56,7 +58,7 @@ const Insurance = () => {
           userID: data._id,
         });
 
-        dispatch(setInsuranceCompleted(response.data));
+        dispatch(setInsuranceCompleted(response.data.data));
         setSuccessAlert(true);
       }
     } catch (error) {
