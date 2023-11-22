@@ -30,7 +30,7 @@ const Insurance = () => {
 
   const dispatch = useDispatch();
 
-  const { data } = useGlobalContext();
+  const { data, updateInsuranceCompleted } = useGlobalContext();
 
   const userCard = useSelector((state: StateProps) => state.userCard);
 
@@ -59,6 +59,7 @@ const Insurance = () => {
         });
 
         dispatch(setInsuranceCompleted(response.data.data));
+        updateInsuranceCompleted(response.data.data);
         setSuccessAlert(true);
       }
     } catch (error) {

@@ -21,10 +21,12 @@ type DataType = {
 
 interface ContextProps {
   data: DataType;
+  updateInsuranceCompleted: (value: boolean) => void;
 }
 
 const GlobalContext = createContext<ContextProps>({
   data: { _id: "", firstName: "", job: "", insuranceCompleted: false },
+  updateInsuranceCompleted: () => {},
 });
 
 export const GlobalContextProvider = ({
@@ -38,6 +40,10 @@ export const GlobalContextProvider = ({
     job: "",
     insuranceCompleted: false,
   });
+
+  const updateInsuranceCompleted = (value: boolean) => {
+    setData((prevData) => ({ ...prevData, insuranceCompleted: value }));
+  };
 
   useEffect(() => {
     const getUserInfo = async () => {
@@ -53,7 +59,9 @@ export const GlobalContextProvider = ({
   }, []);
 
   return (
-    <GlobalContext.Provider value={{ data }}>{children}</GlobalContext.Provider>
+    <GlobalContext.Provider value={{ data, updateInsuranceCompleted }}>
+      {children}
+    </GlobalContext.Provider>
   );
 };
 
