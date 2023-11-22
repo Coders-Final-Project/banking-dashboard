@@ -87,7 +87,7 @@ const AvatarDetail = ({ hasBtn }: Props) => {
 
     const fetchCompanyContracts = async () => {
       try {
-        if (data._id && currentPage === "/cards") {
+        if (data._id) {
           const response = await axios.post("/api/contractual", {
             userID: data._id,
           });
