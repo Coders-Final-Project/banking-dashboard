@@ -8,12 +8,7 @@ import CardActionItem from "@/components/CardActionItem/CardActionItem";
 
 import { filterCardsTable } from "@/helpers";
 
-import axios from "axios";
-
-import { useGlobalContext } from "@/context/store";
-
-import { useSelector, useDispatch } from "react-redux";
-import { setContractual } from "@/globalRedux/features/appSlice";
+import { useSelector } from "react-redux";
 
 import { StateProps } from "@/interface";
 
@@ -24,26 +19,9 @@ const CardsTransaction = () => {
 
   const [cardData, setCardData] = useState(contractual);
 
-  const { data } = useGlobalContext();
-
-  const dispatch = useDispatch();
-
   useEffect(() => {
-    const fetchCompanyContracts = async () => {
-      try {
-        if (data._id) {
-          const response = await axios.post("/api/contractual", {
-            userID: data._id,
-          });
-          dispatch(setContractual(response.data.contractuals));
-        }
-      } catch (error: any) {
-        console.log(error);
-      }
-    };
-
-    fetchCompanyContracts();
-  }, [data, dispatch]);
+    setCardData(contractual);
+  }, [contractual]);
 
   const handleSort = (input: string) => {
     setCheck((prevValue) => !prevValue);

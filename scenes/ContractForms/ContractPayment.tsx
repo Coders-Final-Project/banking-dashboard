@@ -44,8 +44,6 @@ const ContractPayment = ({
               required
               onChange={(e) => updateFields({ currency: e.target.value })}
             >
-              <option value="USD">USD</option>
-              <option value="EUR">EUR</option>
               <option value="AZN">AZN</option>
             </select>
           </div>

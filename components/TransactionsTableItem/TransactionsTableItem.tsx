@@ -70,10 +70,9 @@ const TransactionsTableItem = ({
         const response = await axios.post("/api/card/transfer", {
           userID: data._id,
           cardNumber,
-          amount,
+          amount: fundAmount,
         });
 
-        handleTransferOpen();
         dispatch(setUserCardInfo(response.data.data[0]));
         setSuccessAlert(true);
       } else {
@@ -87,6 +86,7 @@ const TransactionsTableItem = ({
     } finally {
       setCardNumber("");
       setFundAmount("");
+      handleTransferOpen();
     }
   };
 

@@ -23,6 +23,7 @@ import {
   setUserCardInfo,
   setInsuranceCompleted,
   setTransactions,
+  setContractual,
 } from "@/globalRedux/features/appSlice";
 
 interface Props {
@@ -67,7 +68,7 @@ const AvatarDetail = ({ hasBtn }: Props) => {
       }
     };
 
-    const fetchCompanyContracts = async () => {
+    const fetchTransactions = async () => {
       try {
         if (
           data._id &&
@@ -84,10 +85,24 @@ const AvatarDetail = ({ hasBtn }: Props) => {
       }
     };
 
+    const fetchCompanyContracts = async () => {
+      try {
+        if (data._id && currentPage === "/cards") {
+          const response = await axios.post("/api/contractual", {
+            userID: data._id,
+          });
+          dispatch(setContractual(response.data.contractuals));
+        }
+      } catch (error: any) {
+        console.log(error);
+      }
+    };
+
     dispatch(setInsuranceCompleted(data.insuranceCompleted));
 
-    fetchCompanyContracts();
+    fetchTransactions();
     fetchCardInfo();
+    fetchCompanyContracts();
   }, [currentPage, data, dispatch]);
 
   const activeContracts = companyContracts.map(
