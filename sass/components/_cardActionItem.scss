@@ -6,6 +6,7 @@
 .cards__action__item {
   @include flexbox($justify: space-between, $items: center);
   width: 100%;
+  text-decoration: none;
 
   &:hover {
     cursor: pointer;

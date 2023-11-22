@@ -22,6 +22,7 @@ import { StateProps } from "@/interface";
 import {
   setUserCardInfo,
   setInsuranceCompleted,
+  setTransactions,
 } from "@/globalRedux/features/appSlice";
 
 interface Props {
@@ -57,8 +58,8 @@ const AvatarDetail = ({ hasBtn }: Props) => {
             userID: data._id,
           });
 
-          if (response.data.card[0] !== undefined) {
-            dispatch(setUserCardInfo(response.data.card[0]));
+          if (response.data.card !== undefined) {
+            dispatch(setUserCardInfo(response.data.card));
           }
         }
       } catch (error) {
@@ -66,8 +67,26 @@ const AvatarDetail = ({ hasBtn }: Props) => {
       }
     };
 
+    const fetchCompanyContracts = async () => {
+      try {
+        if (
+          data._id &&
+          (currentPage === "/" || currentPage === "/transactions")
+        ) {
+          const response = await axios.post("/api/transactions", {
+            userID: data._id,
+          });
+
+          dispatch(setTransactions(response.data.transactions));
+        }
+      } catch (error: any) {
+        console.log(error);
+      }
+    };
+
     dispatch(setInsuranceCompleted(data.insuranceCompleted));
 
+    fetchCompanyContracts();
     fetchCardInfo();
   }, [currentPage, data, dispatch]);
 
@@ -81,6 +100,7 @@ const AvatarDetail = ({ hasBtn }: Props) => {
   const handleLogout = async () => {
     try {
       await axios.get("/api/user/logout");
+      localStorage.removeItem("persist:root");
       router.push("/signin");
     } catch (error: any) {
       setServerError(error.message);

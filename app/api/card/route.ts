@@ -14,7 +14,7 @@ export async function POST(request: NextRequest) {
   const { cardNumber, endDate, securityCode } = reqBody.cardValues;
 
   const user = await User.findById(userID);
-  const checkCard = await Card.find(cardNumber);
+  const checkCard = await Card.findOne({ cardNumber });
 
   if (checkCard) {
     return NextResponse.json(

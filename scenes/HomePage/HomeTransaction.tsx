@@ -2,46 +2,16 @@
 
 import Link from "next/link";
 
-import { useEffect } from "react";
-
 import "@/sass/scenes/_homeTransaction.scss";
 
-import { useSelector, useDispatch } from "react-redux";
-
-import axios from "axios";
-
-import { setTransactions } from "@/globalRedux/features/appSlice";
+import { useSelector } from "react-redux";
 
 import TransactionItem from "@/components/TransactionItem/TransactionItem";
-
-import { useGlobalContext } from "@/context/store";
 
 import { StateProps } from "@/interface";
 
 const HomeTransaction = () => {
-  const dispatch = useDispatch();
-
-  const { data } = useGlobalContext();
-
   const transactions = useSelector((state: StateProps) => state.transactions);
-
-  useEffect(() => {
-    const fetchCompanyContracts = async () => {
-      try {
-        if (data._id) {
-          const response = await axios.post("/api/transactions", {
-            userID: data._id,
-          });
-
-          dispatch(setTransactions(response.data.transactions));
-        }
-      } catch (error: any) {
-        console.log(error);
-      }
-    };
-
-    fetchCompanyContracts();
-  }, [data, dispatch]);
 
   return (
     <div className="home__content__transaction">

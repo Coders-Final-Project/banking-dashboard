@@ -12,7 +12,7 @@ export async function POST(request: NextRequest) {
 
     const userID = reqBody.userID;
 
-    const card = await Card.findOne({ userID: userID });
+    const card = await Card.findOne({ userID });
 
     if (!card) {
       return NextResponse.json(

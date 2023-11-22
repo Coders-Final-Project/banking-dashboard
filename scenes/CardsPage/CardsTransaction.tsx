@@ -20,9 +20,13 @@ import { StateProps } from "@/interface";
 const CardsTransaction = () => {
   const [check, setCheck] = useState(false);
 
-  const dispatch = useDispatch();
+  const contractual = useSelector((state: StateProps) => state.contractual);
+
+  const [cardData, setCardData] = useState(contractual);
 
   const { data } = useGlobalContext();
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const fetchCompanyContracts = async () => {
@@ -40,10 +44,6 @@ const CardsTransaction = () => {
 
     fetchCompanyContracts();
   }, [data, dispatch]);
-
-  const contractual = useSelector((state: StateProps) => state.contractual);
-
-  const [cardData, setCardData] = useState(contractual);
 
   const handleSort = (input: string) => {
     setCheck((prevValue) => !prevValue);

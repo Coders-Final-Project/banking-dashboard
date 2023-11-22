@@ -72,6 +72,11 @@
         opacity: 0.9;
       }
     }
+
+    &__sendBtn.disabled__btn {
+      cursor: not-allowed;
+      opacity: 0.9;
+    }
   }
 
   &__alert--error,
