@@ -33,10 +33,10 @@ export interface IContractItem {
   endDate: string;
 }
 export interface IContractClient {
-  id: number;
-  clientImg: string;
-  clientName: string;
-  clientCompany: string;
+  _id: number;
+  firstName: string;
+  lastName: string;
+  job: string;
 }
 
 export interface FormData {
@@ -110,6 +110,31 @@ export interface ICompanyContracts {
   isSIgned: boolean;
 }
 
+export interface IAllCustomers {
+  _id: number;
+  firstName: string;
+  lastName: string;
+  job: string;
+}
+
+export interface CardProps {
+  _id: number;
+  userName: string;
+  userSurname: string;
+  cardNumber: string;
+  endDate: string;
+  securityCode: string;
+  balance: number;
+}
+
+export interface CurrenctLangProps {
+  value: string;
+}
+
 export interface StateProps {
   companyContracts: ICompanyContracts[];
+  allCustomers: IAllCustomers[];
+  userCard: CardProps;
+  curLang: CurrenctLangProps;
+  insuranceCompleted: boolean;
 }

@@ -1,62 +1,75 @@
 import Image from "next/image";
 import Link from "next/link";
 
+import LangSwitcher from "../LangSwitcher/LangSwitcher";
+
 import "@/sass/layout/_sidebar.scss";
 
 import MainLogo from "@/components/MainLogo/MainLogo";
 import SidebarItem from "@/components/SidebarItem/SidebarItem";
 
-const sidebarLinks = [
-  {
-    id: 1,
-    icon: "home.png",
-    route: "/",
-    text: "home",
-  },
-  {
-    id: 2,
-    icon: "edit.png",
-    route: "contracts",
-    text: "contracts",
-  },
-  {
-    id: 3,
-    icon: "document-text.png",
-    route: "documents",
-    text: "documents",
-  },
-  {
-    id: 4,
-    icon: "document-normal.png",
-    iconExtra: "vector.png",
-    route: "invoices",
-    text: "invoices",
-  },
-  {
-    id: 5,
-    icon: "convert-card.png",
-    route: "transactions",
-    text: "transactions",
-  },
-  {
-    id: 6,
-    icon: "security.png",
-    iconExtra: "frame.png",
-    route: "insurance",
-    text: "insurance",
-  },
-  {
-    id: 7,
-    icon: "card.png",
-    route: "cards",
-    text: "cards",
-  },
-];
+import { getIntl } from "../../lib/intl";
 
-const Sidebar = () => {
+type SidebarProps = {
+  params: { locale: string };
+};
+
+const Sidebar = async ({ params: { locale } }: SidebarProps) => {
+  const intl = await getIntl(locale);
+
+  const sidebarLinks = [
+    {
+      id: 1,
+      icon: "home.png",
+      route: "/",
+      text: `${intl.formatMessage({ id: "sidebar.link1.title" })}`,
+    },
+    {
+      id: 2,
+      icon: "edit.png",
+      route: "contracts",
+      text: `${intl.formatMessage({ id: "sidebar.link2.title" })}`,
+    },
+    {
+      id: 3,
+      icon: "document-text.png",
+      route: "documents",
+      text: `${intl.formatMessage({ id: "sidebar.link3.title" })}`,
+    },
+    {
+      id: 4,
+      icon: "document-normal.png",
+      iconExtra: "vector.png",
+      route: "invoices",
+      text: `${intl.formatMessage({ id: "sidebar.link4.title" })}`,
+    },
+    {
+      id: 5,
+      icon: "convert-card.png",
+      route: "transactions",
+      text: `${intl.formatMessage({ id: "sidebar.link5.title" })}`,
+    },
+    {
+      id: 6,
+      icon: "security.png",
+      iconExtra: "frame.png",
+      route: "insurance",
+      text: `${intl.formatMessage({ id: "sidebar.link6.title" })}`,
+    },
+    {
+      id: 7,
+      icon: "card.png",
+      route: "cards",
+      text: `${intl.formatMessage({ id: "sidebar.link7.title" })}`,
+    },
+  ];
+
   return (
     <div className="sidebar">
-      <MainLogo />
+      <div className="sidebar__main">
+        <MainLogo />
+        <LangSwitcher />
+      </div>
       <div className="sidebar__links">
         {sidebarLinks.map((link) => (
           <SidebarItem
@@ -76,7 +89,9 @@ const Sidebar = () => {
           height={24}
           className="sidebar__settings__icon"
         />
-        <div className="sidebar__settings__text">Settings</div>
+        <div className="sidebar__settings__text">
+          {intl.formatMessage({ id: "sidebar.link8.title" })}
+        </div>
       </Link>
     </div>
   );

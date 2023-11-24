@@ -1,0 +1,19 @@
+@import "/sass/utils/colors";
+@import "/sass/utils/variables";
+@import "/sass/utils/mixins";
+@import "/sass/base/typography";
+
+.personal {
+  &__contractorType {
+    border: 1px solid;
+  }
+  &__choosing {
+    border: 1px solid;
+  }
+
+  input {
+    height: 20px;
+    width: 20px;
+    background-color: red;
+  }
+}

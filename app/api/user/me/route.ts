@@ -11,7 +11,9 @@ export async function GET(request: NextRequest) {
 
   try {
     const userId = await getDataFromToken(request);
-    const user = await User.findOne({ _id: userId }).select("firstName job");
+    const user = await User.findOne({ _id: userId }).select(
+      "firstName job insuranceCompleted",
+    );
 
     return NextResponse.json({
       message: "User found",

@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 
 import "@/sass/scenes/_contractsActive.scss";
 
@@ -15,15 +16,15 @@ import { setCompanyContracts } from "@/globalRedux/features/appSlice";
 
 import { StateProps } from "@/interface";
 
-import { cache, useEffect } from "react";
+import { useEffect } from "react";
 
 const ContractsActive = () => {
   const dispatch = useDispatch();
 
   const { data } = useGlobalContext();
 
-  const companyContracts = useSelector(
-    (state: StateProps) => state.companyContracts,
+  const { companyContracts, userCard } = useSelector(
+    (state: StateProps) => state,
   );
 
   useEffect(() => {
@@ -41,8 +42,7 @@ const ContractsActive = () => {
     };
 
     fetchCompanyContracts();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [data]);
+  }, [data, dispatch]);
 
   return (
     <div className="contracts__content__active">
@@ -59,6 +59,19 @@ const ContractsActive = () => {
         />
       </div>
       <div className="contracts__content__active__body">
+        {userCard._id === -1 && (
+          <Link
+            href="/cards"
+            className="contracts__content__active__body__empty"
+          >
+            Add card in order to create any contract
+          </Link>
+        )}
+
+        {companyContracts.length === 0 && userCard._id !== -1 && (
+          <div className="no__contract">There is no contract yet!</div>
+        )}
+
         {companyContracts?.map((contract) => (
           <ContractsItem key={contract._id} {...contract} />
         ))}

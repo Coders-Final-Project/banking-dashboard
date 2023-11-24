@@ -1,0 +1,19 @@
+@import "/sass/utils/colors";
+@import "/sass/utils/variables";
+@import "/sass/utils/mixins";
+@import "/sass/base/typography";
+
+.lang__switcher {
+  @include flexbox($justify: center, $items: center, $gap: 1em);
+
+  &__link {
+    text-decoration: none;
+    color: $main-color-black;
+    font-size: 17px;
+    text-transform: uppercase;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}

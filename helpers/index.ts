@@ -151,7 +151,7 @@ export const defineCompanyImage = (companyName: string): string | undefined => {
   const companies: CompanyImages = {
     "Pasha Bank": "pashaBank.jpg",
     "Kapital Bank": "kapitalBank.png",
-    "Bank of Bank": "bankOfBaku.jpg",
+    "Bank of Baku": "bankOfBaku.jpg",
   };
 
   return companies[companyName];

@@ -1,8 +1,12 @@
 import Image from "next/image";
 
+import { getIntl } from "../../lib/intl";
+
 import "@/sass/scenes/_homeTotal.scss";
 
-const HomeTotal = () => {
+const HomeTotal = async () => {
+  const intl = await getIntl("en");
+
   return (
     <div className="home__content__total">
       <div className="home__content__total__item">
@@ -15,7 +19,7 @@ const HomeTotal = () => {
         />
         <div className="home__content__total__item__info">
           <div className="home__content__total__item__info__text">
-            Total Outstanding
+            {intl.formatMessage({ id: "page.home.line1.title1" })}
           </div>
           <div className="home__content__total__item__info__number">
             $58,764<span>.25</span>
@@ -33,7 +37,7 @@ const HomeTotal = () => {
         />
         <div className="home__content__total__item__info">
           <div className="home__content__total__item__info__text">
-            Upcoming Payment
+            {intl.formatMessage({ id: "page.home.line1.title2" })}
           </div>
           <div className="home__content__total__item__info__number">
             April 1st, <span>2022</span>

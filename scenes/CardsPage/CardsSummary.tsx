@@ -2,12 +2,15 @@ import Image from "next/image";
 
 import "@/sass/scenes/_cardsSummary.scss";
 
+import img from "../../public/assets/cards/income-icon.png";
+
 const CardsSummary = () => {
   return (
     <div className="cards__summary">
       <div className="cards__summary__item">
         <Image
-          src="/assets/cards/income-icon.png"
+          // src="/assets/cards/income-icon.png"
+          src={img}
           alt="income"
           width={30}
           height={30}

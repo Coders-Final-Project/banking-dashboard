@@ -25,7 +25,13 @@
     );
 
     &__item {
-      @include flexbox($justify: flex-start, $items: center, $gap: 0.5em);
+      @include flexbox(
+        $direction: column,
+        $justify: flex-start,
+        $items: center,
+        $gap: 0.5em
+      );
+      width: 400px;
 
       label {
         color: $main-color-black;
@@ -38,6 +44,7 @@
         background-color: $greyscale-grey-200;
         padding: 10px;
         border-radius: 10px;
+        width: 100%;
       }
     }
 

@@ -1,0 +1,14 @@
+{
+  "page.home.head.title": "Welcome",
+  "page.home.head.desc": "Here is your dashboard overview",
+  "page.home.line1.title1": "Total Outstanding",
+  "page.home.line1.title2": "Upcoming Payment",
+  "sidebar.link1.title": "Home",
+  "sidebar.link2.title": "Contracts",
+  "sidebar.link3.title": "Documents",
+  "sidebar.link4.title": "Invoices",
+  "sidebar.link5.title": "Transactions",
+  "sidebar.link6.title": "Insurance",
+  "sidebar.link7.title": "Cards",
+  "sidebar.link8.title": "Settings"
+}

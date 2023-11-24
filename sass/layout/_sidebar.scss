@@ -21,6 +21,10 @@
   );
   overflow: hidden;
 
+  &__main {
+    @include flexbox($justify: flex-start, $items: center, $gap: 3.5em);
+  }
+
   &__links {
     @include flexbox(
       $direction: column,
