@@ -9,10 +9,10 @@ export async function POST(request: NextRequest) {
 
   const reqBody = await request.json();
 
-  const userID = reqBody.userID;
+  const userId = reqBody.userID;
 
   try {
-    const contractuals = await Contractual.find({ userID });
+    const contractuals = await Contractual.find({ userId });
 
     return NextResponse.json({
       contractuals,

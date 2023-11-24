@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 import "@/sass/components/_cardActionItem.scss";
 
@@ -15,7 +16,7 @@ const CardActionItem = ({
   const { formattedDate } = getFormattedDate(createdAt);
 
   return (
-    <div className="cards__action__item">
+    <Link href="/contracts" className="cards__action__item">
       <div className="cards__action__item__preview">
         <Image
           src={`/assets/contracts/${defineCompanyImage(company)}`}
@@ -35,7 +36,7 @@ const CardActionItem = ({
         height={24}
         className="cards__action__item__switch"
       />
-    </div>
+    </Link>
   );
 };
 

@@ -8,42 +8,20 @@ import CardActionItem from "@/components/CardActionItem/CardActionItem";
 
 import { filterCardsTable } from "@/helpers";
 
-import axios from "axios";
-
-import { useGlobalContext } from "@/context/store";
-
-import { useSelector, useDispatch } from "react-redux";
-import { setContractual } from "@/globalRedux/features/appSlice";
+import { useSelector } from "react-redux";
 
 import { StateProps } from "@/interface";
 
 const CardsTransaction = () => {
   const [check, setCheck] = useState(false);
 
-  const dispatch = useDispatch();
-
-  const { data } = useGlobalContext();
-
-  useEffect(() => {
-    const fetchCompanyContracts = async () => {
-      try {
-        if (data._id) {
-          const response = await axios.post("/api/contractual", {
-            userID: data._id,
-          });
-          dispatch(setContractual(response.data.contractuals));
-        }
-      } catch (error: any) {
-        console.log(error);
-      }
-    };
-
-    fetchCompanyContracts();
-  }, [data, dispatch]);
-
   const contractual = useSelector((state: StateProps) => state.contractual);
 
   const [cardData, setCardData] = useState(contractual);
+
+  useEffect(() => {
+    setCardData(contractual);
+  }, [contractual]);
 
   const handleSort = (input: string) => {
     setCheck((prevValue) => !prevValue);
@@ -108,7 +86,7 @@ const CardsTransaction = () => {
           ))}
 
           {cardData.length === 0 && (
-            <div className="no__action">There is no action yet!</div>
+            <div className="no__action">There is no contract yet!</div>
           )}
         </div>
       </div>

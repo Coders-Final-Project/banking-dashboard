@@ -3,7 +3,11 @@
 import { useState } from "react";
 import axios from "axios";
 
+import { uploadFile } from "@/lib/actions/uploadActions";
+
 import Image from "next/image";
+
+import { useGlobalContext } from "@/context/store";
 
 import "@/sass/components/_documentModal.scss";
 
@@ -22,6 +26,8 @@ const DocumentModal = ({ title, setIsUploadClicked }: IProps) => {
   const [progress, setProgress] = useState(INITIAL_PROGRESS);
   const [message, setMessage] = useState<string | null>(null);
 
+  const { data } = useGlobalContext();
+
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files && event.target.files[0];
     setSelectedFile(file);
@@ -29,40 +35,41 @@ const DocumentModal = ({ title, setIsUploadClicked }: IProps) => {
     setMessage(null);
   };
 
-  const handleUpload = () => {
+  const handleUpload = async () => {
     if (!selectedFile) {
       setMessage("No selected file");
       return;
     }
 
-    const fd = new FormData();
-    fd.append("fd", selectedFile);
+    const formData = new FormData();
+    formData.append("userId", data._id);
+    formData.append("fileName", title);
+    formData.append("fileUrl", selectedFile);
 
     setMessage("Uploading...");
+
     setProgress((prevState) => {
       return { ...prevState, started: true };
     });
 
-    axios
-      .post("http://httpbin.org/post", fd, {
-        onUploadProgress: (progressEvent) => {
-          setProgress((prevState) => {
-            //@ts-ignore
-            return { ...prevState, pc: progressEvent.progress * 100 };
-          });
-        },
-        headers: {
-          "Custom-Header": "Value",
-        },
-      })
-      .then((res) => {
+    try {
+      if (data._id) {
+        const response = await uploadFile(formData);
+
+        console.log(response);
+
         setMessage("Uploaded successfully");
-        console.log(res.data);
-      })
-      .catch((err) => {
-        setMessage("Uploading failed");
-        console.log(err);
-      });
+
+        setTimeout(() => {
+          setIsUploadClicked(false);
+        }, 1000);
+      }
+    } catch (error) {
+      setMessage("Uploading failed");
+      console.log(error);
+    } finally {
+      setSelectedFile(null);
+    }
   };
 
   const handleCloseModal = () => {

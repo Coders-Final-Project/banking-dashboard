@@ -20,6 +20,10 @@ const TransactionTable = () => {
 
   const [actionsData, setActionsData] = useState(transactions);
 
+  useEffect(() => {
+    setActionsData(transactions);
+  }, [transactions]);
+
   const handleSort = (input: string) => {
     setCheck((prevValue) => !prevValue);
 

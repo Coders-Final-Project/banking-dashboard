@@ -21,7 +21,7 @@ const ContractsClient = () => {
 
   const { data } = useGlobalContext();
 
-  const { allCustomers } = useSelector((state: StateProps) => state);
+  const allCustomers = useSelector((state: StateProps) => state.allCustomers);
 
   useEffect(() => {
     const fetchAllCustomers = async () => {
