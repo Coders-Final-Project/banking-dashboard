@@ -23,8 +23,8 @@ const ContractsActive = () => {
 
   const { data } = useGlobalContext();
 
-  const companyContracts = useSelector(
-    (state: StateProps) => state.companyContracts,
+  const { companyContracts, userCard } = useSelector(
+    (state: StateProps) => state,
   );
 
   const userCard = useSelector((state: StateProps) => state.userCard);
