@@ -54,6 +54,10 @@
   }
 }
 
+.contract__payment__oneColumn.select {
+  gap: 2em;
+}
+
 .contract__payment__twoColumn {
   @include flexbox($justify: space-between, $items: center, $gap: 1.5em);
   width: 100%;

@@ -2,16 +2,17 @@
 
 import Image from "next/image";
 
-import { use, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 import axios from "axios";
 
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { useGlobalContext } from "@/context/store";
 
 import "@/sass/components/_cardTransferItem.scss";
 import { setUserCardInfo } from "@/globalRedux/features/appSlice";
+import { StateProps } from "@/interface";
 
 interface IProps {
   imgUrlEnd: string;
@@ -28,6 +29,8 @@ const CardTransferItem = ({ imgUrlEnd, text }: IProps) => {
   const { data } = useGlobalContext();
 
   const dispatch = useDispatch();
+
+  const userCard = useSelector((state: StateProps) => state.userCard);
 
   useEffect(() => {
     if (errorAlert) {
@@ -107,7 +110,7 @@ const CardTransferItem = ({ imgUrlEnd, text }: IProps) => {
       {isTransferOpen && (
         <div className="transfer__content__body">
           <input
-            type="text"
+            type="string"
             className="transfer__content__body__input"
             placeholder="Card number"
             value={cardNumber}
@@ -123,8 +126,13 @@ const CardTransferItem = ({ imgUrlEnd, text }: IProps) => {
             onChange={(e) => setAmount(e.target.value)}
           />
           <button
-            className="transfer__content__body__sendBtn"
+            className={`transfer__content__body__sendBtn ${
+              (userCard._id === -1 ||
+                Number(userCard.balance) < Number(amount)) &&
+              "disabled__btn"
+            }`}
             onClick={handleFundTransfer}
+            disabled={userCard._id === -1}
           >
             Send
           </button>

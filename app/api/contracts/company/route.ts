@@ -5,6 +5,7 @@ import CompanyContract from "@/lib/models/company.contract.model";
 import { connectToDB } from "@/lib/mongoose";
 import User from "@/lib/models/user.model";
 import Card from "@/lib/models/card.model";
+import Contractual from "@/lib/models/contractual.model";
 
 export async function POST(request: NextRequest) {
   connectToDB();
@@ -47,6 +48,13 @@ export async function POST(request: NextRequest) {
     );
   }
 
+  const newContractual = new Contractual({
+    userId: userID,
+    company,
+    projectName,
+    rate,
+  });
+
   try {
     const savedContract = await newContract.save();
 
@@ -58,6 +66,7 @@ export async function POST(request: NextRequest) {
 
     await user.save();
     await card[0].save();
+    await newContractual.save();
 
     return NextResponse.json({
       message: "Company contract created successfully",

@@ -97,7 +97,7 @@ const ContractsItem = ({
       </div>
       <button className="contract__delete__btn" onClick={handleOpenContract}>
         <Image
-          src="/assets/contracts/remove.png"
+          src="/assets/contracts/delete.png"
           alt="remove"
           width={24}
           height={24}

@@ -59,7 +59,7 @@
       border-radius: 16px;
       border: 1px solid $greyscale-grey-300;
       background: $greyscale-grey-50;
-      @include flexbox($justify: flex-start, $items: center, $gap: 9.5em);
+      @include flexbox($justify: flex-start, $items: center, $gap: 9.2em);
       padding: 0.5em;
       width: 100%;
 
@@ -90,4 +90,12 @@
       width: 100%;
     }
   }
+}
+
+.no__action {
+  text-align: center;
+  width: 100%;
+  font-size: 18px;
+  color: $main-color-blue;
+  margin-top: 20px;
 }

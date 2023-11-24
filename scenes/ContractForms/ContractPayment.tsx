@@ -36,7 +36,7 @@ const ContractPayment = ({
               onChange={(e) => updateFields({ projectName: e.target.value })}
             />
           </div>
-          <div className="contract__payment__oneColumn">
+          <div className="contract__payment__oneColumn select">
             <label htmlFor="currency">Currency</label>
             <select
               id="currency"
@@ -44,8 +44,6 @@ const ContractPayment = ({
               required
               onChange={(e) => updateFields({ currency: e.target.value })}
             >
-              <option value="USD">USD</option>
-              <option value="EUR">EUR</option>
               <option value="AZN">AZN</option>
             </select>
           </div>

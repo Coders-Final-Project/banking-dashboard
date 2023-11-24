@@ -27,6 +27,8 @@ const ContractsActive = () => {
     (state: StateProps) => state,
   );
 
+  const userCard = useSelector((state: StateProps) => state.userCard);
+
   useEffect(() => {
     const fetchCompanyContracts = async () => {
       try {

@@ -76,6 +76,17 @@ const userSchema = new mongoose.Schema(
         ref: "Transaction",
       },
     ],
+    uploadedFiles: [
+      {
+        fileName: {
+          type: String,
+        },
+        fileUrl: {
+          public_id: String,
+          secure_url: String,
+        },
+      },
+    ],
   },
   { timestamps: true },
 );

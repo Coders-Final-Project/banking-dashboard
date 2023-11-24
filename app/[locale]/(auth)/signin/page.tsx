@@ -6,6 +6,8 @@ import axios from "axios";
 
 import Image from "next/image";
 
+import { FormattedMessage } from "react-intl";
+
 import "@/sass/pages/_signIn.scss";
 import Link from "next/link";
 

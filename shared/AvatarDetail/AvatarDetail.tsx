@@ -22,6 +22,8 @@ import { StateProps } from "@/interface";
 import {
   setUserCardInfo,
   setInsuranceCompleted,
+  setTransactions,
+  setContractual,
 } from "@/globalRedux/features/appSlice";
 
 interface Props {
@@ -31,8 +33,14 @@ interface Props {
 const AvatarDetail = ({ hasBtn }: Props) => {
   const [serverError, setServerError] = useState("");
 
-  const { userCard, companyContracts } = useSelector(
-    (state: StateProps) => state,
+  const userCard = useSelector((state: StateProps) => state.userCard);
+
+  const companyContracts = useSelector(
+    (state: StateProps) => state.companyContracts,
+  );
+
+  const insuranceCompleted = useSelector(
+    (state: StateProps) => state.insuranceCompleted,
   );
 
   const { data } = useGlobalContext();
@@ -48,15 +56,15 @@ const AvatarDetail = ({ hasBtn }: Props) => {
         if (
           data._id &&
           (currentPage === "/" ||
-            currentPage === "/cards" ||
-            currentPage === "/contracts")
+            currentPage === "/contracts" ||
+            currentPage === "/cards")
         ) {
           const response = await axios.post("/api/card/fetch", {
             userID: data._id,
           });
 
-          if (response.data.card[0] !== undefined) {
-            dispatch(setUserCardInfo(response.data.card[0]));
+          if (response.data.card !== undefined) {
+            dispatch(setUserCardInfo(response.data.card));
           }
         }
       } catch (error) {
@@ -64,9 +72,41 @@ const AvatarDetail = ({ hasBtn }: Props) => {
       }
     };
 
+    const fetchTransactions = async () => {
+      try {
+        if (
+          data._id &&
+          (currentPage === "/" || currentPage === "/transactions")
+        ) {
+          const response = await axios.post("/api/transactions", {
+            userID: data._id,
+          });
+
+          dispatch(setTransactions(response.data.transactions));
+        }
+      } catch (error: any) {
+        console.log(error);
+      }
+    };
+
+    const fetchCompanyContracts = async () => {
+      try {
+        if (data._id && currentPage === "/cards") {
+          const response = await axios.post("/api/contractual", {
+            userID: data._id,
+          });
+          dispatch(setContractual(response.data.contractuals));
+        }
+      } catch (error: any) {
+        console.log(error);
+      }
+    };
+
     dispatch(setInsuranceCompleted(data.insuranceCompleted));
 
+    fetchTransactions();
     fetchCardInfo();
+    fetchCompanyContracts();
   }, [currentPage, data, dispatch]);
 
   const activeContracts = companyContracts.map(
@@ -79,6 +119,7 @@ const AvatarDetail = ({ hasBtn }: Props) => {
   const handleLogout = async () => {
     try {
       await axios.get("/api/user/logout");
+      localStorage.removeItem("persist:root");
       router.push("/signin");
     } catch (error: any) {
       setServerError(error.message);

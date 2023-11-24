@@ -1,29 +1,34 @@
 import Image from "next/image";
+import Link from "next/link";
 
 import "@/sass/components/_cardActionItem.scss";
 
-interface IProps {
-  name: string;
-  iconUrl: string;
-  date: string;
-  amount: number;
-}
+import { defineCompanyImage, getFormattedDate } from "@/helpers";
 
-const CardActionItem = ({ name, iconUrl, date, amount }: IProps) => {
+import { IContractual } from "@/interface";
+
+const CardActionItem = ({
+  company,
+  projectName,
+  createdAt,
+  rate,
+}: IContractual) => {
+  const { formattedDate } = getFormattedDate(createdAt);
+
   return (
-    <div className="cards__action__item">
+    <Link href="/contracts" className="cards__action__item">
       <div className="cards__action__item__preview">
         <Image
-          src={iconUrl}
-          alt={name}
+          src={`/assets/contracts/${defineCompanyImage(company)}`}
+          alt={projectName}
           width={50}
           height={50}
           className="cards__action__item__preview__icon"
         />
-        <div className="cards__action__item__preview__text">{name}</div>
+        <div className="cards__action__item__preview__text">{projectName}</div>
       </div>
-      <div className="cards__action__item__date">{date}</div>
-      <div className="cards__action__item__amount">-${amount}</div>
+      <div className="cards__action__item__date">{formattedDate}</div>
+      <div className="cards__action__item__amount">{rate}₼</div>
       <Image
         src="/assets/cards/right-arrow.png"
         alt="arrows"
@@ -31,7 +36,7 @@ const CardActionItem = ({ name, iconUrl, date, amount }: IProps) => {
         height={24}
         className="cards__action__item__switch"
       />
-    </div>
+    </Link>
   );
 };
 

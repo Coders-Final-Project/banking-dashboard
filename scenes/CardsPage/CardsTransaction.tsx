@@ -1,22 +1,34 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
+
 import "@/sass/scenes/_cardsTransaction.scss";
 import CardActionItem from "@/components/CardActionItem/CardActionItem";
-import { cardTransaction } from "@/db/card";
+
 import { filterCardsTable } from "@/helpers";
 
+import { useSelector } from "react-redux";
+
+import { StateProps } from "@/interface";
+
 const CardsTransaction = () => {
-  const [cardData, setCardData] = useState(cardTransaction);
   const [check, setCheck] = useState(false);
+
+  const contractual = useSelector((state: StateProps) => state.contractual);
+
+  const [cardData, setCardData] = useState(contractual);
+
+  useEffect(() => {
+    setCardData(contractual);
+  }, [contractual]);
 
   const handleSort = (input: string) => {
     setCheck((prevValue) => !prevValue);
 
     if (input === "name" || input === "date" || input === "amount") {
       const sortedData =
-        filterCardsTable({ input, data: cardTransaction, check }) || [];
+        filterCardsTable({ input, data: contractual, check }) || [];
       setCardData(sortedData);
     }
   };
@@ -24,21 +36,7 @@ const CardsTransaction = () => {
   return (
     <div className="cards__transaction">
       <div className="cards__transaction__heading">
-        <div className="cards__transaction__heading__title">
-          Recent Transactions
-        </div>
-        <button className="cards__transaction__heading__filterBtn">
-          <Image
-            src="/assets/cards/filter.png"
-            alt="filter-btn"
-            width={24}
-            height={24}
-            className="cards__transaction__heading__filterBtn__icon"
-          />
-          <p className="cards__transaction__heading__filterBtn__text">
-            Sort & Filter
-          </p>
-        </button>
+        <div className="cards__transaction__heading__title">All Contracts</div>
       </div>
       <div className="cards__transaction__content">
         <div className="cards__transaction__content__header">
@@ -84,8 +82,12 @@ const CardsTransaction = () => {
         </div>
         <div className="cards__transaction__content__body">
           {cardData.map((action) => (
-            <CardActionItem key={action.id} {...action} />
+            <CardActionItem key={action._id} {...action} />
           ))}
+
+          {cardData.length === 0 && (
+            <div className="no__action">There is no contract yet!</div>
+          )}
         </div>
       </div>
     </div>

@@ -63,6 +63,7 @@
 
   &__method {
     @include flexbox($justify: space-between, $items: flex-start, $gap: 0.25em);
+    margin-left: -10px;
 
     &__text {
       @extend %body-medium;
@@ -111,5 +112,98 @@
 
   &__dotIcon {
     cursor: pointer;
+  }
+
+  .action__item__modal {
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.6);
+    position: fixed;
+    z-index: 1001;
+    top: 0;
+    left: 0;
+    @include flexbox($justify: center, $items: center);
+
+    &__content {
+      @include flexbox(
+        $direction: column,
+        $justify: space-between,
+        $items: flex-end,
+        $gap: 1em
+      );
+      width: 300px;
+
+      &__input {
+        padding: 5px;
+        height: 50px;
+        outline: none;
+        width: 100%;
+        border-radius: 10px;
+        border: 0.5px solid $main-color-black;
+      }
+
+      input::-webkit-outer-spin-button,
+      input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+
+      /* Firefox */
+      input[type="number"] {
+        appearance: textfield;
+        -moz-appearance: textfield;
+      }
+
+      &__btn {
+        border: none;
+        outline: none;
+        background-color: $main-color-black;
+        color: $main-color-white;
+        @extend %button-size3;
+        padding: 5px 10px;
+        border-radius: 10px;
+
+        &:hover {
+          cursor: pointer;
+          opacity: 0.9;
+        }
+      }
+    }
+
+    &__closeBtn {
+      position: fixed;
+      top: 30px;
+      right: 30px;
+      border: none;
+      outline: none;
+      background-color: transparent;
+      color: $action-red-100;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+
+  &__alert--error,
+  &__alert--success {
+    position: fixed;
+    top: 10%;
+    left: 61%;
+    transform: translate(-61%, -10%);
+    padding: 15px;
+    border-radius: 20px;
+    box-shadow: $box-shadow;
+    font-size: 18px;
+  }
+
+  &__alert--error {
+    background-color: $action-red-100;
+    color: $main-color-white;
+  }
+
+  &__alert--success {
+    background-color: $action-green-100;
+    color: $main-color-white;
   }
 }

@@ -51,7 +51,7 @@ const ContractGeneral = ({
         />
       </div>
       <div className="contract__general__twoColumn">
-        <div className="contract__general__oneColumn">
+        <div className="contract__general__oneColumn select">
           <label htmlFor="company">Company</label>
           <select
             id="company"
@@ -78,6 +78,7 @@ const ContractGeneral = ({
             required
             placeholder="Enter fixed rate (Max,1000₼)"
             value={rate}
+            style={{ padding: "10px" }}
             onChange={(e) => updateFields({ rate: e.target.value })}
           />
         </div>
@@ -94,11 +95,12 @@ const ContractGeneral = ({
             onChange={(e) => updateFields({ projectName: e.target.value })}
           />
         </div>
-        <div className="contract__general__oneColumn">
+        <div className="contract__general__oneColumn select">
           <label htmlFor="currency">Currency</label>
           <select
             id="currency"
             value={currency}
+            style={{ padding: "18px" }}
             onChange={(e) => updateFields({ currency: e.target.value })}
             required
           >

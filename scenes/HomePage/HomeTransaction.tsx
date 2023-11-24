@@ -1,12 +1,18 @@
+"use client";
+
 import Link from "next/link";
 
 import "@/sass/scenes/_homeTransaction.scss";
 
-import { userTransactionHistory } from "@/db/user";
+import { useSelector } from "react-redux";
 
 import TransactionItem from "@/components/TransactionItem/TransactionItem";
 
+import { StateProps } from "@/interface";
+
 const HomeTransaction = () => {
+  const transactions = useSelector((state: StateProps) => state.transactions);
+
   return (
     <div className="home__content__transaction">
       <div className="home__content__transaction__header">
@@ -21,9 +27,13 @@ const HomeTransaction = () => {
         </Link>
       </div>
       <div className="home__content__transaction__body">
-        {userTransactionHistory.map((person) => (
-          <TransactionItem key={person.id} {...person} />
+        {transactions.map((action) => (
+          <TransactionItem key={action._id} {...action} />
         ))}
+
+        {transactions.length === 0 && (
+          <div className="no__action">There is no action yet!</div>
+        )}
       </div>
     </div>
   );
