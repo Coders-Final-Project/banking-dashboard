@@ -3,6 +3,8 @@
 import { useState } from "react";
 import axios from "axios";
 
+import { uploadFile } from "@/lib/actions/uploadActions";
+
 import Image from "next/image";
 
 import { useGlobalContext } from "@/context/store";
@@ -39,28 +41,34 @@ const DocumentModal = ({ title, setIsUploadClicked }: IProps) => {
       return;
     }
 
-    const fd = new FormData();
-    fd.append("fd", selectedFile);
+    const formData = new FormData();
+    formData.append("userId", data._id);
+    formData.append("fileName", title);
+    formData.append("fileUrl", selectedFile);
 
     setMessage("Uploading...");
+
     setProgress((prevState) => {
       return { ...prevState, started: true };
     });
 
     try {
       if (data._id) {
-        const response = await axios.post("api/upload-file", {
-          userID: data._id,
-          fileName: "tax",
-          fileUrl: "file url 2",
-        });
+        const response = await uploadFile(formData);
 
         console.log(response);
+
         setMessage("Uploaded successfully");
+
+        setTimeout(() => {
+          setIsUploadClicked(false);
+        }, 1000);
       }
     } catch (error) {
       setMessage("Uploading failed");
       console.log(error);
+    } finally {
+      setSelectedFile(null);
     }
   };
 

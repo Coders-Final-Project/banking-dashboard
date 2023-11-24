@@ -80,11 +80,10 @@ const userSchema = new mongoose.Schema(
       {
         fileName: {
           type: String,
-          required: true,
         },
         fileUrl: {
-          type: String,
-          required: true,
+          public_id: String,
+          secure_url: String,
         },
       },
     ],
