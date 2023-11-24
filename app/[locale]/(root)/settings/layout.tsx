@@ -9,8 +9,8 @@ const layout = ({ children }: { children: React.ReactNode }) => {
   return (
     <div className="settings">
       <header className="page__header">
-        <div className="page__header__welcome">
-          <div className="page__header__welcome__title">Settings</div>
+        <div className="page_header_welcome">
+          <div className="page_headerwelcome_title">Settings</div>
         </div>
         <AvatarDetail />
       </header>
