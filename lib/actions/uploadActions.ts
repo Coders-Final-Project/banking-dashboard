@@ -73,8 +73,8 @@ export async function uploadFile(formData: any) {
 
     fs.unlink(newFile.filepath);
 
-    return { message: "Upload success!" };
+    return { message: "Upload success!", status: 200 };
   } catch (error: any) {
-    return { msg: error.message };
+    return { msg: error.message, status: 500 };
   }
 }

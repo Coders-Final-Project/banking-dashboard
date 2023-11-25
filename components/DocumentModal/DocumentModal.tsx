@@ -1,7 +1,6 @@
 "use client";
 
-import { useState } from "react";
-import axios from "axios";
+import { useState, useEffect } from "react";
 
 import { uploadFile } from "@/lib/actions/uploadActions";
 
@@ -25,8 +24,17 @@ const DocumentModal = ({ title, setIsUploadClicked }: IProps) => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [progress, setProgress] = useState(INITIAL_PROGRESS);
   const [message, setMessage] = useState<string | null>(null);
+  const [successAlert, setSuccessAlert] = useState(false);
 
   const { data } = useGlobalContext();
+
+  useEffect(() => {
+    if (successAlert) {
+      setTimeout(() => {
+        setSuccessAlert(false);
+      }, 2000);
+    }
+  }, [successAlert]);
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files && event.target.files[0];
@@ -56,7 +64,9 @@ const DocumentModal = ({ title, setIsUploadClicked }: IProps) => {
       if (data._id) {
         const response = await uploadFile(formData);
 
-        console.log(response);
+        if (response.status === 200) {
+          setSuccessAlert(true);
+        }
 
         setMessage("Uploaded successfully");
 
@@ -126,6 +136,9 @@ const DocumentModal = ({ title, setIsUploadClicked }: IProps) => {
           Supported formats: JPG, PNG, or PDF
         </div>
       </div>
+      {successAlert && (
+        <div className="documents__alert--success">Dcoument Loaded!</div>
+      )}
     </div>
   );
 };
