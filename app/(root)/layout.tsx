@@ -14,25 +14,17 @@ export const metadata: Metadata = {
   description: "Coders Final Project",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
-  params,
 }: {
   children: React.ReactNode;
-  params: { locale: string };
 }) {
-  const { locale } = params;
-
   return (
-    <html lang={locale}>
+    <html lang="en">
       <body className={inter.className}>
         <GlobalContextProvider>
           <Providers>
-            <Sidebar
-              params={{
-                locale,
-              }}
-            />
+            <Sidebar />
             {children}
           </Providers>
         </GlobalContextProvider>
