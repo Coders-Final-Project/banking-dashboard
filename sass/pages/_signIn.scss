@@ -5,7 +5,6 @@
 
 .signIn {
   width: 100%;
-  min-height: 622px;
   height: auto;
   min-height: 634px;
   background-color: $second-color-black;
@@ -21,6 +20,7 @@
       $items: flex-start,
       $gap: 1.5em
     );
+    margin: 30px 0;
 
     &__title {
       font-size: 32px;
@@ -194,5 +194,10 @@
 
   .pop-up__success {
     background-color: $action-green-100;
+  }
+
+  .recaptcha {
+    @include flexbox($justify: center, $items: center);
+    margin: 0 auto;
   }
 }

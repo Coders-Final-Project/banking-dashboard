@@ -8,8 +8,12 @@ import MainLogo from "@/components/MainLogo/MainLogo";
 
 import { usePathname } from "next/navigation";
 
-const SignNav = () => {
+import { useTranslation } from "@/i18n/client";
+
+const SignNav = ({ lng }: { lng: string }) => {
   const pathname = usePathname();
+
+  const { t } = useTranslation(lng);
 
   return (
     <nav className="sign__nav">
