@@ -1,11 +1,9 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import { GlobalContextProvider } from "@/context/store";
-import { Providers } from "@/globalRedux/provider";
+
+import { dir } from "i18next";
 
 import "@/sass/style.scss";
-
-import Sidebar from "@/shared/Sidebar/Sidebar";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -14,20 +12,20 @@ export const metadata: Metadata = {
   description: "Coders Final Project",
 };
 
+import SignNav from "@/shared/SignNav/SignNav";
+
 export default async function RootLayout({
   children,
+  params: { lng },
 }: {
   children: React.ReactNode;
+  params: { lng: string };
 }) {
   return (
-    <html lang="en">
+    <html lang={lng} dir={dir(lng)}>
       <body className={inter.className}>
-        <GlobalContextProvider>
-          <Providers>
-            <Sidebar />
-            {children}
-          </Providers>
-        </GlobalContextProvider>
+        <SignNav />
+        {children}
       </body>
     </html>
   );

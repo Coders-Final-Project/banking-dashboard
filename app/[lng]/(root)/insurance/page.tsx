@@ -18,9 +18,13 @@ import { StateProps } from "@/interface";
 import { useSelector, useDispatch } from "react-redux";
 import { setInsuranceCompleted } from "@/globalRedux/features/appSlice";
 
-const Insurance = () => {
+import { useTranslation } from "@/i18n/client";
+
+const Insurance = ({ params: { lng } }: { params: { lng: string } }) => {
   const [isCoverageOpen, setIsCoverageOpen] = useState(true);
   const [successAlert, setSuccessAlert] = useState(false);
+
+  const { t } = useTranslation(lng);
 
   const insuranceCompleted = useSelector(
     (state: StateProps) => state.insuranceCompleted,

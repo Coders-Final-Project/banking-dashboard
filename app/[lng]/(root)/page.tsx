@@ -7,23 +7,33 @@ import HomeMethod from "@/scenes/HomePage/HomeMethod";
 import HomePayment from "@/scenes/HomePage/HomePayment";
 import HomeTransaction from "@/scenes/HomePage/HomeTransaction";
 
-export default async function Home() {
+import { useTranslation } from "@/i18n";
+
+export default async function Home({
+  params: { lng },
+}: {
+  params: { lng: string };
+}) {
+  const { t } = await useTranslation(lng);
+
   return (
     <main className="home">
       <header className="page__header">
         <div className="page__header__welcome">
-          <div className="page__header__welcome__title">Welcome</div>
+          <div className="page__header__welcome__title">
+            {t("home.main.title")}
+          </div>
           <div className="page__header__welcome__desc">
-            Here is your dashboard overview
+            {t("home.main.desc")}
           </div>
         </div>
         <AvatarDetail hasBtn />
       </header>
       <div className="home__content">
-        <HomeTotal />
-        <HomeMethod />
-        <HomePayment />
-        <HomeTransaction />
+        <HomeTotal lng={lng} />
+        <HomeMethod lng={lng} />
+        <HomePayment lng={lng} />
+        <HomeTransaction lng={lng} />
       </div>
     </main>
   );

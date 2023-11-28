@@ -12,7 +12,7 @@ interface Props {
 
 const Button = ({ text, icon, isbBgBlack, url }: Props) => {
   return (
-    <Link href={url} className={`button ${isbBgBlack && "button__black"}`}>
+    <Link href={`${url}`} className={`button ${isbBgBlack && "button__black"}`}>
       <p className="button__text">{text}</p>
       <Image
         src={`/assets/home/${icon}`}

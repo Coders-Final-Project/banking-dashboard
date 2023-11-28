@@ -1,0 +1,21 @@
+{
+  "home.main.title": "Xoş gəndiniz",
+  "home.main.desc": "İdarə panelinizin təsviri",
+  "home.line1.title1": "Ümumi borc",
+  "home.line1.title2": "Gələcək ödəniş",
+  "home.line1.title3": "Çıxarış üsulu",
+  "home.line1.method.case": "Təsdiqlənmiş",
+  "home.line1.method.status": "Əlaqəli",
+  "home.graph.title": "Ödəniş Tarixi",
+  "home.graph.compare": "Keçən ay ilə müqayisə",
+  "home.actions.title": "Əməliyyat Tarixi",
+  "home.actions.link": "hamısı",
+  "sidebar.link1.title": "Əsas səhifə",
+  "sidebar.link2.title": "Müqavilələr",
+  "sidebar.link3.title": "Sənədlər",
+  "sidebar.link4.title": "Faturalar",
+  "sidebar.link5.title": "Əməliyyatlar",
+  "sidebar.link6.title": "Sığorta",
+  "sidebar.link7.title": "Kartlar",
+  "sidebar.link8.title": "Tənzimləmələr"
+}

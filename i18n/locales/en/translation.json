@@ -1,0 +1,21 @@
+{
+  "home.main.title": "Welcome",
+  "home.main.desc": "Here is your dashboard overview",
+  "home.line1.title1": "Total Outstanding",
+  "home.line1.title2": "Upcoming Payment",
+  "home.line1.title3": "Withdraw Method",
+  "home.line1.method.case": "Verified",
+  "home.line1.method.status": "Connected",
+  "home.graph.title": "Payment History",
+  "home.graph.compare": "vs last month",
+  "home.actions.title": "Transaction History",
+  "home.actions.link": "see all",
+  "sidebar.link1.title": "Home",
+  "sidebar.link2.title": "Contracts",
+  "sidebar.link3.title": "Documents",
+  "sidebar.link4.title": "Invoices",
+  "sidebar.link5.title": "Transactions",
+  "sidebar.link6.title": "Insurance",
+  "sidebar.link7.title": "Cards",
+  "sidebar.link8.title": "Settings"
+}

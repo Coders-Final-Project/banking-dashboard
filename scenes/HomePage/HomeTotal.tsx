@@ -2,7 +2,11 @@ import Image from "next/image";
 
 import "@/sass/scenes/_homeTotal.scss";
 
-const HomeTotal = () => {
+import { useTranslation } from "@/i18n";
+
+const HomeTotal = async ({ lng }: { lng: string }) => {
+  const { t } = await useTranslation(lng);
+
   return (
     <div className="home__content__total">
       <div className="home__content__total__item">
@@ -15,7 +19,7 @@ const HomeTotal = () => {
         />
         <div className="home__content__total__item__info">
           <div className="home__content__total__item__info__text">
-            Total Outstanding
+            {t("home.line1.title1")}
           </div>
           <div className="home__content__total__item__info__number">
             $58,764<span>.25</span>
@@ -33,7 +37,7 @@ const HomeTotal = () => {
         />
         <div className="home__content__total__item__info">
           <div className="home__content__total__item__info__text">
-            Upcoming Payment
+            {t("home.line1.title2")}
           </div>
           <div className="home__content__total__item__info__number">
             April 1st, <span>2022</span>

@@ -85,4 +85,28 @@
       color: $greyscale-grey-400;
     }
   }
+
+  .lang__switcher {
+    position: absolute;
+    top: 40px;
+    right: 20px;
+    @include flexbox($justify: space-between, $items: center, $gap: 0.5rem);
+
+    &__item {
+      text-transform: uppercase;
+
+      &__link {
+        text-decoration: none;
+        color: $main-color-black;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+
+    &__item.active {
+      color: $greyscale-grey-400;
+    }
+  }
 }
