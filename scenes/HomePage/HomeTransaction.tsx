@@ -10,20 +10,24 @@ import TransactionItem from "@/components/TransactionItem/TransactionItem";
 
 import { StateProps } from "@/interface";
 
-const HomeTransaction = () => {
+import { useTranslation } from "@/i18n/client";
+
+const HomeTransaction = ({ lng }: { lng: string }) => {
   const transactions = useSelector((state: StateProps) => state.transactions);
+
+  const { t } = useTranslation(lng);
 
   return (
     <div className="home__content__transaction">
       <div className="home__content__transaction__header">
         <div className="home__content__transaction__header__title">
-          Transaction History
+          {t("home.actions.title")}
         </div>
         <Link
           href="/transactions"
           className="home__content__transaction__header__all"
         >
-          see all
+          {t("home.actions.link")}
         </Link>
       </div>
       <div className="home__content__transaction__body">

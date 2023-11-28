@@ -1,11 +1,15 @@
 import LineGraph from "@/shared/LineGraph/LineGraph";
 import { userPaymentHistory } from "@/db/user";
 
-const HomePayment = () => {
+import { useTranslation } from "@/i18n";
+
+const HomePayment = async ({ lng }: { lng: string }) => {
+  const { t } = await useTranslation(lng);
+
   return (
     <div>
       <LineGraph
-        title="Payment History"
+        title={t("home.graph.title")}
         isHeaderDetail={true}
         data={userPaymentHistory}
       />

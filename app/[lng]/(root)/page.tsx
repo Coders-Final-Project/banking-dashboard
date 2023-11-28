@@ -7,33 +7,33 @@ import HomeMethod from "@/scenes/HomePage/HomeMethod";
 import HomePayment from "@/scenes/HomePage/HomePayment";
 import HomeTransaction from "@/scenes/HomePage/HomeTransaction";
 
-import { getIntl } from "../../../lib/intl";
+import { useTranslation } from "@/i18n";
 
-type HomeProps = {
-  params: { locale: string };
-};
-
-export default async function Home({ params: { locale } }: HomeProps) {
-  const intl = await getIntl(locale);
+export default async function Home({
+  params: { lng },
+}: {
+  params: { lng: string };
+}) {
+  const { t } = await useTranslation(lng);
 
   return (
     <main className="home">
       <header className="page__header">
         <div className="page__header__welcome">
           <div className="page__header__welcome__title">
-            {intl.formatMessage({ id: "page.home.head.title" })}
+            {t("home.main.title")}
           </div>
           <div className="page__header__welcome__desc">
-            {intl.formatMessage({ id: "page.home.head.desc" })}
+            {t("home.main.desc")}
           </div>
         </div>
         <AvatarDetail hasBtn />
       </header>
       <div className="home__content">
-        <HomeTotal />
-        <HomeMethod />
-        <HomePayment />
-        <HomeTransaction />
+        <HomeTotal lng={lng} />
+        <HomeMethod lng={lng} />
+        <HomePayment lng={lng} />
+        <HomeTransaction lng={lng} />
       </div>
     </main>
   );

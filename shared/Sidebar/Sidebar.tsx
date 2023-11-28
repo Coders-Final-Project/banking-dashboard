@@ -1,66 +1,62 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import LangSwitcher from "../LangSwitcher/LangSwitcher";
+import { Trans } from "react-i18next/TransWithoutContext";
+import { languages } from "../../i18n/settings";
+import { useTranslation } from "@/i18n";
 
 import "@/sass/layout/_sidebar.scss";
 
 import MainLogo from "@/components/MainLogo/MainLogo";
 import SidebarItem from "@/components/SidebarItem/SidebarItem";
 
-import { getIntl } from "../../lib/intl";
-
-type SidebarProps = {
-  params: { locale: string };
-};
-
-const Sidebar = async ({ params: { locale } }: SidebarProps) => {
-  const intl = await getIntl(locale);
+const Sidebar = async ({ lng }: { lng: string }) => {
+  const { t } = await useTranslation(lng);
 
   const sidebarLinks = [
     {
       id: 1,
       icon: "home.png",
       route: "/",
-      text: `${intl.formatMessage({ id: "sidebar.link1.title" })}`,
+      text: `${t("sidebar.link1.title")}`,
     },
     {
       id: 2,
       icon: "edit.png",
       route: "contracts",
-      text: `${intl.formatMessage({ id: "sidebar.link2.title" })}`,
+      text: `${t("sidebar.link2.title")}`,
     },
     {
       id: 3,
       icon: "document-text.png",
       route: "documents",
-      text: `${intl.formatMessage({ id: "sidebar.link3.title" })}`,
+      text: `${t("sidebar.link3.title")}`,
     },
     {
       id: 4,
       icon: "document-normal.png",
       iconExtra: "vector.png",
       route: "invoices",
-      text: `${intl.formatMessage({ id: "sidebar.link4.title" })}`,
+      text: `${t("sidebar.link4.title")}`,
     },
     {
       id: 5,
       icon: "convert-card.png",
       route: "transactions",
-      text: `${intl.formatMessage({ id: "sidebar.link5.title" })}`,
+      text: `${t("sidebar.link5.title")}`,
     },
     {
       id: 6,
       icon: "security.png",
       iconExtra: "frame.png",
       route: "insurance",
-      text: `${intl.formatMessage({ id: "sidebar.link6.title" })}`,
+      text: `${t("sidebar.link6.title")}`,
     },
     {
       id: 7,
       icon: "card.png",
       route: "cards",
-      text: `${intl.formatMessage({ id: "sidebar.link7.title" })}`,
+      text: `${t("sidebar.link7.title")}`,
     },
   ];
 
@@ -68,7 +64,6 @@ const Sidebar = async ({ params: { locale } }: SidebarProps) => {
     <div className="sidebar">
       <div className="sidebar__main">
         <MainLogo />
-        <LangSwitcher />
       </div>
       <div className="sidebar__links">
         {sidebarLinks.map((link) => (
@@ -90,9 +85,26 @@ const Sidebar = async ({ params: { locale } }: SidebarProps) => {
           className="sidebar__settings__icon"
         />
         <div className="sidebar__settings__text">
-          {intl.formatMessage({ id: "sidebar.link8.title" })}
+          {t("sidebar.link8.title")}
         </div>
       </Link>
+      <div className="lang__switcher">
+        <Trans i18nKey="languageSwitcher" t={t}>
+          <span className="lang__switcher__item active">{lng}</span>{" "}
+        </Trans>
+        {languages
+          .filter((l) => lng !== l)
+          .map((l, index) => {
+            return (
+              <span key={l} className="lang__switcher__item">
+                {index > 0 && " or "}
+                <Link href={`/${l}`} className="lang__switcher__item__link">
+                  {l}
+                </Link>
+              </span>
+            );
+          })}
+      </div>
     </div>
   );
 };

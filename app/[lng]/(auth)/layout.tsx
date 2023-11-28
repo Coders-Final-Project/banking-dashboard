@@ -1,16 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 
-// import { IntlProvider } from "react-intl";
-
-// async function getMessages(locale: string) {
-//   return await import(`../../../lang/${locale}.json`);
-// }
-
-type FooterContainerProps = {
-  locale: string;
-  children: React.ReactNode;
-};
+import { dir } from "i18next";
 
 import "@/sass/style.scss";
 
@@ -25,15 +16,13 @@ import SignNav from "@/shared/SignNav/SignNav";
 
 export default async function RootLayout({
   children,
-  params,
+  params: { lng },
 }: {
   children: React.ReactNode;
-  params: { locale: string };
+  params: { lng: string };
 }) {
-  const { locale } = params;
-
   return (
-    <html lang={locale}>
+    <html lang={lng} dir={dir(lng)}>
       <body className={inter.className}>
         <SignNav />
         {children}

@@ -3,6 +3,8 @@ import { Inter } from "next/font/google";
 import { GlobalContextProvider } from "@/context/store";
 import { Providers } from "@/globalRedux/provider";
 
+import { dir } from "i18next";
+
 import "@/sass/style.scss";
 
 import Sidebar from "@/shared/Sidebar/Sidebar";
@@ -14,25 +16,19 @@ export const metadata: Metadata = {
   description: "Coders Final Project",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
-  params,
+  params: { lng },
 }: {
   children: React.ReactNode;
-  params: { locale: string };
+  params: { lng: string };
 }) {
-  const { locale } = params;
-
   return (
-    <html lang={locale}>
+    <html lang={lng} dir={dir(lng)}>
       <body className={inter.className}>
         <GlobalContextProvider>
           <Providers>
-            <Sidebar
-              params={{
-                locale,
-              }}
-            />
+            <Sidebar lng={lng} />
             {children}
           </Providers>
         </GlobalContextProvider>

@@ -17,6 +17,9 @@ type DataType = {
   firstName: string;
   job: string;
   insuranceCompleted: boolean;
+  uploadedFiles: [
+    { fileName: string; fileUrl: { public_id: String; secure_url: String } },
+  ];
 };
 
 interface ContextProps {
@@ -25,7 +28,15 @@ interface ContextProps {
 }
 
 const GlobalContext = createContext<ContextProps>({
-  data: { _id: "", firstName: "", job: "", insuranceCompleted: false },
+  data: {
+    _id: "",
+    firstName: "",
+    job: "",
+    insuranceCompleted: false,
+    uploadedFiles: [
+      { fileName: "", fileUrl: { public_id: "", secure_url: "" } },
+    ],
+  },
   updateInsuranceCompleted: () => {},
 });
 
@@ -39,6 +50,9 @@ export const GlobalContextProvider = ({
     firstName: "",
     job: "",
     insuranceCompleted: false,
+    uploadedFiles: [
+      { fileName: "", fileUrl: { public_id: "", secure_url: "" } },
+    ],
   });
 
   const updateInsuranceCompleted = (value: boolean) => {

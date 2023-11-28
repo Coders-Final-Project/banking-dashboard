@@ -132,7 +132,7 @@ const AvatarDetail = ({ hasBtn }: Props) => {
         <Button
           text="create a contract"
           icon="frame.png"
-          url="en/contracts/create"
+          url="/contracts/create"
         />
       )}
       <Image

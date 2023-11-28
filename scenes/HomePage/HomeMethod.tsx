@@ -2,12 +2,16 @@ import Image from "next/image";
 
 import "@/sass/scenes/_homeMethod.scss";
 
-const HomeMethod = () => {
+import { useTranslation } from "@/i18n";
+
+const HomeMethod = async ({ lng }: { lng: string }) => {
+  const { t } = await useTranslation(lng);
+
   return (
     <div className="home__content__method">
       <div className="home__content__method__withdraw">
         <div className="home__content__method__withdraw__text">
-          Withdraw Method
+          {t("home.line1.title3")}
         </div>
         <Image
           src="/assets/home/dot.png"
@@ -28,7 +32,7 @@ const HomeMethod = () => {
         <div className="home__content__method__info__text">
           <div className="home__content__method__info__text__name">PayPal</div>
           <div className="home__content__method__info__text__case">
-            Verified
+            {t("home.line1.method.case")}
           </div>
         </div>
         <button className="home__content__method__info__btn">
@@ -39,7 +43,7 @@ const HomeMethod = () => {
             height={20}
             className="home__content__method__info__btn__icon"
           />
-          Connected
+          {t("home.line1.method.status")}
         </button>
       </div>
     </div>

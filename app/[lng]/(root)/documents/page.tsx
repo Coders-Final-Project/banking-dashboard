@@ -7,7 +7,7 @@ import AvatarDetail from "@/shared/AvatarDetail/AvatarDetail";
 import DocumentItem from "@/scenes/DocumentsPage/DocumentItem";
 import DocumentAside from "@/scenes/DocumentsPage/DocumentAside";
 
-const Documents = () => {
+const Documents = async () => {
   return (
     <main className="documents">
       <header className="page__header">

@@ -1,11 +1,11 @@
 import Image from "next/image";
 
-import { getIntl } from "../../lib/intl";
-
 import "@/sass/scenes/_homeTotal.scss";
 
-const HomeTotal = async () => {
-  const intl = await getIntl("en");
+import { useTranslation } from "@/i18n";
+
+const HomeTotal = async ({ lng }: { lng: string }) => {
+  const { t } = await useTranslation(lng);
 
   return (
     <div className="home__content__total">
@@ -19,7 +19,7 @@ const HomeTotal = async () => {
         />
         <div className="home__content__total__item__info">
           <div className="home__content__total__item__info__text">
-            {intl.formatMessage({ id: "page.home.line1.title1" })}
+            {t("home.line1.title1")}
           </div>
           <div className="home__content__total__item__info__number">
             $58,764<span>.25</span>
@@ -37,7 +37,7 @@ const HomeTotal = async () => {
         />
         <div className="home__content__total__item__info">
           <div className="home__content__total__item__info__text">
-            {intl.formatMessage({ id: "page.home.line1.title2" })}
+            {t("home.line1.title2")}
           </div>
           <div className="home__content__total__item__info__number">
             April 1st, <span>2022</span>

@@ -142,3 +142,16 @@
 .document__modal.close {
   display: none;
 }
+
+.documents__alert--success {
+  position: fixed;
+  top: 10%;
+  left: 61%;
+  transform: translate(-61%, -10%);
+  background-color: $action-green-100;
+  color: $main-color-white;
+  padding: 15px;
+  border-radius: 20px;
+  box-shadow: $box-shadow;
+  font-size: 18px;
+}
