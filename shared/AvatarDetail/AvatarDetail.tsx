@@ -28,9 +28,10 @@ import {
 
 interface Props {
   hasBtn?: boolean;
+  lng?: string;
 }
 
-const AvatarDetail = ({ hasBtn }: Props) => {
+const AvatarDetail = ({ hasBtn, lng }: Props) => {
   const [serverError, setServerError] = useState("");
 
   const userCard = useSelector((state: StateProps) => state.userCard);
@@ -55,9 +56,9 @@ const AvatarDetail = ({ hasBtn }: Props) => {
       try {
         if (
           data._id &&
-          (currentPage === "/" ||
-            currentPage === "/contracts" ||
-            currentPage === "/cards")
+          (currentPage === `/az` ||
+            currentPage === `/en` ||
+            currentPage.includes("cards"))
         ) {
           const response = await axios.post("/api/card/fetch", {
             userID: data._id,
@@ -76,7 +77,9 @@ const AvatarDetail = ({ hasBtn }: Props) => {
       try {
         if (
           data._id &&
-          (currentPage === "/" || currentPage === "/transactions")
+          (currentPage === `/az` ||
+            currentPage === `/en` ||
+            currentPage.includes("transactions"))
         ) {
           const response = await axios.post("/api/transactions", {
             userID: data._id,
@@ -89,9 +92,9 @@ const AvatarDetail = ({ hasBtn }: Props) => {
       }
     };
 
-    const fetchCompanyContracts = async () => {
+    const fetchContractuals = async () => {
       try {
-        if (data._id && currentPage === "/cards") {
+        if (data._id && currentPage.includes("cards")) {
           const response = await axios.post("/api/contractual", {
             userID: data._id,
           });
@@ -106,7 +109,7 @@ const AvatarDetail = ({ hasBtn }: Props) => {
 
     fetchTransactions();
     fetchCardInfo();
-    fetchCompanyContracts();
+    fetchContractuals();
   }, [currentPage, data, dispatch]);
 
   const activeContracts = companyContracts.map(
@@ -132,7 +135,8 @@ const AvatarDetail = ({ hasBtn }: Props) => {
         <Button
           text="create a contract"
           icon="frame.png"
-          url="/contracts/create"
+          url="create"
+          lng={lng}
         />
       )}
       <Image

@@ -8,11 +8,15 @@ interface Props {
   icon: string;
   isbBgBlack?: boolean;
   url: string;
+  lng?: string;
 }
 
-const Button = ({ text, icon, isbBgBlack, url }: Props) => {
+const Button = ({ text, icon, isbBgBlack, url, lng }: Props) => {
   return (
-    <Link href={`${url}`} className={`button ${isbBgBlack && "button__black"}`}>
+    <Link
+      href={`/${lng}/contracts/${url}`}
+      className={`button ${isbBgBlack && "button__black"}`}
+    >
       <p className="button__text">{text}</p>
       <Image
         src={`/assets/home/${icon}`}

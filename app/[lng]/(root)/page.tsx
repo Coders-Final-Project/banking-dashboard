@@ -27,7 +27,7 @@ export default async function Home({
             {t("home.main.desc")}
           </div>
         </div>
-        <AvatarDetail hasBtn />
+        <AvatarDetail hasBtn lng={lng} />
       </header>
       <div className="home__content">
         <HomeTotal lng={lng} />
