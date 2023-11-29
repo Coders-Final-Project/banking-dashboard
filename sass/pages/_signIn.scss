@@ -9,6 +9,8 @@
   min-height: 634px;
   background-color: $second-color-black;
   @include flexbox($justify: center, $items: center);
+  background: url("/assets/sign/bg.jpg") center center no-repeat;
+  background-size: cover;
 
   &__form {
     background-color: $main-color-white;
@@ -21,6 +23,7 @@
       $gap: 1.5em
     );
     margin: 30px 0;
+    box-shadow: $box-shadow;
 
     &__title {
       font-size: 32px;

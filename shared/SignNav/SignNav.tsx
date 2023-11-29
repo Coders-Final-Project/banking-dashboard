@@ -23,10 +23,10 @@ const SignNav = ({ lng }: { lng: string }) => {
         <option value="English(United States)">EN</option>
       </select>
       <Link
-        href={pathname === "/signup" ? "/signin" : "signup"}
+        href={pathname.includes("signup") ? `/signin` : "signup"}
         className="sign__nav__loginBtn"
       >
-        {pathname === "/signup" ? "Sing In" : "Sign Up"}
+        {pathname.includes("signup") ? "Sing In" : "Sign Up"}
       </Link>
     </nav>
   );
