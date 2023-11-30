@@ -1,7 +1,8 @@
 "use client";
 
-import { ICompanyContracts } from "@/interface";
 import axios from "axios";
+
+import { UploadedFileProps } from "@/interface";
 
 import {
   createContext,
@@ -25,6 +26,7 @@ type DataType = {
 interface ContextProps {
   data: DataType;
   updateInsuranceCompleted: (value: boolean) => void;
+  updateUploadedFiles: (input: UploadedFileProps) => void;
 }
 
 const GlobalContext = createContext<ContextProps>({
@@ -38,6 +40,7 @@ const GlobalContext = createContext<ContextProps>({
     ],
   },
   updateInsuranceCompleted: () => {},
+  updateUploadedFiles: () => {},
 });
 
 export const GlobalContextProvider = ({
@@ -59,6 +62,14 @@ export const GlobalContextProvider = ({
     setData((prevData) => ({ ...prevData, insuranceCompleted: value }));
   };
 
+  const updateUploadedFiles = (input: UploadedFileProps) => {
+    //@ts-ignore
+    setData((prevData) => ({
+      ...prevData,
+      uploadedFiles: [...prevData.uploadedFiles, input],
+    }));
+  };
+
   useEffect(() => {
     const getUserInfo = async () => {
       try {
@@ -73,7 +84,9 @@ export const GlobalContextProvider = ({
   }, []);
 
   return (
-    <GlobalContext.Provider value={{ data, updateInsuranceCompleted }}>
+    <GlobalContext.Provider
+      value={{ data, updateInsuranceCompleted, updateUploadedFiles }}
+    >
       {children}
     </GlobalContext.Provider>
   );

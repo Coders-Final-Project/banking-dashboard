@@ -6,6 +6,8 @@ import { v4 as uuidv4 } from "uuid";
 import os from "os";
 import * as cloudinary from "cloudinary";
 
+import { UploadedFileProps } from "@/interface";
+
 import User from "../models/user.model";
 
 cloudinary.v2.config({
@@ -58,14 +60,16 @@ export async function uploadFile(formData: any) {
 
     const file = await uploadFileToCloudinary(newFile);
 
+    const newFileItem: UploadedFileProps = {
+      fileName,
+      fileUrl: { public_id: file.public_id, secure_url: file.secure_url },
+    };
+
     const updatedUser = await User.findByIdAndUpdate(
       userID,
       {
         $push: {
-          uploadedFiles: {
-            fileName,
-            fileUrl: { public_id: file.public_id, secure_url: file.secure_url },
-          },
+          uploadedFiles: newFileItem,
         },
       },
       { new: true },
@@ -73,7 +77,7 @@ export async function uploadFile(formData: any) {
 
     fs.unlink(newFile.filepath);
 
-    return { message: "Upload success!", status: 200 };
+    return { message: "Upload success!", data: newFileItem, status: 200 };
   } catch (error: any) {
     return { msg: error.message, status: 500 };
   }

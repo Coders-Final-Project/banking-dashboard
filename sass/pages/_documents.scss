@@ -29,6 +29,15 @@
       }
     }
 
+    &__warning.success {
+      background-color: $action-green-80;
+
+      .documents__content__warning__text {
+        color: $main-color-white;
+        @extend %body-medium;
+      }
+    }
+
     &__upload {
       @include flexbox($justify: space-between, $items: flex-start, $gap: 2em);
     }

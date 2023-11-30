@@ -26,7 +26,7 @@ const DocumentModal = ({ title, setIsUploadClicked }: IProps) => {
   const [message, setMessage] = useState<string | null>(null);
   const [successAlert, setSuccessAlert] = useState(false);
 
-  const { data } = useGlobalContext();
+  const { data, updateUploadedFiles } = useGlobalContext();
 
   useEffect(() => {
     if (successAlert) {
@@ -68,6 +68,10 @@ const DocumentModal = ({ title, setIsUploadClicked }: IProps) => {
           setSuccessAlert(true);
         }
 
+        if (response.data) {
+          updateUploadedFiles(response.data);
+        }
+
         setMessage("Uploaded successfully");
 
         setTimeout(() => {
@@ -107,7 +111,7 @@ const DocumentModal = ({ title, setIsUploadClicked }: IProps) => {
             className="document__modal__card__content__icon"
           />
           <label className="document__modal__card__content__input">
-            <input type="file" onChange={handleFileChange} />
+            <input type="file" onChange={handleFileChange} accept=".pdf" />
             Click here or drag file to upload
           </label>
           {selectedFile && (
