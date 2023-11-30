@@ -9,17 +9,19 @@ interface Props {
   iconExtra?: string;
   text: string;
   route: string;
+  lng: string;
 }
 
-const SidebarItem = ({ icon, text, iconExtra, route }: Props) => {
+const SidebarItem = ({ icon, text, iconExtra, route, lng }: Props) => {
   const pathname = usePathname();
 
   const isActive =
-    (pathname.includes(route) && route.length > 1) || pathname === route;
+    (pathname.includes(route) && route.length > 1) ||
+    pathname === route + `${lng}`;
 
   return (
     <Link
-      href={`/${route}`}
+      href={`/${lng}/${route}`}
       className={`sidebar__links__item ${isActive && "active"}`}
     >
       <Image

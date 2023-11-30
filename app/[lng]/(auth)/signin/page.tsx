@@ -6,7 +6,7 @@ import axios from "axios";
 
 import Image from "next/image";
 
-import { FormattedMessage } from "react-intl";
+import ReCAPTCHA from "react-google-recaptcha";
 
 import "@/sass/pages/_signIn.scss";
 import Link from "next/link";
@@ -23,6 +23,7 @@ const SignIn = () => {
   const [formValues, setFormValues] = useState(initialValues);
   const [sending, setSending] = useState(false);
   const [serverError, setServerError] = useState("");
+  const [captcha, setCaptcha] = useState(false);
 
   const router = useRouter();
 
@@ -53,6 +54,12 @@ const SignIn = () => {
       ...prevValues,
       [target.name]: target.value,
     }));
+  };
+
+  const handleRecaptcha = () => {
+    setCaptcha((prevValue) => {
+      return !prevValue;
+    });
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -129,9 +136,19 @@ const SignIn = () => {
           </Link>
           .
         </div>
+        <div className="recaptcha">
+          <ReCAPTCHA
+            sitekey="6LcQAh8pAAAAAEIt6vw4NJOhoJYk9xFApwbv9vTm"
+            onChange={handleRecaptcha}
+          />
+        </div>
         <button
           className={`signIn__form__btn ${
-            formValues.email && formValues.password && !sending && "active"
+            formValues.email &&
+            formValues.password &&
+            captcha &&
+            !sending &&
+            "active"
           }`}
           disabled={!formValues.email || !formValues.password}
           type="submit"

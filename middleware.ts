@@ -10,7 +10,13 @@ acceptLanguage.languages(languages);
 export function middleware(request: NextRequest) {
   const path = request.nextUrl.pathname;
 
-  const isPublicPath = path === "/signin" || path === "/signup";
+  const isPublicPath =
+    path === "/signin" ||
+    path === "/signup" ||
+    path === "/az/signin" ||
+    path === "/en/signup" ||
+    path === "/az/signup" ||
+    path === "/en/signin";
 
   const token = request.cookies.get("token")?.value || "";
 
@@ -58,6 +64,24 @@ export function middleware(request: NextRequest) {
 export const config = {
   matcher: [
     "/",
+    "/en",
+    "/az",
+    "/en/invoices",
+    "/en/cards",
+    "/en/contracts",
+    "/en/documents",
+    "/en/insurance",
+    "/en/invoices",
+    "/en/settings",
+    "/en/transactions",
+    "/az/invoices",
+    "/az/cards",
+    "/azcontracts",
+    "/az/documents",
+    "/az/insurance",
+    "/az/invoices",
+    "/az/settings",
+    "/az/transactions",
     "/invoices",
     "/cards",
     "/contracts",
@@ -66,8 +90,13 @@ export const config = {
     "/invoices",
     "/settings",
     "/transactions",
+    "/en/contracts/create",
     "/signin",
     "/signup",
+    "/en/signin",
+    "/en/signup",
+    "/az/signin",
+    "/az/signup",
     // "/((?!api|_next/static|_next/image|assets|favicon.ico|sw.js).*)",
   ],
 };

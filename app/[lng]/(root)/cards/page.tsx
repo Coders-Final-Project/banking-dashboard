@@ -9,14 +9,18 @@ import CardsReport from "@/scenes/CardsPage/CardsReport";
 import CardsTransaction from "@/scenes/CardsPage/CardsTransaction";
 import CardsDetail from "@/scenes/CardsPage/CardsDetail";
 
-const Cards = () => {
+import { useTranslation } from "@/i18n";
+
+const Cards = async ({ params: { lng } }: { params: { lng: string } }) => {
+  const { t } = await useTranslation(lng);
+
   return (
     <main className="cards">
       <header className="page__header">
         <div className="page__header__welcome">
           <div className="page__header__welcome__title">Cards</div>
         </div>
-        <AvatarDetail />
+        <AvatarDetail lng={lng} />
       </header>
       <div className="cards__content">
         <div className="cards__content__stats">

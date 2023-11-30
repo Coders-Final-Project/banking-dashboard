@@ -24,7 +24,7 @@ export default async function RootLayout({
   return (
     <html lang={lng} dir={dir(lng)}>
       <body className={inter.className}>
-        <SignNav />
+        <SignNav lng={lng} />
         {children}
       </body>
     </html>

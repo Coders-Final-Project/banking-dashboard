@@ -17,7 +17,7 @@ const Sidebar = async ({ lng }: { lng: string }) => {
     {
       id: 1,
       icon: "home.png",
-      route: "/",
+      route: `/`,
       text: `${t("sidebar.link1.title")}`,
     },
     {
@@ -73,6 +73,7 @@ const Sidebar = async ({ lng }: { lng: string }) => {
             iconExtra={link.iconExtra}
             text={link.text}
             route={link.route}
+            lng={lng}
           />
         ))}
       </div>

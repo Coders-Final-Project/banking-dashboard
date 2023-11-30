@@ -10,6 +10,8 @@
   background-color: $second-color-black;
   padding: 36px;
   @include flexbox($justify: space-between, $items: center, $gap: 2em);
+  background: url("/assets/sign/bg.jpg") center center no-repeat;
+  background-size: cover;
 
   &__info {
     @include flexbox(
@@ -50,6 +52,7 @@
       $items: flex-start,
       $gap: 2em
     );
+    box-shadow: $box-shadow;
 
     &__title {
       font-size: 32px;
