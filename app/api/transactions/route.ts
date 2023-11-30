@@ -13,7 +13,9 @@ export async function POST(request: NextRequest) {
   const userID = reqBody.userID;
 
   try {
-    const transactions = await Transactions.find({ senderId: userID });
+    const transactions = await Transactions.find({ senderId: userID }).sort(
+      "-createdAt",
+    );
 
     return NextResponse.json({
       transactions,

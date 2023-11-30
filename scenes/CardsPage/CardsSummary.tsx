@@ -9,7 +9,6 @@ const CardsSummary = () => {
     <div className="cards__summary">
       <div className="cards__summary__item">
         <Image
-          // src="/assets/cards/income-icon.png"
           src={img}
           alt="income"
           width={30}

@@ -12,7 +12,7 @@ export async function POST(request: NextRequest) {
   const userID = reqBody.userID;
 
   try {
-    const contracts = await CompanyContract.find({ userID });
+    const contracts = await CompanyContract.find({ userID }).sort("-createdAt");
 
     return NextResponse.json({
       contracts,
