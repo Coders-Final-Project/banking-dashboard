@@ -162,3 +162,64 @@
     color: $main-color-white;
   }
 }
+
+.notify__user__modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1000;
+  background-color: rgba(0, 0, 0, 0.7);
+  @include flexbox($justify: center, $items: center);
+
+  &:hover {
+    cursor: default;
+  }
+
+  &__content {
+    @include flexbox(
+      $direction: column,
+      $justify: center,
+      $items: center,
+      $gap: 1rem
+    );
+    background-color: $main-color-white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 500px;
+
+    &__text {
+      text-align: center;
+      font-size: 18px;
+      line-height: 22px;
+      color: $main-color-black;
+    }
+
+    &__btns {
+      @include flexbox($justify: center, $items: center, $gap: 0.5rem);
+
+      &__cancel,
+      &__confirm {
+        border: none;
+        outline: none;
+        background-color: transparent;
+        font-size: 17px;
+        letter-spacing: 0.01px;
+
+        &:hover {
+          text-decoration: underline;
+          cursor: pointer;
+        }
+      }
+
+      &__cancel {
+        color: $action-red-100;
+      }
+
+      &__confirm {
+        color: $action-green-100;
+      }
+    }
+  }
+}
