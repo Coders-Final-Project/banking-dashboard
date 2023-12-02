@@ -5,7 +5,7 @@
 
 .settings__content__info__main {
   margin-top: 32px;
-  @include flexbox($justify: flex-start, $items: center, $gap: 2rem);
+  @include flexbox($justify: flex-start, $items: flex-start, $gap: 2rem);
   width: 100%;
 
   &__box {
@@ -19,7 +19,8 @@
       $gap: 1.5rem
     );
     width: 50%;
-    height: 230px;
+    min-height: 230px;
+    height: auto;
 
     &__title {
       @extend %body-medium4;
@@ -77,12 +78,94 @@
         cursor: pointer;
         width: 100%;
         @include flexbox($justify: space-between, $items: center);
+        outline: none;
+        cursor: pointer;
 
         &__text {
           @extend %body-medium;
           color: $main-color-black;
         }
       }
+
+      .password__change,
+      .mail__change {
+        padding: 16px;
+        border-radius: 16px;
+        border: 1px solid $greyscale-grey-200;
+        width: 100%;
+        @include flexbox(
+          $direction: column,
+          $justify: flex-start,
+          $items: flex-start,
+          $gap: 0.75rem
+        );
+
+        &__item {
+          @include flexbox(
+            $direction: column,
+            $justify: flex-start,
+            $items: flex-start,
+            $gap: 0.5rem
+          );
+          width: 100%;
+
+          label {
+            color: $main-color-black;
+            @extend %body-medium;
+            font-weight: 400;
+          }
+
+          input {
+            border: 1px solid $greyscale-grey-200;
+            padding: 10px;
+            border-radius: 10px;
+            width: 100%;
+            outline: none;
+
+            &:hover {
+              border: 1px solid $main-color-blue;
+            }
+          }
+        }
+
+        &__btn {
+          border: none;
+          outline: none;
+          padding: 10px;
+          border-radius: 12px;
+          background-color: $main-color-blue;
+          color: $main-color-white;
+          font-size: 16px;
+          margin-left: auto;
+
+          &:hover {
+            cursor: pointer;
+            opacity: 0.9;
+          }
+        }
+      }
     }
   }
+}
+
+.settings__alert--error,
+.settings__alert--success {
+  position: fixed;
+  top: 10%;
+  left: 61%;
+  transform: translate(-61%, -10%);
+  padding: 15px;
+  border-radius: 20px;
+  box-shadow: $box-shadow;
+  font-size: 18px;
+}
+
+.settings__alert--error {
+  background-color: $action-red-100;
+  color: $main-color-white;
+}
+
+.settings__alert--success {
+  background-color: $action-green-100;
+  color: $main-color-white;
 }
