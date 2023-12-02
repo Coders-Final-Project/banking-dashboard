@@ -27,7 +27,7 @@ ChartJS.register(
   Legend,
 );
 
-const options: ChartOptions = {
+const options: ChartOptions<"line"> = {
   plugins: {
     legend: {
       display: false,
