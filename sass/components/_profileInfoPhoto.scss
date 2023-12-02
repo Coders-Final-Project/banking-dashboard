@@ -1,0 +1,123 @@
+@import "/sass/utils/colors";
+@import "/sass/utils/variables";
+@import "/sass/utils/mixins";
+@import "/sass/base/typography";
+
+.profile__info__photo {
+  @include flexbox(
+    $direction: column,
+    $justify: flex-start,
+    $items: flex-start,
+    $gap: 1.5rem
+  );
+  width: 70%;
+
+  &__title {
+    color: $main-color-black;
+    @extend %body-medium4;
+  }
+
+  &__content {
+    @include flexbox($justify: flex-start, $items: center, $gap: 2rem);
+
+    &__person {
+      background-color: $shades-of-blue-96;
+      border-radius: 100px;
+    }
+
+    &__btns {
+      @include flexbox(
+        $direction: column,
+        $justify: flex-start,
+        $items: center,
+        $gap: 0.5rem
+      );
+
+      &__upload,
+      &__remove {
+        padding: 10px 20px;
+        border-radius: 100px;
+        background: $main-color-white;
+        @include flexbox($justify: flex-start, $items: center, $gap: 0.75rem);
+        @extend %body-medium3;
+        letter-spacing: -0.14px;
+        cursor: pointer;
+      }
+
+      &__remove {
+        border: 1px solid transparent;
+        color: $action-red-100;
+
+        &:hover {
+          opacity: 0.8;
+        }
+      }
+
+      &__upload {
+        border: 1px solid $greyscale-grey-200;
+        color: $main-color-black;
+
+        &:hover {
+          background: $greyscale-grey-100;
+        }
+      }
+    }
+  }
+
+  &__provider {
+    padding: 24px;
+    border-radius: 16px;
+    background: $shades-of-blue-98;
+    @include flexbox(
+      $direction: column,
+      $justify: flex-start,
+      $items: flex-start,
+      $gap: 0.5rem
+    );
+    width: 100%;
+
+    &__text {
+      color: $greyscale-grey-500;
+      @extend %body-regular;
+    }
+
+    &__btn {
+      border: none;
+      outline: none;
+      color: $main-color-blue;
+      @extend %body-medium3;
+      background-color: transparent;
+      cursor: pointer;
+      padding: 0;
+    }
+  }
+
+  &__membership {
+    padding: 24px;
+    border-radius: 16px;
+    background: $main-color-black;
+    @include flexbox(
+      $direction: column,
+      $justify: flex-start,
+      $items: flex-start,
+      $gap: 1.5rem
+    );
+
+    &__title {
+      color: $main-color-white;
+      @extend %body-medium4;
+    }
+
+    &__btn {
+      padding: 10px 20px;
+      border-radius: 100px;
+      background: $main-color-white;
+      @include flexbox($justify: flex-start, $items: center, $gap: 0.75rem);
+      @extend %body-medium3;
+      letter-spacing: -0.14px;
+      border: none;
+      outline: none;
+      cursor: pointer;
+    }
+  }
+}
