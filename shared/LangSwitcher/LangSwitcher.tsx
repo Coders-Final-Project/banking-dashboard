@@ -1,10 +1,13 @@
 import Link from "next/link";
+//@ts-ignore
 import { i18n } from "../../i18n-config";
 
 import "@/sass/layout/_langSwitcher.scss";
 
 function LangSwitcher() {
   const { locales, defaultLocale } = i18n;
+
+  console.log(locales);
 
   return (
     <div dir="ltr" className="lang__switcher">
