@@ -129,7 +129,7 @@ const TransactionsTableItem = ({
       </div>
       <div className="transactions__table__item__paidDate">
         <div className="transactions__table__item__paidDate__amount">
-          {amount}₼
+          -{amount}₼
         </div>
         <div className="transactions__table__item__paidDate__date">
           {formattedDate}

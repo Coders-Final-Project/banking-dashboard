@@ -12,7 +12,7 @@ export async function POST(request: NextRequest) {
   const userId = reqBody.userID;
 
   try {
-    const contractuals = await Contractual.find({ userId });
+    const contractuals = await Contractual.find({ userId }).sort("-createdAt");
 
     return NextResponse.json({
       contractuals,

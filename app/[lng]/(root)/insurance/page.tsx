@@ -22,6 +22,7 @@ import { useTranslation } from "@/i18n/client";
 
 const Insurance = ({ params: { lng } }: { params: { lng: string } }) => {
   const [isCoverageOpen, setIsCoverageOpen] = useState(true);
+  const [isApproveClicked, setIsApproveClicked] = useState(false);
   const [successAlert, setSuccessAlert] = useState(false);
 
   const { t } = useTranslation(lng);
@@ -50,11 +51,21 @@ const Insurance = ({ params: { lng } }: { params: { lng: string } }) => {
     setIsCoverageOpen((prevValue) => !prevValue);
   };
 
+  const handleCancel = () => {
+    setIsApproveClicked(false);
+  };
+
+  const handleOpenModal = () => {
+    setIsApproveClicked(true);
+  };
+
   const handleAddInsurance = async () => {
     if (userCard._id === -1) {
       router.push("/cards");
       return;
     }
+
+    setIsApproveClicked(false);
 
     try {
       if (data._id) {
@@ -111,7 +122,7 @@ const Insurance = ({ params: { lng } }: { params: { lng: string } }) => {
             ) : (
               <button
                 className="insurance__content__card__header__btn"
-                onClick={handleAddInsurance}
+                onClick={handleOpenModal}
               >
                 {userCard._id === -1
                   ? "Add Card Before Apply"
@@ -177,6 +188,29 @@ const Insurance = ({ params: { lng } }: { params: { lng: string } }) => {
             className="insurance__content__card__icon"
           />
         </div>
+        {isApproveClicked && (
+          <div className="notify__user__modal">
+            <div className="notify__user__modal__content">
+              <div className="notify__user__modal__content__text">
+                Upon approval, 100₼ deduction from your balance.
+              </div>
+              <div className="notify__user__modal__content__btns">
+                <button
+                  className="notify__user__modal__content__btns__cancel"
+                  onClick={handleCancel}
+                >
+                  Cancel
+                </button>
+                <button
+                  className="notify__user__modal__content__btns__confirm"
+                  onClick={handleAddInsurance}
+                >
+                  Confirm
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
       {successAlert && (
         <div className="insurance__alert--success">

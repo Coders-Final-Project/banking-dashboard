@@ -1,4 +1,8 @@
+"use client";
+
 import Image from "next/image";
+
+import { useGlobalContext } from "@/context/store";
 
 import "@/sass/pages/_documents.scss";
 import "@/sass/layout/_pageHeader.scss";
@@ -7,7 +11,11 @@ import AvatarDetail from "@/shared/AvatarDetail/AvatarDetail";
 import DocumentItem from "@/scenes/DocumentsPage/DocumentItem";
 import DocumentAside from "@/scenes/DocumentsPage/DocumentAside";
 
-const Documents = async () => {
+const Documents = () => {
+  const { data } = useGlobalContext();
+
+  const allFilesProvided = Number(data.uploadedFiles.length) === 4;
+
   return (
     <main className="documents">
       <header className="page__header">
@@ -24,16 +32,24 @@ const Documents = async () => {
       </header>
 
       <div className="documents__content">
-        <div className="documents__content__warning">
+        <div
+          className={`documents__content__warning ${
+            allFilesProvided && "success"
+          }`}
+        >
           <Image
-            src="/assets/documents/warning.png"
+            src={`/assets/documents/${
+              allFilesProvided ? "all-uploaded" : "warning"
+            }.png`}
             alt="warning"
             width={24}
             height={24}
             className="documents__content__warning__img"
           />
           <p className="documents__content__warning__text">
-            Please upload the missing documents
+            {allFilesProvided
+              ? "All documents provided"
+              : " Please upload the missing documents"}
           </p>
         </div>
         <div className="documents__content__upload">

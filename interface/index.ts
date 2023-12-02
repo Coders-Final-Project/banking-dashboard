@@ -144,3 +144,8 @@ export interface StateProps {
   curLang: CurrenctLangProps;
   insuranceCompleted: boolean;
 }
+
+export interface UploadedFileProps {
+  fileName: string;
+  fileUrl: { public_id: string; secure_url: string };
+}

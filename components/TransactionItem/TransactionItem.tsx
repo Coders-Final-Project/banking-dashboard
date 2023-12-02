@@ -42,7 +42,7 @@ const TransactionItem = ({
       </div>
       <div className="home__content__transaction__body__person__amount">
         <div className="home__content__transaction__body__person__amount__number">
-          {amount}₼
+          -{amount}₼
         </div>
         <div className="home__content__transaction__body__person__amount__date">
           {formattedDate}

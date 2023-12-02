@@ -1,0 +1,96 @@
+@import "/sass/utils/colors";
+@import "/sass/utils/variables";
+@import "/sass/utils/mixins";
+@import "/sass/base/typography";
+
+.profile__details {
+  @include flexbox(
+    $direction: column,
+    $justify: flex-start,
+    $items: flex-start,
+    $gap: 1.5rem
+  );
+  width: 100%;
+
+  &__item {
+    @include flexbox(
+      $direction: column,
+      $justify: flex-start,
+      $items: flex-start,
+      $gap: 0.75rem
+    );
+    width: 100%;
+
+    label {
+      @extend %body-medium;
+      color: $main-color-black;
+    }
+
+    input,
+    select {
+      padding: 16px;
+      border-radius: 12px;
+      border: 1px solid $greyscale-grey-300;
+      width: 100%;
+      @extend %body-medium;
+      color: $main-color-black;
+      outline: none;
+
+      &:hover {
+        border: 1px solid $main-color-blue;
+      }
+    }
+  }
+
+  &__sidebyside {
+    @include flexbox($justify: flex-start, $items: flex-start, $gap: 1.5rem);
+    width: 100%;
+
+    &__item {
+      @include flexbox(
+        $direction: column,
+        $justify: flex-start,
+        $items: flex-start,
+        $gap: 0.75rem
+      );
+      width: 100%;
+
+      label {
+        @extend %body-medium;
+        color: $main-color-black;
+      }
+
+      input {
+        padding: 16px;
+        border-radius: 12px;
+        border: 1px solid $greyscale-grey-300;
+        width: 100%;
+        @extend %body-medium;
+        color: $main-color-black;
+        outline: none;
+
+        &:hover {
+          border: 1px solid $main-color-blue;
+        }
+      }
+    }
+  }
+
+  &__btn {
+    padding: 10px 20px;
+    border-radius: 100px;
+    background: $main-color-blue;
+    margin-left: auto;
+    margin-top: 28px;
+    @extend %body-medium3;
+    letter-spacing: -0.14px;
+    color: $main-color-white;
+    border: none;
+    outline: none;
+
+    &:hover {
+      cursor: pointer;
+      opacity: 0.9;
+    }
+  }
+}

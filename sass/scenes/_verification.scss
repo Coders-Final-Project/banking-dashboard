@@ -1,0 +1,10 @@
+@import "/sass/utils/colors";
+@import "/sass/utils/variables";
+@import "/sass/utils/mixins";
+@import "/sass/base/typography";
+
+.verification {
+  margin-top: 2rem;
+  @include flexbox($justify: flex-start, $items: flex-start, $gap: 2rem);
+  width: 100%;
+}

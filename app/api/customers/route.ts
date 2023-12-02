@@ -11,9 +11,9 @@ export async function POST(request: NextRequest) {
   const userID = reqBody.userID;
 
   try {
-    const customers = await User.find({ _id: { $ne: userID } }).select(
-      "firstName lastName job",
-    );
+    const customers = await User.find({ _id: { $ne: userID } })
+      .select("firstName lastName job")
+      .sort("-createdAt");
 
     return NextResponse.json({
       customers,
