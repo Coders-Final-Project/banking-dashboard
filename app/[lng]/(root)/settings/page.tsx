@@ -8,6 +8,7 @@ import "@/sass/pages/_settings.scss";
 import AvatarDetail from "@/shared/AvatarDetail/AvatarDetail";
 import MainInfo from "@/scenes/SettingsPage/MainInfo";
 import ProfileInfo from "@/scenes/SettingsPage/ProfileInfo";
+import Withdrawal from "@/scenes/SettingsPage/Withdrawal";
 
 const Settings = () => {
   const [activeBtn, setActiveBtn] = useState("personal");
@@ -52,6 +53,7 @@ const Settings = () => {
               <ProfileInfo />
             </>
           )}
+          {activeBtn === "withdraw" && <Withdrawal />}
         </div>
       </div>
     </main>
