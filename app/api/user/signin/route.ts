@@ -8,16 +8,6 @@ import bcrypt from "bcrypt";
 
 import jwt from "jsonwebtoken";
 
-export const corsHeaders = {
-  "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
-  "Access-Control-Allow-Headers": "Content-Type, Authorization",
-};
-
-export async function OPTIONS(req: NextRequest) {
-  return NextResponse.json({}, { headers: corsHeaders });
-}
-
 export async function POST(request: NextRequest) {
   connectToDB();
 
@@ -29,10 +19,7 @@ export async function POST(request: NextRequest) {
     const user = await User.findOne({ email });
 
     if (!user) {
-      return NextResponse.json(
-        { message: "User doesn't exist", status: 400 },
-        { headers: corsHeaders },
-      );
+      return NextResponse.json({ message: "User doesn't exist", status: 400 });
     }
 
     const validPassword = await bcrypt.compare(password, user.password);

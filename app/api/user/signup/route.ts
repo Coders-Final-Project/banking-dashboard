@@ -6,16 +6,6 @@ import { connectToDB } from "@/lib/mongoose";
 
 import bcrypt from "bcrypt";
 
-export const corsHeaders = {
-  "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
-  "Access-Control-Allow-Headers": "Content-Type, Authorization",
-};
-
-export async function OPTIONS(req: NextRequest) {
-  return NextResponse.json({}, { headers: corsHeaders });
-}
-
 export async function POST(request: NextRequest) {
   connectToDB();
 
@@ -47,14 +37,11 @@ export async function POST(request: NextRequest) {
   try {
     const savedUser = await newUser.save();
 
-    return NextResponse.json(
-      {
-        message: "User created successfully",
-        success: true,
-        savedUser,
-      },
-      { headers: corsHeaders },
-    );
+    return NextResponse.json({
+      message: "User created successfully",
+      success: true,
+      savedUser,
+    });
   } catch (error: any) {
     console.log(error.message);
     return NextResponse.json({ error: error.message }, { status: 500 });
