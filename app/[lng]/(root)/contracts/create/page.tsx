@@ -104,15 +104,14 @@ const ContractCreate = () => {
         });
 
         setSuccessAlert(true);
+        setTimeout(() => {
+          router.replace("/contracts");
+        }, 1000);
       } else {
         setErrorAlert(true);
       }
     } catch (error) {
       console.log(error);
-    } finally {
-      setTimeout(() => {
-        router.replace("/contracts");
-      }, 1000);
     }
   };
 
