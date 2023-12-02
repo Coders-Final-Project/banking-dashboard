@@ -1,0 +1,117 @@
+@import "/sass/utils/colors";
+@import "/sass/utils/variables";
+@import "/sass/utils/mixins";
+@import "/sass/base/typography";
+
+.verification__account {
+  padding: 23px 24px;
+  border-radius: 16px;
+  border: 1px solid $greyscale-grey-200;
+  @include flexbox(
+    $direction: column,
+    $justify: flex-start,
+    $items: flex-start,
+    $gap: 1.5rem
+  );
+  width: 60%;
+
+  &__title {
+    color: $main-color-black;
+    @extend %body-medium4;
+  }
+
+  &__content {
+    @include flexbox(
+      $direction: column,
+      $justify: flex-start,
+      $items: flex-start,
+      $gap: 1rem
+    );
+    width: 100%;
+
+    &__sign {
+      border-radius: 16px;
+      border: 1px solid $greyscale-grey-200;
+      background: $main-color-white;
+      padding: 16px;
+      @include flexbox($justify: flex-start, $items: center, $gap: 1rem);
+      width: 100%;
+
+      &__icon {
+        padding: 6px;
+        background-color: $greyscale-grey-100;
+        border-radius: 100px;
+      }
+
+      &__text {
+        @extend %body-medium;
+        color: $main-color-black;
+      }
+
+      &__btn {
+        @include flexbox($justify: flex-start, $items: center, $gap: 0.5rem);
+        padding: 10px 12px;
+        border-radius: 100px;
+        background: $action-green-20;
+        border: none;
+        outline: none;
+        color: $action-green-100;
+        @extend %button-size4;
+        margin-left: auto;
+      }
+    }
+
+    &__identity {
+      padding: 16px;
+      border-radius: 16px;
+      border: 1px solid $greyscale-grey-200;
+      background: $main-color-white;
+      @include flexbox($justify: flex-start, $items: flex-start, $gap: 1rem);
+
+      &__icon {
+        padding: 6px;
+        background-color: $greyscale-grey-100;
+        border-radius: 100px;
+      }
+
+      &__info {
+        @include flexbox(
+          $direction: column,
+          $justify: flex-start,
+          $items: flex-start,
+          $gap: 0.5rem
+        );
+
+        &__title {
+          color: $main-color-black;
+          @extend %body-medium;
+        }
+
+        &__desc {
+          color: $greyscale-grey-500;
+          @extend %button-size4;
+          letter-spacing: 0.14px;
+          font-weight: 400;
+        }
+      }
+
+      &__btn {
+        padding: 10px 20px;
+        border-radius: 100px;
+        background: $main-color-blue;
+        color: $main-color-white;
+        @extend %button-size4;
+        letter-spacing: -0.14px;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        margin-top: auto;
+        min-width: 130px;
+
+        &:hover {
+          opacity: 0.9;
+        }
+      }
+    }
+  }
+}

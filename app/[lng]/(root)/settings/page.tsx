@@ -9,6 +9,7 @@ import AvatarDetail from "@/shared/AvatarDetail/AvatarDetail";
 import MainInfo from "@/scenes/SettingsPage/MainInfo";
 import ProfileInfo from "@/scenes/SettingsPage/ProfileInfo";
 import Withdrawal from "@/scenes/SettingsPage/Withdrawal";
+import Verification from "@/scenes/SettingsPage/Verification";
 
 const Settings = () => {
   const [activeBtn, setActiveBtn] = useState("personal");
@@ -45,6 +46,15 @@ const Settings = () => {
           >
             Withdrawal Methods
           </button>
+          <button
+            className={`settings__content__btns__btn ${
+              activeBtn === "verify" && "active"
+            }`}
+            value="verify"
+            onClick={(e) => handleActiveBtn(e)}
+          >
+            Verification
+          </button>
         </div>
         <div className="settings__content__info">
           {activeBtn === "personal" && (
@@ -54,6 +64,7 @@ const Settings = () => {
             </>
           )}
           {activeBtn === "withdraw" && <Withdrawal />}
+          {activeBtn === "verify" && <Verification />}
         </div>
       </div>
     </main>
