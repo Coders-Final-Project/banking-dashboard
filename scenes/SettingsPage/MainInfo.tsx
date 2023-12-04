@@ -16,19 +16,25 @@ const INITIAL_PASS_VALUES = {
   confirmNewPass: "",
 };
 
+const INITIAL_MAIL_VALUES = {
+  currentMail: "",
+  newMail: "",
+};
+
 const MainInfo = () => {
   const [isPassOpen, setIsPassOpen] = useState(false);
   const [isMailOpen, setIsMailOpen] = useState(false);
   const [serverError, setServerError] = useState("");
-  const [success, setSuccess] = useState(false);
+  const [success, setSuccess] = useState("");
   const [passwordValues, setPasswordValues] = useState(INITIAL_PASS_VALUES);
+  const [mailValues, setMailValues] = useState(INITIAL_MAIL_VALUES);
 
   const { data } = useGlobalContext();
 
   useEffect(() => {
     if (success || serverError) {
       setTimeout(() => {
-        setSuccess(false);
+        setSuccess("");
         setServerError("");
       }, 2000);
     }
@@ -36,6 +42,15 @@ const MainInfo = () => {
 
   const handlePasswordValues = (e: any) => {
     setPasswordValues((prevValues) => {
+      return {
+        ...prevValues,
+        [e.target.name]: e.target.value,
+      };
+    });
+  };
+
+  const handleMailValues = (e: any) => {
+    setMailValues((prevValues) => {
       return {
         ...prevValues,
         [e.target.name]: e.target.value,
@@ -62,11 +77,15 @@ const MainInfo = () => {
       ) {
         const response = await axios.post("/api/user/password", {
           userID: data._id,
-          currenctPass: passwordValues.currentPass,
+          currentPass: passwordValues.currentPass,
           newPass: passwordValues.newPass,
         });
 
-        setSuccess(true);
+        if (response.data.success) {
+          setSuccess(response.data.message);
+        } else {
+          setServerError(response.data.message);
+        }
       } else {
         setServerError("Passwords dont match!");
       }
@@ -74,6 +93,37 @@ const MainInfo = () => {
       setServerError(error.response.data.message);
     } finally {
       setPasswordValues(INITIAL_PASS_VALUES);
+    }
+  };
+
+  const handleMailSubmit = async () => {
+    try {
+      if (
+        data._id &&
+        mailValues.newMail !== "" &&
+        mailValues.currentMail !== "" &&
+        mailValues.currentMail !== mailValues.newMail
+      ) {
+        const response = await axios.post("/api/user/mail", {
+          userID: data._id,
+          currentMail: mailValues.currentMail,
+          newMail: mailValues.newMail,
+        });
+
+        if (response.data.success) {
+          setSuccess(response.data.message);
+        } else {
+          setServerError(response.data.message);
+        }
+
+        setSuccess(response.data.message);
+      } else {
+        setServerError("The same mail values!");
+      }
+    } catch (error: any) {
+      setServerError(error.response.data.message);
+    } finally {
+      setMailValues(INITIAL_MAIL_VALUES);
     }
   };
 
@@ -119,13 +169,30 @@ const MainInfo = () => {
             <div className="mail__change">
               <div className="mail__change__item">
                 <label htmlFor="old">Current Email</label>
-                <input type="email" id="old" />
+                <input
+                  type="email"
+                  id="old"
+                  name="currentMail"
+                  value={mailValues.currentMail}
+                  onChange={(e) => handleMailValues(e)}
+                />
               </div>
               <div className="mail__change__item">
                 <label htmlFor="new">New Email</label>
-                <input type="email" id="new" />
+                <input
+                  type="email"
+                  id="new"
+                  name="newMail"
+                  value={mailValues.newMail}
+                  onChange={(e) => handleMailValues(e)}
+                />
               </div>
-              <button className="password__change__btn">Save</button>
+              <button
+                className="password__change__btn"
+                onClick={handleMailSubmit}
+              >
+                Save
+              </button>
             </div>
           )}
           <button
@@ -147,7 +214,7 @@ const MainInfo = () => {
           {isPassOpen && (
             <div className="password__change">
               <div className="password__change__item">
-                <label htmlFor="currentPass">Currenct Password</label>
+                <label htmlFor="currentPass">Current Password</label>
                 <input
                   type="password"
                   id="currentPass"
@@ -186,8 +253,8 @@ const MainInfo = () => {
           )}
         </div>
       </div>
-      {success && (
-        <div className="settings__alert--success">Password Changed!</div>
+      {success !== "" && (
+        <div className="settings__alert--success">{success}</div>
       )}
       {serverError !== "" && (
         <div className="settings__alert--error">{serverError}</div>

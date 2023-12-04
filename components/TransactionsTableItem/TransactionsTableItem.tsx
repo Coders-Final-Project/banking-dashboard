@@ -102,7 +102,7 @@ const TransactionsTableItem = ({
         />
         <div className="transactions__table__item__person__detail">
           <div className="transactions__table__item__person__detail__name">
-            {receiverName} {receiverSurname}
+            {receiverName}
           </div>
           <div className="transactions__table__item__person__detail__company">
             {receiverJob}

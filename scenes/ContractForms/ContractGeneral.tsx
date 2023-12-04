@@ -51,7 +51,7 @@ const ContractGeneral = ({
         />
       </div>
       <div className="contract__general__twoColumn">
-        <div className="contract__general__oneColumn select">
+        <div className="contract__general__oneColumn">
           <label htmlFor="company">Company</label>
           <select
             id="company"
@@ -71,16 +71,15 @@ const ContractGeneral = ({
           </select>
         </div>
         <div className="contract__general__oneColumn">
-          <label htmlFor="job">Fixed Rate</label>
-          <input
-            type="number"
-            id="rate"
+          <label htmlFor="currency">Currency</label>
+          <select
+            id="currency"
+            value={currency}
+            onChange={(e) => updateFields({ currency: e.target.value })}
             required
-            placeholder="Enter fixed rate (Max,1000₼)"
-            value={rate}
-            style={{ padding: "10px" }}
-            onChange={(e) => updateFields({ rate: e.target.value })}
-          />
+          >
+            <option value="AZN">AZN</option>
+          </select>
         </div>
       </div>
       <div className="contract__general__twoColumn">
@@ -95,17 +94,18 @@ const ContractGeneral = ({
             onChange={(e) => updateFields({ projectName: e.target.value })}
           />
         </div>
-        <div className="contract__general__oneColumn select">
-          <label htmlFor="currency">Currency</label>
-          <select
-            id="currency"
-            value={currency}
-            style={{ padding: "18px" }}
-            onChange={(e) => updateFields({ currency: e.target.value })}
+
+        <div className="contract__general__oneColumn">
+          <label htmlFor="job">Fixed Rate</label>
+          <input
+            type="number"
+            id="rate"
             required
-          >
-            <option value="AZN">AZN</option>
-          </select>
+            placeholder="Enter fixed rate (Max,1000₼)"
+            value={rate}
+            style={{ padding: "10px" }}
+            onChange={(e) => updateFields({ rate: e.target.value })}
+          />
         </div>
       </div>
       <div className="contract__general__oneColumn">

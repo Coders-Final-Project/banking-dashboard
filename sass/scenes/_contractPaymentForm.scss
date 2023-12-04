@@ -43,7 +43,6 @@
   select {
     border-radius: 12px;
     border: 1px solid $greyscale-grey-300;
-    padding: 16px;
     width: 100%;
     color: $main-color-black;
     font-size: 16px;
@@ -52,9 +51,16 @@
     line-height: 160%;
     outline: none;
   }
+
+  input {
+    padding: 12px;
+  }
+  select {
+    padding: 18px;
+  }
 }
 
 .contract__payment__twoColumn {
-  @include flexbox($justify: space-between, $items: center, $gap: 1.5em);
+  @include flexbox($justify: space-between, $items: space-between, $gap: 1.5em);
   width: 100%;
 }
