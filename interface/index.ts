@@ -149,3 +149,12 @@ export interface UploadedFileProps {
   fileName: string;
   fileUrl: { public_id: string; secure_url: string };
 }
+
+export interface UploadedProfileProps {
+  dateOfBirth: string;
+  phone: string;
+  street: string;
+  city: string;
+  zipCode: string;
+  country: string;
+}

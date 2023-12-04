@@ -46,6 +46,25 @@ const userSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    dateOfBirth: {
+      type: Date,
+    },
+    citizenOf: {
+      type: String,
+      default: "Azerbaijan",
+    },
+    city: {
+      type: String,
+    },
+    street: {
+      type: String,
+    },
+    zipCode: {
+      type: String,
+    },
+    country: {
+      type: String,
+    },
     cards: [
       {
         type: mongoose.Schema.Types.ObjectId,

@@ -2,7 +2,7 @@
 
 import axios from "axios";
 
-import { UploadedFileProps } from "@/interface";
+import { UploadedFileProps, UploadedProfileProps } from "@/interface";
 
 import {
   createContext,
@@ -17,6 +17,13 @@ type DataType = {
   _id: string;
   firstName: string;
   job: string;
+  lastName: string;
+  street: string;
+  dateOfBirth: string;
+  phone: string;
+  country: string;
+  city: string;
+  zipCode: string;
   insuranceCompleted: boolean;
   uploadedFiles: [
     { fileName: string; fileUrl: { public_id: String; secure_url: String } },
@@ -27,6 +34,7 @@ interface ContextProps {
   data: DataType;
   updateInsuranceCompleted: (value: boolean) => void;
   updateUploadedFiles: (input: UploadedFileProps) => void;
+  updateUserProfile: (input: UploadedProfileProps) => void;
 }
 
 const GlobalContext = createContext<ContextProps>({
@@ -34,6 +42,13 @@ const GlobalContext = createContext<ContextProps>({
     _id: "",
     firstName: "",
     job: "",
+    lastName: "",
+    street: "",
+    dateOfBirth: "",
+    phone: "",
+    country: "",
+    city: "",
+    zipCode: "",
     insuranceCompleted: false,
     uploadedFiles: [
       { fileName: "", fileUrl: { public_id: "", secure_url: "" } },
@@ -41,6 +56,7 @@ const GlobalContext = createContext<ContextProps>({
   },
   updateInsuranceCompleted: () => {},
   updateUploadedFiles: () => {},
+  updateUserProfile: () => {},
 });
 
 export const GlobalContextProvider = ({
@@ -52,6 +68,13 @@ export const GlobalContextProvider = ({
     _id: "",
     firstName: "",
     job: "",
+    lastName: "",
+    street: "",
+    dateOfBirth: "",
+    phone: "",
+    country: "",
+    city: "",
+    zipCode: "",
     insuranceCompleted: false,
     uploadedFiles: [
       { fileName: "", fileUrl: { public_id: "", secure_url: "" } },
@@ -70,6 +93,19 @@ export const GlobalContextProvider = ({
     }));
   };
 
+  const updateUserProfile = (input: UploadedProfileProps) => {
+    //@ts-ignore
+    setData((prevData) => ({
+      ...prevData,
+      street: input.street,
+      dateOfBirth: input.dateOfBirth,
+      phone: input.phone,
+      country: input.country,
+      city: input.city,
+      zipCode: input.zipCode,
+    }));
+  };
+
   useEffect(() => {
     const getUserInfo = async () => {
       try {
@@ -85,7 +121,12 @@ export const GlobalContextProvider = ({
 
   return (
     <GlobalContext.Provider
-      value={{ data, updateInsuranceCompleted, updateUploadedFiles }}
+      value={{
+        data,
+        updateInsuranceCompleted,
+        updateUploadedFiles,
+        updateUserProfile,
+      }}
     >
       {children}
     </GlobalContext.Provider>

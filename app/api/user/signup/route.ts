@@ -27,10 +27,10 @@ export async function POST(request: NextRequest) {
 
   const newUser = new User({
     firstName: firstName.trim(),
-    lastName: firstName.trim(),
+    lastName: lastName.trim(),
     email,
-    job: firstName.trim(),
-    phone: firstName.trim(),
+    job: job.trim(),
+    phone: phone.trim(),
     password: hashedPassword,
   });
 
