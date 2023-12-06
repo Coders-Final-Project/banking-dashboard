@@ -135,6 +135,14 @@ export interface ITransactions {
   amount: string;
 }
 
+export interface INotifications {
+  _id: string;
+  userId: string;
+  key: string;
+  content: string;
+  createdAt: string;
+}
+
 export interface StateProps {
   companyContracts: ICompanyContracts[];
   allCustomers: IAllCustomers[];
@@ -143,6 +151,7 @@ export interface StateProps {
   userCard: CardProps;
   curLang: CurrenctLangProps;
   insuranceCompleted: boolean;
+  notifications: INotifications[];
 }
 
 export interface UploadedFileProps {

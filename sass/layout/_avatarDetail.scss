@@ -7,9 +7,30 @@
   @include flexbox($justify: space-between, $items: center, $gap: 1.25em);
   position: relative;
 
-  &__notify {
-    &:hover {
-      cursor: pointer;
+  .notify__btn {
+    cursor: pointer;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    position: relative;
+
+    &__content {
+      position: absolute;
+      top: 140%;
+      left: 0;
+      transform: translate(-40%, 0);
+      background-color: $main-color-white;
+      width: 250px;
+      height: 250px;
+      overflow-y: scroll;
+      box-shadow: 5px 2px 15px 5px rgba(0, 0, 0, 0.32);
+      border-radius: 10px;
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+
+    &__content::-webkit-scrollbar {
+      display: none;
     }
   }
 

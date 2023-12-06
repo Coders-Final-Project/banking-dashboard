@@ -26,6 +26,8 @@ import {
   setContractual,
 } from "@/globalRedux/features/appSlice";
 
+import Notifications from "@/components/Notifications/Notifications";
+
 interface Props {
   hasBtn?: boolean;
   lng?: string;
@@ -33,6 +35,7 @@ interface Props {
 
 const AvatarDetail = ({ hasBtn, lng }: Props) => {
   const [serverError, setServerError] = useState("");
+  const [isNotifyOpen, setIsNotifyOpen] = useState(false);
 
   const userCard = useSelector((state: StateProps) => state.userCard);
 
@@ -121,6 +124,14 @@ const AvatarDetail = ({ hasBtn, lng }: Props) => {
   const isContractAvailable =
     definedContracts.length !== activeContracts.length;
 
+  const handleNotifyOpen = () => {
+    if (isNotifyOpen) {
+      setIsNotifyOpen(false);
+    } else {
+      setIsNotifyOpen(true);
+    }
+  };
+
   const handleLogout = async () => {
     try {
       await axios.get("/api/user/logout");
@@ -141,13 +152,21 @@ const AvatarDetail = ({ hasBtn, lng }: Props) => {
           lng={lng}
         />
       )}
-      <Image
-        src="/assets/home/notification.png"
-        alt="notification"
-        width={24}
-        height={24}
-        className="avatar__detail__notify"
-      />
+      <button className="notify__btn" onClick={handleNotifyOpen}>
+        <Image
+          src="/assets/home/notification.png"
+          alt="notification"
+          width={24}
+          height={24}
+          className="notify__btn__img"
+          onClick={handleNotifyOpen}
+        />
+        {isNotifyOpen && (
+          <div className="notify__btn__content">
+            <Notifications />
+          </div>
+        )}
+      </button>
       <div className="avatar__detail__person">
         <Image
           src={`${url ? url : "/assets/user/user.png"}`}
