@@ -36,7 +36,7 @@ const ContractsItem = ({
 
   const handleDeleteContract = async () => {
     try {
-      await axios.post("api/contracts/delete", {
+      await axios.post("/api/contracts/delete", {
         contractID: _id,
       });
 

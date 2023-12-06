@@ -82,3 +82,69 @@ export async function uploadFile(formData: any) {
     return { msg: error.message, status: 500 };
   }
 }
+
+export async function uploadImg(formData: any) {
+  try {
+    const userID = formData.get("userId");
+
+    const newFile = await saveFileToLocal(formData);
+
+    const file = await uploadFileToCloudinary(newFile);
+
+    const image = {
+      fileUrl: { public_id: file.public_id, secure_url: file.secure_url },
+    };
+
+    await User.findByIdAndUpdate(
+      userID,
+      {
+        $unset: {
+          profileImg: {},
+        },
+      },
+      { new: true },
+    );
+
+    const updatedUser = await User.findByIdAndUpdate(
+      userID,
+      {
+        $push: {
+          profileImg: image,
+        },
+      },
+      { new: true },
+    );
+
+    fs.unlink(newFile.filepath);
+
+    return { message: "Upload success!", data: image, status: 200 };
+  } catch (error: any) {
+    return { msg: error.message, status: 500 };
+  }
+}
+
+export async function deletePhoto({
+  publicId,
+  userID,
+}: {
+  publicId: string;
+  userID: string;
+}) {
+  try {
+    await User.findByIdAndUpdate(
+      userID,
+      {
+        $unset: {
+          profileImg: {},
+        },
+      },
+      { new: true },
+    );
+
+    await cloudinary.v2.uploader.destroy(publicId);
+
+    return { message: "Delete success!", status: 202 };
+  } catch (error: any) {
+    return { message: error.message };
+  }
+}

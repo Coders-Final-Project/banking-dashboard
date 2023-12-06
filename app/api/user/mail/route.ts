@@ -2,8 +2,6 @@ import { NextRequest, NextResponse } from "next/server";
 
 import User from "@/lib/models/user.model";
 
-import bcrypt from "bcrypt";
-
 import { connectToDB } from "@/lib/mongoose";
 
 export async function POST(request: NextRequest) {
@@ -14,35 +12,41 @@ export async function POST(request: NextRequest) {
 
     const userID = repBody.userID;
 
-    const currenctPass = await repBody.currenctPass;
-    const newPass = await repBody.newPass;
+    const currentMail = await repBody.currentMail;
+    const newMail = await repBody.newMail;
 
     const user = await User.findById(userID);
 
     if (!user) {
       return NextResponse.json({
-        message: "User doesn't exist",
+        message: "User doesn't exist!",
         success: false,
         status: 400,
       });
     }
 
-    const validPassword = await bcrypt.compare(currenctPass, user.password);
-
-    if (!validPassword) {
-      return NextResponse.json(
-        { message: "Invalid Password", success: false },
-        { status: 400 },
-      );
+    if (user.email !== currentMail) {
+      return NextResponse.json({
+        message: "Invalid mail entered!",
+        success: false,
+        status: 400,
+      });
     }
 
-    const salt = await bcrypt.genSalt(10);
-    const hashedNewPassword = await bcrypt.hash(newPass, salt);
+    const checkUser = await User.findOne({ email: newMail });
+
+    if (checkUser) {
+      return NextResponse.json({
+        message: "Email already taken!",
+        success: false,
+        status: 404,
+      });
+    }
 
     const updatedUser = await User.findByIdAndUpdate(
       userID,
       {
-        password: hashedNewPassword,
+        email: newMail,
       },
       { new: true },
     );
@@ -50,7 +54,7 @@ export async function POST(request: NextRequest) {
     await updatedUser.save();
 
     return NextResponse.json({
-      message: "Password changed successfully",
+      message: "Email changed successfully!",
       success: true,
     });
   } catch (error: any) {

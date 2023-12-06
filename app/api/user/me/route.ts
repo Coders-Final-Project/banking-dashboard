@@ -12,7 +12,7 @@ export async function GET(request: NextRequest) {
   try {
     const userId = await getDataFromToken(request);
     const user = await User.findOne({ _id: userId }).select(
-      "firstName job insuranceCompleted uploadedFiles",
+      "firstName lastName street dateOfBirth phone country job citizenOf city zipCode insuranceCompleted uploadedFiles profileImg",
     );
 
     return NextResponse.json({

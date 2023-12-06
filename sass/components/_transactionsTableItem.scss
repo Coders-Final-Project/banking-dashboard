@@ -29,6 +29,7 @@
         $items: flex-start,
         $gap: 0.25em
       );
+      width: 130px;
 
       &__name {
         @extend %body-medium;

@@ -38,13 +38,34 @@ const userSchema = new mongoose.Schema(
       min: 6,
       max: 30,
     },
-    image: {
-      type: String,
-      default: "",
+    profileImg: {
+      fileUrl: {
+        public_id: String,
+        secure_url: String,
+      },
     },
     insuranceCompleted: {
       type: Boolean,
       default: false,
+    },
+    dateOfBirth: {
+      type: Date,
+    },
+    citizenOf: {
+      type: String,
+      default: "Azerbaijan",
+    },
+    city: {
+      type: String,
+    },
+    street: {
+      type: String,
+    },
+    zipCode: {
+      type: String,
+    },
+    country: {
+      type: String,
     },
     cards: [
       {
