@@ -11,6 +11,7 @@ import {
   IAllCustomers,
   ITransactions,
   IContractual,
+  INotifications,
 } from "@/interface";
 
 const initialState: StateProps = {
@@ -18,6 +19,7 @@ const initialState: StateProps = {
   allCustomers: [],
   transactions: [],
   contractual: [],
+  notifications: [],
   userCard: {
     _id: -1,
     userName: "",
@@ -31,6 +33,7 @@ const initialState: StateProps = {
     value: "en",
   },
   insuranceCompleted: false,
+  notificationCount: 0,
 };
 
 export const appSlice: any = createSlice({
@@ -49,6 +52,9 @@ export const appSlice: any = createSlice({
     setTransactions: (state, action: PayloadAction<ITransactions[]>) => {
       state.transactions = action.payload;
     },
+    setNotifications: (state, action: PayloadAction<INotifications[]>) => {
+      state.notifications = action.payload;
+    },
     setContractual: (state, action: PayloadAction<IContractual[]>) => {
       state.contractual = action.payload;
     },
@@ -60,6 +66,12 @@ export const appSlice: any = createSlice({
     },
     setInsuranceCompleted: (state, action: PayloadAction<boolean>) => {
       state.insuranceCompleted = action.payload;
+    },
+    increaseNotificationCount: (state) => {
+      state.notificationCount += 1;
+    },
+    decreaseNotificationsToZero: (state) => {
+      state.notificationCount = 0;
     },
     removeContract: (state, action) => {
       const contractIdToRemove = action.payload;
@@ -79,6 +91,9 @@ export const {
   setAllCustomers,
   setTransactions,
   setContractual,
+  setNotifications,
+  increaseNotificationCount,
+  decreaseNotificationsToZero,
 } = appSlice.actions;
 
 export default appSlice.reducer;

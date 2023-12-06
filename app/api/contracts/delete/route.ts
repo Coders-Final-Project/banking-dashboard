@@ -6,6 +6,7 @@ import { connectToDB } from "@/lib/mongoose";
 import User from "@/lib/models/user.model";
 import Card from "@/lib/models/card.model";
 import Contractual from "@/lib/models/contractual.model";
+import Notification from "@/lib/models/notification.model";
 
 export async function POST(request: NextRequest) {
   try {
@@ -34,9 +35,16 @@ export async function POST(request: NextRequest) {
     card[0].balance = card[0].balance - (Number(contractRate) + 50);
     await user.companyContracts.pop(contractID);
 
+    const newNotification = new Notification({
+      userId: userID,
+      key: contract.company,
+      content: "Contract Deleted",
+    });
+
     await user.save();
     await card[0].save();
     await newContractual.save();
+    await newNotification.save();
 
     return NextResponse.json({
       message: "Contract deleted successfully",

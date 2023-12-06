@@ -24,6 +24,9 @@ import { FormData } from "@/interface";
 
 import { createProgressBar } from "@/helpers";
 
+import { useDispatch } from "react-redux";
+import { increaseNotificationCount } from "@/globalRedux/features/appSlice";
+
 const INITIAL_DATA: FormData = {
   client: "",
   company: "Pasha Bank",
@@ -43,6 +46,8 @@ const ContractCreate = () => {
   const [successAlert, setSuccessAlert] = useState(false);
 
   const router = useRouter();
+
+  const dispatch = useDispatch();
 
   const userData = useGlobalContext();
 
@@ -104,6 +109,7 @@ const ContractCreate = () => {
         });
 
         setSuccessAlert(true);
+        dispatch(increaseNotificationCount());
         setTimeout(() => {
           router.replace("/contracts");
         }, 1000);

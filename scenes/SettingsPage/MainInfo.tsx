@@ -35,6 +35,9 @@ const MainInfo = () => {
     if (success || serverError) {
       setTimeout(() => {
         setSuccess("");
+      }, 2000);
+
+      setTimeout(() => {
         setServerError("");
       }, 2000);
     }
@@ -81,9 +84,12 @@ const MainInfo = () => {
           newPass: passwordValues.newPass,
         });
 
+        console.log(response.data.message);
+
         if (response.data.success) {
           setSuccess(response.data.message);
         } else {
+          console.log(response.data.message);
           setServerError(response.data.message);
         }
       } else {

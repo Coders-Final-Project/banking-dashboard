@@ -16,7 +16,10 @@ import AvatarDetail from "@/shared/AvatarDetail/AvatarDetail";
 import { insuranceCoverages } from "@/db/insurance";
 import { StateProps } from "@/interface";
 import { useSelector, useDispatch } from "react-redux";
-import { setInsuranceCompleted } from "@/globalRedux/features/appSlice";
+import {
+  increaseNotificationCount,
+  setInsuranceCompleted,
+} from "@/globalRedux/features/appSlice";
 
 import { useTranslation } from "@/i18n/client";
 
@@ -74,6 +77,7 @@ const Insurance = ({ params: { lng } }: { params: { lng: string } }) => {
         });
 
         dispatch(setInsuranceCompleted(response.data.data));
+        dispatch(increaseNotificationCount());
         updateInsuranceCompleted(response.data.data);
         setSuccessAlert(true);
       }

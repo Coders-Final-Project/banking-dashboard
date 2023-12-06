@@ -1,8 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
-import Transactions from "@/lib/models/transactions.model";
-
 import { connectToDB } from "@/lib/mongoose";
+import Notification from "@/lib/models/notification.model";
 
 export async function POST(request: NextRequest) {
   connectToDB();
@@ -12,12 +11,12 @@ export async function POST(request: NextRequest) {
   const userID = reqBody.userID;
 
   try {
-    const transactions = await Transactions.find({ senderId: userID }).sort(
+    const notifications = await Notification.find({ userId: userID }).sort(
       "-createdAt",
     );
 
     return NextResponse.json({
-      transactions,
+      notifications,
     });
   } catch (error: any) {
     return NextResponse.json({ error: error.message }, { status: 500 });

@@ -11,7 +11,10 @@ import { useState } from "react";
 import { ICompanyContracts } from "@/interface";
 
 import { useDispatch } from "react-redux";
-import { removeContract } from "@/globalRedux/features/appSlice";
+import {
+  removeContract,
+  increaseNotificationCount,
+} from "@/globalRedux/features/appSlice";
 
 import axios from "axios";
 
@@ -41,7 +44,7 @@ const ContractsItem = ({
       });
 
       setIsDeleteBtnClicked(false);
-
+      dispatch(increaseNotificationCount());
       dispatch(removeContract(_id));
     } catch (error) {
       console.log(error);
