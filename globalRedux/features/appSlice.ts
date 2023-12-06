@@ -33,6 +33,7 @@ const initialState: StateProps = {
     value: "en",
   },
   insuranceCompleted: false,
+  notificationCount: 0,
 };
 
 export const appSlice: any = createSlice({
@@ -66,6 +67,12 @@ export const appSlice: any = createSlice({
     setInsuranceCompleted: (state, action: PayloadAction<boolean>) => {
       state.insuranceCompleted = action.payload;
     },
+    increaseNotificationCount: (state) => {
+      state.notificationCount += 1;
+    },
+    decreaseNotificationsToZero: (state) => {
+      state.notificationCount = 0;
+    },
     removeContract: (state, action) => {
       const contractIdToRemove = action.payload;
       state.companyContracts = state.companyContracts.filter(
@@ -85,6 +92,8 @@ export const {
   setTransactions,
   setContractual,
   setNotifications,
+  increaseNotificationCount,
+  decreaseNotificationsToZero,
 } = appSlice.actions;
 
 export default appSlice.reducer;

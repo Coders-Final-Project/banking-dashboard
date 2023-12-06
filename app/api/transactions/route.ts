@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 
 import Transactions from "@/lib/models/transactions.model";
-import User from "@/lib/models/user.model";
 
 import { connectToDB } from "@/lib/mongoose";
 

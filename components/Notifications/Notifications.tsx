@@ -15,12 +15,12 @@ import "@/sass/components/_notifications.scss";
 
 import { StateProps } from "@/interface";
 
+import { getFormattedDate, defineNotificationImage } from "@/helpers";
+
 const Notifications = () => {
   const { data } = useGlobalContext();
 
   const dispatch = useDispatch();
-
-  const notifications = useSelector((state: StateProps) => state.notifications);
 
   useEffect(() => {
     const fetchNotifications = async () => {
@@ -29,7 +29,7 @@ const Notifications = () => {
           userID: data._id,
         });
 
-        dispatch(setNotifications(response.data.notification));
+        dispatch(setNotifications(response.data.notifications));
       } catch (error) {
         console.log(error);
       }
@@ -38,31 +38,69 @@ const Notifications = () => {
     fetchNotifications();
   }, [data._id, dispatch]);
 
+  const notifications = useSelector((state: StateProps) => state.notifications);
+
+  const handleNotificationDelete = async (id: string) => {
+    try {
+      const response = await axios.post("/api/notifications/delete", {
+        userID: data._id,
+        notificationId: id,
+      });
+
+      dispatch(setNotifications(response.data.notifications));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div className="notifications">
       <div className="notifications__header">
-        <div className="notifications__header__all">notifications (5)</div>
+        <div className="notifications__header__all">
+          notifications ({notifications?.length})
+        </div>
         <div className="notifications__header__new">new (1)</div>
       </div>
       <div className="notifications__body">
-        {notifications.map((item) => (
-          <div key={item._id} className="notifications__body__item">
-            <Image
-              src="/assets/home/people.png"
-              alt="notify"
-              width={24}
-              height={24}
-              className="notifications__body__item__img"
-            />
-            <div className="notifications__body__item__content">
-              <div className="notifications__body__item__content__title">
-                {item.content}
+        {notifications?.map((item) => {
+          const { formattedDate } = getFormattedDate(item.createdAt);
+
+          const imgName = defineNotificationImage(item.key);
+
+          return (
+            <div key={item._id} className="notifications__body__item">
+              <Image
+                src={`/assets/notifications/${imgName}`}
+                alt="notify"
+                width={30}
+                height={30}
+                className="notifications__body__item__img"
+              />
+              <div className="notifications__body__item__content">
+                <div className="notifications__body__item__content__title">
+                  {item.content}
+                </div>
+                <div className="notifications__body__item__content__time">
+                  {formattedDate}
+                </div>
               </div>
-              <div className="notifications__body__item__content__time"></div>
+              <button
+                className="notifications__body__item__btn"
+                onClick={(e) => {
+                  handleNotificationDelete(item._id);
+                  e.stopPropagation();
+                }}
+              >
+                <Image
+                  src="/assets/notifications/delete.png"
+                  alt="delete"
+                  width={15}
+                  height={15}
+                />
+              </button>
             </div>
-            <button className="notifications__body__item__btn">X</button>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </div>
   );

@@ -24,6 +24,7 @@ import {
   setInsuranceCompleted,
   setTransactions,
   setContractual,
+  decreaseNotificationsToZero,
 } from "@/globalRedux/features/appSlice";
 
 import Notifications from "@/components/Notifications/Notifications";
@@ -43,8 +44,8 @@ const AvatarDetail = ({ hasBtn, lng }: Props) => {
     (state: StateProps) => state.companyContracts,
   );
 
-  const insuranceCompleted = useSelector(
-    (state: StateProps) => state.insuranceCompleted,
+  const notificationCount = useSelector(
+    (state: StateProps) => state.notificationCount,
   );
 
   const { data } = useGlobalContext();
@@ -129,6 +130,7 @@ const AvatarDetail = ({ hasBtn, lng }: Props) => {
       setIsNotifyOpen(false);
     } else {
       setIsNotifyOpen(true);
+      dispatch(decreaseNotificationsToZero());
     }
   };
 
@@ -142,6 +144,8 @@ const AvatarDetail = ({ hasBtn, lng }: Props) => {
     }
   };
 
+  const notificationImg = isNotifyOpen ? "alert.png" : "bell.png";
+
   return (
     <div className="avatar__detail">
       {hasBtn && userCard._id !== -1 && isContractAvailable && (
@@ -154,7 +158,7 @@ const AvatarDetail = ({ hasBtn, lng }: Props) => {
       )}
       <button className="notify__btn" onClick={handleNotifyOpen}>
         <Image
-          src="/assets/home/notification.png"
+          src={`/assets/notifications/${notificationImg}`}
           alt="notification"
           width={24}
           height={24}
@@ -165,6 +169,9 @@ const AvatarDetail = ({ hasBtn, lng }: Props) => {
           <div className="notify__btn__content">
             <Notifications />
           </div>
+        )}
+        {notificationCount > 0 && (
+          <div className="notify__btn__count">{notificationCount}</div>
         )}
       </button>
       <div className="avatar__detail__person">

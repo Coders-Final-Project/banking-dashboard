@@ -20,17 +20,28 @@
       left: 0;
       transform: translate(-40%, 0);
       background-color: $main-color-white;
-      width: 250px;
+      width: 280px;
       height: 250px;
       overflow-y: scroll;
       box-shadow: 5px 2px 15px 5px rgba(0, 0, 0, 0.32);
       border-radius: 10px;
       -ms-overflow-style: none;
       scrollbar-width: none;
+      z-index: 1000;
     }
 
     &__content::-webkit-scrollbar {
       display: none;
+    }
+
+    &__count {
+      position: absolute;
+      top: -4px;
+      right: -1px;
+      padding: 2px 6px;
+      border-radius: 50%;
+      background-color: $action-red-100;
+      color: $main-color-white;
     }
   }
 

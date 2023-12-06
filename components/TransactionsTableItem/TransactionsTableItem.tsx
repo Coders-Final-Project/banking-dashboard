@@ -15,7 +15,10 @@ import { useDispatch } from "react-redux";
 
 import { useGlobalContext } from "@/context/store";
 
-import { setUserCardInfo } from "@/globalRedux/features/appSlice";
+import {
+  setUserCardInfo,
+  increaseNotificationCount,
+} from "@/globalRedux/features/appSlice";
 
 const TransactionsTableItem = ({
   receiverName,
@@ -75,6 +78,7 @@ const TransactionsTableItem = ({
 
         dispatch(setUserCardInfo(response.data.data[0]));
         setSuccessAlert(true);
+        dispatch(increaseNotificationCount());
       } else {
         setCardNumber("");
         setFundAmount("");

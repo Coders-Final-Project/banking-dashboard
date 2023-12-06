@@ -152,6 +152,7 @@ export interface StateProps {
   curLang: CurrenctLangProps;
   insuranceCompleted: boolean;
   notifications: INotifications[];
+  notificationCount: number;
 }
 
 export interface UploadedFileProps {

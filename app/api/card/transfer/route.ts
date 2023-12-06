@@ -4,6 +4,7 @@ import { connectToDB } from "@/lib/mongoose";
 import User from "@/lib/models/user.model";
 import Card from "@/lib/models/card.model";
 import Transactions from "@/lib/models/transactions.model";
+import Notification from "@/lib/models/notification.model";
 
 export async function POST(request: NextRequest) {
   connectToDB();
@@ -54,9 +55,16 @@ export async function POST(request: NextRequest) {
       amount,
     });
 
+    const newNotification = new Notification({
+      userId: userID,
+      key: "transfer",
+      content: `Successfull transfer to ${firstName}`,
+    });
+
     await senderCard[0].save();
     await receiverCard[0].save();
     await newTransaction.save();
+    await newNotification.save();
 
     return NextResponse.json({
       message: "Insurance created successfully",

@@ -167,6 +167,20 @@ export const defineCompanyImage = (companyName: string): string | undefined => {
   return companies[companyName];
 };
 
+export const defineNotificationImage = (
+  companyName: string,
+): string | undefined => {
+  const companies: CompanyImages = {
+    "Pasha Bank": "pashaBank.jpg",
+    "Kapital Bank": "kapitalBank.png",
+    "Bank of Baku": "bankOfBaku.jpg",
+    gerki: "gerki.png",
+    transfer: "person.png",
+  };
+
+  return companies[companyName];
+};
+
 export const getFormattedDate = (createdAt: string) => {
   const createdDate = new Date(createdAt);
 

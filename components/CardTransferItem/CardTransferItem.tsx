@@ -11,7 +11,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { useGlobalContext } from "@/context/store";
 
 import "@/sass/components/_cardTransferItem.scss";
-import { setUserCardInfo } from "@/globalRedux/features/appSlice";
+import {
+  increaseNotificationCount,
+  setUserCardInfo,
+} from "@/globalRedux/features/appSlice";
 import { StateProps } from "@/interface";
 
 interface IProps {
@@ -71,6 +74,7 @@ const CardTransferItem = ({ imgUrlEnd, text }: IProps) => {
 
         dispatch(setUserCardInfo(response.data.data[0]));
         setSuccessAlert(true);
+        dispatch(increaseNotificationCount());
       } else {
         setCardNumber("");
         setAmount("");
