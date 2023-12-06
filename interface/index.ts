@@ -150,6 +150,10 @@ export interface UploadedFileProps {
   fileUrl: { public_id: string; secure_url: string };
 }
 
+export interface UploadedImgProps {
+  fileUrl: { public_id: string; secure_url: string };
+}
+
 export interface UploadedProfileProps {
   dateOfBirth: string;
   phone: string;

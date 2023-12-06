@@ -38,9 +38,11 @@ const userSchema = new mongoose.Schema(
       min: 6,
       max: 30,
     },
-    image: {
-      type: String,
-      default: "",
+    profileImg: {
+      fileUrl: {
+        public_id: String,
+        secure_url: String,
+      },
     },
     insuranceCompleted: {
       type: Boolean,

@@ -2,7 +2,11 @@
 
 import axios from "axios";
 
-import { UploadedFileProps, UploadedProfileProps } from "@/interface";
+import {
+  UploadedFileProps,
+  UploadedProfileProps,
+  UploadedImgProps,
+} from "@/interface";
 
 import {
   createContext,
@@ -28,6 +32,7 @@ type DataType = {
   uploadedFiles: [
     { fileName: string; fileUrl: { public_id: String; secure_url: String } },
   ];
+  profileImg: [{ fileUrl: { public_id: string; secure_url: string } }];
 };
 
 interface ContextProps {
@@ -35,6 +40,8 @@ interface ContextProps {
   updateInsuranceCompleted: (value: boolean) => void;
   updateUploadedFiles: (input: UploadedFileProps) => void;
   updateUserProfile: (input: UploadedProfileProps) => void;
+  updateProfileImg: (input: UploadedImgProps) => void;
+  deleteProfileImage: () => void;
 }
 
 const GlobalContext = createContext<ContextProps>({
@@ -53,10 +60,13 @@ const GlobalContext = createContext<ContextProps>({
     uploadedFiles: [
       { fileName: "", fileUrl: { public_id: "", secure_url: "" } },
     ],
+    profileImg: [{ fileUrl: { public_id: "", secure_url: "" } }],
   },
   updateInsuranceCompleted: () => {},
   updateUploadedFiles: () => {},
   updateUserProfile: () => {},
+  updateProfileImg: () => {},
+  deleteProfileImage: () => {},
 });
 
 export const GlobalContextProvider = ({
@@ -79,10 +89,19 @@ export const GlobalContextProvider = ({
     uploadedFiles: [
       { fileName: "", fileUrl: { public_id: "", secure_url: "" } },
     ],
+    profileImg: [{ fileUrl: { public_id: "", secure_url: "" } }],
   });
 
   const updateInsuranceCompleted = (value: boolean) => {
     setData((prevData) => ({ ...prevData, insuranceCompleted: value }));
+  };
+
+  const updateProfileImg = (input: UploadedImgProps) => {
+    //@ts-ignore
+    setData((prevData) => ({
+      ...prevData,
+      profileImg: [input],
+    }));
   };
 
   const updateUploadedFiles = (input: UploadedFileProps) => {
@@ -106,6 +125,13 @@ export const GlobalContextProvider = ({
     }));
   };
 
+  const deleteProfileImage = () => {
+    setData((prevData) => ({
+      ...prevData,
+      profileImg: [{ fileUrl: { public_id: "", secure_url: "" } }],
+    }));
+  };
+
   useEffect(() => {
     const getUserInfo = async () => {
       try {
@@ -126,6 +152,8 @@ export const GlobalContextProvider = ({
         updateInsuranceCompleted,
         updateUploadedFiles,
         updateUserProfile,
+        updateProfileImg,
+        deleteProfileImage
       }}
     >
       {children}

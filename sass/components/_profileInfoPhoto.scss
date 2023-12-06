@@ -23,6 +23,7 @@
     &__person {
       background-color: $shades-of-blue-96;
       border-radius: 100px;
+      object-fit: cover;
     }
 
     &__btns {
@@ -119,5 +120,27 @@
       outline: none;
       cursor: pointer;
     }
+  }
+
+  .image__alert--error,
+  .image__alert--success {
+    position: fixed;
+    top: 10%;
+    left: 61%;
+    transform: translate(-61%, -10%);
+    padding: 15px;
+    border-radius: 20px;
+    box-shadow: $box-shadow;
+    font-size: 18px;
+  }
+
+  .image__alert--error {
+    background-color: $action-red-100;
+    color: $main-color-white;
+  }
+
+  .image__alert--success {
+    background-color: $action-green-100;
+    color: $main-color-white;
   }
 }

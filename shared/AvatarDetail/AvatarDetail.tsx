@@ -51,6 +51,8 @@ const AvatarDetail = ({ hasBtn, lng }: Props) => {
   const currentPage = usePathname();
   const router = useRouter();
 
+  const url = data.profileImg?.[0]?.fileUrl?.secure_url;
+
   useEffect(() => {
     const fetchCardInfo = async () => {
       try {
@@ -148,7 +150,7 @@ const AvatarDetail = ({ hasBtn, lng }: Props) => {
       />
       <div className="avatar__detail__person">
         <Image
-          src={`/assets/user/user.png`}
+          src={`${url ? url : "/assets/user/user.png"}`}
           alt={data.firstName}
           width={40}
           height={40}
