@@ -14,7 +14,7 @@ export async function POST(request: NextRequest) {
 
     const userID = repBody.userID;
 
-    const currenctPass = await repBody.currenctPass;
+    const currenctPass = await repBody.currentPass;
     const newPass = await repBody.newPass;
 
     const user = await User.findById(userID);
@@ -31,7 +31,7 @@ export async function POST(request: NextRequest) {
 
     if (!validPassword) {
       return NextResponse.json(
-        { message: "Invalid Password", success: false },
+        { message: "Invalid Password!", success: false },
         { status: 400 },
       );
     }
