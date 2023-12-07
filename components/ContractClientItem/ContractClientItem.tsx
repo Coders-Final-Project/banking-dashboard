@@ -1,10 +1,21 @@
+"use client";
+
 import Image from "next/image";
 
 import "@/sass/components/_contractClientItem.scss";
 
 import { IContractClient } from "@/interface";
 
-const ContractClientItem = ({ firstName, lastName, job }: IContractClient) => {
+import { useTranslation } from "@/i18n/client";
+
+const ContractClientItem = ({
+  firstName,
+  lastName,
+  job,
+  lng,
+}: IContractClient) => {
+  const { t } = useTranslation(lng);
+
   return (
     <div className="contracts__content__client__body__item">
       <Image
@@ -32,7 +43,7 @@ const ContractClientItem = ({ firstName, lastName, job }: IContractClient) => {
           className="contracts__content__client__body__item__btn__img"
         />
         <p className="contracts__content__client__body__item__btn__text">
-          View Profile
+          {t("contract.client.part.link")}
         </p>
       </button>
     </div>

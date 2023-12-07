@@ -16,12 +16,16 @@ import { setCompanyContracts } from "@/globalRedux/features/appSlice";
 
 import { StateProps } from "@/interface";
 
+import { useTranslation } from "@/i18n/client";
+
 import { useEffect } from "react";
 
-const ContractsActive = () => {
+const ContractsActive = ({ lng }: { lng: string }) => {
   const dispatch = useDispatch();
 
   const { data } = useGlobalContext();
+
+  const { t } = useTranslation(lng);
 
   const companyContracts = useSelector(
     (state: StateProps) => state.companyContracts,
@@ -50,7 +54,7 @@ const ContractsActive = () => {
     <div className="contracts__content__active">
       <div className="contracts__content__active__header">
         <div className="contracts__content__active__header__title">
-          Active Contracts
+          {t("contract.active.title")}
         </div>
         <Image
           src="/assets/contracts/dot.png"
@@ -66,16 +70,16 @@ const ContractsActive = () => {
             href="/cards"
             className="contracts__content__active__body__empty"
           >
-            Add card in order to create any contract
+            {t("ccontract.active.noCard")}
           </Link>
         )}
 
         {companyContracts.length === 0 && userCard._id !== -1 && (
-          <div className="no__contract">There is no contract yet!</div>
+          <div className="no__contract"> {t("contract.active.noContract")}</div>
         )}
 
         {companyContracts?.map((contract) => (
-          <ContractsItem key={contract._id} {...contract} />
+          <ContractsItem key={contract._id} {...contract} lng={lng} />
         ))}
       </div>
     </div>

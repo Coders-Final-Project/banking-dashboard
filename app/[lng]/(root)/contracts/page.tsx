@@ -15,16 +15,18 @@ const Contracts = async ({ params: { lng } }: { params: { lng: string } }) => {
     <main className="contracts">
       <header className="page__header">
         <div className="page__header__welcome">
-          <div className="page__header__welcome__title">Contracts</div>
+          <div className="page__header__welcome__title">
+            {t("contract.main.title")}
+          </div>
         </div>
         <AvatarDetail hasBtn lng={lng} />
       </header>
       <div className="contracts__content">
         <div className="contracts__content__leftSide">
-          <ContractsSummary />
-          <ContractsActive />
+          <ContractsSummary lng={lng} />
+          <ContractsActive lng={lng} />
         </div>
-        <ContractsClient />
+        <ContractsClient lng={lng} />
       </div>
     </main>
   );

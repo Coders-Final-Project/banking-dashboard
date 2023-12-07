@@ -37,6 +37,7 @@ export interface IContractClient {
   firstName: string;
   lastName: string;
   job: string;
+  lng: string;
 }
 
 export interface FormData {
@@ -95,6 +96,7 @@ export interface ICompanyContracts {
   cycleEnd: string;
   paymentDue: string;
   isSIgned: boolean;
+  lng: string;
 }
 
 export interface IAllCustomers {
@@ -122,10 +124,6 @@ export interface IContractual {
   createdAt: string;
 }
 
-export interface CurrenctLangProps {
-  value: string;
-}
-
 export interface ITransactions {
   _id: string;
   receiverName: string;
@@ -149,7 +147,7 @@ export interface StateProps {
   transactions: ITransactions[];
   contractual: IContractual[];
   userCard: CardProps;
-  curLang: CurrenctLangProps;
+  curLang: string;
   insuranceCompleted: boolean;
   notifications: INotifications[];
   notificationCount: number;

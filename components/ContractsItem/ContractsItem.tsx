@@ -18,14 +18,19 @@ import {
 
 import axios from "axios";
 
+import { useTranslation } from "@/i18n/client";
+
 const ContractsItem = ({
   client,
   company,
   rate,
   date,
   _id,
+  lng,
 }: ICompanyContracts) => {
   const [isDeleteBtnClicked, setIsDeleteBtnClicked] = useState(false);
+
+  const { t } = useTranslation(lng);
 
   const dispatch = useDispatch();
 
@@ -74,7 +79,7 @@ const ContractsItem = ({
             {rate} ₼
           </div>
           <div className="contracts__content__active__body__item__main__amount__rate">
-            Fixed Rate
+            {t("contract.active.item.rate")}
           </div>
         </div>
       </div>
@@ -82,7 +87,7 @@ const ContractsItem = ({
       <div className="contracts__content__active__body__item__secondary">
         <div className="contracts__content__active__body__item__secondary__period">
           <div className="contracts__content__active__body__item__secondary__period__title">
-            Contract Period
+            {t("contract.active.item.period")}
           </div>
           <div className="contracts__content__active__body__item__secondary__period__date">
             {/* {startDate} - {endDate} */}
@@ -91,7 +96,7 @@ const ContractsItem = ({
         </div>
         <div className="contracts__content__active__body__item__secondary__client">
           <div className="contracts__content__active__body__item__secondary__client__title">
-            Client Name
+            {t("contract.active.item.name")}
           </div>
           <div className="contracts__content__active__body__item__secondary__client__name">
             {client}
@@ -110,21 +115,20 @@ const ContractsItem = ({
         <div className="notify__user__modal">
           <div className="notify__user__modal__content">
             <div className="notify__user__modal__content__text">
-              If this contract is removed, an additional 50 AZN will be deducted
-              from your balance. Are you sure?
+              {t("contract.modal.text")}
             </div>
             <div className="notify__user__modal__content__btns">
               <button
                 className="notify__user__modal__content__btns__cancel"
                 onClick={handleCancelDelete}
               >
-                Cancel
+                {t("contract.modal.cancel.btn")}
               </button>
               <button
                 className="notify__user__modal__content__btns__confirm"
                 onClick={handleDeleteContract}
               >
-                Confirm
+                {t("contract.modal.approve.btn")}
               </button>
             </div>
           </div>
