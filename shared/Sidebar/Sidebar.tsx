@@ -13,6 +13,8 @@ import SidebarItem from "@/components/SidebarItem/SidebarItem";
 const Sidebar = async ({ lng }: { lng: string }) => {
   const { t } = await useTranslation(lng);
 
+  console.log(lng);
+
   const sidebarLinks = [
     {
       id: 1,

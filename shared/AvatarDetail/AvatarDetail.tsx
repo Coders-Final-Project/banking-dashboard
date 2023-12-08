@@ -50,10 +50,6 @@ const AvatarDetail = ({ hasBtn, lng }: Props) => {
     (state: StateProps) => state.notificationCount,
   );
 
-  const curLang = useSelector((state: StateProps) => state.curLang);
-
-  const { t } = useTranslation(curLang);
-
   const { data } = useGlobalContext();
 
   const dispatch = useDispatch();
@@ -156,7 +152,7 @@ const AvatarDetail = ({ hasBtn, lng }: Props) => {
     <div className="avatar__detail">
       {hasBtn && userCard._id !== -1 && isContractAvailable && (
         <Button
-          text={`${t("avatar.link3")}`}
+          text="Create A Contract"
           icon="frame.png"
           url="create"
           lng={lng}
@@ -201,13 +197,13 @@ const AvatarDetail = ({ hasBtn, lng }: Props) => {
             href="/settings"
             className="avatar__detail__person__dropdown__profile"
           >
-            {t("avatar.link1")}
+            Profile
           </Link>
           <button
             onClick={handleLogout}
             className="avatar__detail__person__dropdown__logoutBtn"
           >
-            {t("avatar.link2")}
+            Logout
           </button>
         </div>
       </div>
