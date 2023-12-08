@@ -34,6 +34,8 @@ interface Props {
   lng?: string;
 }
 
+import { useTranslation } from "@/i18n/client";
+
 const AvatarDetail = ({ hasBtn, lng }: Props) => {
   const [serverError, setServerError] = useState("");
   const [isNotifyOpen, setIsNotifyOpen] = useState(false);
@@ -47,6 +49,10 @@ const AvatarDetail = ({ hasBtn, lng }: Props) => {
   const notificationCount = useSelector(
     (state: StateProps) => state.notificationCount,
   );
+
+  const curLang = useSelector((state: StateProps) => state.curLang);
+
+  const { t } = useTranslation(curLang);
 
   const { data } = useGlobalContext();
 
@@ -150,7 +156,7 @@ const AvatarDetail = ({ hasBtn, lng }: Props) => {
     <div className="avatar__detail">
       {hasBtn && userCard._id !== -1 && isContractAvailable && (
         <Button
-          text="create a contract"
+          text={`${t("avatar.link3")}`}
           icon="frame.png"
           url="create"
           lng={lng}
@@ -195,13 +201,13 @@ const AvatarDetail = ({ hasBtn, lng }: Props) => {
             href="/settings"
             className="avatar__detail__person__dropdown__profile"
           >
-            Profile
+            {t("avatar.link1")}
           </Link>
           <button
             onClick={handleLogout}
             className="avatar__detail__person__dropdown__logoutBtn"
           >
-            Logout
+            {t("avatar.link2")}
           </button>
         </div>
       </div>

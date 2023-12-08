@@ -10,6 +10,11 @@ import { useRef, ChangeEvent, useState, useEffect } from "react";
 
 import "@/sass/components/_profileInfoPhoto.scss";
 
+import { useSelector } from "react-redux";
+import { StateProps } from "@/interface";
+
+import { useTranslation } from "@/i18n/client";
+
 const ProfileInfoPhoto = () => {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
@@ -20,6 +25,10 @@ const ProfileInfoPhoto = () => {
   const url =
     (selectedFile && URL.createObjectURL(selectedFile)) ||
     data.profileImg?.[0]?.fileUrl?.secure_url;
+
+  const curLang = useSelector((state: StateProps) => state.curLang);
+
+  const { t } = useTranslation(curLang);
 
   useEffect(() => {
     if (success || serverError) {
@@ -45,7 +54,7 @@ const ProfileInfoPhoto = () => {
 
           if (response.data) {
             updateProfileImg(response.data);
-            setSuccess("Profile image updated!");
+            setSuccess(`${t("settings.alert.success1")}`);
           }
         } catch (error) {
           console.log(error);
@@ -56,7 +65,7 @@ const ProfileInfoPhoto = () => {
     };
 
     uploadFile();
-  }, [selectedFile, data._id, updateProfileImg]);
+  }, [selectedFile, data._id, updateProfileImg, t]);
 
   const handleUploadClick = () => {
     if (fileInputRef.current) {
@@ -78,7 +87,7 @@ const ProfileInfoPhoto = () => {
       const response = await deletePhoto({ publicId, userID });
 
       if (response.status === 202) {
-        setSuccess("Image Deleted!");
+        setSuccess(`${t("settings.alert.success2")}`);
         deleteProfileImage();
       }
     } catch (error) {
@@ -88,7 +97,9 @@ const ProfileInfoPhoto = () => {
 
   return (
     <div className="profile__info__photo">
-      <div className="profile__info__photo__title">Personal Details</div>
+      <div className="profile__info__photo__title">
+        {t("settings.photo.title")}
+      </div>
       <div className="profile__info__photo__content">
         <Image
           src={url ? url : `/assets/settings/user.png`}
@@ -109,7 +120,7 @@ const ProfileInfoPhoto = () => {
               height={24}
               className="profile__info__photo__content__btns__upload__btn"
             />
-            Upload New Photo
+            {t("settings.photo.btn1")}
             <input
               type="file"
               accept="image/*"
@@ -129,24 +140,24 @@ const ProfileInfoPhoto = () => {
               height={24}
               className="profile__info__photo__content__btns__remove__btn"
             />
-            Remove Photo
+            {t("settings.photo.btn2")}
           </button>
         </div>
       </div>
       <div className="profile__info__photo__provider">
         <div className="profile__info__photo__provider__text">
-          Photos help your clients recognize you in Payrole
+          {t("settings.payrole.text")}
         </div>
         <button className="profile__info__photo__provider__btn">
-          Learn More
+          {t("settings.payrole.btn")}
         </button>
       </div>
       <div className="profile__info__photo__membership">
         <div className="profile__info__photo__membership__title">
-          How can I upgrade my account membership?
+          {t("settings.pricing.text")}
         </div>
         <button className="profile__info__photo__membership__btn">
-          See Pricing
+          {t("settings.pricing.btn")}
           <Image
             src="/assets/settings/price.png"
             alt="person"

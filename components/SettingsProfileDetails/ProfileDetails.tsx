@@ -8,6 +8,11 @@ import axios from "axios";
 
 import "@/sass/components/_profileDetails.scss";
 
+import { useSelector } from "react-redux";
+import { StateProps } from "@/interface";
+
+import { useTranslation } from "@/i18n/client";
+
 const ProfileDetails = () => {
   const [serverError, setServerError] = useState("");
   const [success, setSuccess] = useState("");
@@ -24,6 +29,10 @@ const ProfileDetails = () => {
   };
 
   const [userValues, setUserValues] = useState(INITIAL_USER_VALUES);
+
+  const curLang = useSelector((state: StateProps) => state.curLang);
+
+  const { t } = useTranslation(curLang);
 
   useEffect(() => {
     const transformedDate = userValues.dateOfBirth
@@ -64,7 +73,7 @@ const ProfileDetails = () => {
 
         updateUserProfile(userValues);
       } else {
-        setServerError("Something went wrong!");
+        setServerError(`${t("settings.details.field1")}`);
       }
     } catch (error: any) {
       setServerError(error.message);
@@ -75,7 +84,7 @@ const ProfileDetails = () => {
   return (
     <div className="profile__details">
       <div className="profile__details__item">
-        <label htmlFor="name">Name</label>
+        <label htmlFor="name">{t("settings.details.field1")}</label>
         <input
           type="text"
           id="name"
@@ -84,7 +93,7 @@ const ProfileDetails = () => {
         />
       </div>
       <div className="profile__details__item">
-        <label htmlFor="date">Date of Birth</label>
+        <label htmlFor="date">{t("settings.details.field2")}</label>
         <input
           type="date"
           id="date"
@@ -94,13 +103,13 @@ const ProfileDetails = () => {
         />
       </div>
       <div className="profile__details__item">
-        <label htmlFor="citizen">Citizen of</label>
+        <label htmlFor="citizen">{t("settings.details.field3")}</label>
         <select id="citizen" value="Azerbaijan" disabled>
           <option value="Azerbaijan">Azerbaijan</option>
         </select>
       </div>
       <div className="profile__details__item">
-        <label htmlFor="phone">Phone Number</label>
+        <label htmlFor="phone">{t("settings.details.field4")}</label>
         <input
           type="phone"
           id="phone"
@@ -112,7 +121,7 @@ const ProfileDetails = () => {
       </div>
       <div className="profile__details__sidebyside">
         <div className="profile__details__sidebyside__item">
-          <label htmlFor="street">Street</label>
+          <label htmlFor="street">{t("settings.details.field5")}</label>
           <input
             type="text"
             id="street"
@@ -123,7 +132,7 @@ const ProfileDetails = () => {
           />
         </div>
         <div className="profile__details__sidebyside__item">
-          <label htmlFor="city">City</label>
+          <label htmlFor="city">{t("settings.details.field6")}</label>
           <input
             type="text"
             id="city"
@@ -136,7 +145,7 @@ const ProfileDetails = () => {
       </div>
       <div className="profile__details__sidebyside">
         <div className="profile__details__sidebyside__item">
-          <label htmlFor="zip">ZIP Code</label>
+          <label htmlFor="zip">{t("settings.details.field7")}</label>
           <input
             type="text"
             id="zip"
@@ -147,7 +156,7 @@ const ProfileDetails = () => {
           />
         </div>
         <div className="profile__details__sidebyside__item">
-          <label htmlFor="country">Country</label>
+          <label htmlFor="country">{t("settings.details.field8")}</label>
           <input
             type="text"
             id="country"
@@ -159,7 +168,7 @@ const ProfileDetails = () => {
         </div>
       </div>
       <button className="profile__details__btn" onClick={handleSave}>
-        Save Changes
+        {t("settings.details.btn")}
       </button>
       {success !== "" && (
         <div className="profile__details__alert--success">{success}</div>
