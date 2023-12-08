@@ -20,6 +20,11 @@ import {
   increaseNotificationCount,
 } from "@/globalRedux/features/appSlice";
 
+import { useSelector } from "react-redux";
+import { StateProps } from "@/interface";
+
+import { useTranslation } from "@/i18n/client";
+
 const TransactionsTableItem = ({
   receiverName,
   receiverSurname,
@@ -34,6 +39,9 @@ const TransactionsTableItem = ({
   const [fundAmount, setFundAmount] = useState("");
   const [errorAlert, setErrorAlert] = useState(false);
   const [successAlert, setSuccessAlert] = useState(false);
+
+  const curLang = useSelector((state: StateProps) => state.curLang);
+  const { t } = useTranslation(curLang);
 
   const { data } = useGlobalContext();
 
@@ -150,7 +158,7 @@ const TransactionsTableItem = ({
           height={24}
           className="transactions__table__item__invoiceBtn__icon"
         />
-        Send Funds
+        {t("actions.table.itemBtn")}
       </button>
       <Image
         src="/assets/transactions/dot.png"
@@ -165,7 +173,7 @@ const TransactionsTableItem = ({
             <input
               type="text"
               className="action__item__modal__content__input"
-              placeholder="Card number"
+              placeholder={`${t("actions.modal.text1")}`}
               value={cardNumber}
               onChange={handleChange}
               minLength={19}
@@ -174,7 +182,7 @@ const TransactionsTableItem = ({
             <input
               type="number"
               className="action__item__modal__content__input"
-              placeholder="Amount (AZN)"
+              placeholder={`${t("actions.modal.text2")}`}
               value={fundAmount}
               onChange={(e) => setFundAmount(e.target.value)}
             />
@@ -182,7 +190,7 @@ const TransactionsTableItem = ({
               className="action__item__modal__content__btn"
               onClick={handleFundTransfer}
             >
-              Send
+              {t("actions.modal.btn")}
             </button>
           </div>
           <button
@@ -201,12 +209,12 @@ const TransactionsTableItem = ({
       )}
       {errorAlert && (
         <div className="transactions__table__item__alert--error">
-          Something went wrong!
+          {t("actions.alert.error")}
         </div>
       )}
       {successAlert && (
         <div className="transactions__table__item__alert--success">
-          Successfull transfer!
+          {t("actions.alert.success")}
         </div>
       )}
     </div>

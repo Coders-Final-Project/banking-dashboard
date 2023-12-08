@@ -1,10 +1,16 @@
+"use client";
+
 import Image from "next/image";
 
 import "@/sass/scenes/_transactionsDetail.scss";
 
 import TransactionsPerson from "@/components/TransactionsPerson/TransactionsPerson";
 
-const TransactionsDetail = () => {
+import { useTranslation } from "@/i18n/client";
+
+const TransactionsDetail = ({ lng }: { lng: string }) => {
+  const { t } = useTranslation(lng);
+
   return (
     <div className="transactions__detail">
       <div className="transactions__detail__forMonth">
@@ -17,7 +23,7 @@ const TransactionsDetail = () => {
         />
         <div className="transactions__detail__forMonth__content">
           <div className="transactions__detail__forMonth__content__title">
-            Payment this month
+            {t("actions.line2.title")}
           </div>
           <div className="transactions__detail__forMonth__content__result">
             <div className="transactions__detail__forMonth__content__result__number">
@@ -41,7 +47,7 @@ const TransactionsDetail = () => {
               ))}
             </div>
             <button className="transactions__detail__forMonth__content__persons__btn">
-              See all
+              {t("actions.line2.btn")}
             </button>
           </div>
         </div>
@@ -57,14 +63,14 @@ const TransactionsDetail = () => {
         />
         <div className="transactions__detail__balance__content">
           <div className="transactions__detail__balance__content__title">
-            Total Payroll Balance
+            {t("actions.line3.title")}
           </div>
           <div className="transactions__detail__balance__content__number">
             $2,325<span>.50</span>
           </div>
           <div className="transactions__detail__balance__content__annual">
             <div className="transactions__detail__balance__content__annual__title">
-              Annual TPV
+              {t("actions.line4.text")}
             </div>
             <Image
               src="/assets/transactions/increase.png"
