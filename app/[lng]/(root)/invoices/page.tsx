@@ -12,10 +12,14 @@ import { IInvoicesData } from "@/interface";
 import { filterInvoiceTable } from "@/helpers";
 import Sidemenu from "@/components/Sidemenu/Sidemenu";
 
-const Invoices = () => {
+import { useTranslation } from "@/i18n/client";
+
+const Invoices = ({ params: { lng } }: { params: { lng: string } }) => {
   const [invoiceData, setInvoiceData] = useState<IInvoicesData[]>(invoicesData);
   const [changeState, setChangeState] = useState<boolean>(false);
   const [openSideMenu, setOpenSideMenu] = useState<boolean>(false);
+
+  const { t } = useTranslation(lng);
 
   const handleSubmit = (input: string) => {
     setChangeState((prev) => !prev);
@@ -41,7 +45,9 @@ const Invoices = () => {
 
         <header className="page__header">
           <div className="page__header__welcome">
-            <div className="page__header__welcome__title">Invoices</div>
+            <div className="page__header__welcome__title">
+              {t("invoice.main.title")}
+            </div>
           </div>
           <AvatarDetail />
         </header>
@@ -56,24 +62,24 @@ const Invoices = () => {
                 height={32}
               />
               <div>
-                <p>Total Received</p>
+                <p>{t("invoice.line1.title")}</p>
                 <p>
                   $3,855<span>.50</span>
                 </p>
                 <p>
-                  <span>+15%</span> vs last month
+                  <span>+15%</span> vs {t("invoice.line1.compare")}
                 </p>
               </div>
             </div>
             <div className="item2">
               <div>
-                <p>PENDING</p>
+                <p>{t("invoice.line1.case1")}</p>
                 <p>
                   $1,346<span>.65</span>
                 </p>
               </div>
               <div>
-                <p>IN DRAFT</p>
+                <p>{t("invoice.line1.case2")}</p>
                 <p>
                   $50<span>.66</span>
                 </p>
@@ -82,7 +88,9 @@ const Invoices = () => {
           </div>
 
           <div className="grid__container__quickPay">
-            <p className="grid__container__quickPay__title">Qucik Pay</p>
+            <p className="grid__container__quickPay__title">
+              {t("invoice.line2.title")}
+            </p>
 
             <div className="grid__container__quickPay__links">
               <div>
@@ -110,16 +118,13 @@ const Invoices = () => {
             </div>
 
             <div className="grid__container__quickPay__text">
-              <p>
-                You can receive payments quickly with Quick Pay feature. You can
-                share the payment link to request the payment to clients.
-              </p>
-              <p>Learn More</p>
+              <p>{t("invoice.line2.text")}</p>
+              <p>{t("invoice.line2.btn")}</p>
             </div>
           </div>
 
           <div className="grid__container__overdue">
-            <div>Overdue</div>
+            <div>{t("invoice.line3.title")}</div>
             <div>
               <div className="circle"></div>
               <div className="price">
@@ -131,7 +136,7 @@ const Invoices = () => {
 
         <div className="invoiceTable">
           <div className="invoiceTable__header">
-            <div>Invoices</div>
+            <div>{t("invoice.table.title")}</div>
             <div className="sortBtns">
               <div className="sortBtns__content">
                 <div>
@@ -163,7 +168,7 @@ const Invoices = () => {
           <div className="invoiceTable__datas">
             <div className="filterBtns">
               <div>
-                <p>No</p>
+                <p>{t("invoice.filter.title1")}</p>
                 <Image
                   src="/assets/invoices/arrows.png"
                   alt="arrow"
@@ -172,7 +177,7 @@ const Invoices = () => {
                 />
               </div>
               <div>
-                <p> Date Created</p>
+                <p>{t("invoice.filter.title2")}</p>
                 <Image
                   src="/assets/invoices/arrows.png"
                   alt="arrow"
@@ -181,7 +186,7 @@ const Invoices = () => {
                 />
               </div>
               <div>
-                <p>Client</p>
+                <p>{t("invoice.filter.title3")}</p>
                 <Image
                   src="/assets/invoices/arrows.png"
                   alt="arrow"
@@ -190,7 +195,9 @@ const Invoices = () => {
                 />
               </div>
               <div>
-                <p onClick={() => handleSubmit("amount")}>Amount</p>
+                <p onClick={() => handleSubmit("amount")}>
+                  {t("invoice.filter.title4")}
+                </p>
                 <Image
                   src="/assets/invoices/arrows.png"
                   alt="arrow"
@@ -199,7 +206,9 @@ const Invoices = () => {
                 />
               </div>
               <div>
-                <p onClick={() => handleSubmit("PENDING")}>Status</p>
+                <p onClick={() => handleSubmit("PENDING")}>
+                  {t("invoice.filter.title5")}
+                </p>
                 <Image
                   src="/assets/invoices/arrows.png"
                   alt="arrow"

@@ -4,6 +4,11 @@ import React, { Dispatch, FormEvent, SetStateAction, useState } from "react";
 import "@/sass/components/_sidemenu.scss";
 import Image from "next/image";
 
+import { useSelector } from "react-redux";
+import { StateProps } from "@/interface";
+
+import { useTranslation } from "@/i18n/client";
+
 interface IProps {
   setOpenSideMenu: Dispatch<SetStateAction<boolean>>;
 }
@@ -100,12 +105,16 @@ const Sidemenu = ({ setOpenSideMenu }: IProps) => {
     setInputs([{ item: "", rate: "", hours: "", total: "" }]);
   };
 
+  const curLang = useSelector((state: StateProps) => state.curLang);
+
+  const { t } = useTranslation(curLang);
+
   return (
     <>
       <div className="bg-shadow"></div>
       <div className="sidemenu">
         <div className="sidemenu__header">
-          <div>Create Invoices</div>
+          <div>{t("invoice.sidemenu.text")}</div>
           <div onClick={changeState}>X</div>
         </div>
         <div className="sidemenu__code">
@@ -117,18 +126,18 @@ const Sidemenu = ({ setOpenSideMenu }: IProps) => {
               width={20}
               height={20}
             />
-            <p> Copy Payment Code</p>
+            <p>{t("invoice.sidemenu.text1")}</p>
           </div>
         </div>
 
         <form action="" onSubmit={onSubmit}>
           <div className="sidemenu__form">
             <div className="email">
-              <div>Recipient Email</div>
+              <div>{t("invoice.sidemenu.text2")}</div>
               <input
                 type="email"
                 id="email"
-                placeholder="Enter email"
+                placeholder={`${t("invoice.sidemenu.text3")}`}
                 value={inputValues.email}
                 onChange={(e) => getEmail(e)}
                 required
@@ -136,11 +145,11 @@ const Sidemenu = ({ setOpenSideMenu }: IProps) => {
             </div>
 
             <div className="pname">
-              <div>Project Name</div>
+              <div>{t("invoice.sidemenu.text4")}</div>
               <input
                 type="text"
                 id="project"
-                placeholder="Enter project name"
+                placeholder={`${t("invoice.sidemenu.text5")}`}
                 value={inputValues.pname}
                 onChange={(e) => getPname(e)}
                 required
@@ -149,7 +158,7 @@ const Sidemenu = ({ setOpenSideMenu }: IProps) => {
 
             <div className="sidemenu__form--date">
               <div>
-                <div className="dateTitle">Issued on</div>
+                <div className="dateTitle">{t("invoice.sidemenu.text7")}</div>
                 <input
                   type="date"
                   id="date"
@@ -159,7 +168,7 @@ const Sidemenu = ({ setOpenSideMenu }: IProps) => {
                 />
               </div>
               <div>
-                <div className="dateTitle">Due on</div>
+                <div className="dateTitle">{t("invoice.sidemenu.text8")}</div>
                 <input
                   type="text"
                   id="dueon"
@@ -173,10 +182,10 @@ const Sidemenu = ({ setOpenSideMenu }: IProps) => {
 
           <div className="sidemenu__addItem">
             <div className="sidemenu__addItem--header">
-              <div>Item</div>
-              <div>Hours</div>
-              <div>Rate/hr</div>
-              <div>Total</div>
+              <div>{t("invoice.sidemenu.text9")}</div>
+              <div>{t("invoice.sidemenu.text10")}</div>
+              <div>{t("invoice.sidemenu.text11")}</div>
+              <div>{t("invoice.sidemenu.text12")}</div>
             </div>
 
             {inputs.map((item, index) => {
@@ -223,13 +232,15 @@ const Sidemenu = ({ setOpenSideMenu }: IProps) => {
             })}
 
             <div className="addItemButton">
-              <button onClick={handleAddInput}>+ Add item</button>
+              <button onClick={handleAddInput}>
+                + {t("invoice.sidemenu.text13")}
+              </button>
             </div>
           </div>
 
           <div className="sidemenu__sendInvoice">
-            <button>Save Draft</button>
-            <button>Send Invoice</button>
+            <button>{t("invoice.sidemenu.text14")}</button>
+            <button>{t("invoice.sidemenu.text15")}</button>
           </div>
         </form>
       </div>
