@@ -102,5 +102,19 @@
   "actions.modal.text2": "Amount(AZN)",
   "actions.modal.btn": "Send",
   "actions.alert.success": "Successfull transfer!",
-  "actions.alert.error": "Something went wrong!"
+  "actions.alert.error": "Something went wrong!",
+  "insurance.main.title": "Get Insured",
+  "insurance.main.desc": "We negotiated exclusive discounts for you, so that you can save money on insurance.",
+  "insurance.live": "I live in",
+  "insurance.content.apply1": "Add Card Before Apply",
+  "insurance.content.apply2": "Apply for Coverage",
+  "insurance.content.apply3": "You applied already!",
+  "insurance.content.year": "Year",
+  "insurance.content.text": "Genki is an excellent health insurance for digital nomads, freelancers and remote workers. It provides cover from one month up to two years in a monthly subscription that can be cancelled anytime.",
+  "insurance.content.btn": "What is included in coverage?",
+  "insurance.content.note": "*Price depends on your age, the region of cover you choose and the deductible you choose",
+  "insurance.modal.text1": "Upon approval, 100₼ deduction from your balance.",
+  "insurance.modal.text2": "Cancel",
+  "insurance.modal.text3": "Confirm",
+  "insurance.alert.success": "Insurance Successfully Applied!"
 }

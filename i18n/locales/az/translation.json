@@ -102,5 +102,19 @@
   "actions.modal.text2": "Miqdar (AZN)",
   "actions.modal.btn": "Göndər",
   "actions.alert.success": "Uğurlu köçürmə!",
-  "actions.alert.error": "Bir şey səhv gedir!"
+  "actions.alert.error": "Bir şey səhv gedir!",
+  "insurance.main.title": "Sığorta əldə et",
+  "insurance.main.desc": "Sizə xüsusi endirimlər təklif etdik, beləliklə sığorta üçün pul qənaət edə bilərsiniz.",
+  "insurance.live": "Mən yaşayıram",
+  "insurance.content.apply1": "Müraciət etmədən əvvəl kart əlavə edin",
+  "insurance.content.apply2": "Müraciət etmək üçün",
+  "insurance.content.apply3": "Siz artıq müraciət etdiniz!",
+  "insurance.content.year": "Illik",
+  "insurance.content.text": "Genki digital nomadlar, frilanserlər və uzaq işçilər üçün əla bir sağlamlıq sığortasıdır. Aydan bir aya qədər olan bir abunə ilə iki ilə qədər örtüş təmin edir və hər an ləğv edilə bilən bir abunə təqdim edir.",
+  "insurance.content.btn": "Örtüşdürmədə nə daxil edilib?",
+  "insurance.content.note": "*Qiymət yaşınıza, seçdiyiniz örtüş əraziyə və seçdiyiniz özgənəyiğə bağlıdır",
+  "insurance.modal.text1": "Təsdiq edildikdən sonra balansınızdan 100₼ çıxılacaq.",
+  "insurance.modal.text2": "Ləğv et",
+  "insurance.modal.text3": "Təsdiq et",
+  "insurance.alert.success": "Sığorta müvəffəqiyyətlə tətbiq edildi!"
 }
