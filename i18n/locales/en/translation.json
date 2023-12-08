@@ -51,5 +51,6 @@
   "doc.modal.text": "Click here or drag file to upload",
   "doc.modal.case": "File Selected",
   "doc.modal.btn": "Upload",
-  "doc.modal.note": "Supported formats"
+  "doc.modal.note": "Supported formats",
+  "doc.modal.success": "Document Loaded!"
 }

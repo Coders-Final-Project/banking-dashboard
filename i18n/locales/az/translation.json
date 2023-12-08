@@ -51,5 +51,6 @@
   "doc.modal.text": "Yükləmək üçün buraya vurun və ya faylı çəkin",
   "doc.modal.case": "Fayl seçilib",
   "doc.modal.btn": "Yüklə",
-  "doc.modal.note": "Dəstəklənən formatlar"
+  "doc.modal.note": "Dəstəklənən formatlar",
+  "doc.modal.success": "Sənəd yükləndi!"
 }

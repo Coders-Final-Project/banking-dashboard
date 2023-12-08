@@ -1,4 +1,11 @@
+"use client";
+
 import Image from "next/image";
+
+import { useSelector } from "react-redux";
+import { StateProps } from "@/interface";
+
+import { useTranslation } from "@/i18n/client";
 
 import "@/sass/components/_documentItemFile.scss";
 
@@ -15,6 +22,10 @@ const DocumentItemFile = ({
   color,
   handleUpload,
 }: IProps) => {
+  const curLang = useSelector((state: StateProps) => state.curLang);
+
+  const { t } = useTranslation(curLang);
+
   return (
     <div className="document__item__file">
       <div
@@ -32,7 +43,7 @@ const DocumentItemFile = ({
       <div className="document__item__file__text">
         <div className="document__item__file__text__title">{title}</div>
         <div className="document__item__file__text__case">
-          {isSubmitted ? "Submitted" : "Not submitted"}
+          {isSubmitted ? `${t("doc.box.case1")}` : `${t("doc.box.case2")}`}
         </div>
       </div>
       <button
@@ -46,7 +57,7 @@ const DocumentItemFile = ({
           height={24}
           className="document__item__file__input__icon"
         />
-        <p className="document__item__file__input__text">Upload</p>
+        <p className="document__item__file__input__text">{t("doc.box.btn")}</p>
       </button>
     </div>
   );

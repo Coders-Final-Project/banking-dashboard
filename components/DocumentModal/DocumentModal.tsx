@@ -6,6 +6,11 @@ import { uploadFile } from "@/lib/actions/uploadActions";
 
 import Image from "next/image";
 
+import { useSelector } from "react-redux";
+import { StateProps } from "@/interface";
+
+import { useTranslation } from "@/i18n/client";
+
 import { useGlobalContext } from "@/context/store";
 
 import "@/sass/components/_documentModal.scss";
@@ -27,6 +32,10 @@ const DocumentModal = ({ title, setIsUploadClicked }: IProps) => {
   const [successAlert, setSuccessAlert] = useState(false);
 
   const { data, updateUploadedFiles } = useGlobalContext();
+
+  const curLang = useSelector((state: StateProps) => state.curLang);
+
+  const { t } = useTranslation(curLang);
 
   useEffect(() => {
     if (successAlert) {
@@ -112,19 +121,19 @@ const DocumentModal = ({ title, setIsUploadClicked }: IProps) => {
           />
           <label className="document__modal__card__content__input">
             <input type="file" onChange={handleFileChange} accept=".pdf" />
-            Click here or drag file to upload
+            {t("doc.modal.text")}
           </label>
           {selectedFile && (
             <div className="document__modal__card__content__process">
               <div className="document__modal__card__content__process__file">
                 <div className="document__modal__card__content__process__file__text">
-                  File Selected
+                  {t("doc.modal.case")}
                 </div>
                 <button
                   onClick={handleUpload}
                   className="document__modal__card__content__process__file__btn"
                 >
-                  Upload
+                  {t("doc.modal.btn")}
                 </button>
               </div>
               {progress.started && (
@@ -137,11 +146,13 @@ const DocumentModal = ({ title, setIsUploadClicked }: IProps) => {
           )}
         </div>
         <div className="document__modal__card__note">
-          Supported formats: JPG, PNG, or PDF
+          {t("doc.modal.note")} JPG, PNG, or PDF
         </div>
       </div>
       {successAlert && (
-        <div className="documents__alert--success">Dcoument Loaded!</div>
+        <div className="documents__alert--success">
+          {t("doc.modal.success")}
+        </div>
       )}
     </div>
   );
