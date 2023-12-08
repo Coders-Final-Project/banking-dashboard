@@ -79,7 +79,7 @@ const Sidebar = async ({ lng }: { lng: string }) => {
           />
         ))}
       </div>
-      <Link href={`/settings`} className="sidebar__settings">
+      <Link href={`/${lng}/settings`} className="sidebar__settings">
         <Image
           src="/assets/sidebar/setting.png"
           alt="setting"
