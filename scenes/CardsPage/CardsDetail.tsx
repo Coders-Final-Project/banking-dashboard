@@ -13,6 +13,8 @@ import CardTransferItem from "@/components/CardTransferItem/CardTransferItem";
 import AddCardModal from "@/components/AddCardModal/AddCardModal";
 import { StateProps } from "@/interface";
 
+import { useTranslation } from "@/i18n/client";
+
 const CardsAdd = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -22,15 +24,21 @@ const CardsAdd = () => {
     setIsModalOpen((prevValue) => !prevValue);
   };
 
+  const curLang = useSelector((state: StateProps) => state.curLang);
+
+  const { t } = useTranslation(curLang);
+
   const userCard = useSelector((state: StateProps) => state.userCard);
 
   return (
     <div className="cards__detail">
       <div className="cards__detail__add">
-        <div className="cards__detail__add__title">Your Cards</div>
+        <div className="cards__detail__add__title">
+          {t("cards.detail.title")}
+        </div>
         {userCard._id === -1 && (
           <button className="cards__detail__add__btn" onClick={handleCardModal}>
-            Add Card <span>+</span>
+            {t("cards.detail.btn")} <span>+</span>
           </button>
         )}
       </div>
@@ -38,7 +46,7 @@ const CardsAdd = () => {
         <div className="cards__detail__ownCard__content">
           <div className="cards__detail__ownCard__content__balance">
             <div className="cards__detail__ownCard__content__balance__title">
-              Currenct Balance
+              {t("cards.own.title")}
             </div>
             <div className="cards__detail__ownCard__content__balance__amount">
               {userCard.balance !== 0 ? userCard.balance : "0,000"} ₼
@@ -114,9 +122,14 @@ const CardsAdd = () => {
       <CardInfo />
       <div className="cards__detail__divider" />
       <div className="cards__detail__transfer">
-        <div className="cards__detail__transfer__title">Transfer funds</div>
+        <div className="cards__detail__transfer__title">
+          {t("cards.transfer.title")}
+        </div>
         <div className="cards__detail__transfer__content">
-          <CardTransferItem imgUrlEnd="payment.png" text="Forward funds" />
+          <CardTransferItem
+            imgUrlEnd="payment.png"
+            text={t("cards.transfer.title2")}
+          />
         </div>
       </div>
       {isModalOpen && (
@@ -125,7 +138,7 @@ const CardsAdd = () => {
           setShowALert={setShowALert}
         />
       )}
-      {showAlert && <div className="success__msg">Card Added</div>}
+      {showAlert && <div className="success__msg">{t("card.added.alert")}</div>}
     </div>
   );
 };

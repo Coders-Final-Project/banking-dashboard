@@ -23,8 +23,14 @@ const INITIAL_VALUES = {
   securityCode: "",
 };
 
+import { useTranslation } from "@/i18n/client";
+
 const AddCardModal = ({ handleCardModal, setShowALert }: IProps) => {
   const [cardValues, setCardValues] = useState<ICardFormVaues>(INITIAL_VALUES);
+
+  const curLang = useSelector((state: StateProps) => state.curLang);
+
+  const { t } = useTranslation(curLang);
 
   const dispatch = useDispatch();
 
@@ -91,7 +97,7 @@ const AddCardModal = ({ handleCardModal, setShowALert }: IProps) => {
     >
       <div className="cards__detail__addModal">
         <div className="cards__detail__addModal__item">
-          <label htmlFor="cardNumber">Card Number</label>
+          <label htmlFor="cardNumber">{t("card.modal.title1")}</label>
           <input
             type="text"
             id="cardNumber"
@@ -105,7 +111,7 @@ const AddCardModal = ({ handleCardModal, setShowALert }: IProps) => {
           />
         </div>
         <div className="cards__detail__addModal__item">
-          <label htmlFor="date">End Date</label>
+          <label htmlFor="date">{t("card.modal.title2")}</label>
           <input
             type="text"
             id="date"
@@ -119,7 +125,7 @@ const AddCardModal = ({ handleCardModal, setShowALert }: IProps) => {
           />
         </div>
         <div className="cards__detail__addModal__item">
-          <label htmlFor="security">Security Code</label>
+          <label htmlFor="security">{t("card.modal.title3")}</label>
           <input
             type="text"
             id="security"
@@ -133,7 +139,7 @@ const AddCardModal = ({ handleCardModal, setShowALert }: IProps) => {
           />
         </div>
         <button className="cards__detail__addModal__btn" type="submit">
-          Send
+          {t("card.modal.btn")}
         </button>
       </div>
       <button

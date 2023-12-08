@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 
 import "@/sass/components/_cardInfo.scss";
@@ -8,13 +10,21 @@ import { hideCardNumbers, checkActiveCard } from "@/helpers";
 import { useSelector } from "react-redux";
 import { StateProps } from "@/interface";
 
+import { useTranslation } from "@/i18n/client";
+
 const CardInfo = () => {
   const userCard = useSelector((state: StateProps) => state.userCard);
+
+  const curLang = useSelector((state: StateProps) => state.curLang);
+
+  const { t } = useTranslation(curLang);
 
   return (
     <div className="cards__detail__info">
       <div className="cards__detail__info__heading">
-        <div className="cards__detail__info__heading__text">Card Info</div>
+        <div className="cards__detail__info__heading__text">
+          {t("cards.info.title")}
+        </div>
         <Image
           src="/assets/cards/dot.png"
           alt="dot"
@@ -26,7 +36,7 @@ const CardInfo = () => {
       <div className="cards__detail__info__content">
         <div className="cards__detail__info__content__item">
           <div className="cards__detail__info__content__item__text">
-            Card Number
+            {t("cards.info.number")}
           </div>
           <div className="cards__detail__info__content__item__value">
             {hideCardNumbers(userCard.cardNumber)}{" "}
@@ -35,7 +45,7 @@ const CardInfo = () => {
         </div>
         <div className="cards__detail__info__content__item">
           <div className="cards__detail__info__content__item__text">
-            Balance
+            {t("cards.info.balance")}
           </div>
           <div className="cards__detail__info__content__item__value">
             {userCard.balance !== 0 ? userCard.balance : "0,000"} ₼
@@ -43,7 +53,7 @@ const CardInfo = () => {
         </div>
         <div className="cards__detail__info__content__item">
           <div className="cards__detail__info__content__item__text">
-            Currency
+            {t("cards.info.currency")}
           </div>
           <div className="cards__detail__info__content__item__value">
             {/* {activeCard.currency} */}
@@ -52,7 +62,7 @@ const CardInfo = () => {
         </div>
         <div className="cards__detail__info__content__item">
           <div className="cards__detail__info__content__item__text">
-            Status Card
+            {t("cards.info.status")}
           </div>
           <div className="cards__detail__info__content__item__value">
             {userCard.endDate !== "" ? userCard.endDate : "04/03"}{" "}

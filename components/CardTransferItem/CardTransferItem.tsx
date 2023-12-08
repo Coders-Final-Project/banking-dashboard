@@ -22,6 +22,8 @@ interface IProps {
   text: string;
 }
 
+import { useTranslation } from "@/i18n/client";
+
 const CardTransferItem = ({ imgUrlEnd, text }: IProps) => {
   const [isTransferOpen, setIsTransferOpen] = useState(false);
   const [cardNumber, setCardNumber] = useState("");
@@ -34,6 +36,10 @@ const CardTransferItem = ({ imgUrlEnd, text }: IProps) => {
   const dispatch = useDispatch();
 
   const userCard = useSelector((state: StateProps) => state.userCard);
+
+  const curLang = useSelector((state: StateProps) => state.curLang);
+
+  const { t } = useTranslation(curLang);
 
   useEffect(() => {
     if (errorAlert) {
@@ -116,7 +122,7 @@ const CardTransferItem = ({ imgUrlEnd, text }: IProps) => {
           <input
             type="string"
             className="transfer__content__body__input"
-            placeholder="Card number"
+            placeholder={`${t("cards.transfer.input1")}`}
             value={cardNumber}
             onChange={handleChange}
             minLength={19}
@@ -125,7 +131,7 @@ const CardTransferItem = ({ imgUrlEnd, text }: IProps) => {
           <input
             type="number"
             className="transfer__content__body__input"
-            placeholder="Amount (AZN)"
+            placeholder={`${t("cards.transfer.input2")}`}
             value={amount}
             onChange={(e) => setAmount(e.target.value)}
           />
@@ -138,18 +144,18 @@ const CardTransferItem = ({ imgUrlEnd, text }: IProps) => {
             onClick={handleFundTransfer}
             disabled={userCard._id === -1}
           >
-            Send
+            {t("cards.transfer.btn")}
           </button>
         </div>
       )}
       {errorAlert && (
         <div className="transfer__content__alert--error">
-          Something went wrong!
+          {t("cards.alert.error")}
         </div>
       )}
       {successAlert && (
         <div className="transfer__content__alert--success">
-          Successfull transfer!
+          {t("cards.alert.success")}
         </div>
       )}
     </div>

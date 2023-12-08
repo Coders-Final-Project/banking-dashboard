@@ -12,12 +12,18 @@ import { useSelector } from "react-redux";
 
 import { StateProps } from "@/interface";
 
+import { useTranslation } from "@/i18n/client";
+
 const CardsTransaction = () => {
   const [check, setCheck] = useState(false);
 
   const contractual = useSelector((state: StateProps) => state.contractual);
 
   const [cardData, setCardData] = useState(contractual);
+
+  const curLang = useSelector((state: StateProps) => state.curLang);
+
+  const { t } = useTranslation(curLang);
 
   useEffect(() => {
     setCardData(contractual);
@@ -36,7 +42,9 @@ const CardsTransaction = () => {
   return (
     <div className="cards__transaction">
       <div className="cards__transaction__heading">
-        <div className="cards__transaction__heading__title">All Contracts</div>
+        <div className="cards__transaction__heading__title">
+          {t("card.table.title")}
+        </div>
       </div>
       <div className="cards__transaction__content">
         <div className="cards__transaction__content__header">
@@ -44,7 +52,7 @@ const CardsTransaction = () => {
             className="cards__transaction__content__header__filterBtn"
             onClick={() => handleSort("name")}
           >
-            Name
+            {t("card.table.filter1")}
             <Image
               src="/assets/cards/arrows.png"
               alt="arrows"
@@ -57,7 +65,7 @@ const CardsTransaction = () => {
             className="cards__transaction__content__header__filterBtn"
             onClick={() => handleSort("date")}
           >
-            Date
+            {t("card.table.filter2")}
             <Image
               src="/assets/cards/arrows.png"
               alt="arrows"
@@ -70,7 +78,7 @@ const CardsTransaction = () => {
             className="cards__transaction__content__header__filterBtn"
             onClick={() => handleSort("amount")}
           >
-            Amount
+            {t("card.table.filter3")}
             <Image
               src="/assets/cards/arrows.png"
               alt="arrows"
@@ -86,7 +94,7 @@ const CardsTransaction = () => {
           ))}
 
           {cardData.length === 0 && (
-            <div className="no__action">There is no contract yet!</div>
+            <div className="no__action">{t("card.no.contract")}</div>
           )}
         </div>
       </div>
