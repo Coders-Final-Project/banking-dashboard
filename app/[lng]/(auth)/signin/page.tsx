@@ -23,17 +23,19 @@ const SignIn = () => {
   const [formValues, setFormValues] = useState(initialValues);
   const [sending, setSending] = useState(false);
   const [serverError, setServerError] = useState("");
+  const [success, setSuccess] = useState("");
   const [captcha, setCaptcha] = useState(false);
 
   const router = useRouter();
 
   useEffect(() => {
-    if (serverError !== "") {
+    if (serverError !== "" || success !== "") {
       setTimeout(() => {
         setServerError("");
+        setSuccess("");
       }, 1000);
     }
-  }, [serverError]);
+  }, [serverError, success]);
 
   const handlePasswordHide = (e: React.FormEvent) => {
     e.preventDefault();
@@ -73,8 +75,12 @@ const SignIn = () => {
     try {
       setSending(true);
       const response = await axios.post("/api/user/signin", formValues);
-      console.log(response.data);
-      router.push("/");
+      if (response.data.status === 400) {
+        setServerError(response.data.message);
+      } else {
+        setSuccess(response.data.message);
+        router.push("/");
+      }
     } catch (error: any) {
       setServerError(error.message);
     } finally {
@@ -167,6 +173,11 @@ const SignIn = () => {
       {serverError !== "" && (
         <div className="pop-up pop-up__error">
           <h2 className="pop-up__text__error">{serverError}</h2>
+        </div>
+      )}
+      {success !== "" && (
+        <div className="pop-up pop-up__success">
+          <h2 className="pop-up__text__success">{success}</h2>
         </div>
       )}
     </section>

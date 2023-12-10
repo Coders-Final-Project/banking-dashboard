@@ -70,7 +70,7 @@ const ContractsActive = ({ lng }: { lng: string }) => {
             href="/cards"
             className="contracts__content__active__body__empty"
           >
-            {t("ccontract.active.noCard")}
+            {t("contract.active.noCard")}
           </Link>
         )}
 

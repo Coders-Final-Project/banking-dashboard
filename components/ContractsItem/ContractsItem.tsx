@@ -6,7 +6,7 @@ import "@/sass/components/_contractsItem.scss";
 
 import { defineCompanyImage } from "@/helpers";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import { ICompanyContracts } from "@/interface";
 
@@ -29,6 +29,7 @@ const ContractsItem = ({
   lng,
 }: ICompanyContracts) => {
   const [isDeleteBtnClicked, setIsDeleteBtnClicked] = useState(false);
+  const [success, setSuccess] = useState(false);
 
   const { t } = useTranslation(lng);
 
@@ -42,6 +43,14 @@ const ContractsItem = ({
     setIsDeleteBtnClicked(false);
   };
 
+  useEffect(() => {
+    if (success) {
+      setTimeout(() => {
+        setSuccess(false);
+      }, 2000);
+    }
+  }, [success]);
+
   const handleDeleteContract = async () => {
     try {
       await axios.post("/api/contracts/delete", {
@@ -51,6 +60,7 @@ const ContractsItem = ({
       setIsDeleteBtnClicked(false);
       dispatch(increaseNotificationCount());
       dispatch(removeContract(_id));
+      setSuccess(true);
     } catch (error) {
       console.log(error);
     }
@@ -132,6 +142,11 @@ const ContractsItem = ({
               </button>
             </div>
           </div>
+        </div>
+      )}
+      {success && (
+        <div className="contractDelete__alert--success">
+          {t("contract.delete.message")}
         </div>
       )}
     </div>

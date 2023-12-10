@@ -32,6 +32,7 @@
   "contract.modal.text": "If this contract is removed, an additional 50 AZN will be deducted from your balance. Are you sure?",
   "contract.modal.cancel.btn": "Cancel",
   "contract.modal.approve.btn": "Confirm",
+  "contract.delete.message": "Contract Deleted!",
   "doc.main.title": "Documents",
   "doc.main.desc": "The documents are based on Azerbaijan local laws and your legal structure.",
   "doc.warning1": "Please upload the missing documents",

@@ -32,6 +32,7 @@
   "contract.modal.text": "Əgər bu müqavilə silinərsə, balansınızdan əlavə 50 AZN çıxarılacaq. Siz əminsiniz?",
   "contract.modal.cancel.btn": "Ləğv et",
   "contract.modal.approve.btn": "Təsdiq et",
+  "contract.delete.message": "Müqavilə silindi!",
   "doc.main.title": "Sənədlər",
   "doc.main.desc": "Sənədlər Azərbaycan yerli qanunları və hüquqi strukturanıza əsaslanır.",
   "doc.warning1": "Xahiş olunur, eksik sənədləri yükləyin",

@@ -206,3 +206,19 @@
     }
   }
 }
+
+.contractDelete__alert--success {
+  position: fixed;
+  top: 10%;
+  left: 61%;
+  transform: translate(-61%, -10%);
+  padding: 15px;
+  border-radius: 20px;
+  box-shadow: $box-shadow;
+  font-size: 18px;
+}
+
+.contractDelete__alert--success {
+  background-color: $action-green-100;
+  color: $main-color-white;
+}

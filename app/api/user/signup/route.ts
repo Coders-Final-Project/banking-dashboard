@@ -16,10 +16,7 @@ export async function POST(request: NextRequest) {
   const user = await User.findOne({ email });
 
   if (user) {
-    return NextResponse.json(
-      { message: "User already exists" },
-      { status: 400 },
-    );
+    return NextResponse.json({ message: "Email already taken!", status: 400 });
   }
 
   const salt = await bcrypt.genSalt(10);
@@ -38,7 +35,7 @@ export async function POST(request: NextRequest) {
     const savedUser = await newUser.save();
 
     return NextResponse.json({
-      message: "User created successfully",
+      message: "User created successfully!",
       success: true,
       savedUser,
     });

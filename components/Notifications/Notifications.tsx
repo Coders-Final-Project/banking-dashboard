@@ -84,7 +84,7 @@ const Notifications = () => {
                   {formattedDate}
                 </div>
               </div>
-              <button
+              <div
                 className="notifications__body__item__btn"
                 onClick={(e) => {
                   handleNotificationDelete(item._id);
@@ -97,7 +97,7 @@ const Notifications = () => {
                   width={15}
                   height={15}
                 />
-              </button>
+              </div>
             </div>
           );
         })}
