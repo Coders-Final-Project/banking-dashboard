@@ -26,8 +26,8 @@ const Cards = async ({ params: { lng } }: { params: { lng: string } }) => {
       </header>
       <div className="cards__content">
         <div className="cards__content__stats">
-          {/* <CardsSummary lng={lng} /> */}
-          {/* <CardsReport lng={lng} /> */}
+          <CardsSummary />
+          <CardsReport />
           <CardsTransaction />
         </div>
         <CardsDetail />

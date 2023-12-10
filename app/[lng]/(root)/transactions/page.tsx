@@ -28,8 +28,8 @@ const Transactions = async ({
       </header>
       <div className="transactions__content">
         <div className="transactions__content__boxes">
-          <TransactionsUp lng={lng} />
-          <TransactionsDetail lng={lng} />
+          <TransactionsUp />
+          <TransactionsDetail />
         </div>
         <TransactionTable />
       </div>

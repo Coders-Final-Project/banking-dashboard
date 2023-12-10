@@ -6,10 +6,16 @@ import "@/sass/scenes/_transactionsDetail.scss";
 
 import TransactionsPerson from "@/components/TransactionsPerson/TransactionsPerson";
 
+import { useSelector } from "react-redux";
+
+import { StateProps } from "@/interface";
+
 import { useTranslation } from "@/i18n/client";
 
-const TransactionsDetail = ({ lng }: { lng: string }) => {
-  const { t } = useTranslation(lng);
+const TransactionsDetail = () => {
+  const curLang = useSelector((state: StateProps) => state.curLang);
+
+  const { t } = useTranslation(curLang);
 
   return (
     <div className="transactions__detail">

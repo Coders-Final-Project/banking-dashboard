@@ -66,7 +66,7 @@ const Documents = ({ params: { lng } }: { params: { lng: string } }) => {
         </div>
         <div className="documents__content__upload">
           <DocumentItem />
-          <DocumentAside lng={lng} />
+          <DocumentAside />
         </div>
       </div>
     </main>

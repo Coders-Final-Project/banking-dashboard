@@ -4,10 +4,16 @@ import Image from "next/image";
 
 import "@/sass/scenes/_transactionsUp.scss";
 
+import { useSelector } from "react-redux";
+
+import { StateProps } from "@/interface";
+
 import { useTranslation } from "@/i18n/client";
 
-const TransactionsUp = ({ lng }: { lng: string }) => {
-  const { t } = useTranslation(lng);
+const TransactionsUp = () => {
+  const curLang = useSelector((state: StateProps) => state.curLang);
+
+  const { t } = useTranslation(curLang);
 
   return (
     <div className="transactions__upcoming">

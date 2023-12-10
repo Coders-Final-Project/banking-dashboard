@@ -6,10 +6,16 @@ import "@/sass/scenes/_cardsSummary.scss";
 
 import img from "../../public/assets/cards/income-icon.png";
 
+import { useSelector } from "react-redux";
+
+import { StateProps } from "@/interface";
+
 import { useTranslation } from "@/i18n/client";
 
-const CardsSummary = ({ lng }: { lng: string }) => {
-  const { t } = useTranslation(lng);
+const CardsSummary = () => {
+  const curLang = useSelector((state: StateProps) => state.curLang);
+
+  const { t } = useTranslation(curLang);
 
   return (
     <div className="cards__summary">
