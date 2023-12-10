@@ -2,9 +2,13 @@
 
 import React, { Dispatch, FormEvent, SetStateAction, useState } from "react";
 import "@/sass/components/_sidemenu.scss";
+
 import Image from "next/image";
 
-import { useSelector } from "react-redux";
+import axios from "axios";
+
+import { useSelector, useDispatch } from "react-redux";
+
 import { StateProps } from "@/interface";
 
 import { useTranslation } from "@/i18n/client";
@@ -32,6 +36,10 @@ const Sidemenu = ({ setOpenSideMenu }: IProps) => {
     { item: "", rate: "", hours: "", total: "" },
   ]);
 
+  const curLang = useSelector((state: StateProps) => state.curLang);
+
+  const { t } = useTranslation(curLang);
+
   const handleAddInput = () => {
     setInputs([...inputs, { item: "", rate: "", hours: "", total: "" }]);
   };
@@ -45,9 +53,12 @@ const Sidemenu = ({ setOpenSideMenu }: IProps) => {
     let onChangeValue = [...inputs];
     //@ts-ignore
     onChangeValue[index][name] = value;
-    setInputs(onChangeValue);
 
-    console.log(onChangeValue);
+    onChangeValue[index]["total"] = String(
+      Number(inputs[index].hours) * Number(inputs[index].rate),
+    );
+
+    setInputs(onChangeValue);
   };
 
   // const handleDeleteInput = (index: number) => {
@@ -88,12 +99,23 @@ const Sidemenu = ({ setOpenSideMenu }: IProps) => {
     setInputValues({ ...inputValues });
   };
 
-  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    let newObj = inputs.reduce((a, b) => Object.assign(a, b), {});
+    const receiverData = inputValues;
+    const itemData = inputs;
 
-    console.log({ ...inputValues, ...newObj });
+    try {
+      const response = await axios.post("/api/invoice", {
+        userID: "111",
+        receiverData,
+        itemData,
+      });
+
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
 
     setInputValues({
       email: "",
@@ -104,10 +126,6 @@ const Sidemenu = ({ setOpenSideMenu }: IProps) => {
 
     setInputs([{ item: "", rate: "", hours: "", total: "" }]);
   };
-
-  const curLang = useSelector((state: StateProps) => state.curLang);
-
-  const { t } = useTranslation(curLang);
 
   return (
     <>
@@ -170,7 +188,7 @@ const Sidemenu = ({ setOpenSideMenu }: IProps) => {
               <div>
                 <div className="dateTitle">{t("invoice.sidemenu.text8")}</div>
                 <input
-                  type="text"
+                  type="date"
                   id="dueon"
                   value={inputValues.dueon}
                   onChange={(e) => getDueon(e)}
@@ -223,8 +241,9 @@ const Sidemenu = ({ setOpenSideMenu }: IProps) => {
                       name="total"
                       type="number"
                       value={item.total}
-                      onChange={(event) => handleChange(event, index)}
+                      // onChange={(event) => handleChange(event, index)}
                       required
+                      disabled
                     />
                   </div>
                 </div>

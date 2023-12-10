@@ -141,6 +141,15 @@ export interface INotifications {
   createdAt: string;
 }
 
+export interface IInvoices {
+  _id: string;
+  userId: string;
+  no: string;
+  status: string;
+  amount: number;
+  createdAt: string;
+}
+
 export interface StateProps {
   companyContracts: ICompanyContracts[];
   allCustomers: IAllCustomers[];
@@ -151,6 +160,7 @@ export interface StateProps {
   insuranceCompleted: boolean;
   notifications: INotifications[];
   notificationCount: number;
+  invoices: IInvoices[];
 }
 
 export interface UploadedFileProps {

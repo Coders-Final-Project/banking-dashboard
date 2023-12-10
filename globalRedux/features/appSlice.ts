@@ -11,6 +11,7 @@ import {
   ITransactions,
   IContractual,
   INotifications,
+  IInvoices,
 } from "@/interface";
 
 const initialState: StateProps = {
@@ -19,6 +20,7 @@ const initialState: StateProps = {
   transactions: [],
   contractual: [],
   notifications: [],
+  invoices: [],
   userCard: {
     _id: -1,
     userName: "",
@@ -64,6 +66,9 @@ export const appSlice: any = createSlice({
     setInsuranceCompleted: (state, action: PayloadAction<boolean>) => {
       state.insuranceCompleted = action.payload;
     },
+    setInvoices: (state, action: PayloadAction<IInvoices[]>) => {
+      state.invoices = action.payload;
+    },
     increaseNotificationCount: (state) => {
       state.notificationCount += 1;
     },
@@ -91,6 +96,7 @@ export const {
   setNotifications,
   increaseNotificationCount,
   decreaseNotificationsToZero,
+  setInvoices,
 } = appSlice.actions;
 
 export default appSlice.reducer;

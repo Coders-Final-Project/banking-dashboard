@@ -1,16 +1,19 @@
 "use client";
 
 import React, { useState } from "react";
+
+import Image from "next/image";
+
 import "@/sass/layout/_pageHeader.scss";
 import "@/sass/pages/_invoices.scss";
-import { user } from "@/db/user";
+
 import { invoicesData } from "@/db/invoices";
 import AvatarDetail from "@/shared/AvatarDetail/AvatarDetail";
-import Image from "next/image";
 import InvoiceTable from "@/components/InvoiceTable/InvoiceTable";
+import Sidemenu from "@/components/Sidemenu/Sidemenu";
+
 import { IInvoicesData } from "@/interface";
 import { filterInvoiceTable } from "@/helpers";
-import Sidemenu from "@/components/Sidemenu/Sidemenu";
 
 import { useTranslation } from "@/i18n/client";
 
@@ -97,7 +100,7 @@ const Invoices = ({ params: { lng } }: { params: { lng: string } }) => {
                 invopay.to/<span>clientname</span>
               </div>
               <div>
-                <button onClick={openSidemenu}>
+                <button>
                   <Image
                     src="/assets/invoices/edit.png"
                     alt="edit"
@@ -139,28 +142,12 @@ const Invoices = ({ params: { lng } }: { params: { lng: string } }) => {
             <div>{t("invoice.table.title")}</div>
             <div className="sortBtns">
               <div className="sortBtns__content">
-                <div>
-                  <Image
-                    src="/assets/cards/filter.png"
-                    alt="filter-btn"
-                    width={24}
-                    height={24}
-                    className="filterImg"
-                  />
-                </div>
-                <p>Sort & Filter</p>
-              </div>
-              <div className="sortBtns__content">
-                <div>
-                  <Image
-                    src="/assets/invoices/csv.png"
-                    alt="csv-btn"
-                    width={24}
-                    height={24}
-                    className="filterImg"
-                  />
-                </div>
-                <p>CSV</p>
+                <button
+                  onClick={openSidemenu}
+                  className="sortBtns__content__open"
+                >
+                  Send an Invoice
+                </button>
               </div>
             </div>
           </div>

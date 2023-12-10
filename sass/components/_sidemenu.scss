@@ -85,8 +85,10 @@ input {
         flex: 50%;
       }
 
-      #date {
+      #date,
+      #dueon {
         text-indent: unset;
+        padding: 10px;
       }
     }
   }

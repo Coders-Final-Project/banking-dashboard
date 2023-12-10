@@ -204,11 +204,20 @@
       .sortBtns {
         @include flexbox($justify: space-between, $items: center, $gap: 16px);
         .sortBtns__content {
-          @include flexbox($justify: space-between, $items: center, $gap: 12px);
-          @extend %body-medium3;
-          border-radius: 100px;
-          padding: 10px 20px;
-          border: 1px solid rgba($color: #e4e4e7, $alpha: 0.9);
+          &__open {
+            border: none;
+            outline: none;
+            background-color: $greyscale-grey-100;
+            @extend %button-size3;
+            border-radius: 100px;
+            padding: 10px 20px;
+            border: 1px solid rgba($color: #e4e4e7, $alpha: 0.9);
+
+            &:hover {
+              cursor: pointer;
+              background-color: $greyscale-grey-200;
+            }
+          }
         }
       }
     }
