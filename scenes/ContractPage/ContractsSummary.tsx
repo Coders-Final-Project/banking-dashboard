@@ -2,7 +2,11 @@ import Image from "next/image";
 
 import "@/sass/scenes/_contractsSummary.scss";
 
-const ContractsSummary = () => {
+import { useTranslation } from "@/i18n";
+
+const ContractsSummary = async ({ lng }: { lng: string }) => {
+  const { t } = await useTranslation(lng);
+
   return (
     <div className="contracts__content__summary">
       <div className="contracts__content__summary__data">
@@ -15,7 +19,7 @@ const ContractsSummary = () => {
         />
         <div className="contracts__content__summary__data__info">
           <div className="contracts__content__summary__data__info__title">
-            Contact Created this month
+            {t("contract.line1.text")}
           </div>
           <div className="contracts__content__summary__data__info__body">
             <div className="contracts__content__summary__data__info__body__number">

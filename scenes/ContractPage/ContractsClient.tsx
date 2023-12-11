@@ -16,12 +16,16 @@ import ContractClientItem from "@/components/ContractClientItem/ContractClientIt
 import { StateProps } from "@/interface";
 import { useGlobalContext } from "@/context/store";
 
-const ContractsClient = () => {
+import { useTranslation } from "@/i18n/client";
+
+const ContractsClient = ({ lng }: { lng: string }) => {
   const dispatch = useDispatch();
 
   const { data } = useGlobalContext();
 
   const allCustomers = useSelector((state: StateProps) => state.allCustomers);
+
+  const { t } = useTranslation(lng);
 
   useEffect(() => {
     const fetchAllCustomers = async () => {
@@ -45,7 +49,7 @@ const ContractsClient = () => {
     <div className="contracts__content__client">
       <div className="contracts__content__client__header">
         <div className="contracts__content__client__header__title">
-          All Customers
+          {t("contract.client.part.title")}
         </div>
         <Image
           src="/assets/contracts/dot.png"
@@ -57,11 +61,11 @@ const ContractsClient = () => {
       </div>
       <div className="contracts__content__client__body">
         {allCustomers.length === 0 && (
-          <div className="no__client">There is no client yet!</div>
+          <div className="no__client">{t("contract.client.part.noClient")}</div>
         )}
 
         {allCustomers.map((client) => (
-          <ContractClientItem key={client._id} {...client} />
+          <ContractClientItem key={client._id} {...client} lng={lng} />
         ))}
       </div>
     </div>

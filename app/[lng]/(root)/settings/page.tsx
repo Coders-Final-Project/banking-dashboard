@@ -11,18 +11,24 @@ import ProfileInfo from "@/scenes/SettingsPage/ProfileInfo";
 import Withdrawal from "@/scenes/SettingsPage/Withdrawal";
 import Verification from "@/scenes/SettingsPage/Verification";
 
-const Settings = () => {
+import { useTranslation } from "@/i18n/client";
+
+const Settings = ({ params: { lng } }: { params: { lng: string } }) => {
   const [activeBtn, setActiveBtn] = useState("personal");
 
   const handleActiveBtn = (e: any) => {
     setActiveBtn(e.target.value);
   };
 
+  const { t } = useTranslation(lng);
+
   return (
     <main className="settings">
       <header className="page__header">
         <div className="page__header__welcome">
-          <div className="page__header__welcome__title">Settings</div>
+          <div className="page__header__welcome__title">
+            {t("settings.main.title")}
+          </div>
         </div>
         <AvatarDetail />
       </header>
@@ -35,7 +41,7 @@ const Settings = () => {
             value="personal"
             onClick={(e) => handleActiveBtn(e)}
           >
-            Personal
+            {t("settings.link1")}
           </button>
           <button
             className={`settings__content__btns__btn ${
@@ -44,7 +50,7 @@ const Settings = () => {
             value="withdraw"
             onClick={(e) => handleActiveBtn(e)}
           >
-            Withdrawal Methods
+            {t("settings.link2")}
           </button>
           <button
             className={`settings__content__btns__btn ${
@@ -53,7 +59,7 @@ const Settings = () => {
             value="verify"
             onClick={(e) => handleActiveBtn(e)}
           >
-            Verification
+            {t("settings.link3")}
           </button>
         </div>
         <div className="settings__content__info">

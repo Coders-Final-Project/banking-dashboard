@@ -7,11 +7,11 @@ import {
   ICompanyContracts,
   StateProps,
   CardProps,
-  CurrenctLangProps,
   IAllCustomers,
   ITransactions,
   IContractual,
   INotifications,
+  IInvoices,
 } from "@/interface";
 
 const initialState: StateProps = {
@@ -20,6 +20,7 @@ const initialState: StateProps = {
   transactions: [],
   contractual: [],
   notifications: [],
+  invoices: [],
   userCard: {
     _id: -1,
     userName: "",
@@ -29,9 +30,7 @@ const initialState: StateProps = {
     endDate: "",
     balance: 0,
   },
-  curLang: {
-    value: "en",
-  },
+  curLang: "en",
   insuranceCompleted: false,
   notificationCount: 0,
 };
@@ -61,11 +60,14 @@ export const appSlice: any = createSlice({
     setUserCardInfo: (state, action: PayloadAction<CardProps>) => {
       state.userCard = action.payload;
     },
-    setCurrenctLang: (state, action: PayloadAction<CurrenctLangProps>) => {
+    setCurrenctLang: (state, action: PayloadAction<string>) => {
       state.curLang = action.payload;
     },
     setInsuranceCompleted: (state, action: PayloadAction<boolean>) => {
       state.insuranceCompleted = action.payload;
+    },
+    setInvoices: (state, action: PayloadAction<IInvoices[]>) => {
+      state.invoices = action.payload;
     },
     increaseNotificationCount: (state) => {
       state.notificationCount += 1;
@@ -94,6 +96,7 @@ export const {
   setNotifications,
   increaseNotificationCount,
   decreaseNotificationsToZero,
+  setInvoices,
 } = appSlice.actions;
 
 export default appSlice.reducer;

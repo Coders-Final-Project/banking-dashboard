@@ -1,10 +1,22 @@
+"use client";
+
 import Image from "next/image";
 
 import "@/sass/scenes/_cardsSummary.scss";
 
 import img from "../../public/assets/cards/income-icon.png";
 
+import { useSelector } from "react-redux";
+
+import { StateProps } from "@/interface";
+
+import { useTranslation } from "@/i18n/client";
+
 const CardsSummary = () => {
+  const curLang = useSelector((state: StateProps) => state.curLang);
+
+  const { t } = useTranslation(curLang);
+
   return (
     <div className="cards__summary">
       <div className="cards__summary__item">
@@ -17,13 +29,13 @@ const CardsSummary = () => {
         />
         <div className="cards__summary__item__info">
           <div className="cards__summary__item__info__title">
-            Income this month
+            {t("cards.line1.title1")}
           </div>
           <div className="cards__summary__item__info__total">
             $8,127<span>.90</span>
           </div>
           <div className="cards__summary__item__info__change">
-            <span className="income">+24%</span> vs last month
+            <span className="income">+24%</span> {t("cards.line1.compare")}
           </div>
         </div>
         <Image
@@ -45,13 +57,13 @@ const CardsSummary = () => {
         />
         <div className="cards__summary__item__info">
           <div className="cards__summary__item__info__title">
-            Expense this month
+            {t("cards.line1.title2")}
           </div>
           <div className="cards__summary__item__info__total">
             $1,325<span>.90</span>
           </div>
           <div className="cards__summary__item__info__change">
-            <span className="expense">-2%</span> vs last month
+            <span className="expense">-2%</span> {t("cards.line1.compare")}
           </div>
         </div>
         <Image

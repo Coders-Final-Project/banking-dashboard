@@ -21,6 +21,11 @@ const INITIAL_MAIL_VALUES = {
   newMail: "",
 };
 
+import { useSelector } from "react-redux";
+import { StateProps } from "@/interface";
+
+import { useTranslation } from "@/i18n/client";
+
 const MainInfo = () => {
   const [isPassOpen, setIsPassOpen] = useState(false);
   const [isMailOpen, setIsMailOpen] = useState(false);
@@ -30,6 +35,10 @@ const MainInfo = () => {
   const [mailValues, setMailValues] = useState(INITIAL_MAIL_VALUES);
 
   const { data } = useGlobalContext();
+
+  const curLang = useSelector((state: StateProps) => state.curLang);
+
+  const { t } = useTranslation(curLang);
 
   useEffect(() => {
     if (success || serverError) {
@@ -84,8 +93,6 @@ const MainInfo = () => {
           newPass: passwordValues.newPass,
         });
 
-        console.log(response.data.message);
-
         if (response.data.success) {
           setSuccess(response.data.message);
         } else {
@@ -93,7 +100,7 @@ const MainInfo = () => {
           setServerError(response.data.message);
         }
       } else {
-        setServerError("Passwords dont match!");
+        setServerError(`${t("settings.login.change.error1")}`);
       }
     } catch (error: any) {
       setServerError(error.response.data.message);
@@ -124,7 +131,7 @@ const MainInfo = () => {
 
         setSuccess(response.data.message);
       } else {
-        setServerError("The same mail values!");
+        setServerError(`${t("settings.login.change.error2")}`);
       }
     } catch (error: any) {
       setServerError(error.response.data.message);
@@ -137,22 +144,22 @@ const MainInfo = () => {
     <div className="settings__content__info__main">
       <div className="settings__content__info__main__box">
         <div className="settings__content__info__main__box__title">
-          Contractor Type
+          {t("settings.contract")}
         </div>
         <div className="settings__content__info__main__box__body">
           <div className="settings__content__info__main__box__body__item">
             <input type="radio" id="individual" name="option" />
-            <label htmlFor="individual">Set up as an individual</label>
+            <label htmlFor="individual">{t("settings.contractType1")}</label>
           </div>
           <div className="settings__content__info__main__box__body__item">
             <input type="radio" id="entity" name="option" />
-            <label htmlFor="entity">Set up as an entity</label>
+            <label htmlFor="entity">{t("settings.contractType2")}</label>
           </div>
         </div>
       </div>
       <div className="settings__content__info__main__box">
         <div className="settings__content__info__main__box__title">
-          Login Details
+          {t("settings.login.title")}
         </div>
         <div className="settings__content__info__main__box__parts">
           <button
@@ -160,7 +167,7 @@ const MainInfo = () => {
             onClick={handleMailOpen}
           >
             <div className="settings__content__info__main__box__parts__item__text">
-              Change email address
+              {t("settings.login.change1")}
             </div>
             <Image
               src={`/assets/settings/${
@@ -174,7 +181,9 @@ const MainInfo = () => {
           {isMailOpen && (
             <div className="mail__change">
               <div className="mail__change__item">
-                <label htmlFor="old">Current Email</label>
+                <label htmlFor="old">
+                  {t("settings.login.change1.field1")}
+                </label>
                 <input
                   type="email"
                   id="old"
@@ -184,7 +193,9 @@ const MainInfo = () => {
                 />
               </div>
               <div className="mail__change__item">
-                <label htmlFor="new">New Email</label>
+                <label htmlFor="new">
+                  {t("settings.login.change1.field2")}
+                </label>
                 <input
                   type="email"
                   id="new"
@@ -197,7 +208,7 @@ const MainInfo = () => {
                 className="password__change__btn"
                 onClick={handleMailSubmit}
               >
-                Save
+                {t("settings.login.change1.btn")}
               </button>
             </div>
           )}
@@ -206,7 +217,7 @@ const MainInfo = () => {
             onClick={handlePassOpen}
           >
             <div className="settings__content__info__main__box__parts__item__text">
-              Change password
+              {t("settings.login.change2")}
             </div>
             <Image
               src={`/assets/settings/${
@@ -220,7 +231,9 @@ const MainInfo = () => {
           {isPassOpen && (
             <div className="password__change">
               <div className="password__change__item">
-                <label htmlFor="currentPass">Current Password</label>
+                <label htmlFor="currentPass">
+                  {t("settings.login.change2.field1")}
+                </label>
                 <input
                   type="password"
                   id="currentPass"
@@ -230,7 +243,9 @@ const MainInfo = () => {
                 />
               </div>
               <div className="password__change__item">
-                <label htmlFor="newPass">New Password</label>
+                <label htmlFor="newPass">
+                  {t("settings.login.change2.field2")}
+                </label>
                 <input
                   type="password"
                   id="newPass"
@@ -240,7 +255,9 @@ const MainInfo = () => {
                 />
               </div>
               <div className="password__change__item">
-                <label htmlFor="confirmNewPass">Confirm Password</label>
+                <label htmlFor="confirmNewPass">
+                  {t("settings.login.change2.field3")}
+                </label>
                 <input
                   type="password"
                   id="confirmNewPass"
@@ -253,7 +270,7 @@ const MainInfo = () => {
                 className="password__change__btn"
                 onClick={handlePassSubmit}
               >
-                Save
+                {t("settings.login.change2.btn")}
               </button>
             </div>
           )}

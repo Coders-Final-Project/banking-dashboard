@@ -85,8 +85,10 @@ input {
         flex: 50%;
       }
 
-      #date {
+      #date,
+      #dueon {
         text-indent: unset;
+        padding: 10px;
       }
     }
   }
@@ -132,4 +134,26 @@ input {
       color: $main-color-white;
     }
   }
+}
+
+.invoice__alert--success,
+.invoice__alert--error {
+  position: fixed;
+  top: 10%;
+  left: 61%;
+  transform: translate(-61%, -10%);
+  padding: 15px;
+  border-radius: 20px;
+  box-shadow: $box-shadow;
+  font-size: 18px;
+}
+
+.invoice__alert--success {
+  background-color: $action-green-100;
+  color: $main-color-white;
+}
+
+.invoice__alert--error {
+  background-color: $action-red-100;
+  color: $main-color-white;
 }

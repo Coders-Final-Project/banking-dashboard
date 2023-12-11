@@ -1,21 +1,41 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+
+import Image from "next/image";
+
 import "@/sass/layout/_pageHeader.scss";
 import "@/sass/pages/_invoices.scss";
-import { user } from "@/db/user";
+
 import { invoicesData } from "@/db/invoices";
 import AvatarDetail from "@/shared/AvatarDetail/AvatarDetail";
-import Image from "next/image";
 import InvoiceTable from "@/components/InvoiceTable/InvoiceTable";
-import { IInvoicesData } from "@/interface";
-import { filterInvoiceTable } from "@/helpers";
 import Sidemenu from "@/components/Sidemenu/Sidemenu";
 
-const Invoices = () => {
+import { IInvoicesData, StateProps } from "@/interface";
+import { filterInvoiceTable } from "@/helpers";
+
+import axios from "axios";
+
+import { useSelector, useDispatch } from "react-redux";
+import { setInvoices } from "@/globalRedux/features/appSlice";
+
+import { useGlobalContext } from "@/context/store";
+
+import { useTranslation } from "@/i18n/client";
+
+const Invoices = ({ params: { lng } }: { params: { lng: string } }) => {
   const [invoiceData, setInvoiceData] = useState<IInvoicesData[]>(invoicesData);
   const [changeState, setChangeState] = useState<boolean>(false);
   const [openSideMenu, setOpenSideMenu] = useState<boolean>(false);
+
+  const { t } = useTranslation(lng);
+
+  const { data } = useGlobalContext();
+
+  const invoices = useSelector((state: StateProps) => state.invoices);
+
+  const dispatch = useDispatch();
 
   const handleSubmit = (input: string) => {
     setChangeState((prev) => !prev);
@@ -30,6 +50,22 @@ const Invoices = () => {
     }
   };
 
+  useEffect(() => {
+    const fetchInvoices = async () => {
+      try {
+        const response = await axios.post("/api/invoice/fetch", {
+          userID: data._id,
+        });
+
+        dispatch(setInvoices(response.data.invoices));
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchInvoices();
+  }, [data._id, dispatch]);
+
   const openSidemenu = () => {
     setOpenSideMenu((prev) => !prev);
   };
@@ -38,14 +74,14 @@ const Invoices = () => {
     <>
       <main className="page">
         {openSideMenu ? <Sidemenu setOpenSideMenu={setOpenSideMenu} /> : null}
-
         <header className="page__header">
           <div className="page__header__welcome">
-            <div className="page__header__welcome__title">Invoices</div>
+            <div className="page__header__welcome__title">
+              {t("invoice.main.title")}
+            </div>
           </div>
           <AvatarDetail />
         </header>
-
         <div className="grid__container">
           <div className="grid__container__totalReceived">
             <div className="item1">
@@ -56,40 +92,40 @@ const Invoices = () => {
                 height={32}
               />
               <div>
-                <p>Total Received</p>
+                <p>{t("invoice.line1.title")}</p>
                 <p>
                   $3,855<span>.50</span>
                 </p>
                 <p>
-                  <span>+15%</span> vs last month
+                  <span>+15%</span> vs {t("invoice.line1.compare")}
                 </p>
               </div>
             </div>
             <div className="item2">
               <div>
-                <p>PENDING</p>
+                <p>{t("invoice.line1.case1")}</p>
                 <p>
                   $1,346<span>.65</span>
                 </p>
               </div>
               <div>
-                <p>IN DRAFT</p>
+                <p>{t("invoice.line1.case2")}</p>
                 <p>
                   $50<span>.66</span>
                 </p>
               </div>
             </div>
           </div>
-
           <div className="grid__container__quickPay">
-            <p className="grid__container__quickPay__title">Qucik Pay</p>
-
+            <p className="grid__container__quickPay__title">
+              {t("invoice.line2.title")}
+            </p>
             <div className="grid__container__quickPay__links">
               <div>
                 invopay.to/<span>clientname</span>
               </div>
               <div>
-                <button onClick={openSidemenu}>
+                <button>
                   <Image
                     src="/assets/invoices/edit.png"
                     alt="edit"
@@ -108,18 +144,13 @@ const Invoices = () => {
                 </button>
               </div>
             </div>
-
             <div className="grid__container__quickPay__text">
-              <p>
-                You can receive payments quickly with Quick Pay feature. You can
-                share the payment link to request the payment to clients.
-              </p>
-              <p>Learn More</p>
+              <p>{t("invoice.line2.text")}</p>
+              <p>{t("invoice.line2.btn")}</p>
             </div>
           </div>
-
           <div className="grid__container__overdue">
-            <div>Overdue</div>
+            <div>{t("invoice.line3.title")}</div>
             <div>
               <div className="circle"></div>
               <div className="price">
@@ -128,42 +159,24 @@ const Invoices = () => {
             </div>
           </div>
         </div>
-
         <div className="invoiceTable">
           <div className="invoiceTable__header">
-            <div>Invoices</div>
+            <div>{t("invoice.table.title")}</div>
             <div className="sortBtns">
               <div className="sortBtns__content">
-                <div>
-                  <Image
-                    src="/assets/cards/filter.png"
-                    alt="filter-btn"
-                    width={24}
-                    height={24}
-                    className="filterImg"
-                  />
-                </div>
-                <p>Sort & Filter</p>
-              </div>
-              <div className="sortBtns__content">
-                <div>
-                  <Image
-                    src="/assets/invoices/csv.png"
-                    alt="csv-btn"
-                    width={24}
-                    height={24}
-                    className="filterImg"
-                  />
-                </div>
-                <p>CSV</p>
+                <button
+                  onClick={openSidemenu}
+                  className="sortBtns__content__open"
+                >
+                  Send an Invoice
+                </button>
               </div>
             </div>
           </div>
-
           <div className="invoiceTable__datas">
             <div className="filterBtns">
               <div>
-                <p>No</p>
+                <p>{t("invoice.filter.title1")}</p>
                 <Image
                   src="/assets/invoices/arrows.png"
                   alt="arrow"
@@ -172,7 +185,7 @@ const Invoices = () => {
                 />
               </div>
               <div>
-                <p> Date Created</p>
+                <p>{t("invoice.filter.title2")}</p>
                 <Image
                   src="/assets/invoices/arrows.png"
                   alt="arrow"
@@ -181,7 +194,7 @@ const Invoices = () => {
                 />
               </div>
               <div>
-                <p>Client</p>
+                <p>{t("invoice.filter.title3")}</p>
                 <Image
                   src="/assets/invoices/arrows.png"
                   alt="arrow"
@@ -190,7 +203,9 @@ const Invoices = () => {
                 />
               </div>
               <div>
-                <p onClick={() => handleSubmit("amount")}>Amount</p>
+                <p onClick={() => handleSubmit("amount")}>
+                  {t("invoice.filter.title4")}
+                </p>
                 <Image
                   src="/assets/invoices/arrows.png"
                   alt="arrow"
@@ -199,7 +214,9 @@ const Invoices = () => {
                 />
               </div>
               <div>
-                <p onClick={() => handleSubmit("PENDING")}>Status</p>
+                <p onClick={() => handleSubmit("PENDING")}>
+                  {t("invoice.filter.title5")}
+                </p>
                 <Image
                   src="/assets/invoices/arrows.png"
                   alt="arrow"
@@ -208,13 +225,8 @@ const Invoices = () => {
                 />
               </div>
             </div>
-
             <div className="filteredData">
-              {/* {invoiceData?.map((item) => {
-                return <InvoiceTable {...item} />;
-              })} */}
-
-              <InvoiceTable invoicesData={invoiceData} />
+              <InvoiceTable invoices={invoices} />
             </div>
           </div>
         </div>

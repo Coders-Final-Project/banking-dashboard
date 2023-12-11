@@ -1,8 +1,27 @@
 "use client";
 
-import React, { Dispatch, FormEvent, SetStateAction, useState } from "react";
+import React, {
+  Dispatch,
+  FormEvent,
+  SetStateAction,
+  useState,
+  useEffect,
+} from "react";
 import "@/sass/components/_sidemenu.scss";
+
 import Image from "next/image";
+
+import axios from "axios";
+
+import { useSelector, useDispatch } from "react-redux";
+
+import { increaseNotificationCount } from "@/globalRedux/features/appSlice";
+
+import { useGlobalContext } from "@/context/store";
+
+import { StateProps } from "@/interface";
+
+import { useTranslation } from "@/i18n/client";
 
 interface IProps {
   setOpenSideMenu: Dispatch<SetStateAction<boolean>>;
@@ -27,6 +46,26 @@ const Sidemenu = ({ setOpenSideMenu }: IProps) => {
     { item: "", rate: "", hours: "", total: "" },
   ]);
 
+  const [successAlert, setSuccessAlert] = useState("");
+  const [errorAlert, setErrorAlert] = useState("");
+
+  useEffect(() => {
+    if (successAlert || errorAlert) {
+      setTimeout(() => {
+        setSuccessAlert("");
+        setErrorAlert("");
+      }, 2000);
+    }
+  }, [successAlert, errorAlert]);
+
+  const curLang = useSelector((state: StateProps) => state.curLang);
+
+  const dispatch = useDispatch();
+
+  const { data } = useGlobalContext();
+
+  const { t } = useTranslation(curLang);
+
   const handleAddInput = () => {
     setInputs([...inputs, { item: "", rate: "", hours: "", total: "" }]);
   };
@@ -40,9 +79,12 @@ const Sidemenu = ({ setOpenSideMenu }: IProps) => {
     let onChangeValue = [...inputs];
     //@ts-ignore
     onChangeValue[index][name] = value;
-    setInputs(onChangeValue);
 
-    console.log(onChangeValue);
+    onChangeValue[index]["total"] = String(
+      Number(inputs[index].hours) * Number(inputs[index].rate),
+    );
+
+    setInputs(onChangeValue);
   };
 
   // const handleDeleteInput = (index: number) => {
@@ -83,12 +125,37 @@ const Sidemenu = ({ setOpenSideMenu }: IProps) => {
     setInputValues({ ...inputValues });
   };
 
-  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    let newObj = inputs.reduce((a, b) => Object.assign(a, b), {});
+    const receiverData = inputValues;
+    const itemData = inputs;
 
-    console.log({ ...inputValues, ...newObj });
+    if (data._id) {
+      try {
+        const response = await axios.post("/api/invoice", {
+          userID: data._id,
+          receiverData: receiverData,
+          itemData: itemData,
+        });
+
+        const status = response.data.status;
+        const message = response.data.message;
+
+        if (status === 400 || status === 500) {
+          setErrorAlert(message);
+        }
+        if (status === 200) {
+          setSuccessAlert(message);
+          dispatch(increaseNotificationCount());
+        }
+      } catch (error) {
+        console.log(error);
+        setErrorAlert("Something went wrong!");
+      }
+    } else {
+      setErrorAlert("Something went wrong!");
+    }
 
     setInputValues({
       email: "",
@@ -105,7 +172,7 @@ const Sidemenu = ({ setOpenSideMenu }: IProps) => {
       <div className="bg-shadow"></div>
       <div className="sidemenu">
         <div className="sidemenu__header">
-          <div>Create Invoices</div>
+          <div>{t("invoice.sidemenu.text")}</div>
           <div onClick={changeState}>X</div>
         </div>
         <div className="sidemenu__code">
@@ -117,39 +184,36 @@ const Sidemenu = ({ setOpenSideMenu }: IProps) => {
               width={20}
               height={20}
             />
-            <p> Copy Payment Code</p>
+            <p>{t("invoice.sidemenu.text1")}</p>
           </div>
         </div>
-
         <form action="" onSubmit={onSubmit}>
           <div className="sidemenu__form">
             <div className="email">
-              <div>Recipient Email</div>
+              <div>{t("invoice.sidemenu.text2")}</div>
               <input
                 type="email"
                 id="email"
-                placeholder="Enter email"
+                placeholder={`${t("invoice.sidemenu.text3")}`}
                 value={inputValues.email}
                 onChange={(e) => getEmail(e)}
                 required
               />
             </div>
-
             <div className="pname">
-              <div>Project Name</div>
+              <div>{t("invoice.sidemenu.text4")}</div>
               <input
                 type="text"
                 id="project"
-                placeholder="Enter project name"
+                placeholder={`${t("invoice.sidemenu.text5")}`}
                 value={inputValues.pname}
                 onChange={(e) => getPname(e)}
                 required
               />
             </div>
-
             <div className="sidemenu__form--date">
               <div>
-                <div className="dateTitle">Issued on</div>
+                <div className="dateTitle">{t("invoice.sidemenu.text7")}</div>
                 <input
                   type="date"
                   id="date"
@@ -159,9 +223,9 @@ const Sidemenu = ({ setOpenSideMenu }: IProps) => {
                 />
               </div>
               <div>
-                <div className="dateTitle">Due on</div>
+                <div className="dateTitle">{t("invoice.sidemenu.text8")}</div>
                 <input
-                  type="text"
+                  type="date"
                   id="dueon"
                   value={inputValues.dueon}
                   onChange={(e) => getDueon(e)}
@@ -170,15 +234,13 @@ const Sidemenu = ({ setOpenSideMenu }: IProps) => {
               </div>
             </div>
           </div>
-
           <div className="sidemenu__addItem">
             <div className="sidemenu__addItem--header">
-              <div>Item</div>
-              <div>Hours</div>
-              <div>Rate/hr</div>
-              <div>Total</div>
+              <div>{t("invoice.sidemenu.text9")}</div>
+              <div>{t("invoice.sidemenu.text10")}</div>
+              <div>{t("invoice.sidemenu.text11")}</div>
+              <div>{t("invoice.sidemenu.text12")}</div>
             </div>
-
             {inputs.map((item, index) => {
               return (
                 <div key={index} className="sidemenu__addItem--items">
@@ -214,24 +276,30 @@ const Sidemenu = ({ setOpenSideMenu }: IProps) => {
                       name="total"
                       type="number"
                       value={item.total}
-                      onChange={(event) => handleChange(event, index)}
                       required
+                      disabled
                     />
                   </div>
                 </div>
               );
             })}
-
             <div className="addItemButton">
-              <button onClick={handleAddInput}>+ Add item</button>
+              <button onClick={handleAddInput}>
+                + {t("invoice.sidemenu.text13")}
+              </button>
             </div>
           </div>
-
           <div className="sidemenu__sendInvoice">
-            <button>Save Draft</button>
-            <button>Send Invoice</button>
+            <button>{t("invoice.sidemenu.text14")}</button>
+            <button>{t("invoice.sidemenu.text15")}</button>
           </div>
         </form>
+        {successAlert !== "" && (
+          <div className="invoice__alert--success">{successAlert}</div>
+        )}
+        {errorAlert !== "" && (
+          <div className="invoice__alert--error">{errorAlert}</div>
+        )}
       </div>
     </>
   );

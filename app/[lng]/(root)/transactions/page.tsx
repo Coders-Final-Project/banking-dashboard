@@ -7,12 +7,22 @@ import TransactionsUp from "@/scenes/TransactionsPage/TransactionsUp";
 import TransactionsDetail from "@/scenes/TransactionsPage/TransactionsDetail";
 import TransactionTable from "@/scenes/TransactionsPage/TransactionTable";
 
-const Transactions = () => {
+import { useTranslation } from "@/i18n";
+
+const Transactions = async ({
+  params: { lng },
+}: {
+  params: { lng: string };
+}) => {
+  const { t } = await useTranslation(lng);
+
   return (
     <main className="transactions">
       <header className="page__header">
         <div className="page__header__welcome">
-          <div className="page__header__welcome__title">Transactions</div>
+          <div className="page__header__welcome__title">
+            {t("actions.main.title")}
+          </div>
         </div>
         <AvatarDetail />
       </header>

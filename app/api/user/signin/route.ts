@@ -19,16 +19,13 @@ export async function POST(request: NextRequest) {
     const user = await User.findOne({ email });
 
     if (!user) {
-      return NextResponse.json({ message: "User doesn't exist", status: 400 });
+      return NextResponse.json({ message: "User doesn't exist!", status: 400 });
     }
 
     const validPassword = await bcrypt.compare(password, user.password);
 
     if (!validPassword) {
-      return NextResponse.json(
-        { message: "Invalid Password" },
-        { status: 400 },
-      );
+      return NextResponse.json({ message: "Invalid Password!", status: 400 });
     }
 
     const tokenData = {
@@ -44,7 +41,8 @@ export async function POST(request: NextRequest) {
     NextResponse.next();
 
     const response = NextResponse.json({
-      message: "Login successful",
+      message: "Login successful!",
+      status: 200,
       success: true,
     });
 

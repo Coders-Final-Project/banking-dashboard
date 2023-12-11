@@ -9,9 +9,18 @@ import DocumentModal from "@/components/DocumentModal/DocumentModal";
 
 import { useGlobalContext } from "@/context/store";
 
+import { useSelector } from "react-redux";
+import { StateProps } from "@/interface";
+
+import { useTranslation } from "@/i18n/client";
+
 const DocumentItem = () => {
   const [modalTitle, setModalTitle] = useState("");
   const [isUploadClicked, setIsUploadClicked] = useState(false);
+
+  const curLang = useSelector((state: StateProps) => state.curLang);
+
+  const { t } = useTranslation(curLang);
 
   const { data } = useGlobalContext();
 
@@ -20,10 +29,10 @@ const DocumentItem = () => {
   });
 
   const docTitles: string[] = [
-    "Passport or National ID",
-    "Tax Registration Number",
-    "Any additional relevant documents",
-    "Proof of registration with the National Social Security Program",
+    `${t("doc.box1.item1.title")}`,
+    `${t("doc.box1.item2.title")}`,
+    `${t("doc.box2.item1.title")}`,
+    `${t("doc.box2.item2.title")}`,
   ];
 
   const docItemBooleanValues = docTitles.map((doc) => {
@@ -43,7 +52,7 @@ const DocumentItem = () => {
   return (
     <div className="documents__content__upload__files">
       <div className="document__item">
-        <div className="document__item__title">Required Documents</div>
+        <div className="document__item__title">{t("doc.box1.title")}</div>
         <div className="document__item__body">
           <DocumentItemFile
             handleUpload={handleUpload}
@@ -60,7 +69,7 @@ const DocumentItem = () => {
         </div>
       </div>
       <div className="document__item">
-        <div className="document__item__title">Optional Documents</div>
+        <div className="document__item__title">{t("doc.box2.title")}</div>
         <div className="document__item__body">
           <DocumentItemFile
             handleUpload={handleUpload}

@@ -18,7 +18,9 @@ const Cards = async ({ params: { lng } }: { params: { lng: string } }) => {
     <main className="cards">
       <header className="page__header">
         <div className="page__header__welcome">
-          <div className="page__header__welcome__title">Cards</div>
+          <div className="page__header__welcome__title">
+            {t("cards.main.title")}
+          </div>
         </div>
         <AvatarDetail lng={lng} />
       </header>

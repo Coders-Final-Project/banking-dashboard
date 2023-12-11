@@ -13,6 +13,8 @@ import { filterActionsTable } from "@/helpers";
 import { useSelector } from "react-redux";
 import { StateProps } from "@/interface";
 
+import { useTranslation } from "@/i18n/client";
+
 const TransactionTable = () => {
   const [check, setCheck] = useState(false);
 
@@ -32,11 +34,15 @@ const TransactionTable = () => {
     setActionsData(sortedData);
   };
 
+  const curLang = useSelector((state: StateProps) => state.curLang);
+
+  const { t } = useTranslation(curLang);
+
   return (
     <div className="transactions__table">
       <div className="transactions__table__header">
         <div className="transactions__table__header__title">
-          Transaction History
+          {t("actions.table.title")}
         </div>
       </div>
       <div className="transactions__table__content">
@@ -45,7 +51,7 @@ const TransactionTable = () => {
             className="transactions__table__content__sortBtns__item"
             onClick={() => handleSort("client")}
           >
-            Client
+            {t("actions.table.filter1")}
             <Image
               src="/assets/transactions/arrows.png"
               alt="arrows"
@@ -58,7 +64,7 @@ const TransactionTable = () => {
               className="transactions__table__content__sortBtns__element"
               onClick={() => handleSort("payment")}
             >
-              Date
+              {t("actions.table.filter2")}
               <Image
                 src="/assets/transactions/arrows.png"
                 alt="arrows"
@@ -67,7 +73,7 @@ const TransactionTable = () => {
               />
             </button>
             <button className="transactions__table__content__sortBtns__element">
-              Method
+              {t("actions.table.filter3")}
               <Image
                 src="/assets/transactions/arrows.png"
                 alt="arrows"
@@ -79,7 +85,7 @@ const TransactionTable = () => {
               className="transactions__table__content__sortBtns__element"
               onClick={() => handleSort("amount")}
             >
-              Amount
+              {t("actions.table.filter4")}
               <Image
                 src="/assets/transactions/arrows.png"
                 alt="arrows"
@@ -90,7 +96,7 @@ const TransactionTable = () => {
           </div>
 
           <button className="transactions__table__content__sortBtns__item">
-            Funds
+            {t("actions.table.filter5")}
             <Image
               src="/assets/transactions/arrows.png"
               alt="arrows"

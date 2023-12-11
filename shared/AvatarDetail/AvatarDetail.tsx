@@ -34,6 +34,8 @@ interface Props {
   lng?: string;
 }
 
+import { useTranslation } from "@/i18n/client";
+
 const AvatarDetail = ({ hasBtn, lng }: Props) => {
   const [serverError, setServerError] = useState("");
   const [isNotifyOpen, setIsNotifyOpen] = useState(false);
@@ -150,7 +152,7 @@ const AvatarDetail = ({ hasBtn, lng }: Props) => {
     <div className="avatar__detail">
       {hasBtn && userCard._id !== -1 && isContractAvailable && (
         <Button
-          text="create a contract"
+          text="Create A Contract"
           icon="frame.png"
           url="create"
           lng={lng}

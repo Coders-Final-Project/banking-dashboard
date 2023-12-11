@@ -88,10 +88,13 @@ const SignUp = () => {
 
       const response = await axios.post("/api/user/signup", formValues);
 
-      router.push("/signin");
-
-      setFormValues(initialValues);
-      setSuccess(true);
+      if (response.data.status === 400) {
+        setServerError(response.data.message);
+      } else {
+        setSuccess(true);
+        router.push("/signin");
+        setFormValues(initialValues);
+      }
     } catch (error: any) {
       setServerError(error.message);
       setFormValues(initialValues);

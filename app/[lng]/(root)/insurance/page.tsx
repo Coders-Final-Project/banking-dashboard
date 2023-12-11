@@ -90,16 +90,17 @@ const Insurance = ({ params: { lng } }: { params: { lng: string } }) => {
     <main className="insurance">
       <header className="page__header">
         <div className="page__header__welcome">
-          <div className="page__header__welcome__title">Get Insured</div>
+          <div className="page__header__welcome__title">
+            {t("insurance.main.title")}
+          </div>
           <div className="page__header__welcome__desc">
-            We negotiated exclusive discounts for you, so that you can save
-            money on insurance.
+            {t("insurance.main.desc")}
           </div>
         </div>
         <AvatarDetail />
       </header>
       <div className="insurance__place">
-        <div className="insurance__place__text">I live in</div>
+        <div className="insurance__place__text">{t("insurance.live")}</div>
         <select className="insurance__place__options">
           <option value="azerbaijan">Azerbaijan</option>
           <option value="turkey">Turkey</option>
@@ -116,12 +117,12 @@ const Insurance = ({ params: { lng } }: { params: { lng: string } }) => {
               className="insurance__content__card__header__img"
             />
             <div className="insurance__content__card__header__price">
-              100₼<span>/year</span>
+              100₼<span>/{t("insurance.content.year")}</span>
             </div>
             <div className="insurance__content__card__header__divider" />
             {insuranceCompleted ? (
               <div className="insurance__content__card__header__done">
-                You applied already!
+                {t("insurance.content.apply3")}
               </div>
             ) : (
               <button
@@ -129,17 +130,14 @@ const Insurance = ({ params: { lng } }: { params: { lng: string } }) => {
                 onClick={handleOpenModal}
               >
                 {userCard._id === -1
-                  ? "Add Card Before Apply"
-                  : "Apply for Coverage"}
+                  ? `${t("insurance.content.apply1")}`
+                  : `${t("insurance.content.apply2")}`}
               </button>
             )}
           </div>
           <div className="insurance__content__card__divider" />
           <div className="insurance__content__card__desc">
-            Genki is an excellent health insurance for digital nomads,
-            freelancers and remote workers. It provides cover from one month up
-            to two years in a monthly subscription that can be cancelled
-            anytime.
+            {t("insurance.content.text")}
           </div>
           <div className="insurance__content__card__coverage">
             <div className="insurance__content__card__coverage__title">
@@ -147,7 +145,7 @@ const Insurance = ({ params: { lng } }: { params: { lng: string } }) => {
                 className="insurance__content__card__coverage__title__btn"
                 onClick={handleCoverage}
               >
-                What is included in coverage?
+                {t("insurance.content.btn")}
               </button>
               {isCoverageOpen ? (
                 <Image
@@ -181,8 +179,7 @@ const Insurance = ({ params: { lng } }: { params: { lng: string } }) => {
             )}
           </div>
           <div className="insurance__content__card__comment">
-            *Price depends on your age, the region of cover you choose and the
-            deductible you choose
+            {t("insurance.content.note")}
           </div>
           <Image
             src="/assets/insurance/msg.png"
@@ -196,20 +193,20 @@ const Insurance = ({ params: { lng } }: { params: { lng: string } }) => {
           <div className="notify__user__modal">
             <div className="notify__user__modal__content">
               <div className="notify__user__modal__content__text">
-                Upon approval, 100₼ deduction from your balance.
+                {t("insurance.modal.text1")}
               </div>
               <div className="notify__user__modal__content__btns">
                 <button
                   className="notify__user__modal__content__btns__cancel"
                   onClick={handleCancel}
                 >
-                  Cancel
+                  {t("insurance.modal.text2")}
                 </button>
                 <button
                   className="notify__user__modal__content__btns__confirm"
                   onClick={handleAddInsurance}
                 >
-                  Confirm
+                  {t("insurance.modal.text3")}
                 </button>
               </div>
             </div>
@@ -218,7 +215,7 @@ const Insurance = ({ params: { lng } }: { params: { lng: string } }) => {
       </div>
       {successAlert && (
         <div className="insurance__alert--success">
-          Insurance Successfully Applied
+          {t("insurance.alert.success")}
         </div>
       )}
     </main>
