@@ -1,6 +1,12 @@
 "use client";
 
-import React, { Dispatch, FormEvent, SetStateAction, useState } from "react";
+import React, {
+  Dispatch,
+  FormEvent,
+  SetStateAction,
+  useState,
+  useEffect,
+} from "react";
 import "@/sass/components/_sidemenu.scss";
 
 import Image from "next/image";
@@ -8,6 +14,10 @@ import Image from "next/image";
 import axios from "axios";
 
 import { useSelector, useDispatch } from "react-redux";
+
+import { increaseNotificationCount } from "@/globalRedux/features/appSlice";
+
+import { useGlobalContext } from "@/context/store";
 
 import { StateProps } from "@/interface";
 
@@ -36,7 +46,23 @@ const Sidemenu = ({ setOpenSideMenu }: IProps) => {
     { item: "", rate: "", hours: "", total: "" },
   ]);
 
+  const [successAlert, setSuccessAlert] = useState("");
+  const [errorAlert, setErrorAlert] = useState("");
+
+  useEffect(() => {
+    if (successAlert || errorAlert) {
+      setTimeout(() => {
+        setSuccessAlert("");
+        setErrorAlert("");
+      }, 2000);
+    }
+  }, [successAlert, errorAlert]);
+
   const curLang = useSelector((state: StateProps) => state.curLang);
+
+  const dispatch = useDispatch();
+
+  const { data } = useGlobalContext();
 
   const { t } = useTranslation(curLang);
 
@@ -105,16 +131,30 @@ const Sidemenu = ({ setOpenSideMenu }: IProps) => {
     const receiverData = inputValues;
     const itemData = inputs;
 
-    try {
-      const response = await axios.post("/api/invoice", {
-        userID: "111",
-        receiverData,
-        itemData,
-      });
+    if (data._id) {
+      try {
+        const response = await axios.post("/api/invoice", {
+          userID: data._id,
+          receiverData: receiverData,
+          itemData: itemData,
+        });
 
-      console.log(response);
-    } catch (error) {
-      console.log(error);
+        const status = response.data.status;
+        const message = response.data.message;
+
+        if (status === 400 || status === 500) {
+          setErrorAlert(message);
+        }
+        if (status === 200) {
+          setSuccessAlert(message);
+          dispatch(increaseNotificationCount());
+        }
+      } catch (error) {
+        console.log(error);
+        setErrorAlert("Something went wrong!");
+      }
+    } else {
+      setErrorAlert("Something went wrong!");
     }
 
     setInputValues({
@@ -147,7 +187,6 @@ const Sidemenu = ({ setOpenSideMenu }: IProps) => {
             <p>{t("invoice.sidemenu.text1")}</p>
           </div>
         </div>
-
         <form action="" onSubmit={onSubmit}>
           <div className="sidemenu__form">
             <div className="email">
@@ -161,7 +200,6 @@ const Sidemenu = ({ setOpenSideMenu }: IProps) => {
                 required
               />
             </div>
-
             <div className="pname">
               <div>{t("invoice.sidemenu.text4")}</div>
               <input
@@ -173,7 +211,6 @@ const Sidemenu = ({ setOpenSideMenu }: IProps) => {
                 required
               />
             </div>
-
             <div className="sidemenu__form--date">
               <div>
                 <div className="dateTitle">{t("invoice.sidemenu.text7")}</div>
@@ -197,7 +234,6 @@ const Sidemenu = ({ setOpenSideMenu }: IProps) => {
               </div>
             </div>
           </div>
-
           <div className="sidemenu__addItem">
             <div className="sidemenu__addItem--header">
               <div>{t("invoice.sidemenu.text9")}</div>
@@ -205,7 +241,6 @@ const Sidemenu = ({ setOpenSideMenu }: IProps) => {
               <div>{t("invoice.sidemenu.text11")}</div>
               <div>{t("invoice.sidemenu.text12")}</div>
             </div>
-
             {inputs.map((item, index) => {
               return (
                 <div key={index} className="sidemenu__addItem--items">
@@ -241,7 +276,6 @@ const Sidemenu = ({ setOpenSideMenu }: IProps) => {
                       name="total"
                       type="number"
                       value={item.total}
-                      // onChange={(event) => handleChange(event, index)}
                       required
                       disabled
                     />
@@ -249,19 +283,23 @@ const Sidemenu = ({ setOpenSideMenu }: IProps) => {
                 </div>
               );
             })}
-
             <div className="addItemButton">
               <button onClick={handleAddInput}>
                 + {t("invoice.sidemenu.text13")}
               </button>
             </div>
           </div>
-
           <div className="sidemenu__sendInvoice">
             <button>{t("invoice.sidemenu.text14")}</button>
             <button>{t("invoice.sidemenu.text15")}</button>
           </div>
         </form>
+        {successAlert !== "" && (
+          <div className="invoice__alert--success">{successAlert}</div>
+        )}
+        {errorAlert !== "" && (
+          <div className="invoice__alert--error">{errorAlert}</div>
+        )}
       </div>
     </>
   );

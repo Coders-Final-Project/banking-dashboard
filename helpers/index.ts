@@ -176,6 +176,7 @@ export const defineNotificationImage = (
     "Bank of Baku": "bankOfBaku.jpg",
     gerki: "gerki.png",
     transfer: "person.png",
+    invoice: "invoice.png",
   };
 
   return companies[companyName];

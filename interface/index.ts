@@ -145,6 +145,7 @@ export interface IInvoices {
   _id: string;
   userId: string;
   no: string;
+  client: string;
   status: string;
   amount: number;
   createdAt: string;

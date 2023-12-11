@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import Image from "next/image";
 
@@ -12,8 +12,15 @@ import AvatarDetail from "@/shared/AvatarDetail/AvatarDetail";
 import InvoiceTable from "@/components/InvoiceTable/InvoiceTable";
 import Sidemenu from "@/components/Sidemenu/Sidemenu";
 
-import { IInvoicesData } from "@/interface";
+import { IInvoicesData, StateProps } from "@/interface";
 import { filterInvoiceTable } from "@/helpers";
+
+import axios from "axios";
+
+import { useSelector, useDispatch } from "react-redux";
+import { setInvoices } from "@/globalRedux/features/appSlice";
+
+import { useGlobalContext } from "@/context/store";
 
 import { useTranslation } from "@/i18n/client";
 
@@ -23,6 +30,12 @@ const Invoices = ({ params: { lng } }: { params: { lng: string } }) => {
   const [openSideMenu, setOpenSideMenu] = useState<boolean>(false);
 
   const { t } = useTranslation(lng);
+
+  const { data } = useGlobalContext();
+
+  const invoices = useSelector((state: StateProps) => state.invoices);
+
+  const dispatch = useDispatch();
 
   const handleSubmit = (input: string) => {
     setChangeState((prev) => !prev);
@@ -37,6 +50,22 @@ const Invoices = ({ params: { lng } }: { params: { lng: string } }) => {
     }
   };
 
+  useEffect(() => {
+    const fetchInvoices = async () => {
+      try {
+        const response = await axios.post("/api/invoice/fetch", {
+          userID: data._id,
+        });
+
+        dispatch(setInvoices(response.data.invoices));
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchInvoices();
+  }, [data._id, dispatch]);
+
   const openSidemenu = () => {
     setOpenSideMenu((prev) => !prev);
   };
@@ -45,7 +74,6 @@ const Invoices = ({ params: { lng } }: { params: { lng: string } }) => {
     <>
       <main className="page">
         {openSideMenu ? <Sidemenu setOpenSideMenu={setOpenSideMenu} /> : null}
-
         <header className="page__header">
           <div className="page__header__welcome">
             <div className="page__header__welcome__title">
@@ -54,7 +82,6 @@ const Invoices = ({ params: { lng } }: { params: { lng: string } }) => {
           </div>
           <AvatarDetail />
         </header>
-
         <div className="grid__container">
           <div className="grid__container__totalReceived">
             <div className="item1">
@@ -89,12 +116,10 @@ const Invoices = ({ params: { lng } }: { params: { lng: string } }) => {
               </div>
             </div>
           </div>
-
           <div className="grid__container__quickPay">
             <p className="grid__container__quickPay__title">
               {t("invoice.line2.title")}
             </p>
-
             <div className="grid__container__quickPay__links">
               <div>
                 invopay.to/<span>clientname</span>
@@ -119,13 +144,11 @@ const Invoices = ({ params: { lng } }: { params: { lng: string } }) => {
                 </button>
               </div>
             </div>
-
             <div className="grid__container__quickPay__text">
               <p>{t("invoice.line2.text")}</p>
               <p>{t("invoice.line2.btn")}</p>
             </div>
           </div>
-
           <div className="grid__container__overdue">
             <div>{t("invoice.line3.title")}</div>
             <div>
@@ -136,7 +159,6 @@ const Invoices = ({ params: { lng } }: { params: { lng: string } }) => {
             </div>
           </div>
         </div>
-
         <div className="invoiceTable">
           <div className="invoiceTable__header">
             <div>{t("invoice.table.title")}</div>
@@ -151,7 +173,6 @@ const Invoices = ({ params: { lng } }: { params: { lng: string } }) => {
               </div>
             </div>
           </div>
-
           <div className="invoiceTable__datas">
             <div className="filterBtns">
               <div>
@@ -204,13 +225,8 @@ const Invoices = ({ params: { lng } }: { params: { lng: string } }) => {
                 />
               </div>
             </div>
-
             <div className="filteredData">
-              {/* {invoiceData?.map((item) => {
-                return <InvoiceTable {...item} />;
-              })} */}
-
-              <InvoiceTable invoicesData={invoiceData} />
+              <InvoiceTable invoices={invoices} />
             </div>
           </div>
         </div>

@@ -10,6 +10,10 @@ const invoiceSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    client: {
+      type: String,
+      required: true,
+    },
     amount: {
       type: Number,
       required: true,
