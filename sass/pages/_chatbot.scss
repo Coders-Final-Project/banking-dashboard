@@ -1,0 +1,13 @@
+@import "/sass/utils/colors";
+@import "/sass/utils/variables";
+@import "/sass/utils/mixins";
+@import "/sass/base/typography";
+
+.chatbot {
+  margin-left: 280px;
+
+  &__content {
+    background-color: $greyscale-grey-50;
+    padding: 32px;
+  }
+}
