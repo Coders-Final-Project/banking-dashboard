@@ -151,6 +151,11 @@ export interface IInvoices {
   createdAt: string;
 }
 
+export interface IChatbotMessages {
+  key: string;
+  value: string;
+}
+
 export interface StateProps {
   companyContracts: ICompanyContracts[];
   allCustomers: IAllCustomers[];
@@ -162,6 +167,7 @@ export interface StateProps {
   notifications: INotifications[];
   notificationCount: number;
   invoices: IInvoices[];
+  chatbotMessages: IChatbotMessages[];
 }
 
 export interface UploadedFileProps {

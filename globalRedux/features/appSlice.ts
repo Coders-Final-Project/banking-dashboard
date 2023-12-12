@@ -12,6 +12,7 @@ import {
   IContractual,
   INotifications,
   IInvoices,
+  IChatbotMessages,
 } from "@/interface";
 
 const initialState: StateProps = {
@@ -21,6 +22,7 @@ const initialState: StateProps = {
   contractual: [],
   notifications: [],
   invoices: [],
+  chatbotMessages: [],
   userCard: {
     _id: -1,
     userName: "",
@@ -69,6 +71,14 @@ export const appSlice: any = createSlice({
     setInvoices: (state, action: PayloadAction<IInvoices[]>) => {
       state.invoices = action.payload;
     },
+    setChatBotMessages: (
+      state,
+      action: PayloadAction<{ key: string; value: string }>,
+    ) => {
+      const { key, value } = action.payload;
+
+      state.chatbotMessages = [...state.chatbotMessages, { key, value }];
+    },
     increaseNotificationCount: (state) => {
       state.notificationCount += 1;
     },
@@ -97,6 +107,7 @@ export const {
   increaseNotificationCount,
   decreaseNotificationsToZero,
   setInvoices,
+  setChatBotMessages,
 } = appSlice.actions;
 
 export default appSlice.reducer;

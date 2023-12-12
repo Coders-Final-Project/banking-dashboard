@@ -58,6 +58,12 @@ const Sidebar = async ({ lng }: { lng: string }) => {
       route: "cards",
       text: `${t("sidebar.link7.title")}`,
     },
+    {
+      id: 8,
+      icon: "chatbot.png",
+      route: "chatbot",
+      text: `Chatbot`,
+    },
   ];
 
   return (
