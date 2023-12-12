@@ -50,9 +50,7 @@
         color: $greyscale-grey-500;
       }
 
-      input[type="password"],
-      input[type="email"],
-      input[type="text"] {
+      .signin__input {
         border: none;
         outline: none;
         border-radius: 12px;

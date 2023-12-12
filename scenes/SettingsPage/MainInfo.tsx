@@ -148,7 +148,7 @@ const MainInfo = () => {
         </div>
         <div className="settings__content__info__main__box__body">
           <div className="settings__content__info__main__box__body__item">
-            <input type="radio" id="individual" name="option" />
+            <input type="radio" id="individual" name="option" checked />
             <label htmlFor="individual">{t("settings.contractType1")}</label>
           </div>
           <div className="settings__content__info__main__box__body__item">
