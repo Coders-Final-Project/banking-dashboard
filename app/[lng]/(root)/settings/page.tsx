@@ -11,8 +11,6 @@ import ProfileInfo from "@/scenes/SettingsPage/ProfileInfo";
 import Withdrawal from "@/scenes/SettingsPage/Withdrawal";
 import Verification from "@/scenes/SettingsPage/Verification";
 
-import { useTranslation } from "@/i18n/client";
-
 const Settings = ({ params: { lng } }: { params: { lng: string } }) => {
   const [activeBtn, setActiveBtn] = useState("personal");
 
@@ -20,14 +18,13 @@ const Settings = ({ params: { lng } }: { params: { lng: string } }) => {
     setActiveBtn(e.target.value);
   };
 
-  const { t } = useTranslation(lng);
-
   return (
     <main className="settings">
       <header className="page__header">
         <div className="page__header__welcome">
           <div className="page__header__welcome__title">
-            {t("settings.main.title")}
+            {/* {t("settings.main.title")} */}
+            Settings
           </div>
         </div>
         <AvatarDetail />
@@ -41,7 +38,8 @@ const Settings = ({ params: { lng } }: { params: { lng: string } }) => {
             value="personal"
             onClick={(e) => handleActiveBtn(e)}
           >
-            {t("settings.link1")}
+            {/* {t("settings.link1")} */}
+            Personal
           </button>
           <button
             className={`settings__content__btns__btn ${
@@ -50,7 +48,8 @@ const Settings = ({ params: { lng } }: { params: { lng: string } }) => {
             value="withdraw"
             onClick={(e) => handleActiveBtn(e)}
           >
-            {t("settings.link2")}
+            {/* {t("settings.link2")} */}
+            Withdrawal Methods
           </button>
           <button
             className={`settings__content__btns__btn ${
@@ -59,7 +58,8 @@ const Settings = ({ params: { lng } }: { params: { lng: string } }) => {
             value="verify"
             onClick={(e) => handleActiveBtn(e)}
           >
-            {t("settings.link3")}
+            {/* {t("settings.link3")} */}
+            Verification
           </button>
         </div>
         <div className="settings__content__info">

@@ -54,7 +54,7 @@ const ProfileInfoPhoto = () => {
 
           if (response.data) {
             updateProfileImg(response.data);
-            setSuccess(`${t("settings.alert.success1")}`);
+            setSuccess(`Profile image updated!`);
           }
         } catch (error) {
           console.log(error);
@@ -65,7 +65,7 @@ const ProfileInfoPhoto = () => {
     };
 
     uploadFile();
-  }, [selectedFile, data._id, updateProfileImg, t]);
+  }, [selectedFile, data._id, updateProfileImg]);
 
   const handleUploadClick = () => {
     if (fileInputRef.current) {

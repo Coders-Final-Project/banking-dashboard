@@ -1,7 +1,7 @@
-@import "/sass/utils/_colors";
-@import "/sass/utils/_variables";
-@import "/sass/utils/_mixins";
-@import "/sass/base/_typography";
+@import "/sass/utils/colors";
+@import "/sass/utils/variables";
+@import "/sass/utils/mixins";
+@import "/sass/base/typography";
 
 .bg-shadow {
   width: 100%;
@@ -118,7 +118,7 @@
     }
   }
   .sidemenu__sendInvoice {
-    @include flexbox($justify: end, $items: center, $gap: 24px);
+    @include flexbox($justify: flex-end, $items: center, $gap: 24px);
     margin-top: 200px;
 
     button {
