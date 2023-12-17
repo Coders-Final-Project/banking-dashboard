@@ -42,7 +42,9 @@ const ContractsClient = ({ lng }: { lng: string }) => {
       }
     };
 
-    fetchAllCustomers();
+    return () => {
+      fetchAllCustomers();
+    };
   }, [data, dispatch]);
 
   return (

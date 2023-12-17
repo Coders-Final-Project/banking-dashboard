@@ -47,7 +47,9 @@ const ContractsActive = ({ lng }: { lng: string }) => {
       }
     };
 
-    fetchCompanyContracts();
+    return () => {
+      fetchCompanyContracts();
+    };
   }, [data, dispatch]);
 
   return (

@@ -63,7 +63,9 @@ const Invoices = ({ params: { lng } }: { params: { lng: string } }) => {
       }
     };
 
-    fetchInvoices();
+    return () => {
+      fetchInvoices();
+    };
   }, [data._id, dispatch]);
 
   const openSidemenu = () => {

@@ -34,8 +34,6 @@ interface Props {
   lng?: string;
 }
 
-import { useTranslation } from "@/i18n/client";
-
 const AvatarDetail = ({ hasBtn, lng }: Props) => {
   const [serverError, setServerError] = useState("");
   const [isNotifyOpen, setIsNotifyOpen] = useState(false);
@@ -115,9 +113,11 @@ const AvatarDetail = ({ hasBtn, lng }: Props) => {
 
     dispatch(setInsuranceCompleted(data.insuranceCompleted));
 
-    fetchTransactions();
-    fetchCardInfo();
-    fetchContractuals();
+    return () => {
+      fetchTransactions();
+      fetchCardInfo();
+      fetchContractuals();
+    };
   }, [currentPage, data, dispatch]);
 
   const activeContracts = companyContracts.map(
