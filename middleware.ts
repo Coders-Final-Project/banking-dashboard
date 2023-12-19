@@ -10,21 +10,53 @@ acceptLanguage.languages(languages);
 export function middleware(request: NextRequest) {
   const path = request.nextUrl.pathname;
 
-  const isPublicPath =
-    path === "/signin" ||
-    path === "/signup" ||
-    path === "/az/signin" ||
-    path === "/en/signup" ||
-    path === "/az/signup" ||
-    path === "/en/signin";
+  const publicPaths = [
+    "/signin",
+    "/signup",
+    "/az/signin",
+    "/en/signup",
+    "/az/signup",
+    "/en/signin",
+  ];
 
   const token = request.cookies.get("token")?.value || "";
 
-  if (isPublicPath && token) {
+  if (publicPaths.includes(path) && token) {
     return NextResponse.redirect(new URL("/", request.nextUrl));
   }
 
-  if (!isPublicPath && !token) {
+  const restrictedPaths = [
+    "/",
+    "/en",
+    "/az",
+    "/en/invoices",
+    "/en/cards",
+    "/en/contracts",
+    "/en/documents",
+    "/en/insurance",
+    "/en/invoices",
+    "/en/settings",
+    "/en/transactions",
+    "/az/invoices",
+    "/az/cards",
+    "/az/contracts",
+    "/az/documents",
+    "/az/insurance",
+    "/az/invoices",
+    "/az/settings",
+    "/az/transactions",
+    "/invoices",
+    "/cards",
+    "/contracts",
+    "/documents",
+    "/insurance",
+    "/invoices",
+    "/settings",
+    "/transactions",
+    "/en/contracts/create",
+  ];
+
+  if (restrictedPaths.includes(path) && !token) {
     return NextResponse.redirect(new URL("/signin", request.nextUrl));
   }
 
@@ -76,7 +108,7 @@ export const config = {
     "/en/transactions",
     "/az/invoices",
     "/az/cards",
-    "/azcontracts",
+    "/az/contracts",
     "/az/documents",
     "/az/insurance",
     "/az/invoices",
