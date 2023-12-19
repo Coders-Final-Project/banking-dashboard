@@ -18,7 +18,7 @@ import { StateProps } from "@/interface";
 
 import { useTranslation } from "@/i18n/client";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 const ContractsActive = ({ lng }: { lng: string }) => {
   const dispatch = useDispatch();
@@ -33,22 +33,38 @@ const ContractsActive = ({ lng }: { lng: string }) => {
 
   const userCard = useSelector((state: StateProps) => state.userCard);
 
+  const effectRef = useRef(false);
+
   useEffect(() => {
-    const fetchCompanyContracts = async () => {
-      try {
-        if (data._id) {
-          const response = await axios.post("/api/contracts/fetch", {
-            userID: data._id,
-          });
-          dispatch(setCompanyContracts(response.data.contracts));
+    if (effectRef.current === true) {
+      const fetchCompanyContracts = async () => {
+        try {
+          if (data._id) {
+            const response = await axios.post(
+              "/api/contracts/fetch",
+              {
+                userID: data._id,
+              },
+              {
+                headers: {
+                  "Cache-Control": "no-cache",
+                  Pragma: "no-cache",
+                  Expires: "0",
+                },
+              },
+            );
+            dispatch(setCompanyContracts(response.data.contracts));
+          }
+        } catch (error: any) {
+          console.log(error);
         }
-      } catch (error: any) {
-        console.log(error);
-      }
-    };
+      };
+
+      fetchCompanyContracts();
+    }
 
     return () => {
-      fetchCompanyContracts();
+      effectRef.current = true;
     };
   }, [data, dispatch]);
 

@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 import "@/sass/scenes/_contractsClient.scss";
 
@@ -27,23 +27,39 @@ const ContractsClient = ({ lng }: { lng: string }) => {
 
   const { t } = useTranslation(lng);
 
-  useEffect(() => {
-    const fetchAllCustomers = async () => {
-      try {
-        if (data._id) {
-          const response = await axios.post("/api/customers", {
-            userID: data._id,
-          });
+  const effectRef = useRef(false);
 
-          dispatch(setAllCustomers(response.data.customers));
+  useEffect(() => {
+    if (effectRef.current === true) {
+      const fetchAllCustomers = async () => {
+        try {
+          if (data._id) {
+            const response = await axios.post(
+              "/api/customers",
+              {
+                userID: data._id,
+              },
+              {
+                headers: {
+                  "Cache-Control": "no-cache",
+                  Pragma: "no-cache",
+                  Expires: "0",
+                },
+              },
+            );
+
+            dispatch(setAllCustomers(response.data.customers));
+          }
+        } catch (error: any) {
+          console.log(error);
         }
-      } catch (error: any) {
-        console.log(error);
-      }
-    };
+      };
+
+      fetchAllCustomers();
+    }
 
     return () => {
-      fetchAllCustomers();
+      effectRef.current = true;
     };
   }, [data, dispatch]);
 

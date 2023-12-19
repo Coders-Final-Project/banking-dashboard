@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 import Image from "next/image";
 
@@ -50,21 +50,37 @@ const Invoices = ({ params: { lng } }: { params: { lng: string } }) => {
     }
   };
 
-  useEffect(() => {
-    const fetchInvoices = async () => {
-      try {
-        const response = await axios.post("/api/invoice/fetch", {
-          userID: data._id,
-        });
+  const effectRef = useRef(false);
 
-        dispatch(setInvoices(response.data.invoices));
-      } catch (error) {
-        console.log(error);
-      }
-    };
+  useEffect(() => {
+    if (effectRef.current === true) {
+      const fetchInvoices = async () => {
+        try {
+          const response = await axios.post(
+            "/api/invoice/fetch",
+            {
+              userID: data._id,
+            },
+            {
+              headers: {
+                "Cache-Control": "no-cache",
+                Pragma: "no-cache",
+                Expires: "0",
+              },
+            },
+          );
+
+          dispatch(setInvoices(response.data.invoices));
+        } catch (error) {
+          console.log(error);
+        }
+      };
+
+      fetchInvoices();
+    }
 
     return () => {
-      fetchInvoices();
+      effectRef.current = true;
     };
   }, [data._id, dispatch]);
 

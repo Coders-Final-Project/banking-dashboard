@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 import { useGlobalContext } from "@/context/store";
 
@@ -57,66 +57,102 @@ const AvatarDetail = ({ hasBtn, lng }: Props) => {
 
   const url = data.profileImg?.[0]?.fileUrl?.secure_url;
 
+  const effectRef = useRef(false);
+
   useEffect(() => {
-    const fetchCardInfo = async () => {
-      try {
-        if (
-          data._id &&
-          (currentPage === `/az` ||
-            currentPage === `/en` ||
-            currentPage.includes("cards"))
-        ) {
-          const response = await axios.post("/api/card/fetch", {
-            userID: data._id,
-          });
+    if (effectRef.current === true) {
+      const fetchCardInfo = async () => {
+        try {
+          if (
+            data._id &&
+            (currentPage === `/az` ||
+              currentPage === `/en` ||
+              currentPage.includes("cards"))
+          ) {
+            const response = await axios.post(
+              "/api/card/fetch",
+              {
+                userID: data._id,
+              },
+              {
+                headers: {
+                  "Cache-Control": "no-cache",
+                  Pragma: "no-cache",
+                  Expires: "0",
+                },
+              },
+            );
 
-          if (response.data.card !== undefined) {
-            dispatch(setUserCardInfo(response.data.card));
+            if (response.data.card !== undefined) {
+              dispatch(setUserCardInfo(response.data.card));
+            }
           }
+        } catch (error) {
+          console.log(error);
         }
-      } catch (error) {
-        console.log(error);
-      }
-    };
+      };
 
-    const fetchTransactions = async () => {
-      try {
-        if (
-          data._id &&
-          (currentPage === `/az` ||
-            currentPage === `/en` ||
-            currentPage.includes("transactions"))
-        ) {
-          const response = await axios.post("/api/transactions", {
-            userID: data._id,
-          });
+      const fetchTransactions = async () => {
+        try {
+          if (
+            data._id &&
+            (currentPage === `/az` ||
+              currentPage === `/en` ||
+              currentPage.includes("transactions"))
+          ) {
+            const response = await axios.post(
+              "/api/transactions",
+              {
+                userID: data._id,
+              },
+              {
+                headers: {
+                  "Cache-Control": "no-cache",
+                  Pragma: "no-cache",
+                  Expires: "0",
+                },
+              },
+            );
 
-          dispatch(setTransactions(response.data.transactions));
+            dispatch(setTransactions(response.data.transactions));
+          }
+        } catch (error: any) {
+          console.log(error);
         }
-      } catch (error: any) {
-        console.log(error);
-      }
-    };
+      };
 
-    const fetchContractuals = async () => {
-      try {
-        if (data._id && currentPage.includes("cards")) {
-          const response = await axios.post("/api/contractual", {
-            userID: data._id,
-          });
-          dispatch(setContractual(response.data.contractuals));
+      const fetchContractuals = async () => {
+        try {
+          if (data._id && currentPage.includes("cards")) {
+            const response = await axios.post(
+              "/api/contractual",
+              {
+                userID: data._id,
+              },
+              {
+                headers: {
+                  "Cache-Control": "no-cache",
+                  Pragma: "no-cache",
+                  Expires: "0",
+                },
+              },
+            );
+            dispatch(setContractual(response.data.contractuals));
+          }
+        } catch (error: any) {
+          console.log(error);
         }
-      } catch (error: any) {
-        console.log(error);
-      }
-    };
+      };
 
-    dispatch(setInsuranceCompleted(data.insuranceCompleted));
-
-    return () => {
       fetchTransactions();
       fetchCardInfo();
       fetchContractuals();
+
+      dispatch(setInsuranceCompleted(data.insuranceCompleted));
+    }
+
+    return () => {
+      effectRef.current = true;
     };
   }, [currentPage, data, dispatch]);
 
@@ -139,6 +175,7 @@ const AvatarDetail = ({ hasBtn, lng }: Props) => {
   const handleLogout = async () => {
     try {
       await axios.get("/api/user/logout");
+      localStorage.removeItem("persist:primary");
       localStorage.removeItem("persist:root");
       router.push("/signin");
     } catch (error: any) {

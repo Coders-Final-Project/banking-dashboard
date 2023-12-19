@@ -63,10 +63,20 @@ const ProfileDetails = () => {
 
   const handleSave = async () => {
     try {
-      const response = await axios.post("/api/user/info", {
-        userValues: userValues,
-        userID: data._id,
-      });
+      const response = await axios.post(
+        "/api/user/info",
+        {
+          userValues: userValues,
+          userID: data._id,
+        },
+        {
+          headers: {
+            "Cache-Control": "no-cache",
+            Pragma: "no-cache",
+            Expires: "0",
+          },
+        },
+      );
 
       if (response.data.success) {
         setSuccess(response.data.message);

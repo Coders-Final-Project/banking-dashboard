@@ -72,9 +72,19 @@ const Insurance = ({ params: { lng } }: { params: { lng: string } }) => {
 
     try {
       if (data._id) {
-        const response = await axios.post("/api/insurance", {
-          userID: data._id,
-        });
+        const response = await axios.post(
+          "/api/insurance",
+          {
+            userID: data._id,
+          },
+          {
+            headers: {
+              "Cache-Control": "no-cache",
+              Pragma: "no-cache",
+              Expires: "0",
+            },
+          },
+        );
 
         dispatch(setInsuranceCompleted(response.data.data));
         dispatch(increaseNotificationCount());

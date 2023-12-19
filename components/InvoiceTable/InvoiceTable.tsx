@@ -14,6 +14,10 @@ const InvoiceTable = ({ invoices }: InvoiceTableProps) => {
   return (
     <>
       <div>
+        {invoices.length === 0 && (
+          <div className="no-invoice">There is no invoice yet!</div>
+        )}
+
         {invoices?.map((item, index) => {
           const { formattedDate } = getFormattedDate(item.createdAt);
 
