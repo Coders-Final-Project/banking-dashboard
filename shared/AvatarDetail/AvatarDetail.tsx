@@ -246,6 +246,12 @@ const AvatarDetail = ({ hasBtn, lng }: Props) => {
           >
             Profile
           </Link>
+          <Link
+            href="/contact"
+            className="avatar__detail__person__dropdown__profile"
+          >
+            Contact
+          </Link>
           <button
             onClick={handleLogout}
             className="avatar__detail__person__dropdown__logoutBtn"
