@@ -22,10 +22,7 @@ const Settings = ({ params: { lng } }: { params: { lng: string } }) => {
     <main className="settings">
       <header className="page__header">
         <div className="page__header__welcome">
-          <div className="page__header__welcome__title">
-            {/* {t("settings.main.title")} */}
-            Settings
-          </div>
+          <div className="page__header__welcome__title">Settings</div>
         </div>
         <AvatarDetail />
       </header>
@@ -38,7 +35,6 @@ const Settings = ({ params: { lng } }: { params: { lng: string } }) => {
             value="personal"
             onClick={(e) => handleActiveBtn(e)}
           >
-            {/* {t("settings.link1")} */}
             Personal
           </button>
           <button
@@ -48,7 +44,6 @@ const Settings = ({ params: { lng } }: { params: { lng: string } }) => {
             value="withdraw"
             onClick={(e) => handleActiveBtn(e)}
           >
-            {/* {t("settings.link2")} */}
             Withdrawal Methods
           </button>
           <button
@@ -58,7 +53,6 @@ const Settings = ({ params: { lng } }: { params: { lng: string } }) => {
             value="verify"
             onClick={(e) => handleActiveBtn(e)}
           >
-            {/* {t("settings.link3")} */}
             Verification
           </button>
         </div>

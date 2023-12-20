@@ -87,7 +87,6 @@ const CardTransferItem = ({ imgUrlEnd, text }: IProps) => {
         setErrorAlert(true);
       }
     } catch (error) {
-      console.log(error);
       setErrorAlert(true);
     } finally {
       setCardNumber("");

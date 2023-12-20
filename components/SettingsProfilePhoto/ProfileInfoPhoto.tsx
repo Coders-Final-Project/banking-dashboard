@@ -56,8 +56,8 @@ const ProfileInfoPhoto = () => {
             updateProfileImg(response.data);
             setSuccess(`Profile image updated!`);
           }
-        } catch (error) {
-          console.log(error);
+        } catch (error: any) {
+          setServerError(error.response.data.message);
         } finally {
           setSelectedFile(null);
         }
@@ -90,8 +90,8 @@ const ProfileInfoPhoto = () => {
         setSuccess(`${t("settings.alert.success2")}`);
         deleteProfileImage();
       }
-    } catch (error) {
-      console.log(error);
+    } catch (error: any) {
+      setServerError(error.response.data.message);
     }
   };
 

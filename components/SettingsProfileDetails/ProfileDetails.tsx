@@ -87,7 +87,6 @@ const ProfileDetails = () => {
       }
     } catch (error: any) {
       setServerError(error.message);
-      console.log(error);
     }
   };
 

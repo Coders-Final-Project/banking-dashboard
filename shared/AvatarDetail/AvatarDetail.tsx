@@ -87,8 +87,8 @@ const AvatarDetail = ({ hasBtn, lng }: Props) => {
               dispatch(setUserCardInfo(response.data.card));
             }
           }
-        } catch (error) {
-          console.log(error);
+        } catch (error: any) {
+          setServerError(error.response.data.message);
         }
       };
 
@@ -117,7 +117,7 @@ const AvatarDetail = ({ hasBtn, lng }: Props) => {
             dispatch(setTransactions(response.data.transactions));
           }
         } catch (error: any) {
-          console.log(error);
+          setServerError(error.response.data.message);
         }
       };
 
@@ -140,7 +140,7 @@ const AvatarDetail = ({ hasBtn, lng }: Props) => {
             dispatch(setContractual(response.data.contractuals));
           }
         } catch (error: any) {
-          console.log(error);
+          setServerError(error.response.data.message);
         }
       };
 

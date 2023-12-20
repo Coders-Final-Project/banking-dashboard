@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 
 import Image from "next/image";
 
@@ -21,6 +21,15 @@ import { definedQuestions } from "@/constants";
 
 const Chatbot = ({ params: { lng } }: { params: { lng: string } }) => {
   const [question, setQuestion] = useState("");
+  const [errorAlert, setErrorAlert] = useState("");
+
+  useEffect(() => {
+    if (errorAlert !== "") {
+      setTimeout(() => {
+        setErrorAlert("");
+      }, 2000);
+    }
+  }, [errorAlert]);
 
   const messages = useSelector((state: StateProps) => state.chatbotMessages);
 
@@ -48,8 +57,8 @@ const Chatbot = ({ params: { lng } }: { params: { lng: string } }) => {
       dispatch(setChatBotMessages({ key: "chatbot", value: chatbotResponse }));
 
       chatContainerRef.current?.scrollIntoView({ behavior: "smooth" });
-    } catch (error) {
-      console.log(error);
+    } catch (error: any) {
+      setErrorAlert(error);
     }
   };
 
@@ -139,6 +148,9 @@ const Chatbot = ({ params: { lng } }: { params: { lng: string } }) => {
           </button>
         </form>
       </div>
+      {errorAlert !== "" && (
+        <div className="chatbot__alert--error">{errorAlert}</div>
+      )}
     </main>
   );
 };

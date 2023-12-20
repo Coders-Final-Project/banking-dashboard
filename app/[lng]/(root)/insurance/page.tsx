@@ -27,6 +27,7 @@ const Insurance = ({ params: { lng } }: { params: { lng: string } }) => {
   const [isCoverageOpen, setIsCoverageOpen] = useState(true);
   const [isApproveClicked, setIsApproveClicked] = useState(false);
   const [successAlert, setSuccessAlert] = useState(false);
+  const [errorAlert, setErrorAlert] = useState("");
 
   const { t } = useTranslation(lng);
 
@@ -48,7 +49,12 @@ const Insurance = ({ params: { lng } }: { params: { lng: string } }) => {
         setSuccessAlert(false);
       }, 2000);
     }
-  }, [successAlert]);
+    if (errorAlert !== "") {
+      setTimeout(() => {
+        setErrorAlert("");
+      }, 2000);
+    }
+  }, [successAlert, errorAlert]);
 
   const handleCoverage = () => {
     setIsCoverageOpen((prevValue) => !prevValue);
@@ -91,8 +97,8 @@ const Insurance = ({ params: { lng } }: { params: { lng: string } }) => {
         updateInsuranceCompleted(response.data.data);
         setSuccessAlert(true);
       }
-    } catch (error) {
-      console.log(error);
+    } catch (error: any) {
+      setErrorAlert(error);
     }
   };
 
@@ -231,6 +237,9 @@ const Insurance = ({ params: { lng } }: { params: { lng: string } }) => {
         <div className="insurance__alert--success">
           {t("insurance.alert.success")}
         </div>
+      )}
+      {errorAlert !== "" && (
+        <div className="insurance__alert--error">{errorAlert}</div>
       )}
     </main>
   );

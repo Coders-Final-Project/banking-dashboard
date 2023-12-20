@@ -3,6 +3,8 @@
 import Image from "next/image";
 import Link from "next/link";
 
+import { useState } from "react";
+
 import "@/sass/scenes/_contractsActive.scss";
 
 import ContractsItem from "@/components/ContractsItem/ContractsItem";
@@ -21,6 +23,16 @@ import { useTranslation } from "@/i18n/client";
 import { useEffect, useRef } from "react";
 
 const ContractsActive = ({ lng }: { lng: string }) => {
+  const [errorAlert, setErrorAlert] = useState("");
+
+  useEffect(() => {
+    if (errorAlert !== "") {
+      setTimeout(() => {
+        setErrorAlert("");
+      }, 2000);
+    }
+  }, [errorAlert]);
+
   const dispatch = useDispatch();
 
   const { data } = useGlobalContext();
@@ -56,7 +68,7 @@ const ContractsActive = ({ lng }: { lng: string }) => {
             dispatch(setCompanyContracts(response.data.contracts));
           }
         } catch (error: any) {
-          console.log(error);
+          setErrorAlert(error.response.data.message);
         }
       };
 
@@ -100,6 +112,9 @@ const ContractsActive = ({ lng }: { lng: string }) => {
           <ContractsItem key={contract._id} {...contract} lng={lng} />
         ))}
       </div>
+      {errorAlert !== "" && (
+        <div className="contract__active__alert--error">{errorAlert}</div>
+      )}
     </div>
   );
 };

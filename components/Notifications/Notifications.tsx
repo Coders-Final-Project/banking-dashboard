@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 import axios from "axios";
 
@@ -18,6 +18,16 @@ import { StateProps } from "@/interface";
 import { getFormattedDate, defineNotificationImage } from "@/helpers";
 
 const Notifications = () => {
+  const [errorAlert, setErrorAlert] = useState("");
+
+  useEffect(() => {
+    if (errorAlert !== "") {
+      setTimeout(() => {
+        setErrorAlert("");
+      }, 2000);
+    }
+  }, [errorAlert]);
+
   const { data } = useGlobalContext();
 
   const dispatch = useDispatch();
@@ -30,8 +40,8 @@ const Notifications = () => {
         });
 
         dispatch(setNotifications(response.data.notifications));
-      } catch (error) {
-        console.log(error);
+      } catch (error: any) {
+        setErrorAlert(error.response.data.message);
       }
     };
 
@@ -48,8 +58,8 @@ const Notifications = () => {
       });
 
       dispatch(setNotifications(response.data.notifications));
-    } catch (error) {
-      console.log(error);
+    } catch (error: any) {
+      setErrorAlert(error.response.data.message);
     }
   };
 
@@ -102,6 +112,9 @@ const Notifications = () => {
           );
         })}
       </div>
+      {errorAlert !== "" && (
+        <div className="notification__alert--error">{errorAlert}</div>
+      )}
     </div>
   );
 };

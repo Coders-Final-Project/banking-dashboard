@@ -150,7 +150,6 @@ const Sidemenu = ({ setOpenSideMenu }: IProps) => {
           dispatch(increaseNotificationCount());
         }
       } catch (error) {
-        console.log(error);
         setErrorAlert("Something went wrong!");
       }
     } else {

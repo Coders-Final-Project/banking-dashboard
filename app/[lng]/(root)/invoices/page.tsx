@@ -28,6 +28,15 @@ const Invoices = ({ params: { lng } }: { params: { lng: string } }) => {
   const [invoiceData, setInvoiceData] = useState<IInvoicesData[]>(invoicesData);
   const [changeState, setChangeState] = useState<boolean>(false);
   const [openSideMenu, setOpenSideMenu] = useState<boolean>(false);
+  const [errorAlert, setErrorAlert] = useState("");
+
+  useEffect(() => {
+    if (errorAlert !== "") {
+      setTimeout(() => {
+        setErrorAlert("");
+      }, 2000);
+    }
+  }, [errorAlert]);
 
   const { t } = useTranslation(lng);
 
@@ -71,8 +80,8 @@ const Invoices = ({ params: { lng } }: { params: { lng: string } }) => {
           );
 
           dispatch(setInvoices(response.data.invoices));
-        } catch (error) {
-          console.log(error);
+        } catch (error: any) {
+          setErrorAlert(error);
         }
       };
 
@@ -248,6 +257,9 @@ const Invoices = ({ params: { lng } }: { params: { lng: string } }) => {
             </div>
           </div>
         </div>
+        {errorAlert !== "" && (
+          <div className="invoice__alert--error">{errorAlert}</div>
+        )}
       </main>
     </>
   );

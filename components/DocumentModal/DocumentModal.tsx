@@ -89,7 +89,6 @@ const DocumentModal = ({ docKey, setIsUploadClicked }: IProps) => {
       }
     } catch (error) {
       setMessage("Uploading failed");
-      console.log(error);
     } finally {
       setSelectedFile(null);
     }

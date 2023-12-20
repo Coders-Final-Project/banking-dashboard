@@ -61,3 +61,16 @@
   color: $main-color-blue;
   margin-top: 20px;
 }
+
+.contract__client__alert--error {
+  position: fixed;
+  top: 10%;
+  left: 61%;
+  transform: translate(-61%, -10%);
+  padding: 15px;
+  border-radius: 20px;
+  box-shadow: $box-shadow;
+  font-size: 18px;
+  background-color: $action-red-100;
+  color: $main-color-white;
+}

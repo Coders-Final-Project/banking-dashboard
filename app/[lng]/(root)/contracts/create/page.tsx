@@ -117,7 +117,7 @@ const ContractCreate = () => {
         setErrorAlert(true);
       }
     } catch (error) {
-      console.log(error);
+      setErrorAlert(true);
     }
   };
 

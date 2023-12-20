@@ -30,6 +30,7 @@ const ContractsItem = ({
 }: ICompanyContracts) => {
   const [isDeleteBtnClicked, setIsDeleteBtnClicked] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [errorAlert, setErrorAlert] = useState("");
 
   const { t } = useTranslation(lng);
 
@@ -49,7 +50,12 @@ const ContractsItem = ({
         setSuccess(false);
       }, 2000);
     }
-  }, [success]);
+    if (errorAlert !== "") {
+      setTimeout(() => {
+        setErrorAlert("");
+      }, 2000);
+    }
+  }, [success, errorAlert]);
 
   const handleDeleteContract = async () => {
     try {
@@ -61,8 +67,8 @@ const ContractsItem = ({
       dispatch(increaseNotificationCount());
       dispatch(removeContract(_id));
       setSuccess(true);
-    } catch (error) {
-      console.log(error);
+    } catch (error: any) {
+      setErrorAlert(error.response.data.message);
     }
   };
 
@@ -100,7 +106,6 @@ const ContractsItem = ({
             {t("contract.active.item.period")}
           </div>
           <div className="contracts__content__active__body__item__secondary__period__date">
-            {/* {startDate} - {endDate} */}
             {date}
           </div>
         </div>
@@ -148,6 +153,9 @@ const ContractsItem = ({
         <div className="contractDelete__alert--success">
           {t("contract.delete.message")}
         </div>
+      )}
+      {errorAlert !== "" && (
+        <div className="contractDelete__alert--error">{errorAlert}</div>
       )}
     </div>
   );

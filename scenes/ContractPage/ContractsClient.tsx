@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import "@/sass/scenes/_contractsClient.scss";
 
@@ -19,6 +19,16 @@ import { useGlobalContext } from "@/context/store";
 import { useTranslation } from "@/i18n/client";
 
 const ContractsClient = ({ lng }: { lng: string }) => {
+  const [errorAlert, setErrorAlert] = useState("");
+
+  useEffect(() => {
+    if (errorAlert !== "") {
+      setTimeout(() => {
+        setErrorAlert("");
+      }, 2000);
+    }
+  }, [errorAlert]);
+
   const dispatch = useDispatch();
 
   const { data } = useGlobalContext();
@@ -51,7 +61,7 @@ const ContractsClient = ({ lng }: { lng: string }) => {
             dispatch(setAllCustomers(response.data.customers));
           }
         } catch (error: any) {
-          console.log(error);
+          setErrorAlert(error.response.data.message);
         }
       };
 
@@ -86,6 +96,9 @@ const ContractsClient = ({ lng }: { lng: string }) => {
           <ContractClientItem key={client._id} {...client} lng={lng} />
         ))}
       </div>
+      {errorAlert !== "" && (
+        <div className="contract__client__alert--error">{errorAlert}</div>
+      )}
     </div>
   );
 };

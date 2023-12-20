@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import "@/sass/components/_addCardModal.scss";
 
@@ -27,6 +27,15 @@ import { useTranslation } from "@/i18n/client";
 
 const AddCardModal = ({ handleCardModal, setShowALert }: IProps) => {
   const [cardValues, setCardValues] = useState<ICardFormVaues>(INITIAL_VALUES);
+  const [errorAlert, setErrorAlert] = useState("");
+
+  useEffect(() => {
+    if (errorAlert !== "") {
+      setTimeout(() => {
+        setErrorAlert("");
+      }, 2000);
+    }
+  }, [errorAlert]);
 
   const curLang = useSelector((state: StateProps) => state.curLang);
 
@@ -57,8 +66,8 @@ const AddCardModal = ({ handleCardModal, setShowALert }: IProps) => {
       }, 2000);
 
       handleCardModal();
-    } catch (error) {
-      console.log(error);
+    } catch (error: any) {
+      setErrorAlert(error.response.data.message);
     }
   };
 
@@ -149,6 +158,9 @@ const AddCardModal = ({ handleCardModal, setShowALert }: IProps) => {
       >
         x
       </button>
+      {errorAlert !== "" && (
+        <div className="card__modal__alert--error">{errorAlert}</div>
+      )}
     </form>
   );
 };

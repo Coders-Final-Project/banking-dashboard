@@ -93,7 +93,6 @@ const TransactionsTableItem = ({
         setErrorAlert(true);
       }
     } catch (error) {
-      console.log(error);
       setErrorAlert(true);
     } finally {
       setCardNumber("");
