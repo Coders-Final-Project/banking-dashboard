@@ -6,6 +6,7 @@ import User from "@/lib/models/user.model";
 import Invoice from "@/lib/models/invoice.model";
 import Card from "@/lib/models/card.model";
 import Notification from "@/lib/models/notification.model";
+import CompanyContract from "@/lib/models/company.contract.model";
 
 import { generateRandomStringNumberPair } from "@/lib/helpers/generateInvoicePair";
 
@@ -23,6 +24,11 @@ export async function POST(request: NextRequest) {
     const items = reqBody.itemData;
 
     const receiver = await User.find({ email });
+    const sender = await User.find({ senderID });
+
+    if (sender[0].email === email) {
+      return NextResponse.json({ message: "Invalid operation!", status: 400 });
+    }
 
     if (receiver.length === 0) {
       return NextResponse.json({ message: "User not found!", status: 400 });
@@ -36,6 +42,18 @@ export async function POST(request: NextRequest) {
 
     if (!senderCard && !receiverCard) {
       return NextResponse.json({ message: "Card not found!", status: 400 });
+    }
+
+    const contracts = await CompanyContract.find({ receiverID });
+
+    const contractSet = new Set();
+
+    contracts.forEach((contract) => {
+      contractSet.add(contract.projectName);
+    });
+
+    if (!contractSet.has(pname)) {
+      return NextResponse.json({ message: "Project not found!", status: 400 });
     }
 
     const totalAmount = items.reduce((count: number, item: any) => {
