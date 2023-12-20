@@ -12,7 +12,6 @@ import {
   IContractual,
   INotifications,
   IInvoices,
-  IChatbotMessages,
 } from "@/interface";
 
 const initialState: StateProps = {
@@ -79,6 +78,9 @@ export const appSlice: any = createSlice({
 
       state.chatbotMessages = [...state.chatbotMessages, { key, value }];
     },
+    deleteTheLastMessage: (state) => {
+      state.chatbotMessages.pop();
+    },
     increaseNotificationCount: (state) => {
       state.notificationCount += 1;
     },
@@ -108,6 +110,7 @@ export const {
   decreaseNotificationsToZero,
   setInvoices,
   setChatBotMessages,
+  deleteTheLastMessage,
 } = appSlice.actions;
 
 export default appSlice.reducer;
