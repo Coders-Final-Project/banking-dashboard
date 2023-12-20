@@ -22,7 +22,7 @@ const Withdrawal = () => {
           </div>
           <div className="withdrawal__automatic__header__toggle">
             <label className="switch">
-              <input type="checkbox" />
+              <input type="checkbox" name="check" />
               <span className="slider round"></span>
             </label>
           </div>

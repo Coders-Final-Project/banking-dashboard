@@ -126,6 +126,7 @@ const Chatbot = ({ params: { lng } }: { params: { lng: string } }) => {
           <input
             type="text"
             value={question}
+            name="user_input"
             onChange={(e) => setQuestion(e.target.value)}
             className="chatbot__content__form__input"
           />

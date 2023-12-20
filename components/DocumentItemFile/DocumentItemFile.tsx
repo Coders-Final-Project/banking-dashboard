@@ -11,6 +11,7 @@ import "@/sass/components/_documentItemFile.scss";
 
 interface IProps {
   title: string;
+  docKey:string;
   isSubmitted: boolean;
   color: string;
   handleUpload: (e: any, title: string) => void;
@@ -19,6 +20,7 @@ interface IProps {
 const DocumentItemFile = ({
   title,
   isSubmitted,
+  docKey,
   color,
   handleUpload,
 }: IProps) => {
@@ -47,7 +49,7 @@ const DocumentItemFile = ({
         </div>
       </div>
       <button
-        onClick={(e) => handleUpload(e, title)}
+        onClick={(e) => handleUpload(e, docKey)}
         className="document__item__file__input"
       >
         <Image

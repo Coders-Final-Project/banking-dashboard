@@ -151,7 +151,11 @@ const ContractCreate = () => {
         style={{ width: `${progressBar}%` }}
       />
       <div className="contract__create__content">
-        <form onSubmit={onSubmit} className="contract__create__content__form">
+        <form
+          autoComplete="off"
+          onSubmit={onSubmit}
+          className="contract__create__content__form"
+        >
           {step}
           <div className="contract__create__content__form__btns">
             {!isFirstStep && (

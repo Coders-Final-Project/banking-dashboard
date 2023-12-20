@@ -127,6 +127,7 @@ const ProfileInfoPhoto = () => {
               ref={fileInputRef}
               style={{ display: "none" }}
               onChange={handleFileChange}
+              name="profile_img"
             />
           </button>
           <button

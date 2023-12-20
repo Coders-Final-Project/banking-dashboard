@@ -178,6 +178,8 @@ const TransactionsTableItem = ({
               onChange={handleChange}
               minLength={19}
               maxLength={19}
+              autoComplete="off"
+              name="card_number"
             />
             <input
               type="number"
@@ -185,6 +187,8 @@ const TransactionsTableItem = ({
               placeholder={`${t("actions.modal.text2")}`}
               value={fundAmount}
               onChange={(e) => setFundAmount(e.target.value)}
+              autoComplete="off"
+              name="amount"
             />
             <button
               className="action__item__modal__content__btn"

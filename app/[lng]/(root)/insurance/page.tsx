@@ -111,7 +111,11 @@ const Insurance = ({ params: { lng } }: { params: { lng: string } }) => {
       </header>
       <div className="insurance__place">
         <div className="insurance__place__text">{t("insurance.live")}</div>
-        <select className="insurance__place__options">
+        <select
+          className="insurance__place__options"
+          name="country"
+          autoComplete="off"
+        >
           <option value="azerbaijan">Azerbaijan</option>
           <option value="turkey">Turkey</option>
         </select>

@@ -48,6 +48,7 @@ const ContractGeneral = ({
           placeholder="Enter client name"
           value={client}
           onChange={(e) => updateFields({ client: e.target.value })}
+          autoComplete="off"
         />
       </div>
       <div className="contract__general__twoColumn">
@@ -58,6 +59,7 @@ const ContractGeneral = ({
             value={company}
             onChange={(e) => updateFields({ company: e.target.value })}
             required
+            autoComplete="off"
           >
             {definedContracts.map((contract, index) => {
               if (!activeContracts.includes(contract)) {
@@ -77,6 +79,7 @@ const ContractGeneral = ({
             value={currency}
             onChange={(e) => updateFields({ currency: e.target.value })}
             required
+            autoComplete="off"
           >
             <option value="AZN">AZN</option>
           </select>
@@ -92,11 +95,12 @@ const ContractGeneral = ({
             placeholder="UI/UX Design for Beauty Start-up"
             value={projectName}
             onChange={(e) => updateFields({ projectName: e.target.value })}
+            autoComplete="off"
           />
         </div>
 
         <div className="contract__general__oneColumn">
-          <label htmlFor="job">Fixed Rate</label>
+          <label htmlFor="rate">Fixed Rate</label>
           <input
             type="number"
             id="rate"
@@ -105,6 +109,7 @@ const ContractGeneral = ({
             value={rate}
             style={{ padding: "10px" }}
             onChange={(e) => updateFields({ rate: e.target.value })}
+            autoComplete="off"
           />
         </div>
       </div>
@@ -117,6 +122,7 @@ const ContractGeneral = ({
           placeholder="Select Date"
           value={date}
           onChange={(e) => updateFields({ date: e.target.value })}
+          autoComplete="off"
         />
       </div>
     </ContractFormWrapper>

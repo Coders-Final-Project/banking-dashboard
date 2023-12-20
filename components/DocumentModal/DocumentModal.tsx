@@ -16,7 +16,7 @@ import { useGlobalContext } from "@/context/store";
 import "@/sass/components/_documentModal.scss";
 
 interface IProps {
-  title: string;
+  docKey: string;
   setIsUploadClicked: (input: boolean) => void;
 }
 
@@ -25,7 +25,7 @@ const INITIAL_PROGRESS = {
   pc: 0,
 };
 
-const DocumentModal = ({ title, setIsUploadClicked }: IProps) => {
+const DocumentModal = ({ docKey, setIsUploadClicked }: IProps) => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [progress, setProgress] = useState(INITIAL_PROGRESS);
   const [message, setMessage] = useState<string | null>(null);
@@ -60,7 +60,7 @@ const DocumentModal = ({ title, setIsUploadClicked }: IProps) => {
 
     const formData = new FormData();
     formData.append("userId", data._id);
-    formData.append("fileName", title);
+    formData.append("fileName", docKey);
     formData.append("fileUrl", selectedFile);
 
     setMessage("Uploading...");
@@ -103,7 +103,7 @@ const DocumentModal = ({ title, setIsUploadClicked }: IProps) => {
     <div className={`document__modal `}>
       <div className="document__modal__card">
         <div className="document__modal__card__heading">
-          <div className="document__modal__card__heading__title">{title}</div>
+          <div className="document__modal__card__heading__title">{docKey}</div>
           <button
             onClick={handleCloseModal}
             className="document__modal__card__heading__closeBtn"

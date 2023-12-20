@@ -100,6 +100,8 @@ const ProfileDetails = () => {
           id="name"
           placeholder={data.firstName + " " + data.lastName}
           disabled
+          name="person"
+          autoComplete="off"
         />
       </div>
       <div className="profile__details__item">
@@ -110,11 +112,18 @@ const ProfileDetails = () => {
           value={userValues.dateOfBirth}
           onChange={(e) => handleUserValues(e)}
           name="dateOfBirth"
+          autoComplete="off"
         />
       </div>
       <div className="profile__details__item">
         <label htmlFor="citizen">{t("settings.details.field3")}</label>
-        <select id="citizen" value="Azerbaijan" disabled>
+        <select
+          id="citizen"
+          value="Azerbaijan"
+          disabled
+          name="country"
+          autoComplete="off"
+        >
           <option value="Azerbaijan">Azerbaijan</option>
         </select>
       </div>
@@ -127,6 +136,7 @@ const ProfileDetails = () => {
           name="phone"
           value={userValues.phone}
           onChange={(e) => handleUserValues(e)}
+          autoComplete="off"
         />
       </div>
       <div className="profile__details__sidebyside">
@@ -139,6 +149,7 @@ const ProfileDetails = () => {
             name="street"
             value={userValues.street}
             onChange={(e) => handleUserValues(e)}
+            autoComplete="off"
           />
         </div>
         <div className="profile__details__sidebyside__item">
@@ -150,6 +161,7 @@ const ProfileDetails = () => {
             name="city"
             value={userValues.city}
             onChange={(e) => handleUserValues(e)}
+            autoComplete="off"
           />
         </div>
       </div>
@@ -163,6 +175,7 @@ const ProfileDetails = () => {
             name="zipCode"
             value={userValues.zipCode}
             onChange={(e) => handleUserValues(e)}
+            autoComplete="off"
           />
         </div>
         <div className="profile__details__sidebyside__item">
@@ -174,6 +187,7 @@ const ProfileDetails = () => {
             name="country"
             value={userValues.country}
             onChange={(e) => handleUserValues(e)}
+            autoComplete="off"
           />
         </div>
       </div>
