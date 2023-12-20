@@ -3,6 +3,8 @@
 import Image from "next/image";
 import Link from "next/link";
 
+import { useState } from "react";
+
 import "@/sass/scenes/_contractsActive.scss";
 
 import ContractsItem from "@/components/ContractsItem/ContractsItem";
@@ -18,9 +20,19 @@ import { StateProps } from "@/interface";
 
 import { useTranslation } from "@/i18n/client";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 const ContractsActive = ({ lng }: { lng: string }) => {
+  const [errorAlert, setErrorAlert] = useState("");
+
+  useEffect(() => {
+    if (errorAlert !== "") {
+      setTimeout(() => {
+        setErrorAlert("");
+      }, 2000);
+    }
+  }, [errorAlert]);
+
   const dispatch = useDispatch();
 
   const { data } = useGlobalContext();
@@ -33,21 +45,39 @@ const ContractsActive = ({ lng }: { lng: string }) => {
 
   const userCard = useSelector((state: StateProps) => state.userCard);
 
-  useEffect(() => {
-    const fetchCompanyContracts = async () => {
-      try {
-        if (data._id) {
-          const response = await axios.post("/api/contracts/fetch", {
-            userID: data._id,
-          });
-          dispatch(setCompanyContracts(response.data.contracts));
-        }
-      } catch (error: any) {
-        console.log(error);
-      }
-    };
+  const effectRef = useRef(false);
 
-    fetchCompanyContracts();
+  useEffect(() => {
+    if (effectRef.current === true) {
+      const fetchCompanyContracts = async () => {
+        try {
+          if (data._id) {
+            const response = await axios.post(
+              "/api/contracts/fetch",
+              {
+                userID: data._id,
+              },
+              {
+                headers: {
+                  "Cache-Control": "no-cache",
+                  Pragma: "no-cache",
+                  Expires: "0",
+                },
+              },
+            );
+            dispatch(setCompanyContracts(response.data.contracts));
+          }
+        } catch (error: any) {
+          setErrorAlert(error.response.data.message);
+        }
+      };
+
+      fetchCompanyContracts();
+    }
+
+    return () => {
+      effectRef.current = true;
+    };
   }, [data, dispatch]);
 
   return (
@@ -82,6 +112,9 @@ const ContractsActive = ({ lng }: { lng: string }) => {
           <ContractsItem key={contract._id} {...contract} lng={lng} />
         ))}
       </div>
+      {errorAlert !== "" && (
+        <div className="contract__active__alert--error">{errorAlert}</div>
+      )}
     </div>
   );
 };

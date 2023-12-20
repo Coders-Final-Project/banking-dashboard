@@ -39,6 +39,8 @@ const ContractScope = ({ workScope, updateFields }: ScopeFormProps) => {
           placeholder="Descripe scope of work"
           value={workScope}
           required
+          autoComplete="off"
+          name="scope"
         />
         <div className="contract__scope__container__counter">
           {state.charCount}/500

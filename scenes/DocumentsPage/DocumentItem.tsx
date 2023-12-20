@@ -29,10 +29,10 @@ const DocumentItem = () => {
   });
 
   const docTitles: string[] = [
-    `${t("doc.box1.item1.title")}`,
-    `${t("doc.box1.item2.title")}`,
-    `${t("doc.box2.item1.title")}`,
-    `${t("doc.box2.item2.title")}`,
+    "Passport or National ID",
+    "Tax Registration Number",
+    "Any additional relevant documents",
+    "Proof of registration with the National Social Security Program",
   ];
 
   const docItemBooleanValues = docTitles.map((doc) => {
@@ -43,9 +43,9 @@ const DocumentItem = () => {
     }
   });
 
-  const handleUpload = (e: any, title: string) => {
+  const handleUpload = (e: any, docKey: string) => {
     e.preventDefault();
-    setModalTitle(title);
+    setModalTitle(docKey);
     setIsUploadClicked(true);
   };
 
@@ -57,12 +57,14 @@ const DocumentItem = () => {
           <DocumentItemFile
             handleUpload={handleUpload}
             title={docTitles[0]}
+            docKey="Passport or National ID"
             isSubmitted={docItemBooleanValues[0]}
             color="#3A67C1"
           />
           <DocumentItemFile
             handleUpload={handleUpload}
             title={docTitles[1]}
+            docKey="Tax Registration Number"
             isSubmitted={docItemBooleanValues[1]}
             color="#0B0B0C"
           />
@@ -74,12 +76,14 @@ const DocumentItem = () => {
           <DocumentItemFile
             handleUpload={handleUpload}
             title={docTitles[2]}
+            docKey="Any additional relevant documents"
             isSubmitted={docItemBooleanValues[2]}
             color="#6945FA"
           />
           <DocumentItemFile
             handleUpload={handleUpload}
             title={docTitles[3]}
+            docKey="Proof of registration with the National Social Security Program"
             isSubmitted={docItemBooleanValues[3]}
             color="#0AAF60"
           />
@@ -87,7 +91,7 @@ const DocumentItem = () => {
       </div>
       {isUploadClicked && (
         <DocumentModal
-          title={modalTitle}
+          docKey={modalTitle}
           setIsUploadClicked={setIsUploadClicked}
         />
       )}

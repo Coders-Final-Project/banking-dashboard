@@ -102,6 +102,7 @@ const SignIn = () => {
             value={formValues.email}
             onChange={handleChange}
             className="signin__input"
+            autoComplete="off"
           />
         </div>
         <div className="signIn__form__item">
@@ -127,6 +128,7 @@ const SignIn = () => {
             value={formValues.password}
             onChange={handleChange}
             className="signin__input"
+            autoComplete="off"
           />
           <div className="remember__me">
             <input type="checkbox" id="remember" />

@@ -150,7 +150,6 @@ const Sidemenu = ({ setOpenSideMenu }: IProps) => {
           dispatch(increaseNotificationCount());
         }
       } catch (error) {
-        console.log(error);
         setErrorAlert("Something went wrong!");
       }
     } else {
@@ -198,6 +197,7 @@ const Sidemenu = ({ setOpenSideMenu }: IProps) => {
                 value={inputValues.email}
                 onChange={(e) => getEmail(e)}
                 required
+                autoComplete="off"
               />
             </div>
             <div className="pname">
@@ -209,6 +209,7 @@ const Sidemenu = ({ setOpenSideMenu }: IProps) => {
                 value={inputValues.pname}
                 onChange={(e) => getPname(e)}
                 required
+                autoComplete="off"
               />
             </div>
             <div className="sidemenu__form--date">
@@ -220,6 +221,7 @@ const Sidemenu = ({ setOpenSideMenu }: IProps) => {
                   value={inputValues.date}
                   onChange={(e) => getDate(e)}
                   required
+                  autoComplete="off"
                 />
               </div>
               <div>
@@ -230,6 +232,7 @@ const Sidemenu = ({ setOpenSideMenu }: IProps) => {
                   value={inputValues.dueon}
                   onChange={(e) => getDueon(e)}
                   required
+                  autoComplete="off"
                 />
               </div>
             </div>
@@ -251,6 +254,7 @@ const Sidemenu = ({ setOpenSideMenu }: IProps) => {
                       value={item.item}
                       onChange={(event) => handleChange(event, index)}
                       required
+                      autoComplete="off"
                     />
                   </div>
                   <div>
@@ -260,6 +264,7 @@ const Sidemenu = ({ setOpenSideMenu }: IProps) => {
                       value={item.hours}
                       onChange={(event) => handleChange(event, index)}
                       required
+                      autoComplete="off"
                     />
                   </div>
                   <div>
@@ -269,6 +274,7 @@ const Sidemenu = ({ setOpenSideMenu }: IProps) => {
                       value={item.rate}
                       onChange={(event) => handleChange(event, index)}
                       required
+                      autoComplete="off"
                     />
                   </div>
                   <div>
@@ -278,6 +284,7 @@ const Sidemenu = ({ setOpenSideMenu }: IProps) => {
                       value={item.total}
                       required
                       disabled
+                      autoComplete="off"
                     />
                   </div>
                 </div>

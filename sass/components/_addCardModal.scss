@@ -46,6 +46,17 @@
         border-radius: 10px;
         width: 100%;
       }
+
+      input::-webkit-outer-spin-button,
+      input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+
+      input[type="number"] {
+        appearance: textfield;
+        -moz-appearance: textfield;
+      }
     }
 
     &__btn {
@@ -80,4 +91,17 @@
       color: $main-color-blue;
     }
   }
+}
+
+.card__modal__alert--error {
+  position: fixed;
+  top: 10%;
+  left: 61%;
+  transform: translate(-61%, -10%);
+  padding: 15px;
+  border-radius: 20px;
+  box-shadow: $box-shadow;
+  font-size: 18px;
+  background-color: $action-red-100;
+  color: $main-color-white;
 }

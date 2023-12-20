@@ -1,0 +1,32 @@
+@import "/sass/utils/colors";
+@import "/sass/utils/variables";
+@import "/sass/utils/mixins";
+@import "/sass/base/typography";
+
+.not__found {
+  @include flexbox(
+    $direction: column,
+    $justify: center,
+    $items: center,
+    $gap: 0.5rem
+  );
+  margin-top: 100px;
+
+  &__title {
+    @extend %title-size1;
+    color: $main-color-black;
+  }
+
+  &__link {
+    &__item {
+      @extend %title-size2;
+      text-decoration: none;
+      color: $main-color-blue;
+
+      &:hover {
+        cursor: pointer;
+        text-decoration: underline;
+      }
+    }
+  }
+}

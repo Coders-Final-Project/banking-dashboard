@@ -32,7 +32,14 @@ export async function POST(request: NextRequest) {
     const senderCard = await Card.find({ userID });
     const receiverCard = await Card.find({ cardNumber });
 
-    if (!senderCard && !receiverCard) {
+    if (senderCard[0].cardNumber === cardNumber) {
+      return NextResponse.json(
+        { message: "Invalid operation!" },
+        { status: 400 },
+      );
+    }
+
+    if (receiverCard.length === 0) {
       return NextResponse.json({ message: "Card not found!" }, { status: 400 });
     }
 

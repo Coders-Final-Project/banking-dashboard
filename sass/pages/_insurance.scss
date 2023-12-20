@@ -161,6 +161,11 @@
     background-color: $action-green-100;
     color: $main-color-white;
   }
+
+  &__alert--error {
+    background-color: $action-red-100;
+    color: $main-color-white;
+  }
 }
 
 .notify__user__modal {

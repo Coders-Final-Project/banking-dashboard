@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 
-import { useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import "@/sass/scenes/_contractsClient.scss";
 
@@ -19,6 +19,16 @@ import { useGlobalContext } from "@/context/store";
 import { useTranslation } from "@/i18n/client";
 
 const ContractsClient = ({ lng }: { lng: string }) => {
+  const [errorAlert, setErrorAlert] = useState("");
+
+  useEffect(() => {
+    if (errorAlert !== "") {
+      setTimeout(() => {
+        setErrorAlert("");
+      }, 2000);
+    }
+  }, [errorAlert]);
+
   const dispatch = useDispatch();
 
   const { data } = useGlobalContext();
@@ -27,22 +37,40 @@ const ContractsClient = ({ lng }: { lng: string }) => {
 
   const { t } = useTranslation(lng);
 
+  const effectRef = useRef(false);
+
   useEffect(() => {
-    const fetchAllCustomers = async () => {
-      try {
-        if (data._id) {
-          const response = await axios.post("/api/customers", {
-            userID: data._id,
-          });
+    if (effectRef.current === true) {
+      const fetchAllCustomers = async () => {
+        try {
+          if (data._id) {
+            const response = await axios.post(
+              "/api/customers",
+              {
+                userID: data._id,
+              },
+              {
+                headers: {
+                  "Cache-Control": "no-cache",
+                  Pragma: "no-cache",
+                  Expires: "0",
+                },
+              },
+            );
 
-          dispatch(setAllCustomers(response.data.customers));
+            dispatch(setAllCustomers(response.data.customers));
+          }
+        } catch (error: any) {
+          setErrorAlert(error.response.data.message);
         }
-      } catch (error: any) {
-        console.log(error);
-      }
-    };
+      };
 
-    fetchAllCustomers();
+      fetchAllCustomers();
+    }
+
+    return () => {
+      effectRef.current = true;
+    };
   }, [data, dispatch]);
 
   return (
@@ -68,6 +96,9 @@ const ContractsClient = ({ lng }: { lng: string }) => {
           <ContractClientItem key={client._id} {...client} lng={lng} />
         ))}
       </div>
+      {errorAlert !== "" && (
+        <div className="contract__client__alert--error">{errorAlert}</div>
+      )}
     </div>
   );
 };

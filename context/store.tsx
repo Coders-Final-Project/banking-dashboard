@@ -15,6 +15,7 @@ import {
   SetStateAction,
   useState,
   useEffect,
+  useRef,
 } from "react";
 
 type DataType = {
@@ -132,17 +133,31 @@ export const GlobalContextProvider = ({
     }));
   };
 
-  useEffect(() => {
-    const getUserInfo = async () => {
-      try {
-        const response = await axios.get("/api/user/me");
-        setData(response.data.data);
-      } catch (error: any) {
-        throw new Error(error.message);
-      }
-    };
+  const effectRef = useRef(false);
 
-    getUserInfo();
+  useEffect(() => {
+    if (effectRef.current === true) {
+      const getUserInfo = async () => {
+        try {
+          const response = await axios.get("/api/user/me", {
+            headers: {
+              "Cache-Control": "no-cache",
+              Pragma: "no-cache",
+              Expires: "0",
+            },
+          });
+          setData(response.data.data);
+        } catch (error: any) {
+          throw new Error(error.message);
+        }
+      };
+
+      getUserInfo();
+    }
+
+    return () => {
+      effectRef.current = true;
+    };
   }, []);
 
   return (
@@ -153,7 +168,7 @@ export const GlobalContextProvider = ({
         updateUploadedFiles,
         updateUserProfile,
         updateProfileImg,
-        deleteProfileImage
+        deleteProfileImage,
       }}
     >
       {children}

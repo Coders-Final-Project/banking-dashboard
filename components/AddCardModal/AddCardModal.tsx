@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import "@/sass/components/_addCardModal.scss";
 
@@ -27,6 +27,15 @@ import { useTranslation } from "@/i18n/client";
 
 const AddCardModal = ({ handleCardModal, setShowALert }: IProps) => {
   const [cardValues, setCardValues] = useState<ICardFormVaues>(INITIAL_VALUES);
+  const [errorAlert, setErrorAlert] = useState("");
+
+  useEffect(() => {
+    if (errorAlert !== "") {
+      setTimeout(() => {
+        setErrorAlert("");
+      }, 2000);
+    }
+  }, [errorAlert]);
 
   const curLang = useSelector((state: StateProps) => state.curLang);
 
@@ -57,8 +66,8 @@ const AddCardModal = ({ handleCardModal, setShowALert }: IProps) => {
       }, 2000);
 
       handleCardModal();
-    } catch (error) {
-      console.log(error);
+    } catch (error: any) {
+      setErrorAlert(error.response.data.message);
     }
   };
 
@@ -80,6 +89,12 @@ const AddCardModal = ({ handleCardModal, setShowALert }: IProps) => {
     if (target.name === "endDate") {
       if (target.value.length === 2) {
         target.value += "/";
+      }
+    }
+
+    if (target.name === "securityCode") {
+      if (target.value.length > 3) {
+        return;
       }
     }
 
@@ -127,15 +142,13 @@ const AddCardModal = ({ handleCardModal, setShowALert }: IProps) => {
         <div className="cards__detail__addModal__item">
           <label htmlFor="security">{t("card.modal.title3")}</label>
           <input
-            type="text"
+            type="number"
             id="security"
             placeholder="000"
             name="securityCode"
             value={cardValues.securityCode}
             required
             onChange={handleChange}
-            minLength={3}
-            maxLength={3}
           />
         </div>
         <button className="cards__detail__addModal__btn" type="submit">
@@ -149,6 +162,9 @@ const AddCardModal = ({ handleCardModal, setShowALert }: IProps) => {
       >
         x
       </button>
+      {errorAlert !== "" && (
+        <div className="card__modal__alert--error">{errorAlert}</div>
+      )}
     </form>
   );
 };

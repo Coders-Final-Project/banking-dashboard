@@ -1,6 +1,8 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
+
+import Link from "next/link";
 
 import Image from "next/image";
 
@@ -28,12 +30,22 @@ const Invoices = ({ params: { lng } }: { params: { lng: string } }) => {
   const [invoiceData, setInvoiceData] = useState<IInvoicesData[]>(invoicesData);
   const [changeState, setChangeState] = useState<boolean>(false);
   const [openSideMenu, setOpenSideMenu] = useState<boolean>(false);
+  const [errorAlert, setErrorAlert] = useState("");
+
+  useEffect(() => {
+    if (errorAlert !== "") {
+      setTimeout(() => {
+        setErrorAlert("");
+      }, 2000);
+    }
+  }, [errorAlert]);
 
   const { t } = useTranslation(lng);
 
   const { data } = useGlobalContext();
 
   const invoices = useSelector((state: StateProps) => state.invoices);
+  const userCard = useSelector((state: StateProps) => state.userCard);
 
   const dispatch = useDispatch();
 
@@ -50,20 +62,38 @@ const Invoices = ({ params: { lng } }: { params: { lng: string } }) => {
     }
   };
 
+  const effectRef = useRef(false);
+
   useEffect(() => {
-    const fetchInvoices = async () => {
-      try {
-        const response = await axios.post("/api/invoice/fetch", {
-          userID: data._id,
-        });
+    if (effectRef.current === true) {
+      const fetchInvoices = async () => {
+        try {
+          const response = await axios.post(
+            "/api/invoice/fetch",
+            {
+              userID: data._id,
+            },
+            {
+              headers: {
+                "Cache-Control": "no-cache",
+                Pragma: "no-cache",
+                Expires: "0",
+              },
+            },
+          );
 
-        dispatch(setInvoices(response.data.invoices));
-      } catch (error) {
-        console.log(error);
-      }
+          dispatch(setInvoices(response.data.invoices));
+        } catch (error: any) {
+          setErrorAlert(error);
+        }
+      };
+
+      fetchInvoices();
+    }
+
+    return () => {
+      effectRef.current = true;
     };
-
-    fetchInvoices();
   }, [data._id, dispatch]);
 
   const openSidemenu = () => {
@@ -163,14 +193,20 @@ const Invoices = ({ params: { lng } }: { params: { lng: string } }) => {
           <div className="invoiceTable__header">
             <div>{t("invoice.table.title")}</div>
             <div className="sortBtns">
-              <div className="sortBtns__content">
-                <button
-                  onClick={openSidemenu}
-                  className="sortBtns__content__open"
-                >
-                  Send an Invoice
-                </button>
-              </div>
+              {userCard._id === -1 ? (
+                <Link href="/cards" className="sortBtns__noCard">
+                  Add Card
+                </Link>
+              ) : (
+                <div className="sortBtns__content">
+                  <button
+                    onClick={openSidemenu}
+                    className="sortBtns__content__open"
+                  >
+                    Send an Invoice
+                  </button>
+                </div>
+              )}
             </div>
           </div>
           <div className="invoiceTable__datas">
@@ -230,6 +266,9 @@ const Invoices = ({ params: { lng } }: { params: { lng: string } }) => {
             </div>
           </div>
         </div>
+        {errorAlert !== "" && (
+          <div className="invoice__alert--error">{errorAlert}</div>
+        )}
       </main>
     </>
   );

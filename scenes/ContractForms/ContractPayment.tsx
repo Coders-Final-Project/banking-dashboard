@@ -34,6 +34,7 @@ const ContractPayment = ({
               placeholder="$ 10,000"
               value={projectName}
               onChange={(e) => updateFields({ projectName: e.target.value })}
+              autoComplete="off"
             />
           </div>
           <div className="contract__payment__oneColumn select">
@@ -43,6 +44,7 @@ const ContractPayment = ({
               value={currency}
               required
               onChange={(e) => updateFields({ currency: e.target.value })}
+              autoComplete="off"
             >
               <option value="AZN">AZN</option>
             </select>
@@ -59,6 +61,7 @@ const ContractPayment = ({
               value={cycleEnd}
               required
               onChange={(e) => updateFields({ cycleEnd: e.target.value })}
+              autoComplete="off"
             >
               <option value="Last day of the month">
                 Last day of the month
@@ -76,6 +79,7 @@ const ContractPayment = ({
               value={paymentDue}
               required
               onChange={(e) => updateFields({ paymentDue: e.target.value })}
+              autoComplete="off"
             >
               <option value="Same Day">Same day</option>
               <option value="In a week">In a week</option>
