@@ -203,6 +203,21 @@
 
       .sortBtns {
         @include flexbox($justify: space-between, $items: center, $gap: 16px);
+
+        &__noCard {
+          color: $main-color-blue;
+          font-size: 17px;
+          text-decoration: none;
+          padding: 15px;
+          border-radius: 100px;
+          border: 1px solid $greyscale-grey-200;
+          background-color: $greyscale-grey-100;
+
+          &:hover {
+            background-color: $greyscale-grey-200;
+          }
+        }
+
         .sortBtns__content {
           &__open {
             border: none;

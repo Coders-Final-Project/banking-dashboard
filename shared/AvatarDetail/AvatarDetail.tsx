@@ -38,6 +38,14 @@ const AvatarDetail = ({ hasBtn, lng }: Props) => {
   const [serverError, setServerError] = useState("");
   const [isNotifyOpen, setIsNotifyOpen] = useState(false);
 
+  useEffect(() => {
+    if (serverError !== "") {
+      setTimeout(() => {
+        setServerError("");
+      }, 1500);
+    }
+  }, [serverError]);
+
   const userCard = useSelector((state: StateProps) => state.userCard);
 
   const companyContracts = useSelector(
@@ -88,7 +96,9 @@ const AvatarDetail = ({ hasBtn, lng }: Props) => {
             }
           }
         } catch (error: any) {
-          setServerError(error.response.data.message);
+          setTimeout(() => {
+            setServerError(error.response.data.message);
+          }, 1000);
         }
       };
 

@@ -2,6 +2,8 @@
 
 import React, { useState, useEffect, useRef } from "react";
 
+import Link from "next/link";
+
 import Image from "next/image";
 
 import "@/sass/layout/_pageHeader.scss";
@@ -43,6 +45,7 @@ const Invoices = ({ params: { lng } }: { params: { lng: string } }) => {
   const { data } = useGlobalContext();
 
   const invoices = useSelector((state: StateProps) => state.invoices);
+  const userCard = useSelector((state: StateProps) => state.userCard);
 
   const dispatch = useDispatch();
 
@@ -190,14 +193,20 @@ const Invoices = ({ params: { lng } }: { params: { lng: string } }) => {
           <div className="invoiceTable__header">
             <div>{t("invoice.table.title")}</div>
             <div className="sortBtns">
-              <div className="sortBtns__content">
-                <button
-                  onClick={openSidemenu}
-                  className="sortBtns__content__open"
-                >
-                  Send an Invoice
-                </button>
-              </div>
+              {userCard._id === -1 ? (
+                <Link href="/cards" className="sortBtns__noCard">
+                  Add Card
+                </Link>
+              ) : (
+                <div className="sortBtns__content">
+                  <button
+                    onClick={openSidemenu}
+                    className="sortBtns__content__open"
+                  >
+                    Send an Invoice
+                  </button>
+                </div>
+              )}
             </div>
           </div>
           <div className="invoiceTable__datas">

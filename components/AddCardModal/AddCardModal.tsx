@@ -92,6 +92,12 @@ const AddCardModal = ({ handleCardModal, setShowALert }: IProps) => {
       }
     }
 
+    if (target.name === "securityCode") {
+      if (target.value.length > 3) {
+        return;
+      }
+    }
+
     setCardValues((prevValues) => ({
       ...prevValues,
       [target.name]: target.value,
@@ -136,15 +142,13 @@ const AddCardModal = ({ handleCardModal, setShowALert }: IProps) => {
         <div className="cards__detail__addModal__item">
           <label htmlFor="security">{t("card.modal.title3")}</label>
           <input
-            type="text"
+            type="number"
             id="security"
             placeholder="000"
             name="securityCode"
             value={cardValues.securityCode}
             required
             onChange={handleChange}
-            minLength={3}
-            maxLength={3}
           />
         </div>
         <button className="cards__detail__addModal__btn" type="submit">

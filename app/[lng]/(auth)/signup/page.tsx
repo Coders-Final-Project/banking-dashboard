@@ -125,6 +125,7 @@ const SignUp = () => {
                 value={formValues.firstName}
                 onChange={handleChange}
                 className="signup__input"
+                autoComplete="off"
               />
             </div>
             <div className="signup__form__content__namePart__item">
@@ -136,6 +137,7 @@ const SignUp = () => {
                 value={formValues.lastName}
                 onChange={handleChange}
                 className="signup__input"
+                autoComplete="off"
               />
             </div>
           </div>
@@ -148,6 +150,7 @@ const SignUp = () => {
               value={formValues.email}
               onChange={handleChange}
               className="signup__input"
+              autoComplete="off"
             />
           </div>
           <div className="signup__form__content__item">
@@ -159,6 +162,7 @@ const SignUp = () => {
               value={formValues.job}
               onChange={handleChange}
               className="signup__input"
+              autoComplete="off"
             />
           </div>
           <div className="signup__form__content__item">
@@ -170,6 +174,7 @@ const SignUp = () => {
               value={formValues.phone}
               onChange={handleChange}
               className="signup__input"
+              autoComplete="off"
             />
           </div>
           <div className="signup__form__content__item">
@@ -195,6 +200,7 @@ const SignUp = () => {
               value={formValues.password}
               onChange={handleChange}
               className="signup__input"
+              autoComplete="off"
             />
             <p>
               Use 8 or more characters with a mix of letters, numbers & symbols

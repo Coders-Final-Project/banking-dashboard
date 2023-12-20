@@ -87,6 +87,7 @@ const CardTransferItem = ({ imgUrlEnd, text }: IProps) => {
         setErrorAlert(true);
       }
     } catch (error) {
+      console.log(error);
       setErrorAlert(true);
     } finally {
       setCardNumber("");
@@ -126,8 +127,6 @@ const CardTransferItem = ({ imgUrlEnd, text }: IProps) => {
             onChange={handleChange}
             minLength={19}
             maxLength={19}
-            autoComplete="off"
-            name="card_number"
           />
           <input
             type="number"
@@ -135,8 +134,6 @@ const CardTransferItem = ({ imgUrlEnd, text }: IProps) => {
             placeholder={`${t("cards.transfer.input2")}`}
             value={amount}
             onChange={(e) => setAmount(e.target.value)}
-            autoComplete="off"
-            name="amount"
           />
           <button
             className={`transfer__content__body__sendBtn ${
