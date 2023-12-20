@@ -72,6 +72,12 @@ const Notifications = () => {
         <div className="notifications__header__new">new (1)</div>
       </div>
       <div className="notifications__body">
+        {notifications.length === 0 && (
+          <div className="notifications__body__empty">
+            There is nothing yet!
+          </div>
+        )}
+
         {notifications?.map((item) => {
           const { formattedDate } = getFormattedDate(item.createdAt);
 
