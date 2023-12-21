@@ -61,7 +61,7 @@
           width: 100%;
 
           &:hover {
-            border-color: $main-color-blue;
+            border-color: $main-color-black;
           }
         }
 
@@ -85,6 +85,10 @@
         &:hover {
           opacity: 1;
         }
+      }
+
+      &__btn.disabled {
+        cursor: not-allowed;
       }
     }
   }

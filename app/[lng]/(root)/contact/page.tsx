@@ -9,6 +9,8 @@ import AvatarDetail from "@/shared/AvatarDetail/AvatarDetail";
 
 import { definedContactSubjects } from "@/constants";
 
+import { sendContactForm } from "@/lib/actions/sendContactForm";
+
 const INITIAL_VALUES = {
   user: "",
   subject: "Account Inquiry",
@@ -20,6 +22,7 @@ const Contact = () => {
   const [formValues, setFormValues] = useState(INITIAL_VALUES);
   const [success, setSuccess] = useState(false);
   const [errorAlert, setErrorAlert] = useState("");
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (success) {
@@ -45,10 +48,27 @@ const Contact = () => {
     });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    setFormValues(INITIAL_VALUES);
+    const { user, mail, subject, message } = formValues;
+
+    if (!user || !mail || !subject || !message) {
+      setErrorAlert("Fill al the fields!");
+      return;
+    }
+
+    setLoading(true);
+
+    try {
+      await sendContactForm(formValues);
+      setSuccess(true);
+    } catch (error: any) {
+      setErrorAlert("Server error!");
+    } finally {
+      setFormValues(INITIAL_VALUES);
+      setLoading(false);
+    }
   };
 
   return (
@@ -113,8 +133,12 @@ const Contact = () => {
               autoComplete="off"
             ></textarea>
           </div>
-          <button className="contact__body__form__btn" type="submit">
-            Submit
+          <button
+            className={`contact__body__form__btn ${loading && "disabled"}`}
+            type="submit"
+            disabled={loading}
+          >
+            {loading ? "Sending..." : "Submit"}
           </button>
         </form>
       </div>
