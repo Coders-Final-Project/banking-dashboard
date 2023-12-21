@@ -28,7 +28,7 @@ const CardTransferItem = ({ imgUrlEnd, text }: IProps) => {
   const [isTransferOpen, setIsTransferOpen] = useState(false);
   const [cardNumber, setCardNumber] = useState("");
   const [amount, setAmount] = useState("");
-  const [errorAlert, setErrorAlert] = useState(false);
+  const [errorAlert, setErrorAlert] = useState("");
   const [successAlert, setSuccessAlert] = useState(false);
 
   const { data } = useGlobalContext();
@@ -42,9 +42,9 @@ const CardTransferItem = ({ imgUrlEnd, text }: IProps) => {
   const { t } = useTranslation(curLang);
 
   useEffect(() => {
-    if (errorAlert) {
+    if (errorAlert !== "") {
       setTimeout(() => {
-        setErrorAlert(false);
+        setErrorAlert("");
       }, 2000);
     }
 
@@ -84,11 +84,10 @@ const CardTransferItem = ({ imgUrlEnd, text }: IProps) => {
       } else {
         setCardNumber("");
         setAmount("");
-        setErrorAlert(true);
+        setErrorAlert("Fill all fields!");
       }
-    } catch (error) {
-      console.log(error);
-      setErrorAlert(true);
+    } catch (error: any) {
+      setErrorAlert(error.response.data.message);
     } finally {
       setCardNumber("");
       setAmount("");
@@ -149,9 +148,7 @@ const CardTransferItem = ({ imgUrlEnd, text }: IProps) => {
         </div>
       )}
       {errorAlert && (
-        <div className="transfer__content__alert--error">
-          {t("cards.alert.error")}
-        </div>
+        <div className="transfer__content__alert--error">{errorAlert}</div>
       )}
       {successAlert && (
         <div className="transfer__content__alert--success">
