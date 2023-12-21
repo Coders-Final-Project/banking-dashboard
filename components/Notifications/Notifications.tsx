@@ -73,9 +73,7 @@ const Notifications = () => {
       </div>
       <div className="notifications__body">
         {notifications.length === 0 && (
-          <div className="notifications__body__empty">
-            There is nothing yet!
-          </div>
+          <div className="notifications__body__empty">Empty!</div>
         )}
 
         {notifications?.map((item) => {

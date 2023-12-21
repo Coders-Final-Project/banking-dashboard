@@ -42,7 +42,7 @@ const INITIAL_DATA: FormData = {
 
 const ContractCreate = () => {
   const [data, setData] = useState(INITIAL_DATA);
-  const [errorAlert, setErrorAlert] = useState(false);
+  const [errorAlert, setErrorAlert] = useState("");
   const [successAlert, setSuccessAlert] = useState(false);
 
   const router = useRouter();
@@ -84,9 +84,9 @@ const ContractCreate = () => {
   const progressBar = createProgressBar(currentStepIndex, steps.length);
 
   useEffect(() => {
-    if (errorAlert) {
+    if (errorAlert !== "") {
       setTimeout(() => {
-        setErrorAlert(false);
+        setErrorAlert("");
       }, 2000);
     }
 
@@ -114,10 +114,10 @@ const ContractCreate = () => {
           router.replace("/contracts");
         }, 1000);
       } else {
-        setErrorAlert(true);
+        setErrorAlert("You have to sign the contract!");
       }
-    } catch (error) {
-      setErrorAlert(true);
+    } catch (error: any) {
+      setErrorAlert(error.response.data.message);
     }
   };
 
@@ -176,10 +176,8 @@ const ContractCreate = () => {
           </div>
         </form>
       </div>
-      {errorAlert && (
-        <div className="contract__create__alert--error">
-          You have to sign the contract
-        </div>
+      {errorAlert !== "" && (
+        <div className="contract__create__alert--error">{errorAlert}</div>
       )}
       {successAlert && (
         <div className="contract__create__alert--success">
