@@ -24,9 +24,9 @@ export async function POST(request: NextRequest) {
     const items = reqBody.itemData;
 
     const receiver = await User.find({ email });
-    const sender = await User.find({ senderID });
+    const sender = await User.findById(senderID);
 
-    if (sender[0].email === email) {
+    if (sender.email === email) {
       return NextResponse.json({ message: "Invalid operation!", status: 400 });
     }
 
