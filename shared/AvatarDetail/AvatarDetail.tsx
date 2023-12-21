@@ -96,9 +96,9 @@ const AvatarDetail = ({ hasBtn, lng }: Props) => {
             }
           }
         } catch (error: any) {
-          setTimeout(() => {
-            setServerError(error.response.data.message);
-          }, 1000);
+          // setTimeout(() => {
+          //   setServerError(error.response.data.message);
+          // }, 1000);
         }
       };
 
@@ -185,8 +185,11 @@ const AvatarDetail = ({ hasBtn, lng }: Props) => {
   const handleLogout = async () => {
     try {
       await axios.get("/api/user/logout");
-      localStorage.removeItem("persist:primary");
-      localStorage.removeItem("persist:root");
+      const itemsToRemove = ["persist:root", "persist:primary"];
+
+      itemsToRemove.forEach((key) => {
+        localStorage.removeItem(key);
+      });
       router.push("/signin");
     } catch (error: any) {
       setServerError(error.message);
