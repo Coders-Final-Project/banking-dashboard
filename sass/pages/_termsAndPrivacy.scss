@@ -1,0 +1,36 @@
+@import "/sass/utils/_colors";
+@import "/sass/utils/_variables";
+@import "/sass/utils/_mixins";
+@import "/sass/base/_typography";
+
+.terms__privacy {
+  width: 100%;
+  height: auto;
+  min-height: 656px;
+  background-color: $second-color-black;
+  @include flexbox($justify: center, $items: center);
+  background: url("/assets/sign/bg.jpg") center center no-repeat;
+  background-size: cover;
+
+  &__content {
+    background-color: $main-color-white;
+    padding: 24px;
+    border-radius: 24px;
+    @include flexbox(
+      $direction: column,
+      $justify: space-between,
+      $items: flex-start,
+      $gap: 1.5em
+    );
+    margin: 30px 0;
+    box-shadow: $box-shadow;
+
+    &__title {
+      font-size: 28px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: normal;
+      color: $main-color-black;
+    }
+  }
+}

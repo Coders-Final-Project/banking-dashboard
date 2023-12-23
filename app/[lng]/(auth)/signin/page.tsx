@@ -137,11 +137,11 @@ const SignIn = () => {
         </div>
         <div className="signIn__form__privacy">
           By continuing, you agree to the{" "}
-          <Link href="#" className="link">
+          <Link href="/terms-privacy" className="link">
             Terms of use
           </Link>{" "}
           and{" "}
-          <Link href="#" className="link">
+          <Link href="/terms-privacy" className="link">
             Privacy Policy
           </Link>
         </div>

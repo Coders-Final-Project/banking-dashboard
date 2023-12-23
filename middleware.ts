@@ -14,12 +14,15 @@ export function middleware(request: NextRequest) {
     "/signin",
     "/signup",
     "/forget-password",
+    "/terms-privacy",
     "/az/signin",
     "/az/forget-password",
+    "/az/terms-privacy",
     "/en/signup",
     "/az/signup",
     "/en/signin",
     "/en/forget-password",
+    "/en/terms-privacy",
   ];
 
   const token = request.cookies.get("token")?.value || "";
@@ -141,6 +144,9 @@ export const config = {
     "/az/signin",
     "/az/signup",
     "/az/forget-password",
+    "/terms-privacy",
+    "/az/terms-privacy",
+    "/en/terms-privacy",
     // "/((?!api|_next/static|_next/image|assets|favicon.ico|sw.js).*)",
   ],
 };
