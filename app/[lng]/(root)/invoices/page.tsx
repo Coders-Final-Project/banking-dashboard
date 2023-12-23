@@ -124,9 +124,7 @@ const Invoices = ({ params: { lng } }: { params: { lng: string } }) => {
               />
               <div>
                 <p>{t("invoice.line1.title")}</p>
-                <p>
-                  $3,855<span>.50</span>
-                </p>
+                <p>3,855₼</p>
                 <p>
                   <span>+15%</span> vs {t("invoice.line1.compare")}
                 </p>
@@ -135,15 +133,11 @@ const Invoices = ({ params: { lng } }: { params: { lng: string } }) => {
             <div className="item2">
               <div>
                 <p>{t("invoice.line1.case1")}</p>
-                <p>
-                  $1,346<span>.65</span>
-                </p>
+                <p>1,346₼</p>
               </div>
               <div>
                 <p>{t("invoice.line1.case2")}</p>
-                <p>
-                  $50<span>.66</span>
-                </p>
+                <p>50₼</p>
               </div>
             </div>
           </div>
@@ -184,9 +178,7 @@ const Invoices = ({ params: { lng } }: { params: { lng: string } }) => {
             <div>{t("invoice.line3.title")}</div>
             <div>
               <div className="circle"></div>
-              <div className="price">
-                $1,500<span>.50</span>
-              </div>
+              <div className="price">1,500₼</div>
             </div>
           </div>
         </div>

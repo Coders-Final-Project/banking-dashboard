@@ -31,9 +31,7 @@ const CardsSummary = () => {
           <div className="cards__summary__item__info__title">
             {t("cards.line1.title1")}
           </div>
-          <div className="cards__summary__item__info__total">
-            $8,127<span>.90</span>
-          </div>
+          <div className="cards__summary__item__info__total">8,127₼</div>
           <div className="cards__summary__item__info__change">
             <span className="income">+24%</span> {t("cards.line1.compare")}
           </div>
@@ -59,9 +57,7 @@ const CardsSummary = () => {
           <div className="cards__summary__item__info__title">
             {t("cards.line1.title2")}
           </div>
-          <div className="cards__summary__item__info__total">
-            $1,325<span>.90</span>
-          </div>
+          <div className="cards__summary__item__info__total">1,325₼</div>
           <div className="cards__summary__item__info__change">
             <span className="expense">-2%</span> {t("cards.line1.compare")}
           </div>

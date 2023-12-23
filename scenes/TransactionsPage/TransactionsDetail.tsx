@@ -33,7 +33,7 @@ const TransactionsDetail = () => {
           </div>
           <div className="transactions__detail__forMonth__content__result">
             <div className="transactions__detail__forMonth__content__result__number">
-              10
+              100₼
             </div>
             <div className="transactions__detail__forMonth__content__result__pers">
               +8%
@@ -72,7 +72,7 @@ const TransactionsDetail = () => {
             {t("actions.line3.title")}
           </div>
           <div className="transactions__detail__balance__content__number">
-            $2,325<span>.50</span>
+            2,325₼
           </div>
           <div className="transactions__detail__balance__content__annual">
             <div className="transactions__detail__balance__content__annual__title">
@@ -86,7 +86,7 @@ const TransactionsDetail = () => {
               className="transactions__detail__balance__content__annual__icon"
             />
             <div className="transactions__detail__balance__content__annual__number">
-              $800<span>.00</span>
+              800₼
             </div>
           </div>
         </div>

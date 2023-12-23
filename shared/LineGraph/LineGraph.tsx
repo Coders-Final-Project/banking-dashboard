@@ -75,8 +75,8 @@ const LineGraph = ({ isHeaderDetail, data, title }: IProps) => {
       {isHeaderDetail && (
         <div className="line__graph__content__secondLine">
           <div className="line__graph__content__secondLine__number">
-            ${fullPart}
-            {fractioanalPart && <span>.{fractioanalPart.slice(0, 2)}</span>}
+            {fullPart}₼
+            {/* {fractioanalPart && <span>.{fractioanalPart.slice(0, 2)}</span>} */}
           </div>
           <div className="line__graph__content__secondLine__difference">
             <span>+23%</span> vs last month

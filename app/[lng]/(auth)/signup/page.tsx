@@ -214,11 +214,11 @@ const SignUp = () => {
             <input type="checkbox" id="terms" onChange={handlePrivacy} />
             <label htmlFor="terms">
               I agree to our{" "}
-              <Link href="#" className="link">
+              <Link href="/terms-privacy" className="link">
                 Terms of use
               </Link>{" "}
               and{" "}
-              <Link href="#" className="link">
+              <Link href="/terms-privacy" className="link">
                 Privacy Policy
               </Link>
               .

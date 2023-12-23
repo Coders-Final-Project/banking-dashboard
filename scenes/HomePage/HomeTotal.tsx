@@ -22,7 +22,7 @@ const HomeTotal = async ({ lng }: { lng: string }) => {
             {t("home.line1.title1")}
           </div>
           <div className="home__content__total__item__info__number">
-            $58,764<span>.25</span>
+            58,764₼
           </div>
         </div>
       </div>
@@ -40,7 +40,7 @@ const HomeTotal = async ({ lng }: { lng: string }) => {
             {t("home.line1.title2")}
           </div>
           <div className="home__content__total__item__info__number">
-            April 1st, <span>2022</span>
+            April 12th, <span>2024</span>
           </div>
         </div>
       </div>

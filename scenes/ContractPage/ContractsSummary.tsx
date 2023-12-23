@@ -23,7 +23,7 @@ const ContractsSummary = async ({ lng }: { lng: string }) => {
           </div>
           <div className="contracts__content__summary__data__info__body">
             <div className="contracts__content__summary__data__info__body__number">
-              $83
+              1500₼
             </div>
             <div className="contracts__content__summary__data__info__body__perc">
               +8%
