@@ -13,10 +13,13 @@ export function middleware(request: NextRequest) {
   const publicPaths = [
     "/signin",
     "/signup",
+    "/forget-password",
     "/az/signin",
+    "/az/forget-password",
     "/en/signup",
     "/az/signup",
     "/en/signin",
+    "/en/forget-password",
   ];
 
   const token = request.cookies.get("token")?.value || "";
@@ -131,10 +134,13 @@ export const config = {
     "/en/contracts/create",
     "/signin",
     "/signup",
+    "/forget-password",
     "/en/signin",
+    "/en/forget-password",
     "/en/signup",
     "/az/signin",
     "/az/signup",
+    "/az/forget-password",
     // "/((?!api|_next/static|_next/image|assets|favicon.ico|sw.js).*)",
   ],
 };

@@ -12,7 +12,7 @@
     grid-row: auto auto;
     column-gap: 35px;
     row-gap: 24px;
-    padding: 0px 32px;
+    padding: 0px 24px;
 
     &__totalReceived {
       @include flexbox($justify: space-around, $gap: 51px, $items: center);
@@ -188,10 +188,11 @@
   }
 
   .invoiceTable {
-    margin: 0 32px;
+    margin: 0 24px;
+    margin-bottom: 23px;
     border: 1px solid rgba($color: #e4e4e7, $alpha: 0.9);
     border-radius: 16px;
-    margin-top: 32px;
+    margin-top: 24px;
     padding: 24px;
 
     &__header {

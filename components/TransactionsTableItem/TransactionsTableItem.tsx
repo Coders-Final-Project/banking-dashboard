@@ -159,13 +159,13 @@ const TransactionsTableItem = ({
         />
         {t("actions.table.itemBtn")}
       </button>
-      <Image
+      {/* <Image
         src="/assets/transactions/dot.png"
         alt="dot"
         width={24}
         height={24}
         className="transactions__table__item__dotIcon"
-      />
+      /> */}
       {isTransferOpen && (
         <div className="action__item__modal">
           <div className="action__item__modal__content">
