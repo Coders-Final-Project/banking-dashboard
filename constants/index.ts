@@ -6,3 +6,20 @@ export const definedQuestions = [
   "How do I manage contracts and invoices?",
   "What security measures protect my data?",
 ];
+
+export const definedContactSubjects = [
+  "Account Inquiry",
+  "Transaction Issue",
+  "Card Replacement",
+  "Loan Application",
+  "Fraud Report",
+  "Technical Support",
+  "Feedback and Suggestions",
+  "Account Closure",
+  "Payment Assistance",
+  "Security Concerns",
+  "ATM-related Query",
+  "Interest Rates",
+  "Lost/Stolen Card",
+  "General Inquiry",
+];

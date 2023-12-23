@@ -9,7 +9,7 @@ import Image from "next/image";
 import "@/sass/layout/_pageHeader.scss";
 import "@/sass/pages/_invoices.scss";
 
-import { invoicesData } from "@/db/invoices";
+// import { invoicesData } from "@/db/invoices";
 import AvatarDetail from "@/shared/AvatarDetail/AvatarDetail";
 import InvoiceTable from "@/components/InvoiceTable/InvoiceTable";
 import Sidemenu from "@/components/Sidemenu/Sidemenu";
@@ -27,7 +27,6 @@ import { useGlobalContext } from "@/context/store";
 import { useTranslation } from "@/i18n/client";
 
 const Invoices = ({ params: { lng } }: { params: { lng: string } }) => {
-  const [invoiceData, setInvoiceData] = useState<IInvoicesData[]>(invoicesData);
   const [changeState, setChangeState] = useState<boolean>(false);
   const [openSideMenu, setOpenSideMenu] = useState<boolean>(false);
   const [errorAlert, setErrorAlert] = useState("");
@@ -47,6 +46,8 @@ const Invoices = ({ params: { lng } }: { params: { lng: string } }) => {
   const invoices = useSelector((state: StateProps) => state.invoices);
   const userCard = useSelector((state: StateProps) => state.userCard);
 
+  const [invoiceData, setInvoiceData] = useState<IInvoicesData[]>();
+
   const dispatch = useDispatch();
 
   const handleSubmit = (input: string) => {
@@ -55,7 +56,7 @@ const Invoices = ({ params: { lng } }: { params: { lng: string } }) => {
     if (input == "amount" || "PENDING" || "date") {
       const sortedInvoces = filterInvoiceTable({
         input,
-        data: invoicesData,
+        data: [],
         changeState,
       });
       setInvoiceData(sortedInvoces as IInvoicesData[]);

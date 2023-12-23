@@ -4,9 +4,7 @@ import Image from "next/image";
 
 import "@/sass/components/_cardInfo.scss";
 
-import { activeCard } from "@/db/card";
-
-import { hideCardNumbers, checkActiveCard } from "@/helpers";
+import { hideCardNumbers } from "@/helpers";
 import { useSelector } from "react-redux";
 import { StateProps } from "@/interface";
 
@@ -55,10 +53,7 @@ const CardInfo = () => {
           <div className="cards__detail__info__content__item__text">
             {t("cards.info.currency")}
           </div>
-          <div className="cards__detail__info__content__item__value">
-            {/* {activeCard.currency} */}
-            AZN
-          </div>
+          <div className="cards__detail__info__content__item__value">AZN</div>
         </div>
         <div className="cards__detail__info__content__item">
           <div className="cards__detail__info__content__item__text">
@@ -66,7 +61,7 @@ const CardInfo = () => {
           </div>
           <div className="cards__detail__info__content__item__value">
             {userCard.endDate !== "" ? userCard.endDate : "04/03"}{" "}
-            <span>({checkActiveCard(activeCard.statusCard)})</span>
+            <span>Active</span>
           </div>
         </div>
       </div>

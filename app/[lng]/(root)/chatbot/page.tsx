@@ -14,7 +14,10 @@ import { useSelector, useDispatch } from "react-redux";
 import AvatarDetail from "@/shared/AvatarDetail/AvatarDetail";
 
 import { useGlobalContext } from "@/context/store";
-import { setChatBotMessages } from "@/globalRedux/features/appSlice";
+import {
+  setChatBotMessages,
+  deleteTheLastMessage,
+} from "@/globalRedux/features/appSlice";
 import { StateProps } from "@/interface";
 
 import { definedQuestions } from "@/constants";
@@ -44,6 +47,7 @@ const Chatbot = ({ params: { lng } }: { params: { lng: string } }) => {
     e.preventDefault();
 
     dispatch(setChatBotMessages({ key: "client", value: question }));
+    dispatch(setChatBotMessages({ key: "chatbot", value: "Typing..." }));
 
     setQuestion("");
 
@@ -54,6 +58,7 @@ const Chatbot = ({ params: { lng } }: { params: { lng: string } }) => {
 
       const chatbotResponse = response.data.answer[0].message.content;
 
+      dispatch(deleteTheLastMessage());
       dispatch(setChatBotMessages({ key: "chatbot", value: chatbotResponse }));
 
       chatContainerRef.current?.scrollIntoView({ behavior: "smooth" });
