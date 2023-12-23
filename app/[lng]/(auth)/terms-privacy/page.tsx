@@ -1,6 +1,9 @@
 import "@/sass/pages/_termsAndPrivacy.scss";
 
-const termsAndPrivacy = [
+import Link from "next/link";
+import Image from "next/image";
+
+const terms = [
   {
     id: 1,
     title: "Account Registration:",
@@ -59,23 +62,116 @@ const termsAndPrivacy = [
   },
 ];
 
+const privacies = [
+  {
+    id: 1,
+    title: "Information Collection:",
+    lists: [
+      "We collect personal information when users register accounts, make transactions, or interact with the app.",
+    ],
+  },
+  {
+    id: 2,
+    title: "Use of Information:",
+    lists: [
+      "We use collected information to provide and improve our services, as well as for marketing purposes with user consent.",
+    ],
+  },
+  {
+    id: 3,
+    title: "Data Security:",
+    lists: [
+      "We implement security measures to protect user data, but no method is 100% secure.",
+    ],
+  },
+  {
+    id: 4,
+    title: "Third-Party Services:",
+    lists: [
+      "We may use third-party services, and their privacy policies will apply.",
+    ],
+  },
+  {
+    id: 5,
+    title: "Cookies and Analytics:",
+    lists: [
+      "We use cookies and analytics tools to enhance user experience and gather usage data.",
+    ],
+  },
+  {
+    id: 6,
+    title: "Sharing of Information:",
+    lists: [
+      "We may share information with third parties for specific purposes, such as payment processing",
+    ],
+  },
+  {
+    id: 7,
+    title: "User Controls:",
+    lists: [
+      "Users can manage their privacy settings and opt-out of certain data collection.",
+    ],
+  },
+  {
+    id: 8,
+    title: "Changes to Privacy Policy:",
+    lists: [
+      "Users will be notified of any significant changes to the privacy policy.",
+    ],
+  },
+];
+
 const TermsAndPrivacy = () => {
   return (
     <section className="terms__privacy">
       <div className="terms__privacy__content">
-        <div className="terms__privacy__content__title">Terms and Privacy</div>
+        <Link href="/signin" className="terms__privacy__content__link">
+          <Image
+            src="/assets/sign/back.png"
+            alt="back"
+            width={20}
+            height={20}
+            className="terms__privacy__content__img"
+          />
+        </Link>
+        <div className="terms__privacy__content__title">Terms</div>
         <div className="terms__privacy__content__text">
-          {termsAndPrivacy.map((rule) => {
+          {terms.map((term) => {
             return (
               <div
-                key={rule.id}
+                key={term.id}
                 className="terms__privacy__content__text__item"
               >
                 <div className="terms__privacy__content__text__item__title">
-                  {rule.title}
+                  {term.title}
                 </div>
                 <div className="terms__privacy__content__text__item__list">
-                  {rule.lists.map((item) => (
+                  {term.lists.map((item) => (
+                    <div
+                      key={item}
+                      className="terms__privacy__content__text__item__list__item"
+                    >
+                      {item}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+        <div className="terms__privacy__content__title">Privacy</div>
+        <div className="terms__privacy__content__text">
+          {privacies.map((privacy) => {
+            return (
+              <div
+                key={privacy.id}
+                className="terms__privacy__content__text__item"
+              >
+                <div className="terms__privacy__content__text__item__title">
+                  {privacy.title}
+                </div>
+                <div className="terms__privacy__content__text__item__list">
+                  {privacy.lists.map((item) => (
                     <div
                       key={item}
                       className="terms__privacy__content__text__item__list__item"

@@ -29,7 +29,7 @@ const InvoiceTable = ({ invoices }: InvoiceTableProps) => {
               </div>
               <div className="invoiceTable__container__item">{item.client}</div>
               <div className="invoiceTable__container__item">
-                ${item.amount}
+                {item.amount}₼
               </div>
               <div
                 className="invoiceTable__container__item"
