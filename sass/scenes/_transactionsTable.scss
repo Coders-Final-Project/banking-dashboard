@@ -43,7 +43,7 @@
       border: 1px solid $greyscale-grey-300;
       background: $greyscale-grey-50;
       width: 100%;
-      @include flexbox($justify: flex-start, $items: center, $gap: 8.5em);
+      @include flexbox($justify: space-between, $items: center, $gap: 8.5em);
       padding: 10px;
 
       &__item,
@@ -62,11 +62,11 @@
       }
 
       &__item:first-child {
-        margin-right: 90px;
+        margin-right: 60px;
       }
 
       &__middleGroup {
-        @include flexbox($justify: center, $items: center, $gap: 5.5em);
+        @include flexbox($justify: center, $items: center, $gap: 8em);
       }
     }
 
