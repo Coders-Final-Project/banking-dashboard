@@ -92,8 +92,10 @@ const SignUp = () => {
         setServerError(response.data.message);
       } else {
         setSuccess(true);
-        router.push("/signin");
         setFormValues(initialValues);
+        setTimeout(() => {
+          router.push("/signin");
+        }, 1500);
       }
     } catch (error: any) {
       setServerError(error.message);
