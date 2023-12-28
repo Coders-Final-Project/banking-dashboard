@@ -11,15 +11,18 @@ import { useTranslation } from "@/i18n/client";
 const ContractClientItem = ({
   firstName,
   lastName,
+  profileImg,
   job,
   lng,
 }: IContractClient) => {
   const { t } = useTranslation(lng);
 
+  const imgUrl = profileImg?.[0]?.fileUrl?.secure_url;
+
   return (
     <div className="contracts__content__client__body__item">
       <Image
-        src="/assets/contracts/people.png"
+        src={`${imgUrl ? imgUrl : "/assets/contracts/people.png"}`}
         alt="person"
         width={40}
         height={40}

@@ -27,13 +27,15 @@ import { useTranslation } from "@/i18n/client";
 
 const TransactionsTableItem = ({
   receiverName,
-  receiverSurname,
   receiverJob,
   amount,
   createdAt,
+  profileImg,
 }: ITransactions) => {
   const { formattedDate, formattedTime } = getFormattedDate(createdAt);
   const [isTransferOpen, setIsTransferOpen] = useState(false);
+
+  const imgUrl = profileImg?.[0]?.fileUrl?.secure_url;
 
   const [cardNumber, setCardNumber] = useState("");
   const [fundAmount, setFundAmount] = useState("");
@@ -105,7 +107,7 @@ const TransactionsTableItem = ({
     <div className="transactions__table__item">
       <div className="transactions__table__item__person">
         <Image
-          src="/assets/transactions/people.png"
+          src={`${imgUrl ? imgUrl : "/assets/transactions/people.png"}`}
           alt={receiverName}
           width={48}
           height={48}
@@ -159,13 +161,6 @@ const TransactionsTableItem = ({
         />
         {t("actions.table.itemBtn")}
       </button>
-      {/* <Image
-        src="/assets/transactions/dot.png"
-        alt="dot"
-        width={24}
-        height={24}
-        className="transactions__table__item__dotIcon"
-      /> */}
       {isTransferOpen && (
         <div className="action__item__modal">
           <div className="action__item__modal__content">

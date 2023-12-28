@@ -12,7 +12,7 @@ export async function POST(request: NextRequest) {
 
   try {
     const customers = await User.find({ _id: { $ne: userID } })
-      .select("firstName lastName job")
+      .select("firstName lastName job profileImg")
       .sort("-createdAt");
 
     return NextResponse.json({

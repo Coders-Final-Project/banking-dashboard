@@ -65,7 +65,7 @@ export async function POST(request: NextRequest) {
     const newNotification = new Notification({
       userId: userID,
       key: "transfer",
-      content: `Successfull transfer to ${firstName}`,
+      content: `Transfer to ${firstName}`,
     });
 
     await senderCard[0].save();

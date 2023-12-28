@@ -6,27 +6,22 @@ import { ITransactions } from "@/interface";
 
 import { getFormattedDate } from "@/helpers";
 
-interface ITransactionItem {
-  receiverName: string;
-  receiverSurname: string;
-  receiverJob: string;
-  createdAt: string;
-  amount: string;
-}
-
 const TransactionItem = ({
   receiverName,
   receiverSurname,
   receiverJob,
   amount,
   createdAt,
+  profileImg,
 }: ITransactions) => {
   const { formattedDate } = getFormattedDate(createdAt);
+
+  const imgUrl = profileImg?.[0]?.fileUrl?.secure_url;
 
   return (
     <div className="home__content__transaction__body__person">
       <Image
-        src="/assets/home/people.png"
+        src={`${imgUrl ? imgUrl : "/assets/home/people.png"}`}
         alt={receiverName}
         width={48}
         height={48}
