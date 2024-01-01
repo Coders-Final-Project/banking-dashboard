@@ -29,7 +29,7 @@ import { increaseNotificationCount } from "@/globalRedux/features/appSlice";
 
 const INITIAL_DATA: FormData = {
   client: "",
-  company: "Pasha Bank",
+  company: "",
   rate: "",
   projectName: "",
   currency: "AZN",

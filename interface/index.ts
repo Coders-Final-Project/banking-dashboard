@@ -36,6 +36,7 @@ export interface IContractClient {
   _id: number;
   firstName: string;
   lastName: string;
+  profileImg: [{ fileUrl: { public_id: string; secure_url: string } }];
   job: string;
   lng: string;
 }
@@ -104,6 +105,7 @@ export interface IAllCustomers {
   firstName: string;
   lastName: string;
   job: string;
+  profileImg: [{ fileUrl: { public_id: string; secure_url: string } }];
 }
 
 export interface CardProps {
@@ -131,6 +133,7 @@ export interface ITransactions {
   receiverJob: string;
   createdAt: string;
   amount: string;
+  profileImg: [{ fileUrl: { public_id: string; secure_url: string } }];
 }
 
 export interface INotifications {

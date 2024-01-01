@@ -61,6 +61,7 @@ const ContractGeneral = ({
             required
             autoComplete="off"
           >
+            <option value="">{``}</option>
             {definedContracts.map((contract, index) => {
               if (!activeContracts.includes(contract)) {
                 return (
