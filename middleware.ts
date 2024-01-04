@@ -81,7 +81,6 @@ export function middleware(request: NextRequest) {
   if (!lng) lng = acceptLanguage.get(request.headers.get("Accept-Language"));
   if (!lng) lng = fallbackLng;
 
-  // Redirect if lng in path is not supported
   if (
     !languages.some((loc) => request.nextUrl.pathname.startsWith(`/${loc}`)) &&
     !request.nextUrl.pathname.startsWith("/_next")
@@ -156,5 +155,6 @@ export const config = {
     "/az/terms-privacy",
     "/en/terms-privacy",
     // "/((?!api|_next/static|_next/image|assets|favicon.ico|sw.js).*)",
+    "/((?!(?:az|en|api|_next/static|_next/image)(?:/|$))(?!.*\\.[^.]*$).*/?)",
   ],
 };

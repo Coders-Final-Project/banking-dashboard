@@ -36,7 +36,7 @@ const Chatbot = ({ params: { lng } }: { params: { lng: string } }) => {
 
   const messages = useSelector((state: StateProps) => state.chatbotMessages);
 
-  const chatContainerRef = useRef<HTMLDivElement>(null);
+  const chatContainerRef = useRef(null);
 
   const dispatch = useDispatch();
 
@@ -61,7 +61,11 @@ const Chatbot = ({ params: { lng } }: { params: { lng: string } }) => {
       dispatch(deleteTheLastMessage());
       dispatch(setChatBotMessages({ key: "chatbot", value: chatbotResponse }));
 
-      chatContainerRef.current?.scrollIntoView({ behavior: "smooth" });
+      //@ts-ignore
+      chatContainerRef.current?.lastChild?.scrollIntoView({
+        behavior: "smooth",
+        block: "nearest",
+      });
     } catch (error: any) {
       setErrorAlert(error);
     }
