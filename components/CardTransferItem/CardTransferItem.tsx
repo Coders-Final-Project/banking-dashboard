@@ -70,6 +70,18 @@ const CardTransferItem = ({ imgUrlEnd, text }: IProps) => {
   };
 
   const handleFundTransfer = async () => {
+    if (isNaN(parseInt(cardNumber))) {
+      setErrorAlert("Provide correct value!");
+      setCardNumber("");
+      return;
+    }
+
+    if (Number(amount) <= 0) {
+      setErrorAlert("Not allowed!");
+      setAmount("");
+      return;
+    }
+
     try {
       if (data?._id && cardNumber.length === 19 && amount !== "") {
         const response = await axios.post("/api/card/transfer", {
@@ -141,7 +153,9 @@ const CardTransferItem = ({ imgUrlEnd, text }: IProps) => {
               "disabled__btn"
             }`}
             onClick={handleFundTransfer}
-            disabled={userCard._id === -1}
+            disabled={
+              userCard._id === -1 || Number(userCard.balance) < Number(amount)
+            }
           >
             {t("cards.transfer.btn")}
           </button>
