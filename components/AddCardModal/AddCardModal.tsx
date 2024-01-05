@@ -48,6 +48,18 @@ const AddCardModal = ({ handleCardModal, setShowALert }: IProps) => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
+    const { cardNumber, endDate, securityCode } = cardValues;
+
+    if (
+      isNaN(parseInt(cardNumber)) ||
+      isNaN(parseInt(endDate)) ||
+      isNaN(parseInt(securityCode))
+    ) {
+      setErrorAlert("Provide correct values!");
+      setCardValues(INITIAL_VALUES);
+      return;
+    }
+
     try {
       if (data._id) {
         const response = await axios.post("/api/card", {
@@ -55,7 +67,6 @@ const AddCardModal = ({ handleCardModal, setShowALert }: IProps) => {
           userID: data._id,
         });
 
-        console.log(response);
         dispatch(setUserCardInfo(response.data.savedCard));
       }
 

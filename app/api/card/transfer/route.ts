@@ -43,6 +43,13 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ message: "Card not found!" }, { status: 400 });
     }
 
+    if (senderCard[0].balance < parseFloat(amount)) {
+      return NextResponse.json(
+        { message: "You don't have enough balance!" },
+        { status: 400 },
+      );
+    }
+
     senderCard[0].balance = senderCard[0].balance - parseFloat(amount);
     receiverCard[0].balance = receiverCard[0].balance + parseFloat(amount);
 
