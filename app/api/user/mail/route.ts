@@ -4,6 +4,8 @@ import User from "@/lib/models/user.model";
 
 import { connectToDB } from "@/lib/mongoose";
 
+import { emailRegex } from "@/lib/utils/mailRegex";
+
 export async function POST(request: NextRequest) {
   connectToDB();
 
@@ -40,6 +42,13 @@ export async function POST(request: NextRequest) {
         message: "Email already taken!",
         success: false,
         status: 404,
+      });
+    }
+
+    if (!emailRegex.test(newMail)) {
+      return NextResponse.json({
+        message: "Invalid email format",
+        status: 400,
       });
     }
 
