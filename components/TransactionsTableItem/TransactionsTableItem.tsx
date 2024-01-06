@@ -78,6 +78,13 @@ const TransactionsTableItem = ({
   };
 
   const handleFundTransfer = async () => {
+    if (isNaN(parseInt(cardNumber))) {
+      setErrorAlert(true);
+      setCardNumber("");
+      handleTransferOpen();
+      return;
+    }
+
     try {
       if (data?._id && cardNumber.length === 19 && amount !== "") {
         const response = await axios.post("/api/card/transfer", {
@@ -185,8 +192,11 @@ const TransactionsTableItem = ({
               name="amount"
             />
             <button
-              className="action__item__modal__content__btn"
+              className={`action__item__modal__content__btn ${
+                parseInt(fundAmount) <= 0 && "disabled"
+              }`}
               onClick={handleFundTransfer}
+              disabled={parseInt(fundAmount) <= 0}
             >
               {t("actions.modal.btn")}
             </button>
