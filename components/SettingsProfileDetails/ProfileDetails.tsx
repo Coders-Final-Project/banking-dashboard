@@ -62,6 +62,18 @@ const ProfileDetails = () => {
   };
 
   const handleSave = async () => {
+    const { city, country, phone } = userValues;
+
+    if (!isNaN(parseInt(city)) || !isNaN(parseInt(country))) {
+      setServerError("Provide correct values!");
+      return;
+    }
+
+    if (isNaN(parseInt(phone))) {
+      setServerError("Provide correct phone number!");
+      return;
+    }
+
     try {
       const response = await axios.post(
         "/api/user/info",

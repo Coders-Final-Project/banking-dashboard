@@ -11,6 +11,8 @@ import { definedContactSubjects } from "@/constants";
 
 import { sendContactForm } from "@/lib/actions/sendContactForm";
 
+import { emailRegex } from "@/lib/utils/mailRegex";
+
 const INITIAL_VALUES = {
   user: "",
   subject: "Account Inquiry",
@@ -55,6 +57,11 @@ const Contact = () => {
 
     if (!user || !mail || !subject || !message) {
       setErrorAlert("Fill al the fields!");
+      return;
+    }
+
+    if (!emailRegex.test(mail)) {
+      setErrorAlert("Provide correct mail!");
       return;
     }
 

@@ -16,6 +16,13 @@ export async function POST(request: NextRequest) {
     const user = await User.findById(userID);
     const card = await Card.find({ userID });
 
+    if (card[0].balance < 100) {
+      return NextResponse.json({
+        message: "There is no enough balance!",
+        status: 400,
+      });
+    }
+
     user.insuranceCompleted = true;
     card[0].balance = card[0].balance - 100;
 

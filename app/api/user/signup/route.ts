@@ -6,6 +6,8 @@ import { connectToDB } from "@/lib/mongoose";
 
 import bcrypt from "bcrypt";
 
+import { emailRegex } from "@/lib/utils/mailRegex";
+
 export async function POST(request: NextRequest) {
   connectToDB();
 
@@ -17,6 +19,10 @@ export async function POST(request: NextRequest) {
 
   if (user) {
     return NextResponse.json({ message: "Email already taken!", status: 400 });
+  }
+
+  if (!emailRegex.test(email)) {
+    return NextResponse.json({ message: "Invalid email format", status: 400 });
   }
 
   const salt = await bcrypt.genSalt(10);

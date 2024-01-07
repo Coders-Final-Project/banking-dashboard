@@ -26,7 +26,7 @@ const SignNav = ({ lng }: { lng: string }) => {
         href={pathname.includes("signup") ? `/signin` : "signup"}
         className="sign__nav__loginBtn"
       >
-        {pathname.includes("signup") ? "Sing In" : "Sign Up"}
+        {pathname.includes("signup") ? "Sign In" : "Sign Up"}
       </Link>
     </nav>
   );

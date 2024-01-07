@@ -39,7 +39,7 @@ const TransactionsTableItem = ({
 
   const [cardNumber, setCardNumber] = useState("");
   const [fundAmount, setFundAmount] = useState("");
-  const [errorAlert, setErrorAlert] = useState(false);
+  const [errorAlert, setErrorAlert] = useState("");
   const [successAlert, setSuccessAlert] = useState(false);
 
   const curLang = useSelector((state: StateProps) => state.curLang);
@@ -50,9 +50,9 @@ const TransactionsTableItem = ({
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (errorAlert) {
+    if (errorAlert !== "") {
       setTimeout(() => {
-        setErrorAlert(false);
+        setErrorAlert("");
       }, 2000);
     }
 
@@ -78,6 +78,13 @@ const TransactionsTableItem = ({
   };
 
   const handleFundTransfer = async () => {
+    if (isNaN(parseInt(cardNumber))) {
+      setErrorAlert("Provide valid card number!");
+      setCardNumber("");
+      handleTransferOpen();
+      return;
+    }
+
     try {
       if (data?._id && cardNumber.length === 19 && amount !== "") {
         const response = await axios.post("/api/card/transfer", {
@@ -92,10 +99,10 @@ const TransactionsTableItem = ({
       } else {
         setCardNumber("");
         setFundAmount("");
-        setErrorAlert(true);
+        setErrorAlert("Unexpected input!");
       }
-    } catch (error) {
-      setErrorAlert(true);
+    } catch (error: any) {
+      setErrorAlert(error.response.data.message);
     } finally {
       setCardNumber("");
       setFundAmount("");
@@ -185,8 +192,11 @@ const TransactionsTableItem = ({
               name="amount"
             />
             <button
-              className="action__item__modal__content__btn"
+              className={`action__item__modal__content__btn ${
+                parseInt(fundAmount) <= 0 && "disabled"
+              }`}
               onClick={handleFundTransfer}
+              disabled={parseInt(fundAmount) <= 0}
             >
               {t("actions.modal.btn")}
             </button>
@@ -205,9 +215,9 @@ const TransactionsTableItem = ({
           </button>
         </div>
       )}
-      {errorAlert && (
+      {errorAlert !== "" && (
         <div className="transactions__table__item__alert--error">
-          {t("actions.alert.error")}
+          {errorAlert}
         </div>
       )}
       {successAlert && (

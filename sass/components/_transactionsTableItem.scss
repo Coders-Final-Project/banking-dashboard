@@ -170,6 +170,10 @@
           opacity: 0.9;
         }
       }
+
+      &__btn.disabled {
+        cursor: not-allowed;
+      }
     }
 
     &__closeBtn {

@@ -200,3 +200,10 @@ export const getFormattedDate = (createdAt: string) => {
 
   return { formattedDate, formattedTime };
 };
+
+export function numberWithCommas(amount: string) {
+  amount = String(amount);
+  var pattern = /(-?\d+)(\d{3})/;
+  while (pattern.test(amount)) amount = amount.replace(pattern, "$1,$2");
+  return amount;
+}

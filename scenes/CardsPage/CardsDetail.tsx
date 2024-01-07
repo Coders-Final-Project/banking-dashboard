@@ -13,6 +13,8 @@ import CardTransferItem from "@/components/CardTransferItem/CardTransferItem";
 import AddCardModal from "@/components/AddCardModal/AddCardModal";
 import { StateProps } from "@/interface";
 
+import { numberWithCommas } from "@/helpers";
+
 import { useTranslation } from "@/i18n/client";
 
 const CardsAdd = () => {
@@ -49,7 +51,10 @@ const CardsAdd = () => {
               {t("cards.own.title")}
             </div>
             <div className="cards__detail__ownCard__content__balance__amount">
-              {userCard.balance !== 0 ? userCard.balance : "0,000"} ₼
+              {userCard.balance !== 0
+                ? numberWithCommas(String(userCard.balance))
+                : "0,000"}{" "}
+              ₼
             </div>
           </div>
           <div className="cards__detail__ownCard__content__logo">
