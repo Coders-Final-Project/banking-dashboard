@@ -39,7 +39,7 @@ const TransactionsTableItem = ({
 
   const [cardNumber, setCardNumber] = useState("");
   const [fundAmount, setFundAmount] = useState("");
-  const [errorAlert, setErrorAlert] = useState(false);
+  const [errorAlert, setErrorAlert] = useState("");
   const [successAlert, setSuccessAlert] = useState(false);
 
   const curLang = useSelector((state: StateProps) => state.curLang);
@@ -50,9 +50,9 @@ const TransactionsTableItem = ({
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (errorAlert) {
+    if (errorAlert !== "") {
       setTimeout(() => {
-        setErrorAlert(false);
+        setErrorAlert("");
       }, 2000);
     }
 
@@ -79,7 +79,7 @@ const TransactionsTableItem = ({
 
   const handleFundTransfer = async () => {
     if (isNaN(parseInt(cardNumber))) {
-      setErrorAlert(true);
+      setErrorAlert("Provide valid card number!");
       setCardNumber("");
       handleTransferOpen();
       return;
@@ -99,10 +99,10 @@ const TransactionsTableItem = ({
       } else {
         setCardNumber("");
         setFundAmount("");
-        setErrorAlert(true);
+        setErrorAlert("Unexpected input!");
       }
-    } catch (error) {
-      setErrorAlert(true);
+    } catch (error: any) {
+      setErrorAlert(error.response.data.message);
     } finally {
       setCardNumber("");
       setFundAmount("");
@@ -215,9 +215,9 @@ const TransactionsTableItem = ({
           </button>
         </div>
       )}
-      {errorAlert && (
+      {errorAlert !== "" && (
         <div className="transactions__table__item__alert--error">
-          {t("actions.alert.error")}
+          {errorAlert}
         </div>
       )}
       {successAlert && (
