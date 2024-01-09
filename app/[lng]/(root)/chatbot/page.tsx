@@ -46,6 +46,11 @@ const Chatbot = ({ params: { lng } }: { params: { lng: string } }) => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
+    if (question === "") {
+      setErrorAlert("Enter your question!");
+      return;
+    }
+
     dispatch(setChatBotMessages({ key: "client", value: question }));
     dispatch(setChatBotMessages({ key: "chatbot", value: "Typing..." }));
 
