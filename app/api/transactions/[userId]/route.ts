@@ -5,12 +5,13 @@ import User from "@/lib/models/user.model";
 
 import { connectToDB } from "@/lib/mongoose";
 
-export async function POST(request: NextRequest) {
+export async function GET(
+  request: NextRequest,
+  { params }: { params: { userId: string } },
+) {
   connectToDB();
 
-  const reqBody = await request.json();
-
-  const userID = reqBody.userID;
+  const userID = params.userId;
 
   try {
     const transactions = await Transactions.find({ senderId: userID }).sort(
