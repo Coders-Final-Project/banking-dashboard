@@ -69,10 +69,11 @@ const ProfileDetails = () => {
       return;
     }
 
-    if (isNaN(parseInt(phone))) {
-      setServerError("Provide correct phone number!");
-      return;
-    }
+    //CORRECT THIS PART
+    // if (isNaN(parseInt(phone))) {
+    //   setServerError("Provide correct phone number!");
+    //   return;
+    // }
 
     try {
       const response = await axios.post(

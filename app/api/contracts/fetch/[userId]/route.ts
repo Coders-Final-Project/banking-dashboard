@@ -4,12 +4,13 @@ import CompanyContract from "@/lib/models/company.contract.model";
 
 import { connectToDB } from "@/lib/mongoose";
 
-export async function POST(request: NextRequest) {
+export async function GET(
+  request: Request,
+  { params }: { params: { userId: string } },
+) {
   connectToDB();
 
-  const reqBody = await request.json();
-
-  const userID = reqBody.userID;
+  const userID = params.userId;
 
   try {
     const contracts = await CompanyContract.find({ userID }).sort("-createdAt");

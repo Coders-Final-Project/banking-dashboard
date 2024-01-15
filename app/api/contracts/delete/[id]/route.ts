@@ -8,13 +8,14 @@ import Card from "@/lib/models/card.model";
 import Contractual from "@/lib/models/contractual.model";
 import Notification from "@/lib/models/notification.model";
 
-export async function POST(request: NextRequest) {
+export async function DELETE(
+  request: NextRequest,
+  { params }: { params: { id: string } },
+) {
   try {
     connectToDB();
 
-    const reqBody = await request.json();
-
-    const contractID = reqBody.contractID;
+    const contractID = params.id;
 
     const contract = await CompanyContract.findByIdAndDelete(contractID);
     const userID = contract.userID;

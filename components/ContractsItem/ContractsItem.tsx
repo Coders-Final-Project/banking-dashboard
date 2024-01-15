@@ -57,11 +57,9 @@ const ContractsItem = ({
     }
   }, [success, errorAlert]);
 
-  const handleDeleteContract = async () => {
+  const handleDeleteContract = async (id: number) => {
     try {
-      await axios.post("/api/contracts/delete", {
-        contractID: _id,
-      });
+      await axios.delete(`/api/contracts/delete/${id}`);
 
       setIsDeleteBtnClicked(false);
       dispatch(increaseNotificationCount());
@@ -141,7 +139,7 @@ const ContractsItem = ({
               </button>
               <button
                 className="notify__user__modal__content__btns__confirm"
-                onClick={handleDeleteContract}
+                onClick={() => handleDeleteContract(_id)}
               >
                 {t("contract.modal.approve.btn")}
               </button>
