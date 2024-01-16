@@ -69,19 +69,13 @@ const Invoices = ({ params: { lng } }: { params: { lng: string } }) => {
     if (effectRef.current === true) {
       const fetchInvoices = async () => {
         try {
-          const response = await axios.post(
-            "/api/invoice/fetch",
-            {
-              userID: data._id,
+          const response = await axios.get(`/api/invoice/fetch/${data._id}`, {
+            headers: {
+              "Cache-Control": "no-cache",
+              Pragma: "no-cache",
+              Expires: "0",
             },
-            {
-              headers: {
-                "Cache-Control": "no-cache",
-                Pragma: "no-cache",
-                Expires: "0",
-              },
-            },
-          );
+          });
 
           dispatch(setInvoices(response.data.invoices));
         } catch (error: any) {

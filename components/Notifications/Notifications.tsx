@@ -35,9 +35,9 @@ const Notifications = () => {
   useEffect(() => {
     const fetchNotifications = async () => {
       try {
-        const response = await axios.post("/api/notifications", {
-          userID: data._id,
-        });
+        const response = await axios.get(
+          `/api/notifications/fetch/${data._id}`,
+        );
 
         dispatch(setNotifications(response.data.notifications));
       } catch (error: any) {
@@ -52,10 +52,9 @@ const Notifications = () => {
 
   const handleNotificationDelete = async (id: string) => {
     try {
-      const response = await axios.post("/api/notifications/delete", {
-        userID: data._id,
-        notificationId: id,
-      });
+      const response = await axios.delete(
+        `/api/notifications/delete/${data._id}/${id}`,
+      );
 
       dispatch(setNotifications(response.data.notifications));
     } catch (error: any) {
