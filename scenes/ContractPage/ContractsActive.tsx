@@ -52,11 +52,8 @@ const ContractsActive = ({ lng }: { lng: string }) => {
       const fetchCompanyContracts = async () => {
         try {
           if (data._id) {
-            const response = await axios.post(
-              "/api/contracts/fetch",
-              {
-                userID: data._id,
-              },
+            const response = await axios.get(
+              `/api/contracts/fetch/${data._id}`,
               {
                 headers: {
                   "Cache-Control": "no-cache",

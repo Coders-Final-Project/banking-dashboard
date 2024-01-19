@@ -3,12 +3,13 @@ import { NextRequest, NextResponse } from "next/server";
 import { connectToDB } from "@/lib/mongoose";
 import User from "@/lib/models/user.model";
 
-export async function POST(request: NextRequest) {
+export async function GET(
+  request: NextRequest,
+  { params }: { params: { userId: string } },
+) {
   connectToDB();
 
-  const reqBody = await request.json();
-
-  const userID = reqBody.userID;
+  const userID = params.userId;
 
   try {
     const customers = await User.find({ _id: { $ne: userID } })

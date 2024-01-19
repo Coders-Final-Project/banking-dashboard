@@ -77,19 +77,13 @@ const AvatarDetail = ({ hasBtn, lng }: Props) => {
               currentPage === `/en` ||
               currentPage.includes("cards"))
           ) {
-            const response = await axios.post(
-              "/api/card/fetch",
-              {
-                userID: data._id,
+            const response = await axios.get(`/api/card/fetch/${data._id}`, {
+              headers: {
+                "Cache-Control": "no-cache",
+                Pragma: "no-cache",
+                Expires: "0",
               },
-              {
-                headers: {
-                  "Cache-Control": "no-cache",
-                  Pragma: "no-cache",
-                  Expires: "0",
-                },
-              },
-            );
+            });
 
             if (response.data.card !== undefined) {
               dispatch(setUserCardInfo(response.data.card));
@@ -110,19 +104,13 @@ const AvatarDetail = ({ hasBtn, lng }: Props) => {
               currentPage === `/en` ||
               currentPage.includes("transactions"))
           ) {
-            const response = await axios.post(
-              "/api/transactions",
-              {
-                userID: data._id,
+            const response = await axios.get(`/api/transactions/${data._id}`, {
+              headers: {
+                "Cache-Control": "no-cache",
+                Pragma: "no-cache",
+                Expires: "0",
               },
-              {
-                headers: {
-                  "Cache-Control": "no-cache",
-                  Pragma: "no-cache",
-                  Expires: "0",
-                },
-              },
-            );
+            });
 
             dispatch(setTransactions(response.data.transactions));
           }
@@ -134,19 +122,13 @@ const AvatarDetail = ({ hasBtn, lng }: Props) => {
       const fetchContractuals = async () => {
         try {
           if (data._id && currentPage.includes("cards")) {
-            const response = await axios.post(
-              "/api/contractual",
-              {
-                userID: data._id,
+            const response = await axios.get(`/api/contractuals/${data._id}`, {
+              headers: {
+                "Cache-Control": "no-cache",
+                Pragma: "no-cache",
+                Expires: "0",
               },
-              {
-                headers: {
-                  "Cache-Control": "no-cache",
-                  Pragma: "no-cache",
-                  Expires: "0",
-                },
-              },
-            );
+            });
             dispatch(setContractual(response.data.contractuals));
           }
         } catch (error: any) {

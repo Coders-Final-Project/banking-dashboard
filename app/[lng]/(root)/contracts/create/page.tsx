@@ -103,7 +103,7 @@ const ContractCreate = () => {
 
     try {
       if (data.isSigned) {
-        const response = await axios.post(`/api/contracts/company`, {
+        const response = await axios.post(`/api/contracts/create`, {
           data,
           userID: userData.data._id,
         });

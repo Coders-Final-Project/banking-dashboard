@@ -4,12 +4,13 @@ import Invoice from "@/lib/models/invoice.model";
 
 import { connectToDB } from "@/lib/mongoose";
 
-export async function POST(request: NextRequest) {
+export async function GET(
+  request: NextRequest,
+  { params }: { params: { userId: string } },
+) {
   connectToDB();
 
-  const reqBody = await request.json();
-
-  const userID = reqBody.userID;
+  const userID = params.userId;
 
   try {
     const invoices = await Invoice.find({ userId: userID }).sort("-createdAt");

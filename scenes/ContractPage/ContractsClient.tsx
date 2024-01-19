@@ -44,19 +44,13 @@ const ContractsClient = ({ lng }: { lng: string }) => {
       const fetchAllCustomers = async () => {
         try {
           if (data._id) {
-            const response = await axios.post(
-              "/api/customers",
-              {
-                userID: data._id,
+            const response = await axios.get(`/api/customers/${data._id}`, {
+              headers: {
+                "Cache-Control": "no-cache",
+                Pragma: "no-cache",
+                Expires: "0",
               },
-              {
-                headers: {
-                  "Cache-Control": "no-cache",
-                  Pragma: "no-cache",
-                  Expires: "0",
-                },
-              },
-            );
+            });
 
             dispatch(setAllCustomers(response.data.customers));
           }

@@ -62,7 +62,7 @@ const AddCardModal = ({ handleCardModal, setShowALert }: IProps) => {
 
     try {
       if (data._id) {
-        const response = await axios.post("/api/card", {
+        const response = await axios.post("/api/card/create", {
           cardValues,
           userID: data._id,
         });

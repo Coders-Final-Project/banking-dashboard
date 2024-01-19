@@ -8,7 +8,11 @@ import "@/sass/style.scss";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Dashboard",
+  title: {
+    absolute: "",
+    default: "Payrole - Banking App",
+    template: "%s | Payrole",
+  },
   description: "Coders Final Project",
 };
 

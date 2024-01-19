@@ -133,7 +133,7 @@ const Sidemenu = ({ setOpenSideMenu }: IProps) => {
 
     if (data._id) {
       try {
-        const response = await axios.post("/api/invoice", {
+        const response = await axios.post("/api/invoice/create", {
           userID: data._id,
           receiverData: receiverData,
           itemData: itemData,

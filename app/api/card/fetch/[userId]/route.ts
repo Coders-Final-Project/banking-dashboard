@@ -4,13 +4,14 @@ import { connectToDB } from "@/lib/mongoose";
 
 import Card from "@/lib/models/card.model";
 
-export async function POST(request: NextRequest) {
+export async function GET(
+  request: Request,
+  { params }: { params: { userId: string } },
+) {
   try {
     connectToDB();
 
-    const reqBody = await request.json();
-
-    const userID = reqBody.userID;
+    const userID = params.userId;
 
     const card = await Card.findOne({ userID });
 

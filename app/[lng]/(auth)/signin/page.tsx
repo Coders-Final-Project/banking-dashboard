@@ -103,7 +103,7 @@ const SignIn = () => {
             onChange={handleChange}
             className="signin__input"
             autoComplete="off"
-            disabled={sending}
+            disabled={success !== "" || sending}
           />
         </div>
         <div className="signIn__form__item">
@@ -130,7 +130,7 @@ const SignIn = () => {
             onChange={handleChange}
             className="signin__input"
             autoComplete="off"
-            disabled={sending}
+            disabled={success !== "" || sending}
           />
           <div className="remember__me">
             <input type="checkbox" id="remember" />
