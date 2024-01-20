@@ -24,7 +24,7 @@ const SignIn = () => {
   const [sending, setSending] = useState(false);
   const [serverError, setServerError] = useState("");
   const [success, setSuccess] = useState("");
-  const [captcha, setCaptcha] = useState(false);
+  const [captcha, setCaptcha] = useState(true);
 
   const router = useRouter();
 
@@ -147,12 +147,12 @@ const SignIn = () => {
             Privacy Policy
           </Link>
         </div>
-        <div className="recaptcha">
+        {/* <div className="recaptcha">
           <ReCAPTCHA
             sitekey="6LcQAh8pAAAAAEIt6vw4NJOhoJYk9xFApwbv9vTm"
             onChange={handleRecaptcha}
           />
-        </div>
+        </div> */}
         <button
           className={`signIn__form__btn ${
             formValues.email &&
