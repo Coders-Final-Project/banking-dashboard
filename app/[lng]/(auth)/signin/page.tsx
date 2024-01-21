@@ -24,7 +24,7 @@ const SignIn = () => {
   const [sending, setSending] = useState(false);
   const [serverError, setServerError] = useState("");
   const [success, setSuccess] = useState("");
-  const [captcha, setCaptcha] = useState(false);
+  const [captcha, setCaptcha] = useState(true);
 
   const router = useRouter();
 
