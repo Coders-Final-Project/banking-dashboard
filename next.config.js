@@ -7,8 +7,12 @@ const nextConfig = {
         hostname: "res.cloudinary.com",
         pathname: "**",
       },
+      {
+        protocol: "https",
+        hostname: "payrole-coral.vercel.app",
+        pathname: "**",
+      },
     ],
-    domains: ["https://payrole-coral.vercel.app"],
   },
 };
 
