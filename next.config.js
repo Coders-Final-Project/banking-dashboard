@@ -12,6 +12,11 @@ const nextConfig = {
         hostname: "payrole-coral.vercel.app",
         pathname: "**",
       },
+      {
+        protocol: "https",
+        hostname: "payrole.netlify.app",
+        pathname: "**",
+      },
     ],
   },
 };
