@@ -46,7 +46,7 @@ export async function POST(request: NextRequest) {
       success: true,
     });
 
-    response.cookies.set("token", token);
+    response.cookies.set("token", token, { httpOnly: true, sameSite: "lax" });
 
     return response;
   } catch (error: any) {

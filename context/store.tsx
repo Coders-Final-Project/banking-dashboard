@@ -139,7 +139,7 @@ export const GlobalContextProvider = ({
     if (effectRef.current === true) {
       const getUserInfo = async () => {
         try {
-          const response = await axios.get("/api/user/me", {
+          const response = await axios.get("api/user/me", {
             headers: {
               "Cache-Control": "no-cache",
               Pragma: "no-cache",
