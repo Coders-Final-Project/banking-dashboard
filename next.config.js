@@ -8,6 +8,7 @@ const nextConfig = {
         pathname: "**",
       },
     ],
+    domains: ["https://payrole-coral.vercel.app"],
   },
 };
 
