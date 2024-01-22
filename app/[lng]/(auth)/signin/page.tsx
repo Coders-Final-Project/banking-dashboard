@@ -64,14 +64,6 @@ const SignIn = () => {
     });
   };
 
-  useEffect(() => {
-    if (success !== "") {
-      setTimeout(() => {
-        router.replace("/");
-      }, 1000);
-    }
-  }, [success, router]);
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const { email, password } = formValues;
@@ -155,12 +147,12 @@ const SignIn = () => {
             Privacy Policy
           </Link>
         </div>
-        <div className="recaptcha">
+        {/* <div className="recaptcha">
           <ReCAPTCHA
             sitekey="6LcQAh8pAAAAAEIt6vw4NJOhoJYk9xFApwbv9vTm"
             onChange={handleRecaptcha}
           />
-        </div>
+        </div> */}
         <button
           className={`signIn__form__btn ${
             formValues.email &&
