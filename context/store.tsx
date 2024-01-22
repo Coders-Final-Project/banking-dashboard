@@ -139,7 +139,7 @@ export const GlobalContextProvider = ({
     if (effectRef.current === false) {
       const getUserInfo = async () => {
         try {
-          const response = await axios.get("/api/user/me");
+          const response = await axios.get("api/user/me");
           setData(response.data.data);
         } catch (error: any) {
           throw new Error(error.message);
@@ -149,9 +149,9 @@ export const GlobalContextProvider = ({
       getUserInfo();
     }
 
-    return () => {
-      effectRef.current = true;
-    };
+    // return () => {
+    //   effectRef.current = true;
+    // };
   }, []);
 
   return (
