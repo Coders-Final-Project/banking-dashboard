@@ -64,14 +64,6 @@ const SignIn = () => {
     });
   };
 
-  useEffect(() => {
-    if (success !== "") {
-      setTimeout(() => {
-        router.replace("/");
-      }, 1000);
-    }
-  }, [success, router]);
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const { email, password } = formValues;
@@ -87,7 +79,8 @@ const SignIn = () => {
         setServerError(response.data.message);
       } else {
         setSuccess(response.data.message);
-        router.replace("/");
+        // router.replace("/");
+        window.location.href = "/";
       }
     } catch (error: any) {
       setServerError(error.message);

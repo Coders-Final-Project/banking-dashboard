@@ -146,12 +146,6 @@ const AvatarDetail = ({ hasBtn, lng }: Props) => {
     }
   };
 
-  useEffect(() => {
-    setTimeout(() => {
-      router.replace("/");
-    }, 1000);
-  }, [router]);
-
   const handleLogout = async () => {
     try {
       await axios.get("/api/user/logout");
@@ -160,7 +154,8 @@ const AvatarDetail = ({ hasBtn, lng }: Props) => {
       itemsToRemove.forEach((key) => {
         localStorage.removeItem(key);
       });
-      router.replace("/signin");
+      // router.replace("/signin");
+      window.location.href = "/signin";
     } catch (error: any) {
       setServerError(error.message);
     }
