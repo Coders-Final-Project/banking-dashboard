@@ -79,7 +79,8 @@ const SignIn = () => {
         setServerError(response.data.message);
       } else {
         setSuccess(response.data.message);
-        router.replace("/");
+        // router.replace("/");
+        window.location.href = "/";
       }
     } catch (error: any) {
       setServerError(error.message);

@@ -154,7 +154,8 @@ const AvatarDetail = ({ hasBtn, lng }: Props) => {
       itemsToRemove.forEach((key) => {
         localStorage.removeItem(key);
       });
-      router.replace("/signin");
+      // router.replace("/signin");
+      window.location.href = "/signin";
     } catch (error: any) {
       setServerError(error.message);
     }
