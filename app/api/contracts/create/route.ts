@@ -77,6 +77,7 @@ export async function POST(request: NextRequest) {
     await newNotification.save();
 
     return NextResponse.json({
+      data: savedContract,
       message: "Company contract created successfully",
       success: true,
     });
