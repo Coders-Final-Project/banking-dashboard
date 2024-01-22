@@ -136,10 +136,10 @@ export const GlobalContextProvider = ({
   const effectRef = useRef(false);
 
   useEffect(() => {
-    if (effectRef.current === true) {
+    if (effectRef.current === false) {
       const getUserInfo = async () => {
         try {
-          const response = await axios.get("api/user/me");
+          const response = await axios.get("/api/user/me");
           setData(response.data.data);
         } catch (error: any) {
           throw new Error(error.message);

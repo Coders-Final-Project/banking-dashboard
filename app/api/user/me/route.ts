@@ -10,9 +10,7 @@ export async function GET(request: NextRequest) {
   connectToDB();
 
   try {
-    // const userId = await getDataFromToken(request);
-
-    const userId = "655332ab0920ea213be7311c";
+    const userId = await getDataFromToken(request);
 
     const user = await User.findOne({ _id: userId }).select(
       "firstName lastName street dateOfBirth phone country job citizenOf city zipCode insuranceCompleted uploadedFiles profileImg",
