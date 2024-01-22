@@ -68,7 +68,7 @@ const AvatarDetail = ({ hasBtn, lng }: Props) => {
   const effectRef = useRef(false);
 
   useEffect(() => {
-    if (effectRef.current === true) {
+    if (effectRef.current === false) {
       const fetchCardInfo = async () => {
         try {
           if (
@@ -166,7 +166,7 @@ const AvatarDetail = ({ hasBtn, lng }: Props) => {
 
   const handleLogout = async () => {
     try {
-      await axios.get("/api/user/logout");
+      await axios.get("api/user/logout");
       const itemsToRemove = ["persist:root", "persist:primary"];
 
       itemsToRemove.forEach((key) => {
