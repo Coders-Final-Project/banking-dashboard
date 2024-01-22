@@ -168,7 +168,7 @@ const SignIn = () => {
           {sending ? "Sending..." : "Log In"}
         </button>
         <Link href="/forget-password" className="signIn__form__forgetPass">
-          Forget your password
+          Forget your password?
         </Link>
         <div className="signIn__form__switch">
           Do not have an acount?{" "}
