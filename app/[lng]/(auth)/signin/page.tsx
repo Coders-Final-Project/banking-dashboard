@@ -79,7 +79,7 @@ const SignIn = () => {
         setServerError(response.data.message);
       } else {
         setSuccess(response.data.message);
-        router.push("/");
+        router.replace("/");
       }
     } catch (error: any) {
       setServerError(error.message);

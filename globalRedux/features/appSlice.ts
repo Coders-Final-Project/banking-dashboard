@@ -46,6 +46,12 @@ export const appSlice: any = createSlice({
     ) => {
       state.companyContracts = action.payload;
     },
+    updateCompanyContracts: (
+      state,
+      action: PayloadAction<ICompanyContracts>,
+    ) => {
+      state.companyContracts = [...state.companyContracts, action.payload];
+    },
     setAllCustomers: (state, action: PayloadAction<IAllCustomers[]>) => {
       state.allCustomers = action.payload;
     },
@@ -111,6 +117,7 @@ export const {
   setInvoices,
   setChatBotMessages,
   deleteTheLastMessage,
+  updateCompanyContracts,
 } = appSlice.actions;
 
 export default appSlice.reducer;

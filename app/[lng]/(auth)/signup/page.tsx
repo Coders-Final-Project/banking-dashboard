@@ -94,7 +94,7 @@ const SignUp = () => {
         setSuccess(true);
         setFormValues(initialValues);
         setTimeout(() => {
-          router.push("/signin");
+          router.replace("/signin");
         }, 1500);
       }
     } catch (error: any) {
