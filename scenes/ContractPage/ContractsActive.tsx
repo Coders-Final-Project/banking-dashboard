@@ -48,7 +48,7 @@ const ContractsActive = ({ lng }: { lng: string }) => {
   const effectRef = useRef(false);
 
   useEffect(() => {
-    if (effectRef.current === true) {
+    if (effectRef.current === false) {
       const fetchCompanyContracts = async () => {
         try {
           if (data._id) {

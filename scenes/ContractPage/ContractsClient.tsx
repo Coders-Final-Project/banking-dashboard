@@ -40,7 +40,7 @@ const ContractsClient = ({ lng }: { lng: string }) => {
   const effectRef = useRef(false);
 
   useEffect(() => {
-    if (effectRef.current === true) {
+    if (effectRef.current === false) {
       const fetchAllCustomers = async () => {
         try {
           if (data._id) {
