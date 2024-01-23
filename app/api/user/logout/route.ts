@@ -1,5 +1,7 @@
 import { NextResponse } from "next/server";
 
+import jwt from "jsonwebtoken";
+
 export async function GET() {
   try {
     const response = NextResponse.json({
@@ -7,7 +9,9 @@ export async function GET() {
       success: true,
     });
 
-    response.cookies.set("token", "", { httpOnly: true, expires: new Date(0) });
+    response.cookies.delete("token");
+
+    // response.cookies.set("token", "", { httpOnly: true, expires: new Date(0) });
 
     return response;
   } catch (error: any) {
