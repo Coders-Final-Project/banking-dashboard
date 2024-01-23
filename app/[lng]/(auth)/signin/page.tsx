@@ -11,8 +11,6 @@ import ReCAPTCHA from "react-google-recaptcha";
 import "@/sass/pages/_signIn.scss";
 import Link from "next/link";
 
-import { useRouter } from "next/navigation";
-
 const initialValues = {
   email: "",
   password: "",
@@ -25,8 +23,6 @@ const SignIn = () => {
   const [serverError, setServerError] = useState("");
   const [success, setSuccess] = useState("");
   const [captcha, setCaptcha] = useState(true);
-
-  const router = useRouter();
 
   useEffect(() => {
     if (serverError !== "" || success !== "") {
@@ -79,7 +75,6 @@ const SignIn = () => {
         setServerError(response.data.message);
       } else {
         setSuccess(response.data.message);
-        // router.replace("/");
         window.location.href = "/";
       }
     } catch (error: any) {

@@ -13,7 +13,7 @@ import axios from "axios";
 
 import { useSelector, useDispatch } from "react-redux";
 
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 import "@/sass/layout/_avatarDetail.scss";
 
@@ -59,7 +59,6 @@ const AvatarDetail = ({ hasBtn, lng }: Props) => {
   const dispatch = useDispatch();
 
   const currentPage = usePathname();
-  const router = useRouter();
 
   const url = data?.profileImg?.[0]?.fileUrl?.secure_url;
 
@@ -67,6 +66,25 @@ const AvatarDetail = ({ hasBtn, lng }: Props) => {
 
   useEffect(() => {
     if (effectRef.current === false) {
+      const fetchCardInfo = async () => {
+        try {
+          if (data._id) {
+            const response = await axios.get(`/api/card/fetch/${data._id}`);
+
+            if (response.data.card !== undefined) {
+              dispatch(setUserCardInfo(response.data.card));
+            }
+          }
+        } catch (error: any) {
+          // setTimeout(() => {
+          //   setServerError(error.response.data.message);
+          // }, 1000);
+        }
+      };
+
+      if (currentPage.includes("contracts")) {
+        fetchCardInfo();
+      }
       dispatch(setInsuranceCompleted(data.insuranceCompleted));
     }
 
@@ -99,9 +117,10 @@ const AvatarDetail = ({ hasBtn, lng }: Props) => {
       itemsToRemove.forEach((key) => {
         localStorage.removeItem(key);
       });
-      // router.replace("/signin");
+
       window.location.href = "/signin";
     } catch (error: any) {
+      console.log(error);
       setServerError(error.message);
     }
   };

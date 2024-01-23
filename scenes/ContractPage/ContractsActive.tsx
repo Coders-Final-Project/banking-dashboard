@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 
 import { useState } from "react";
 
@@ -43,8 +42,6 @@ const ContractsActive = ({ lng }: { lng: string }) => {
     (state: StateProps) => state.companyContracts,
   );
 
-  const userCard = useSelector((state: StateProps) => state.userCard);
-
   const effectRef = useRef(false);
 
   useEffect(() => {
@@ -54,13 +51,6 @@ const ContractsActive = ({ lng }: { lng: string }) => {
           if (data._id) {
             const response = await axios.get(
               `/api/contracts/fetch/${data._id}`,
-              {
-                headers: {
-                  "Cache-Control": "no-cache",
-                  Pragma: "no-cache",
-                  Expires: "0",
-                },
-              },
             );
             dispatch(setCompanyContracts(response.data.contracts));
           }
@@ -92,14 +82,7 @@ const ContractsActive = ({ lng }: { lng: string }) => {
         />
       </div>
       <div className="contracts__content__active__body">
-        {userCard._id === -1 ? (
-          <Link
-            href="/cards"
-            className="contracts__content__active__body__empty"
-          >
-            {t("contract.active.noCard")}
-          </Link>
-        ) : companyContracts.length === 0 ? (
+        {companyContracts.length === 0 ? (
           <div className="no__contract"> {t("contract.active.noContract")}</div>
         ) : (
           companyContracts?.map((contract) => (
