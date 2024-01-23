@@ -20,7 +20,7 @@ import { filterInvoiceTable } from "@/helpers";
 import axios from "axios";
 
 import { useSelector, useDispatch } from "react-redux";
-import { setInvoices } from "@/globalRedux/features/appSlice";
+import { setInvoices, updateInvoices } from "@/globalRedux/features/appSlice";
 
 import { useGlobalContext } from "@/context/store";
 

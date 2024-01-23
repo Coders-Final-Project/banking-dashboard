@@ -84,7 +84,11 @@ export async function POST(request: NextRequest) {
     await newInvoice.save();
     await newNotification.save();
 
-    return NextResponse.json({ message: "Invoice created!", status: 200 });
+    return NextResponse.json({
+      message: "Invoice created!",
+      data: newInvoice,
+      status: 200,
+    });
   } catch (error: any) {
     return NextResponse.json({ error: error.message, status: 500 });
   }

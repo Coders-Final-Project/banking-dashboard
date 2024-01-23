@@ -15,7 +15,10 @@ import axios from "axios";
 
 import { useSelector, useDispatch } from "react-redux";
 
-import { increaseNotificationCount } from "@/globalRedux/features/appSlice";
+import {
+  increaseNotificationCount,
+  updateInvoices,
+} from "@/globalRedux/features/appSlice";
 
 import { useGlobalContext } from "@/context/store";
 
@@ -138,6 +141,8 @@ const Sidemenu = ({ setOpenSideMenu }: IProps) => {
           receiverData: receiverData,
           itemData: itemData,
         });
+
+        dispatch(updateInvoices(response.data.data));
 
         const status = response.data.status;
         const message = response.data.message;

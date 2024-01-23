@@ -84,6 +84,7 @@ export async function POST(request: NextRequest) {
       message: "Insurance created successfully",
       success: true,
       data: senderCard,
+      action: newTransaction,
     });
   } catch (error: any) {
     return NextResponse.json({ error: error.message }, { status: 500 });

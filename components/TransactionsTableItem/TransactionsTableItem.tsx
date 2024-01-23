@@ -18,6 +18,7 @@ import { useGlobalContext } from "@/context/store";
 import {
   setUserCardInfo,
   increaseNotificationCount,
+  updateTransactions,
 } from "@/globalRedux/features/appSlice";
 
 import { useSelector } from "react-redux";
@@ -94,6 +95,7 @@ const TransactionsTableItem = ({
         });
 
         dispatch(setUserCardInfo(response.data.data[0]));
+        dispatch(updateTransactions(response.data.action));
         setSuccessAlert(true);
         dispatch(increaseNotificationCount());
       } else {

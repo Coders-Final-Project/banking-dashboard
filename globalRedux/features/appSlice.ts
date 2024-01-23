@@ -50,7 +50,13 @@ export const appSlice: any = createSlice({
       state,
       action: PayloadAction<ICompanyContracts>,
     ) => {
-      state.companyContracts = [...state.companyContracts, action.payload];
+      state.companyContracts = [action.payload, ...state.companyContracts];
+    },
+    updateTransactions: (state, action: PayloadAction<ITransactions>) => {
+      state.transactions = [action.payload, ...state.transactions];
+    },
+    updateInvoices: (state, action: PayloadAction<IInvoices>) => {
+      state.invoices = [action.payload, ...state.invoices];
     },
     setAllCustomers: (state, action: PayloadAction<IAllCustomers[]>) => {
       state.allCustomers = action.payload;
@@ -118,6 +124,8 @@ export const {
   setChatBotMessages,
   deleteTheLastMessage,
   updateCompanyContracts,
+  updateTransactions,
+  updateInvoices,
 } = appSlice.actions;
 
 export default appSlice.reducer;
