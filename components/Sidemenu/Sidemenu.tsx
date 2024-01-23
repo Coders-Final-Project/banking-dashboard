@@ -142,8 +142,6 @@ const Sidemenu = ({ setOpenSideMenu }: IProps) => {
           itemData: itemData,
         });
 
-        dispatch(updateInvoices(response.data.data));
-
         const status = response.data.status;
         const message = response.data.message;
 
@@ -153,6 +151,7 @@ const Sidemenu = ({ setOpenSideMenu }: IProps) => {
         if (status === 200) {
           setSuccessAlert(message);
           dispatch(increaseNotificationCount());
+          dispatch(updateInvoices(response.data.data));
         }
       } catch (error) {
         setErrorAlert("Something went wrong!");

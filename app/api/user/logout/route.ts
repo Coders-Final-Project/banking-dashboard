@@ -1,7 +1,5 @@
 import { NextResponse } from "next/server";
 
-import jwt from "jsonwebtoken";
-
 export async function GET() {
   try {
     const response = NextResponse.json({
