@@ -1,12 +1,14 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState, useRef } from "react";
+
+import axios from "axios";
 
 import Image from "next/image";
 
 import "@/sass/scenes/_cardsDetail.scss";
 
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 import CardInfo from "@/components/CardInfo/CardInfo";
 import CardTransferItem from "@/components/CardTransferItem/CardTransferItem";
@@ -16,9 +18,12 @@ import { StateProps } from "@/interface";
 import { numberWithCommas } from "@/helpers";
 
 import { useTranslation } from "@/i18n/client";
+import { setUserCardInfo } from "@/globalRedux/features/appSlice";
+import { useGlobalContext } from "@/context/store";
 
 const CardsAdd = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [serverError, setServerError] = useState("");
 
   const [showAlert, setShowALert] = useState(false);
 
@@ -31,6 +36,38 @@ const CardsAdd = () => {
   const { t } = useTranslation(curLang);
 
   const userCard = useSelector((state: StateProps) => state.userCard);
+
+  const { data } = useGlobalContext();
+
+  const dispatch = useDispatch();
+
+  const effectRef = useRef(false);
+
+  useEffect(() => {
+    if (effectRef.current === false) {
+      const fetchCardInfo = async () => {
+        try {
+          if (data._id) {
+            const response = await axios.get(`/api/card/fetch/${data._id}`);
+
+            if (response.data.card !== undefined) {
+              dispatch(setUserCardInfo(response.data.card));
+            }
+          }
+        } catch (error: any) {
+          // setTimeout(() => {
+          //   setServerError(error.response.data.message);
+          // }, 1000);
+        }
+      };
+
+      fetchCardInfo();
+    }
+
+    return () => {
+      effectRef.current = true;
+    };
+  }, [data._id, dispatch]);
 
   return (
     <div className="cards__detail">
@@ -144,6 +181,11 @@ const CardsAdd = () => {
         />
       )}
       {showAlert && <div className="success__msg">{t("card.added.alert")}</div>}
+      {serverError !== "" && (
+        <div className="pop-up pop-up__error">
+          <h2 className="pop-up__text__error">{serverError}</h2>
+        </div>
+      )}
     </div>
   );
 };

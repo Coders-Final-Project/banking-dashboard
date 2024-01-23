@@ -92,22 +92,20 @@ const ContractsActive = ({ lng }: { lng: string }) => {
         />
       </div>
       <div className="contracts__content__active__body">
-        {userCard._id === -1 && (
+        {userCard._id === -1 ? (
           <Link
             href="/cards"
             className="contracts__content__active__body__empty"
           >
             {t("contract.active.noCard")}
           </Link>
-        )}
-
-        {companyContracts.length === 0 && userCard._id !== -1 && (
+        ) : companyContracts.length === 0 ? (
           <div className="no__contract"> {t("contract.active.noContract")}</div>
+        ) : (
+          companyContracts?.map((contract) => (
+            <ContractsItem key={contract._id} {...contract} lng={lng} />
+          ))
         )}
-
-        {companyContracts?.map((contract) => (
-          <ContractsItem key={contract._id} {...contract} lng={lng} />
-        ))}
       </div>
       {errorAlert !== "" && (
         <div className="contract__active__alert--error">{errorAlert}</div>

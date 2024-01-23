@@ -101,6 +101,29 @@
       scrollbar-width: none;
     }
   }
+
+  .pop-up {
+    position: fixed;
+    z-index: 2000;
+    top: 5%;
+    left: 50%;
+    transform: translate(-50%, -5%);
+    width: auto;
+    height: auto;
+    border-radius: 0.5em;
+    font-size: 1.1em;
+    padding: 1em;
+    color: $main-color-white;
+    box-shadow: $box-shadow;
+  }
+
+  .pop-up__error {
+    background-color: $action-red-100;
+  }
+
+  .pop-up__success {
+    background-color: $action-green-100;
+  }
 }
 
 .no__action {

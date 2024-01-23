@@ -1,8 +1,10 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 import Image from "next/image";
+
+import axios from "axios";
 
 import "@/sass/scenes/_transactionsTable.scss";
 
@@ -10,17 +12,48 @@ import TransactionsTableItem from "@/components/TransactionsTableItem/Transactio
 
 import { filterActionsTable } from "@/helpers";
 
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { StateProps } from "@/interface";
 
 import { useTranslation } from "@/i18n/client";
+import { useGlobalContext } from "@/context/store";
+import { setTransactions } from "@/globalRedux/features/appSlice";
 
 const TransactionTable = () => {
   const [check, setCheck] = useState(false);
+  const [serverError, setServerError] = useState("");
 
   const transactions = useSelector((state: StateProps) => state.transactions);
 
   const [actionsData, setActionsData] = useState(transactions);
+
+  const dispatch = useDispatch();
+
+  const { data } = useGlobalContext();
+
+  const effectRef = useRef(false);
+
+  useEffect(() => {
+    if (effectRef.current === false) {
+      const fetchTransactions = async () => {
+        try {
+          if (data._id) {
+            const response = await axios.get(`/api/transactions/${data._id}`);
+
+            dispatch(setTransactions(response.data.transactions));
+          }
+        } catch (error: any) {
+          setServerError(error.response.data.message);
+        }
+      };
+
+      fetchTransactions();
+    }
+
+    return () => {
+      effectRef.current = true;
+    };
+  }, [data._id, dispatch]);
 
   useEffect(() => {
     setActionsData(transactions);
@@ -106,15 +139,20 @@ const TransactionTable = () => {
           </button>
         </div>
         <div className="transactions__table__content__actions">
-          {actionsData.map((action) => (
-            <TransactionsTableItem key={action._id} {...action} />
-          ))}
-
-          {actionsData.length === 0 && (
+          {actionsData.length === 0 ? (
             <div className="no__action">There is no action yet!</div>
+          ) : (
+            actionsData.map((action) => (
+              <TransactionsTableItem key={action._id} {...action} />
+            ))
           )}
         </div>
       </div>
+      {serverError !== "" && (
+        <div className="pop-up pop-up__error">
+          <h2 className="pop-up__text__error">{serverError}</h2>
+        </div>
+      )}
     </div>
   );
 };

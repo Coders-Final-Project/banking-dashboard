@@ -22,8 +22,6 @@ import { StateProps } from "@/interface";
 import {
   setUserCardInfo,
   setInsuranceCompleted,
-  setTransactions,
-  setContractual,
   decreaseNotificationsToZero,
 } from "@/globalRedux/features/appSlice";
 
@@ -69,59 +67,6 @@ const AvatarDetail = ({ hasBtn, lng }: Props) => {
 
   useEffect(() => {
     if (effectRef.current === false) {
-      const fetchCardInfo = async () => {
-        try {
-          if (
-            data._id &&
-            (currentPage === `/az` ||
-              currentPage === `/en` ||
-              currentPage.includes("cards"))
-          ) {
-            const response = await axios.get(`/api/card/fetch/${data._id}`);
-
-            if (response.data.card !== undefined) {
-              dispatch(setUserCardInfo(response.data.card));
-            }
-          }
-        } catch (error: any) {
-          // setTimeout(() => {
-          //   setServerError(error.response.data.message);
-          // }, 1000);
-        }
-      };
-
-      const fetchTransactions = async () => {
-        try {
-          if (
-            data._id &&
-            (currentPage === `/az` ||
-              currentPage === `/en` ||
-              currentPage.includes("transactions"))
-          ) {
-            const response = await axios.get(`/api/transactions/${data._id}`);
-
-            dispatch(setTransactions(response.data.transactions));
-          }
-        } catch (error: any) {
-          setServerError(error.response.data.message);
-        }
-      };
-
-      const fetchContractuals = async () => {
-        try {
-          if (data._id && currentPage.includes("cards")) {
-            const response = await axios.get(`/api/contractuals/${data._id}`);
-            dispatch(setContractual(response.data.contractuals));
-          }
-        } catch (error: any) {
-          setServerError(error.response.data.message);
-        }
-      };
-
-      fetchTransactions();
-      fetchCardInfo();
-      fetchContractuals();
-
       dispatch(setInsuranceCompleted(data.insuranceCompleted));
     }
 

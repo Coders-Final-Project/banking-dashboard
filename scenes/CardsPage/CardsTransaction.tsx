@@ -1,21 +1,28 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
+
 import Image from "next/image";
 
+import axios from "axios";
+
 import "@/sass/scenes/_cardsTransaction.scss";
+
 import CardActionItem from "@/components/CardActionItem/CardActionItem";
 
 import { filterCardsTable } from "@/helpers";
 
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 import { StateProps } from "@/interface";
 
 import { useTranslation } from "@/i18n/client";
+import { useGlobalContext } from "@/context/store";
+import { setContractual } from "@/globalRedux/features/appSlice";
 
 const CardsTransaction = () => {
   const [check, setCheck] = useState(false);
+  const [serverError, setServerError] = useState("");
 
   const contractual = useSelector((state: StateProps) => state.contractual);
 
@@ -24,6 +31,33 @@ const CardsTransaction = () => {
   const curLang = useSelector((state: StateProps) => state.curLang);
 
   const { t } = useTranslation(curLang);
+
+  const { data } = useGlobalContext();
+
+  const dispatch = useDispatch();
+
+  const effectRef = useRef(false);
+
+  useEffect(() => {
+    if (effectRef.current === false) {
+      const fetchContractuals = async () => {
+        try {
+          if (data._id) {
+            const response = await axios.get(`/api/contractuals/${data._id}`);
+            dispatch(setContractual(response.data.contractuals));
+          }
+        } catch (error: any) {
+          setServerError(error.response.data.message);
+        }
+      };
+
+      fetchContractuals();
+    }
+
+    return () => {
+      effectRef.current = true;
+    };
+  }, [data._id, dispatch]);
 
   useEffect(() => {
     setCardData(contractual);
@@ -89,15 +123,20 @@ const CardsTransaction = () => {
           </button>
         </div>
         <div className="cards__transaction__content__body">
-          {cardData.map((action) => (
-            <CardActionItem key={action._id} {...action} />
-          ))}
-
-          {cardData.length === 0 && (
+          {cardData.length === 0 ? (
             <div className="no__action">{t("card.no.contract")}</div>
+          ) : (
+            cardData.map((action) => (
+              <CardActionItem key={action._id} {...action} />
+            ))
           )}
         </div>
       </div>
+      {serverError !== "" && (
+        <div className="pop-up pop-up__error">
+          <h2 className="pop-up__text__error">{serverError}</h2>
+        </div>
+      )}
     </div>
   );
 };
