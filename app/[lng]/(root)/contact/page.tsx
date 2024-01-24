@@ -13,6 +13,8 @@ import { sendContactForm } from "@/lib/actions/sendContactForm";
 
 import { emailRegex } from "@/lib/utils/mailRegex";
 
+import { useTranslation } from "@/i18n/client";
+
 const INITIAL_VALUES = {
   user: "",
   subject: "Account Inquiry",
@@ -20,11 +22,13 @@ const INITIAL_VALUES = {
   message: "",
 };
 
-const Contact = () => {
+const Contact = ({ params: { lng } }: { params: { lng: string } }) => {
   const [formValues, setFormValues] = useState(INITIAL_VALUES);
   const [success, setSuccess] = useState(false);
   const [errorAlert, setErrorAlert] = useState("");
   const [loading, setLoading] = useState(false);
+
+  const { t } = useTranslation(lng);
 
   useEffect(() => {
     if (success) {
