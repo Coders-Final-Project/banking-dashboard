@@ -173,7 +173,7 @@ const AvatarDetail = ({ hasBtn, lng }: Props) => {
         </div>
         <div className="avatar__detail__person__dropdown">
           <Link
-            href="/settings"
+            href={`/${lng}/settings`}
             className="avatar__detail__person__dropdown__profile"
           >
             Profile
