@@ -16,53 +16,59 @@ const Sidebar = async ({ lng }: { lng: string }) => {
   const sidebarLinks = [
     {
       id: 1,
-      icon: "home.png",
+      icon: "house.png",
       route: `/`,
       text: `${t("sidebar.link1.title")}`,
     },
     {
       id: 2,
-      icon: "edit.png",
+      icon: "contract.png",
       route: "contracts",
       text: `${t("sidebar.link2.title")}`,
     },
     {
       id: 3,
-      icon: "document-text.png",
+      icon: "document.png",
       route: "documents",
       text: `${t("sidebar.link3.title")}`,
     },
     {
       id: 4,
-      icon: "document-normal.png",
+      icon: "invoice.png",
       iconExtra: "vector.png",
       route: "invoices",
       text: `${t("sidebar.link4.title")}`,
     },
     {
       id: 5,
-      icon: "convert-card.png",
+      icon: "payment.png",
       route: "transactions",
       text: `${t("sidebar.link5.title")}`,
     },
     {
       id: 6,
-      icon: "security.png",
+      icon: "insurance.png",
       iconExtra: "frame.png",
       route: "insurance",
       text: `${t("sidebar.link6.title")}`,
     },
     {
       id: 7,
-      icon: "card.png",
+      icon: "cards.png",
       route: "cards",
       text: `${t("sidebar.link7.title")}`,
     },
     {
       id: 8,
-      icon: "chatbot.png",
+      icon: "chat.png",
       route: "chatbot",
       text: `Chatbot`,
+    },
+    {
+      id: 9,
+      icon: "phone.png",
+      route: "contact",
+      text: `Contact`,
     },
   ];
 
@@ -97,7 +103,15 @@ const Sidebar = async ({ lng }: { lng: string }) => {
       </Link>
       <div className="lang__switcher">
         <Trans i18nKey="languageSwitcher" t={t}>
-          <span className="lang__switcher__item active">{lng}</span>{" "}
+          <span className="lang__switcher__item active">
+            <Image
+              src={`/assets/sidebar/${lng === "az" ? "aze" : "eng"}.png`}
+              alt="country"
+              width={24}
+              height={24}
+              className="sidebar__settings__icon"
+            />
+          </span>{" "}
         </Trans>
         {languages
           .filter((l) => lng !== l)
@@ -106,7 +120,13 @@ const Sidebar = async ({ lng }: { lng: string }) => {
               <span key={l} className="lang__switcher__item">
                 {index > 0 && " or "}
                 <Link href={`/${l}`} className="lang__switcher__item__link">
-                  {l}
+                  <Image
+                    src={`/assets/sidebar/${l === "az" ? "aze" : "eng"}.png`}
+                    alt="country"
+                    width={24}
+                    height={24}
+                    className="sidebar__settings__icon"
+                  />
                 </Link>
               </span>
             );

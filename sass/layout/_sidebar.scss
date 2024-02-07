@@ -37,7 +37,7 @@
     &__item {
       @include flexbox($justify: flex-start, $items: center, $gap: 0.75em);
       position: relative;
-      padding: 12px;
+      padding: 11px;
       width: 100%;
       border: 1px solid transparent;
       text-decoration: none;
@@ -88,7 +88,7 @@
 
   .lang__switcher {
     position: absolute;
-    top: 40px;
+    top: 35px;
     right: 20px;
     @include flexbox($justify: space-between, $items: center, $gap: 0.5rem);
 
