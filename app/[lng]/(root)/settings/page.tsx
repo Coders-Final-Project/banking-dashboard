@@ -24,7 +24,7 @@ const Settings = ({ params: { lng } }: { params: { lng: string } }) => {
         <div className="page__header__welcome">
           <div className="page__header__welcome__title">Settings</div>
         </div>
-        <AvatarDetail />
+        <AvatarDetail lng={lng} />
       </header>
       <div className="settings__content">
         <div className="settings__content__btns">

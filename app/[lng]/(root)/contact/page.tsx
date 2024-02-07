@@ -88,7 +88,7 @@ const Contact = ({ params: { lng } }: { params: { lng: string } }) => {
         <div className="page__header__welcome">
           <div className="page__header__welcome__title">Contact</div>
         </div>
-        <AvatarDetail />
+        <AvatarDetail lng={lng} />
       </header>
       <div className="contact__body">
         <div className="contact__body__title">Contact Us</div>

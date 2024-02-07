@@ -120,7 +120,6 @@ const AvatarDetail = ({ hasBtn, lng }: Props) => {
 
       window.location.href = "/signin";
     } catch (error: any) {
-      console.log(error);
       setServerError(error.message);
     }
   };
@@ -172,18 +171,6 @@ const AvatarDetail = ({ hasBtn, lng }: Props) => {
           </div>
         </div>
         <div className="avatar__detail__person__dropdown">
-          <Link
-            href={`/${lng}/settings`}
-            className="avatar__detail__person__dropdown__profile"
-          >
-            Profile
-          </Link>
-          <Link
-            href={`/${lng}/contact`}
-            className="avatar__detail__person__dropdown__profile"
-          >
-            Contact
-          </Link>
           <button
             onClick={handleLogout}
             className="avatar__detail__person__dropdown__logoutBtn"
