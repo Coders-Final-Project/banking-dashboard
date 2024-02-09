@@ -26,6 +26,8 @@ import { StateProps } from "@/interface";
 
 import { useTranslation } from "@/i18n/client";
 
+import { useSWRConfig } from "swr";
+
 interface IProps {
   setOpenSideMenu: Dispatch<SetStateAction<boolean>>;
 }
@@ -51,6 +53,8 @@ const Sidemenu = ({ setOpenSideMenu }: IProps) => {
 
   const [successAlert, setSuccessAlert] = useState("");
   const [errorAlert, setErrorAlert] = useState("");
+
+  const { mutate } = useSWRConfig();
 
   useEffect(() => {
     if (successAlert || errorAlert) {
@@ -152,6 +156,7 @@ const Sidemenu = ({ setOpenSideMenu }: IProps) => {
           setSuccessAlert(message);
           dispatch(increaseNotificationCount());
           dispatch(updateInvoices(response.data.data));
+          mutate(`/api/invoice/fetch/${data._id}`);
         }
       } catch (error) {
         setErrorAlert("Something went wrong!");

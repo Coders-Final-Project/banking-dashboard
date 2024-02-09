@@ -20,7 +20,7 @@ import ContractScope from "@/scenes/ContractForms/ContractScope";
 import ContractSign from "@/scenes/ContractForms/ContractSign";
 
 import { FormEvent } from "react";
-import { FormData } from "@/interface";
+import { FormData, StateProps } from "@/interface";
 
 import { createProgressBar } from "@/helpers";
 
@@ -29,6 +29,9 @@ import {
   increaseNotificationCount,
   updateCompanyContracts,
 } from "@/globalRedux/features/appSlice";
+
+import { useSWRConfig } from "swr";
+import { useSelector } from "react-redux";
 
 const INITIAL_DATA: FormData = {
   client: "",
@@ -48,11 +51,17 @@ const ContractCreate = () => {
   const [errorAlert, setErrorAlert] = useState("");
   const [successAlert, setSuccessAlert] = useState(false);
 
+  const { data: user } = useGlobalContext();
+
+  const userCard = useSelector((state: StateProps) => state.userCard);
+
   const router = useRouter();
 
   const dispatch = useDispatch();
 
   const userData = useGlobalContext();
+
+  const { mutate } = useSWRConfig();
 
   const updateFields = (fields: Partial<FormData>) => {
     setData((prev) => {
@@ -115,6 +124,7 @@ const ContractCreate = () => {
 
         setSuccessAlert(true);
         dispatch(increaseNotificationCount());
+        mutate(`/api/contracts/fetch/${user._id}`);
         setTimeout(() => {
           router.replace("/contracts");
         }, 1000);
@@ -125,6 +135,10 @@ const ContractCreate = () => {
       setErrorAlert(error.response.data.message);
     }
   };
+
+  if (userCard._id === -1) {
+    return router.push("/contracts");
+  }
 
   return (
     <main className="contract__create">

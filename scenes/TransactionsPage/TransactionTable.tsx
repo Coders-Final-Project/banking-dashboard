@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 
 import Image from "next/image";
 
@@ -12,48 +12,38 @@ import TransactionsTableItem from "@/components/TransactionsTableItem/Transactio
 
 import { filterActionsTable } from "@/helpers";
 
-import { useSelector, useDispatch } from "react-redux";
-import { StateProps } from "@/interface";
+import { useSelector } from "react-redux";
+import { ITransactions, StateProps } from "@/interface";
 
 import { useTranslation } from "@/i18n/client";
 import { useGlobalContext } from "@/context/store";
-import { setTransactions } from "@/globalRedux/features/appSlice";
+
+import useSWR from "swr";
 
 const TransactionTable = () => {
   const [check, setCheck] = useState(false);
   const [serverError, setServerError] = useState("");
 
-  const transactions = useSelector((state: StateProps) => state.transactions);
-
-  const [actionsData, setActionsData] = useState(transactions);
-
-  const dispatch = useDispatch();
-
   const { data } = useGlobalContext();
 
-  const effectRef = useRef(false);
+  const fetcher = async (url: string) => {
+    try {
+      const response = await axios.get(url);
+      setActionsData(response.data.transactions);
 
-  useEffect(() => {
-    if (effectRef.current === false) {
-      const fetchTransactions = async () => {
-        try {
-          if (data._id) {
-            const response = await axios.get(`/api/transactions/${data._id}`);
-
-            dispatch(setTransactions(response.data.transactions));
-          }
-        } catch (error: any) {
-          setServerError(error.response.data.message);
-        }
-      };
-
-      fetchTransactions();
+      return response;
+    } catch (error: any) {
+      setServerError(error?.message);
     }
+  };
 
-    return () => {
-      effectRef.current = true;
-    };
-  }, [data._id, dispatch]);
+  const {
+    data: transactions,
+    mutate,
+    isLoading,
+  } = useSWR(`/api/transactions/${data._id}`, fetcher);
+
+  const [actionsData, setActionsData] = useState(transactions);
 
   useEffect(() => {
     setActionsData(transactions);
@@ -62,9 +52,9 @@ const TransactionTable = () => {
   const handleSort = (input: string) => {
     setCheck((prevValue) => !prevValue);
 
-    const sortedData =
-      filterActionsTable({ input, data: transactions, check }) || [];
-    setActionsData(sortedData);
+    // const sortedData =
+    //   filterActionsTable({ input, data: transactions, check }) || [];
+    // setActionsData(sortedData);
   };
 
   const curLang = useSelector((state: StateProps) => state.curLang);
@@ -139,10 +129,14 @@ const TransactionTable = () => {
           </button>
         </div>
         <div className="transactions__table__content__actions">
-          {actionsData.length === 0 ? (
+          {(isLoading || actionsData === undefined) && (
+            <div className="no__action">Loading...</div>
+          )}
+
+          {transactions?.data?.transactions?.length === 0 ? (
             <div className="no__action">There is no action yet!</div>
           ) : (
-            actionsData.map((action) => (
+            transactions?.data?.transactions?.map((action: ITransactions) => (
               <TransactionsTableItem key={action._id} {...action} />
             ))
           )}

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 
 import Link from "next/link";
 
@@ -9,7 +9,6 @@ import Image from "next/image";
 import "@/sass/layout/_pageHeader.scss";
 import "@/sass/pages/_invoices.scss";
 
-// import { invoicesData } from "@/db/invoices";
 import AvatarDetail from "@/shared/AvatarDetail/AvatarDetail";
 import InvoiceTable from "@/components/InvoiceTable/InvoiceTable";
 import Sidemenu from "@/components/Sidemenu/Sidemenu";
@@ -17,12 +16,7 @@ import Sidemenu from "@/components/Sidemenu/Sidemenu";
 import { IInvoicesData, StateProps } from "@/interface";
 import { filterInvoiceTable } from "@/helpers";
 
-import axios from "axios";
-
-import { useSelector, useDispatch } from "react-redux";
-import { setInvoices, updateInvoices } from "@/globalRedux/features/appSlice";
-
-import { useGlobalContext } from "@/context/store";
+import { useSelector } from "react-redux";
 
 import { useTranslation } from "@/i18n/client";
 
@@ -41,14 +35,9 @@ const Invoices = ({ params: { lng } }: { params: { lng: string } }) => {
 
   const { t } = useTranslation(lng);
 
-  const { data } = useGlobalContext();
-
-  const invoices = useSelector((state: StateProps) => state.invoices);
   const userCard = useSelector((state: StateProps) => state.userCard);
 
   const [invoiceData, setInvoiceData] = useState<IInvoicesData[]>();
-
-  const dispatch = useDispatch();
 
   const handleSubmit = (input: string) => {
     setChangeState((prev) => !prev);
@@ -62,34 +51,6 @@ const Invoices = ({ params: { lng } }: { params: { lng: string } }) => {
       setInvoiceData(sortedInvoces as IInvoicesData[]);
     }
   };
-
-  const effectRef = useRef(false);
-
-  useEffect(() => {
-    if (effectRef.current === false) {
-      const fetchInvoices = async () => {
-        try {
-          const response = await axios.get(`/api/invoice/fetch/${data._id}`, {
-            headers: {
-              "Cache-Control": "no-cache",
-              Pragma: "no-cache",
-              Expires: "0",
-            },
-          });
-
-          dispatch(setInvoices(response.data.invoices));
-        } catch (error: any) {
-          setErrorAlert(error);
-        }
-      };
-
-      fetchInvoices();
-    }
-
-    return () => {
-      effectRef.current = true;
-    };
-  }, [data._id, dispatch]);
 
   const openSidemenu = () => {
     setOpenSideMenu((prev) => !prev);
@@ -249,7 +210,7 @@ const Invoices = ({ params: { lng } }: { params: { lng: string } }) => {
               </div>
             </div>
             <div className="filteredData">
-              <InvoiceTable invoices={invoices} />
+              <InvoiceTable />
             </div>
           </div>
         </div>

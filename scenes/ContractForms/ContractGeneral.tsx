@@ -1,9 +1,10 @@
+"use client";
+
 import "@/sass/scenes/_contractGeneralForm.scss";
 
 import ContractFormWrapper from "@/components/ContractFormWrapper/ContractFormWrapper";
 
-import { useSelector } from "react-redux";
-import { StateProps } from "@/interface";
+import { ICompanyContracts } from "@/interface";
 
 import { definedContracts } from "@/constants";
 
@@ -20,6 +21,12 @@ type GeneralFormProps = GeneralFormData & {
   updateFields: (fields: Partial<GeneralFormData>) => void;
 };
 
+import useSWR from "swr";
+import { useGlobalContext } from "@/context/store";
+
+import axios from "axios";
+import { useEffect, useState } from "react";
+
 const ContractGeneral = ({
   client,
   company,
@@ -29,12 +36,35 @@ const ContractGeneral = ({
   date,
   updateFields,
 }: GeneralFormProps) => {
-  const companyContracts: any = useSelector(
-    (state: StateProps) => state.companyContracts,
-  );
+  const [errorAlert, setErrorAlert] = useState("");
 
-  const activeContracts = companyContracts.map(
-    (contract: any) => contract.company,
+  useEffect(() => {
+    if (errorAlert !== "") {
+      setTimeout(() => {
+        setErrorAlert("");
+      }, 2000);
+    }
+  }, [errorAlert]);
+
+  const { data } = useGlobalContext();
+
+  const fetcher = async (url: string) => {
+    try {
+      const response = await axios.get(url);
+      return response;
+    } catch (error: any) {
+      setErrorAlert(error?.message);
+    }
+  };
+
+  const {
+    data: companyContracts,
+    mutate,
+    isLoading,
+  } = useSWR(`/api/contracts/fetch/${data._id}`, fetcher);
+
+  const activeContracts = companyContracts?.data?.contracts.map(
+    (contract: ICompanyContracts) => contract.company,
   );
 
   return (
@@ -63,7 +93,7 @@ const ContractGeneral = ({
           >
             <option value="">{``}</option>
             {definedContracts.map((contract, index) => {
-              if (!activeContracts.includes(contract)) {
+              if (!activeContracts?.includes(contract)) {
                 return (
                   <option key={index} value={contract}>
                     {contract}
@@ -126,6 +156,9 @@ const ContractGeneral = ({
           autoComplete="off"
         />
       </div>
+      {errorAlert !== "" && (
+        <div className="contract__general__alert--error">{errorAlert}</div>
+      )}
     </ContractFormWrapper>
   );
 };
