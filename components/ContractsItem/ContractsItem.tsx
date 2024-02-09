@@ -11,14 +11,14 @@ import { useState, useEffect } from "react";
 import { ICompanyContracts } from "@/interface";
 
 import { useDispatch } from "react-redux";
-import {
-  removeContract,
-  increaseNotificationCount,
-} from "@/globalRedux/features/appSlice";
+import { increaseNotificationCount } from "@/globalRedux/features/appSlice";
 
 import axios from "axios";
 
 import { useTranslation } from "@/i18n/client";
+
+import { useSWRConfig } from "swr";
+import { useGlobalContext } from "@/context/store";
 
 const ContractsItem = ({
   client,
@@ -31,6 +31,10 @@ const ContractsItem = ({
   const [isDeleteBtnClicked, setIsDeleteBtnClicked] = useState(false);
   const [success, setSuccess] = useState(false);
   const [errorAlert, setErrorAlert] = useState("");
+
+  const { data } = useGlobalContext();
+
+  const { mutate } = useSWRConfig();
 
   const { t } = useTranslation(lng);
 
@@ -63,10 +67,10 @@ const ContractsItem = ({
 
       setIsDeleteBtnClicked(false);
       dispatch(increaseNotificationCount());
-      dispatch(removeContract(_id));
+      mutate(`/api/contracts/fetch/${data._id}`);
       setSuccess(true);
     } catch (error: any) {
-      setErrorAlert(error.response.data.message);
+      setErrorAlert("Something went wrong!");
     }
   };
 
