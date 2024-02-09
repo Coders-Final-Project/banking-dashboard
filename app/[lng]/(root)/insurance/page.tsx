@@ -147,7 +147,11 @@ const Insurance = ({ params: { lng } }: { params: { lng: string } }) => {
             ) : (
               <button
                 className="insurance__content__card__header__btn"
-                onClick={handleOpenModal}
+                onClick={() =>
+                  userCard._id !== -1
+                    ? handleOpenModal()
+                    : router.push("/cards")
+                }
               >
                 {userCard._id === -1
                   ? `${t("insurance.content.apply1")}`

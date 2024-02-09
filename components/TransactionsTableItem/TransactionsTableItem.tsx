@@ -26,6 +26,8 @@ import { StateProps } from "@/interface";
 
 import { useTranslation } from "@/i18n/client";
 
+import { useSWRConfig } from "swr";
+
 const TransactionsTableItem = ({
   receiverName,
   receiverJob,
@@ -49,6 +51,8 @@ const TransactionsTableItem = ({
   const { data } = useGlobalContext();
 
   const dispatch = useDispatch();
+
+  const { mutate } = useSWRConfig();
 
   useEffect(() => {
     if (errorAlert !== "") {
@@ -98,6 +102,7 @@ const TransactionsTableItem = ({
         dispatch(updateTransactions(response.data.action));
         setSuccessAlert(true);
         dispatch(increaseNotificationCount());
+        mutate(`/api/transactions/${data._id}`);
       } else {
         setCardNumber("");
         setFundAmount("");

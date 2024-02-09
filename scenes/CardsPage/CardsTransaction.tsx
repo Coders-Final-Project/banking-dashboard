@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 
 import Image from "next/image";
 
@@ -12,21 +12,18 @@ import CardActionItem from "@/components/CardActionItem/CardActionItem";
 
 import { filterCardsTable } from "@/helpers";
 
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
-import { StateProps } from "@/interface";
+import { IContractual, StateProps } from "@/interface";
 
 import { useTranslation } from "@/i18n/client";
 import { useGlobalContext } from "@/context/store";
-import { setContractual } from "@/globalRedux/features/appSlice";
+
+import useSWR from "swr";
 
 const CardsTransaction = () => {
   const [check, setCheck] = useState(false);
   const [serverError, setServerError] = useState("");
-
-  const contractual = useSelector((state: StateProps) => state.contractual);
-
-  const [cardData, setCardData] = useState(contractual);
 
   const curLang = useSelector((state: StateProps) => state.curLang);
 
@@ -34,30 +31,30 @@ const CardsTransaction = () => {
 
   const { data } = useGlobalContext();
 
-  const dispatch = useDispatch();
-
-  const effectRef = useRef(false);
-
   useEffect(() => {
-    if (effectRef.current === false) {
-      const fetchContractuals = async () => {
-        try {
-          if (data._id) {
-            const response = await axios.get(`/api/contractuals/${data._id}`);
-            dispatch(setContractual(response.data.contractuals));
-          }
-        } catch (error: any) {
-          setServerError(error.response.data.message);
-        }
-      };
-
-      fetchContractuals();
+    if (serverError !== "") {
+      setTimeout(() => {
+        setServerError("");
+      }, 2000);
     }
+  }, [serverError]);
 
-    return () => {
-      effectRef.current = true;
-    };
-  }, [data._id, dispatch]);
+  const fetcher = async (url: string) => {
+    try {
+      const response = await axios.get(url);
+      return response;
+    } catch (error: any) {
+      setServerError(error?.message);
+    }
+  };
+
+  const {
+    data: contractual,
+    mutate,
+    isLoading,
+  } = useSWR(`/api/contractuals/${data._id}`, fetcher);
+
+  const [cardData, setCardData] = useState(contractual);
 
   useEffect(() => {
     setCardData(contractual);
@@ -66,11 +63,11 @@ const CardsTransaction = () => {
   const handleSort = (input: string) => {
     setCheck((prevValue) => !prevValue);
 
-    if (input === "name" || input === "date" || input === "amount") {
-      const sortedData =
-        filterCardsTable({ input, data: contractual, check }) || [];
-      setCardData(sortedData);
-    }
+    // if (input === "name" || input === "date" || input === "amount") {
+    //   const sortedData =
+    //     filterCardsTable({ input, data: contractual, check }) || [];
+    //   setCardData(sortedData);
+    // }
   };
 
   return (
@@ -123,10 +120,12 @@ const CardsTransaction = () => {
           </button>
         </div>
         <div className="cards__transaction__content__body">
-          {cardData.length === 0 ? (
+          {isLoading && <div className="no__action">Loading...</div>}
+
+          {contractual?.data?.contractuals?.length === 0 ? (
             <div className="no__action">{t("card.no.contract")}</div>
           ) : (
-            cardData.map((action) => (
+            contractual?.data?.contractuals?.map((action: IContractual) => (
               <CardActionItem key={action._id} {...action} />
             ))
           )}

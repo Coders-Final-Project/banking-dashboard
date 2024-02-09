@@ -6,19 +6,22 @@ import { useEffect, useState } from "react";
 
 import axios from "axios";
 
-import { useSelector, useDispatch } from "react-redux";
-import { setNotifications } from "@/globalRedux/features/appSlice";
+import { useDispatch } from "react-redux";
 
 import { useGlobalContext } from "@/context/store";
 
 import "@/sass/components/_notifications.scss";
 
-import { StateProps } from "@/interface";
+import { INotifications } from "@/interface";
 
 import { getFormattedDate, defineNotificationImage } from "@/helpers";
 
+import useSWR, { useSWRConfig } from "swr";
+
 const Notifications = () => {
   const [errorAlert, setErrorAlert] = useState("");
+
+  const { mutate } = useSWRConfig();
 
   useEffect(() => {
     if (errorAlert !== "") {
@@ -30,33 +33,25 @@ const Notifications = () => {
 
   const { data } = useGlobalContext();
 
-  const dispatch = useDispatch();
+  const fetcher = async (url: string) => {
+    try {
+      const response = await axios.get(url);
+      return response;
+    } catch (error: any) {
+      setErrorAlert(error?.message);
+    }
+  };
 
-  useEffect(() => {
-    const fetchNotifications = async () => {
-      try {
-        const response = await axios.get(
-          `/api/notifications/fetch/${data._id}`,
-        );
-
-        dispatch(setNotifications(response.data.notifications));
-      } catch (error: any) {
-        setErrorAlert(error.response.data.message);
-      }
-    };
-
-    fetchNotifications();
-  }, [data._id, dispatch]);
-
-  const notifications = useSelector((state: StateProps) => state.notifications);
+  const { data: notifications, isLoading } = useSWR(
+    `/api/notifications/fetch/${data._id}`,
+    fetcher,
+  );
 
   const handleNotificationDelete = async (id: string) => {
     try {
-      const response = await axios.delete(
-        `/api/notifications/delete/${data._id}/${id}`,
-      );
+      await axios.delete(`/api/notifications/delete/${data._id}/${id}`);
 
-      dispatch(setNotifications(response.data.notifications));
+      mutate(`/api/notifications/fetch/${data._id}`);
     } catch (error: any) {
       setErrorAlert(error.response.data.message);
     }
@@ -66,16 +61,20 @@ const Notifications = () => {
     <div className="notifications">
       <div className="notifications__header">
         <div className="notifications__header__all">
-          notifications ({notifications?.length})
+          notifications ({notifications?.data?.notifications.length})
         </div>
         <div className="notifications__header__new">new (1)</div>
       </div>
       <div className="notifications__body">
-        {notifications.length === 0 && (
+        {isLoading && (
+          <div className="notifications__body__empty">Loading...</div>
+        )}
+
+        {notifications?.data?.notifications.length === 0 && (
           <div className="notifications__body__empty">Empty!</div>
         )}
 
-        {notifications?.map((item) => {
+        {notifications?.data?.notifications.map((item: INotifications) => {
           const { formattedDate } = getFormattedDate(item.createdAt);
 
           const imgName = defineNotificationImage(item.key);

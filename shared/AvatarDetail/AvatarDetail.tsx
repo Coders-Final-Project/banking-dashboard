@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 
 import { useState, useEffect, useRef } from "react";
 
@@ -82,7 +81,7 @@ const AvatarDetail = ({ hasBtn, lng }: Props) => {
         }
       };
 
-      if (currentPage.includes("contracts")) {
+      if (currentPage.includes("contracts") || currentPage.includes("/")) {
         fetchCardInfo();
       }
       dispatch(setInsuranceCompleted(data.insuranceCompleted));

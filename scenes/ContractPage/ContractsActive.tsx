@@ -12,14 +12,13 @@ import axios from "axios";
 
 import { useGlobalContext } from "@/context/store";
 
-import { useSelector, useDispatch } from "react-redux";
-import { setCompanyContracts } from "@/globalRedux/features/appSlice";
-
-import { StateProps } from "@/interface";
+import { ICompanyContracts } from "@/interface";
 
 import { useTranslation } from "@/i18n/client";
 
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
+
+import useSWR from "swr";
 
 const ContractsActive = ({ lng }: { lng: string }) => {
   const [errorAlert, setErrorAlert] = useState("");
@@ -32,40 +31,24 @@ const ContractsActive = ({ lng }: { lng: string }) => {
     }
   }, [errorAlert]);
 
-  const dispatch = useDispatch();
-
   const { data } = useGlobalContext();
 
   const { t } = useTranslation(lng);
 
-  const companyContracts = useSelector(
-    (state: StateProps) => state.companyContracts,
-  );
-
-  const effectRef = useRef(false);
-
-  useEffect(() => {
-    if (effectRef.current === false) {
-      const fetchCompanyContracts = async () => {
-        try {
-          if (data._id) {
-            const response = await axios.get(
-              `/api/contracts/fetch/${data._id}`,
-            );
-            dispatch(setCompanyContracts(response.data.contracts));
-          }
-        } catch (error: any) {
-          setErrorAlert(error.response.data.message);
-        }
-      };
-
-      fetchCompanyContracts();
+  const fetcher = async (url: string) => {
+    try {
+      const response = await axios.get(url);
+      return response;
+    } catch (error: any) {
+      setErrorAlert(error?.message);
     }
+  };
 
-    return () => {
-      effectRef.current = true;
-    };
-  }, [data, dispatch]);
+  const {
+    data: companyContracts,
+    mutate,
+    isLoading,
+  } = useSWR(`/api/contracts/fetch/${data._id}`, fetcher);
 
   return (
     <div className="contracts__content__active">
@@ -82,12 +65,16 @@ const ContractsActive = ({ lng }: { lng: string }) => {
         />
       </div>
       <div className="contracts__content__active__body">
-        {companyContracts.length === 0 ? (
+        {isLoading && <div className="no__contract">Loading...</div>}
+
+        {companyContracts?.data?.contracts.length === 0 ? (
           <div className="no__contract"> {t("contract.active.noContract")}</div>
         ) : (
-          companyContracts?.map((contract) => (
-            <ContractsItem key={contract._id} {...contract} lng={lng} />
-          ))
+          companyContracts?.data?.contracts.map(
+            (contract: ICompanyContracts) => (
+              <ContractsItem key={contract._id} {...contract} lng={lng} />
+            ),
+          )
         )}
       </div>
       {errorAlert !== "" && (
