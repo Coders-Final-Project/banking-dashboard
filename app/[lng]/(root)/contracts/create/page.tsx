@@ -25,10 +25,7 @@ import { FormData, StateProps } from "@/interface";
 import { createProgressBar } from "@/helpers";
 
 import { useDispatch } from "react-redux";
-import {
-  increaseNotificationCount,
-  updateCompanyContracts,
-} from "@/globalRedux/features/appSlice";
+import { increaseNotificationCount } from "@/globalRedux/features/appSlice";
 
 import { useSWRConfig } from "swr";
 import { useSelector } from "react-redux";
@@ -119,8 +116,6 @@ const ContractCreate = () => {
           data,
           userID: userData.data._id,
         });
-
-        dispatch(updateCompanyContracts(response.data.data));
 
         setSuccessAlert(true);
         dispatch(increaseNotificationCount());

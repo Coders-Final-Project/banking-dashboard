@@ -57,12 +57,6 @@ export const appSlice: any = createSlice({
     decreaseNotificationsToZero: (state) => {
       state.notificationCount = 0;
     },
-    removeContract: (state, action) => {
-      const contractIdToRemove = action.payload;
-      state.companyContracts = state.companyContracts.filter(
-        (contract) => contract._id !== contractIdToRemove,
-      );
-    },
   },
 });
 
@@ -70,7 +64,6 @@ export const {
   setUserCardInfo,
   setCurrenctLang,
   setInsuranceCompleted,
-  removeContract,
   increaseNotificationCount,
   decreaseNotificationsToZero,
   setChatBotMessages,
