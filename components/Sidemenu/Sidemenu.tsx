@@ -15,10 +15,7 @@ import axios from "axios";
 
 import { useSelector, useDispatch } from "react-redux";
 
-import {
-  increaseNotificationCount,
-  updateInvoices,
-} from "@/globalRedux/features/appSlice";
+import { increaseNotificationCount } from "@/globalRedux/features/appSlice";
 
 import { useGlobalContext } from "@/context/store";
 
@@ -155,7 +152,6 @@ const Sidemenu = ({ setOpenSideMenu }: IProps) => {
         if (status === 200) {
           setSuccessAlert(message);
           dispatch(increaseNotificationCount());
-          dispatch(updateInvoices(response.data.data));
           mutate(`/api/invoice/fetch/${data._id}`);
         }
       } catch (error) {
