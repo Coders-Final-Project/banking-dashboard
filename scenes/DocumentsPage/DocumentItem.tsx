@@ -39,8 +39,6 @@ const DocumentItem = ({ allFiles }: { allFiles: UploadedFileProps[] }) => {
     }
   });
 
-  console.log(docItemBooleanValues);
-
   const handleUpload = (e: any, docKey: string) => {
     e.preventDefault();
     setModalTitle(docKey);

@@ -52,8 +52,6 @@ const Documents = ({ params: { lng } }: { params: { lng: string } }) => {
 
   const filesProvided = Number(files?.length) === 4;
 
-  console.log(files);
-
   return (
     <main className="documents">
       <header className="page__header">
