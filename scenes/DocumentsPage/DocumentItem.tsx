@@ -7,14 +7,12 @@ import "@/sass/scenes/_documentItem.scss";
 import DocumentItemFile from "@/components/DocumentItemFile/DocumentItemFile";
 import DocumentModal from "@/components/DocumentModal/DocumentModal";
 
-import { useGlobalContext } from "@/context/store";
-
 import { useSelector } from "react-redux";
-import { StateProps } from "@/interface";
+import { StateProps, UploadedFileProps } from "@/interface";
 
 import { useTranslation } from "@/i18n/client";
 
-const DocumentItem = () => {
+const DocumentItem = ({ allFiles }: { allFiles: UploadedFileProps[] }) => {
   const [modalTitle, setModalTitle] = useState("");
   const [isUploadClicked, setIsUploadClicked] = useState(false);
 
@@ -22,10 +20,8 @@ const DocumentItem = () => {
 
   const { t } = useTranslation(curLang);
 
-  const { data } = useGlobalContext();
-
-  const files = data.uploadedFiles.map((file) => {
-    return file.fileName;
+  const filesName = allFiles?.map((file: UploadedFileProps) => {
+    return file.fileName!;
   });
 
   const docTitles: string[] = [
@@ -36,12 +32,14 @@ const DocumentItem = () => {
   ];
 
   const docItemBooleanValues = docTitles.map((doc) => {
-    if (files.includes(doc)) {
+    if (filesName?.includes(doc)) {
       return true;
     } else {
       return false;
     }
   });
+
+  console.log(docItemBooleanValues);
 
   const handleUpload = (e: any, docKey: string) => {
     e.preventDefault();
@@ -58,6 +56,7 @@ const DocumentItem = () => {
             handleUpload={handleUpload}
             title={docTitles[0]}
             docKey="Passport or National ID"
+            key="1"
             isSubmitted={docItemBooleanValues[0]}
             color="#3A67C1"
           />
@@ -65,6 +64,7 @@ const DocumentItem = () => {
             handleUpload={handleUpload}
             title={docTitles[1]}
             docKey="Tax Registration Number"
+            key="2"
             isSubmitted={docItemBooleanValues[1]}
             color="#0B0B0C"
           />
@@ -77,6 +77,7 @@ const DocumentItem = () => {
             handleUpload={handleUpload}
             title={docTitles[2]}
             docKey="Any additional relevant documents"
+            key="3"
             isSubmitted={docItemBooleanValues[2]}
             color="#6945FA"
           />
@@ -84,6 +85,7 @@ const DocumentItem = () => {
             handleUpload={handleUpload}
             title={docTitles[3]}
             docKey="Proof of registration with the National Social Security Program"
+            key="4"
             isSubmitted={docItemBooleanValues[3]}
             color="#0AAF60"
           />
