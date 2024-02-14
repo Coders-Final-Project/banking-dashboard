@@ -67,7 +67,7 @@ const ContractsActive = ({ lng }: { lng: string }) => {
       <div className="contracts__content__active__body">
         {isLoading && <div className="no__contract">Loading...</div>}
 
-        {companyContracts?.data?.contracts.length === 0 ? (
+        {companyContracts?.data?.contracts?.length === 0 ? (
           <div className="no__contract"> {t("contract.active.noContract")}</div>
         ) : (
           companyContracts?.data?.contracts.map(

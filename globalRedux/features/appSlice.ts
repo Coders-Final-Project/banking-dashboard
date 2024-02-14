@@ -6,12 +6,6 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 import { StateProps, CardProps } from "@/interface";
 
 const initialState: StateProps = {
-  companyContracts: [],
-  allCustomers: [],
-  transactions: [],
-  contractual: [],
-  notifications: [],
-  invoices: [],
   chatbotMessages: [],
   userCard: {
     _id: -1,
