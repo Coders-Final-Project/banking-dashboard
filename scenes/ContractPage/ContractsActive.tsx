@@ -18,6 +18,9 @@ import { useTranslation } from "@/i18n/client";
 
 import { useEffect } from "react";
 
+import { setContractsLength } from "@/globalRedux/features/appSlice";
+import { useDispatch } from "react-redux";
+
 import useSWR from "swr";
 
 const ContractsActive = ({ lng }: { lng: string }) => {
@@ -31,6 +34,8 @@ const ContractsActive = ({ lng }: { lng: string }) => {
     }
   }, [errorAlert]);
 
+  const dispatch = useDispatch();
+
   const { data } = useGlobalContext();
 
   const { t } = useTranslation(lng);
@@ -38,6 +43,9 @@ const ContractsActive = ({ lng }: { lng: string }) => {
   const fetcher = async (url: string) => {
     try {
       const response = await axios.get(url);
+
+      dispatch(setContractsLength(response?.data?.contracts?.length));
+
       return response;
     } catch (error: any) {
       setErrorAlert(error?.message);

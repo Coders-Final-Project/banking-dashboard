@@ -19,6 +19,7 @@ const initialState: StateProps = {
   curLang: "en",
   insuranceCompleted: false,
   notificationCount: 0,
+  contractsLength: 0,
 };
 
 export const appSlice: any = createSlice({
@@ -51,6 +52,9 @@ export const appSlice: any = createSlice({
     decreaseNotificationsToZero: (state) => {
       state.notificationCount = 0;
     },
+    setContractsLength: (state, action: PayloadAction<number>) => {
+      state.contractsLength = action.payload;
+    },
   },
 });
 
@@ -62,6 +66,7 @@ export const {
   decreaseNotificationsToZero,
   setChatBotMessages,
   deleteTheLastMessage,
+  setContractsLength,
 } = appSlice.actions;
 
 export default appSlice.reducer;

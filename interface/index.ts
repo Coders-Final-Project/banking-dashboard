@@ -165,6 +165,7 @@ export interface StateProps {
   insuranceCompleted: boolean;
   notificationCount: number;
   chatbotMessages: IChatbotMessages[];
+  contractsLength: number;
 }
 
 export interface UploadedFileProps {

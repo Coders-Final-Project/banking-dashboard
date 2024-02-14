@@ -26,8 +26,6 @@ import {
 
 import Notifications from "@/components/Notifications/Notifications";
 
-import useSWR from "swr";
-
 interface Props {
   hasBtn?: boolean;
   lng?: string;
@@ -46,6 +44,10 @@ const AvatarDetail = ({ hasBtn, lng }: Props) => {
   }, [serverError]);
 
   const userCard = useSelector((state: StateProps) => state.userCard);
+
+  const contractsLength = useSelector(
+    (state: StateProps) => state.contractsLength,
+  );
 
   const notificationCount = useSelector(
     (state: StateProps) => state.notificationCount,
@@ -90,6 +92,8 @@ const AvatarDetail = ({ hasBtn, lng }: Props) => {
     };
   }, [currentPage, data, dispatch]);
 
+  const isContractAvailable = definedContracts.length > contractsLength;
+
   const handleNotifyOpen = () => {
     if (isNotifyOpen) {
       setIsNotifyOpen(false);
@@ -118,7 +122,7 @@ const AvatarDetail = ({ hasBtn, lng }: Props) => {
 
   return (
     <div className="avatar__detail">
-      {hasBtn && userCard._id !== -1 && (
+      {hasBtn && userCard._id !== -1 && isContractAvailable && (
         <Button
           text="Create A Contract"
           icon="frame.png"
