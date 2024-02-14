@@ -4,13 +4,13 @@ import path from "path";
 import fs from "fs/promises";
 import { v4 as uuidv4 } from "uuid";
 import os from "os";
-import * as cloudinary from "cloudinary";
+import { v2 as cloudinary } from "cloudinary";
 
 import { UploadedFileProps } from "@/interface";
 
 import User from "../models/user.model";
 
-cloudinary.v2.config({
+cloudinary.config({
   cloud_name: process.env.CLOUD_NAME,
   api_key: process.env.CLOUDINARY_API_KEY,
   api_secret: process.env.CLOUDINARY_API_SECRET,
@@ -45,7 +45,7 @@ async function saveFileToLocal(formData: any) {
 }
 
 export async function uploadFileToCloudinary(newFile: any) {
-  const response = cloudinary.v2.uploader.upload(newFile.filepath, {
+  const response = cloudinary.uploader.upload(newFile.filepath, {
     folder: "banking",
   });
 
@@ -142,7 +142,7 @@ export async function deletePhoto({
       { new: true },
     );
 
-    await cloudinary.v2.uploader.destroy(publicId);
+    await cloudinary.uploader.destroy(publicId);
 
     return { message: "Delete success!", status: 202 };
   } catch (error: any) {
