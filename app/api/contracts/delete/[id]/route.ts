@@ -34,7 +34,8 @@ export async function DELETE(
     const card = await Card.find({ userID });
 
     card[0].balance = card[0].balance - (Number(contractRate) + 50);
-    await user.companyContracts.pop(contractID);
+    const indexOfContract = await user.companyContracts.indexOf(contractID);
+    await user.companyContracts.splice(indexOfContract, 1);
 
     const newNotification = new Notification({
       userId: userID,

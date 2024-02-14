@@ -39,7 +39,35 @@
     }
 
     &__upload {
+      width: 100%;
       @include flexbox($justify: space-between, $items: flex-start, $gap: 2em);
     }
+
+    &__loading {
+      padding: 32px;
+      @include flexbox(
+        $direction: column,
+        $justify: space-between,
+        $items: flex-start,
+        $gap: 2em
+      );
+      width: 100%;
+    }
+  }
+
+  &__alert--error {
+    position: fixed;
+    z-index: 2000;
+    top: 5%;
+    left: 50%;
+    transform: translate(-50%, -5%);
+    width: auto;
+    height: auto;
+    border-radius: 0.5em;
+    font-size: 1.1em;
+    padding: 1em;
+    color: $main-color-white;
+    box-shadow: $box-shadow;
+    background-color: $action-red-100;
   }
 }

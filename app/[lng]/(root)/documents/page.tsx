@@ -2,12 +2,14 @@
 
 import Image from "next/image";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 import { useGlobalContext } from "@/context/store";
 
 import "@/sass/pages/_documents.scss";
 import "@/sass/layout/_pageHeader.scss";
+
+import axios from "axios";
 
 import AvatarDetail from "@/shared/AvatarDetail/AvatarDetail";
 import DocumentItem from "@/scenes/DocumentsPage/DocumentItem";
@@ -18,18 +20,37 @@ import { setCurrenctLang } from "@/globalRedux/features/appSlice";
 
 import { useTranslation } from "@/i18n/client";
 
+import useSWR from "swr";
+
 const Documents = ({ params: { lng } }: { params: { lng: string } }) => {
   const { data } = useGlobalContext();
+  const [serverError, setServerError] = useState("");
 
   const { t } = useTranslation(lng);
 
   const dispatch = useDispatch();
 
+  const fetcher = async (url: string) => {
+    try {
+      const response = await axios.get(url);
+
+      return response?.data?.documents?.uploadedFiles;
+    } catch (error: any) {
+      setServerError(error?.message);
+    }
+  };
+
+  const {
+    data: files,
+    mutate,
+    isLoading,
+  } = useSWR(`/api/documents/${data._id}`, fetcher);
+
   useEffect(() => {
     dispatch(setCurrenctLang(lng));
   }, [lng, dispatch]);
 
-  const allFilesProvided = Number(data.uploadedFiles.length) === 4;
+  const filesProvided = Number(files?.length) === 4;
 
   return (
     <main className="documents">
@@ -48,12 +69,12 @@ const Documents = ({ params: { lng } }: { params: { lng: string } }) => {
       <div className="documents__content">
         <div
           className={`documents__content__warning ${
-            allFilesProvided && "success"
+            filesProvided && "success"
           }`}
         >
           <Image
             src={`/assets/documents/${
-              allFilesProvided ? "all-uploaded" : "warning"
+              filesProvided ? "all-uploaded" : "warning"
             }.png`}
             alt="warning"
             width={24}
@@ -61,14 +82,21 @@ const Documents = ({ params: { lng } }: { params: { lng: string } }) => {
             className="documents__content__warning__img"
           />
           <p className="documents__content__warning__text">
-            {allFilesProvided ? `${t("doc.warning2")}` : `${t("doc.warning1")}`}
+            {filesProvided ? `${t("doc.warning2")}` : `${t("doc.warning1")}`}
           </p>
         </div>
         <div className="documents__content__upload">
-          <DocumentItem />
+          {isLoading ? (
+            <div className="documents__content__loading">Loading... </div>
+          ) : (
+            <DocumentItem allFiles={files} />
+          )}
           <DocumentAside />
         </div>
       </div>
+      {serverError !== "" && (
+        <div className="documents__alert--error">{serverError}</div>
+      )}
     </main>
   );
 };

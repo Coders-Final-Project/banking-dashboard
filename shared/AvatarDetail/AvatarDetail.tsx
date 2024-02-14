@@ -45,8 +45,8 @@ const AvatarDetail = ({ hasBtn, lng }: Props) => {
 
   const userCard = useSelector((state: StateProps) => state.userCard);
 
-  const companyContracts = useSelector(
-    (state: StateProps) => state.companyContracts,
+  const contractsLength = useSelector(
+    (state: StateProps) => state.contractsLength,
   );
 
   const notificationCount = useSelector(
@@ -92,12 +92,7 @@ const AvatarDetail = ({ hasBtn, lng }: Props) => {
     };
   }, [currentPage, data, dispatch]);
 
-  const activeContracts = companyContracts.map(
-    (contract: any) => contract.company,
-  );
-
-  const isContractAvailable =
-    definedContracts.length !== activeContracts.length;
+  const isContractAvailable = definedContracts.length > contractsLength;
 
   const handleNotifyOpen = () => {
     if (isNotifyOpen) {

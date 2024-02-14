@@ -18,6 +18,9 @@ import { useTranslation } from "@/i18n/client";
 
 import { useEffect } from "react";
 
+import { setContractsLength } from "@/globalRedux/features/appSlice";
+import { useDispatch } from "react-redux";
+
 import useSWR from "swr";
 
 const ContractsActive = ({ lng }: { lng: string }) => {
@@ -31,6 +34,8 @@ const ContractsActive = ({ lng }: { lng: string }) => {
     }
   }, [errorAlert]);
 
+  const dispatch = useDispatch();
+
   const { data } = useGlobalContext();
 
   const { t } = useTranslation(lng);
@@ -38,6 +43,9 @@ const ContractsActive = ({ lng }: { lng: string }) => {
   const fetcher = async (url: string) => {
     try {
       const response = await axios.get(url);
+
+      dispatch(setContractsLength(response?.data?.contracts?.length));
+
       return response;
     } catch (error: any) {
       setErrorAlert(error?.message);
@@ -67,7 +75,7 @@ const ContractsActive = ({ lng }: { lng: string }) => {
       <div className="contracts__content__active__body">
         {isLoading && <div className="no__contract">Loading...</div>}
 
-        {companyContracts?.data?.contracts.length === 0 ? (
+        {companyContracts?.data?.contracts?.length === 0 ? (
           <div className="no__contract"> {t("contract.active.noContract")}</div>
         ) : (
           companyContracts?.data?.contracts.map(

@@ -2,21 +2,9 @@
 
 import axios from "axios";
 
-import {
-  UploadedFileProps,
-  UploadedProfileProps,
-  UploadedImgProps,
-} from "@/interface";
+import { UploadedProfileProps, UploadedImgProps } from "@/interface";
 
-import {
-  createContext,
-  useContext,
-  Dispatch,
-  SetStateAction,
-  useState,
-  useEffect,
-  useRef,
-} from "react";
+import { createContext, useContext, useState, useEffect, useRef } from "react";
 
 type DataType = {
   _id: string;
@@ -30,16 +18,12 @@ type DataType = {
   city: string;
   zipCode: string;
   insuranceCompleted: boolean;
-  uploadedFiles: [
-    { fileName: string; fileUrl: { public_id: String; secure_url: String } },
-  ];
   profileImg: [{ fileUrl: { public_id: string; secure_url: string } }];
 };
 
 interface ContextProps {
   data: DataType;
   updateInsuranceCompleted: (value: boolean) => void;
-  updateUploadedFiles: (input: UploadedFileProps) => void;
   updateUserProfile: (input: UploadedProfileProps) => void;
   updateProfileImg: (input: UploadedImgProps) => void;
   deleteProfileImage: () => void;
@@ -58,13 +42,9 @@ const GlobalContext = createContext<ContextProps>({
     city: "",
     zipCode: "",
     insuranceCompleted: false,
-    uploadedFiles: [
-      { fileName: "", fileUrl: { public_id: "", secure_url: "" } },
-    ],
     profileImg: [{ fileUrl: { public_id: "", secure_url: "" } }],
   },
   updateInsuranceCompleted: () => {},
-  updateUploadedFiles: () => {},
   updateUserProfile: () => {},
   updateProfileImg: () => {},
   deleteProfileImage: () => {},
@@ -87,9 +67,6 @@ export const GlobalContextProvider = ({
     city: "",
     zipCode: "",
     insuranceCompleted: false,
-    uploadedFiles: [
-      { fileName: "", fileUrl: { public_id: "", secure_url: "" } },
-    ],
     profileImg: [{ fileUrl: { public_id: "", secure_url: "" } }],
   });
 
@@ -104,15 +81,6 @@ export const GlobalContextProvider = ({
       profileImg: [input],
     }));
   };
-
-  const updateUploadedFiles = (input: UploadedFileProps) => {
-    //@ts-ignore
-    setData((prevData) => ({
-      ...prevData,
-      uploadedFiles: [...prevData.uploadedFiles, input],
-    }));
-  };
-
   const updateUserProfile = (input: UploadedProfileProps) => {
     //@ts-ignore
     setData((prevData) => ({
@@ -159,7 +127,6 @@ export const GlobalContextProvider = ({
       value={{
         data,
         updateInsuranceCompleted,
-        updateUploadedFiles,
         updateUserProfile,
         updateProfileImg,
         deleteProfileImage,

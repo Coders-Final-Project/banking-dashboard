@@ -5,69 +5,18 @@ import acceptLanguage from "accept-language";
 
 import { fallbackLng, languages, cookieName } from "./i18n/settings";
 
+import { publicPaths, restrictedPaths } from "./constants";
+
 acceptLanguage.languages(languages);
 
 export function middleware(request: NextRequest) {
   const path = request.nextUrl.pathname;
-
-  const publicPaths = [
-    "/signin",
-    "/signup",
-    "/forget-password",
-    "/terms-privacy",
-    "/az/signin",
-    "/az/forget-password",
-    "/az/terms-privacy",
-    "/en/signup",
-    "/az/signup",
-    "/en/signin",
-    "/en/forget-password",
-    "/en/terms-privacy",
-  ];
 
   const token = request.cookies.get("token")?.value || "";
 
   if (publicPaths.includes(path) && token) {
     return NextResponse.redirect(new URL("/", request.nextUrl));
   }
-
-  const restrictedPaths = [
-    "/",
-    "/en",
-    "/az",
-    "/en/invoices",
-    "/en/chatbot",
-    "/az/chatbot",
-    "/en/contact",
-    "/az/contact",
-    "/en/cards",
-    "/en/contracts",
-    "/en/documents",
-    "/en/insurance",
-    "/en/invoices",
-    "/en/settings",
-    "/en/transactions",
-    "/az/invoices",
-    "/az/cards",
-    "/en/contact",
-    "/az/contracts",
-    "/az/documents",
-    "/az/insurance",
-    "/az/invoices",
-    "/az/settings",
-    "/az/contact",
-    "/az/transactions",
-    "/invoices",
-    "/cards",
-    "/contracts",
-    "/documents",
-    "/insurance",
-    "/invoices",
-    "/settings",
-    "/contact",
-    "/transactions",
-    "/en/contracts/create",
-  ];
 
   if (restrictedPaths.includes(path) && !token) {
     return NextResponse.redirect(new URL("/signin", request.nextUrl));
@@ -167,7 +116,6 @@ export const config = {
     "/terms-privacy",
     "/az/terms-privacy",
     "/en/terms-privacy",
-    // "/((?!api|_next/static|_next/image|assets|favicon.ico|sw.js).*)",
     "/((?!(?:az|en|api|_next/static|_next/image)(?:/|$))(?!.*\\.[^.]*$).*/?)",
   ],
 };

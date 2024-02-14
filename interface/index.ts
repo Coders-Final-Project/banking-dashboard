@@ -160,17 +160,12 @@ export interface IChatbotMessages {
 }
 
 export interface StateProps {
-  companyContracts: ICompanyContracts[];
-  allCustomers: IAllCustomers[];
-  transactions: ITransactions[];
-  contractual: IContractual[];
   userCard: CardProps;
   curLang: string;
   insuranceCompleted: boolean;
-  notifications: INotifications[];
   notificationCount: number;
-  invoices: IInvoices[];
   chatbotMessages: IChatbotMessages[];
+  contractsLength: number;
 }
 
 export interface UploadedFileProps {

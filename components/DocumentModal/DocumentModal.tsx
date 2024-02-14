@@ -25,13 +25,15 @@ const INITIAL_PROGRESS = {
   pc: 0,
 };
 
+import { useSWRConfig } from "swr";
+
 const DocumentModal = ({ docKey, setIsUploadClicked }: IProps) => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [progress, setProgress] = useState(INITIAL_PROGRESS);
   const [message, setMessage] = useState<string | null>(null);
   const [successAlert, setSuccessAlert] = useState(false);
 
-  const { data, updateUploadedFiles } = useGlobalContext();
+  const { data } = useGlobalContext();
 
   const curLang = useSelector((state: StateProps) => state.curLang);
 
@@ -51,6 +53,8 @@ const DocumentModal = ({ docKey, setIsUploadClicked }: IProps) => {
     setProgress(INITIAL_PROGRESS);
     setMessage(null);
   };
+
+  const { mutate } = useSWRConfig();
 
   const handleUpload = async () => {
     if (!selectedFile) {
@@ -77,9 +81,7 @@ const DocumentModal = ({ docKey, setIsUploadClicked }: IProps) => {
           setSuccessAlert(true);
         }
 
-        if (response.data) {
-          updateUploadedFiles(response.data);
-        }
+        mutate(`/api/documents/${data._id}`);
 
         setMessage("Uploaded successfully");
 
