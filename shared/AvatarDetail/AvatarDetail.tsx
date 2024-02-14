@@ -81,7 +81,11 @@ const AvatarDetail = ({ hasBtn, lng }: Props) => {
         }
       };
 
-      if (currentPage.includes("contracts") || currentPage.includes("/")) {
+      if (
+        currentPage.includes("contracts") ||
+        currentPage === "/en" ||
+        currentPage === "/az"
+      ) {
         fetchCardInfo();
       }
       dispatch(setInsuranceCompleted(data.insuranceCompleted));
