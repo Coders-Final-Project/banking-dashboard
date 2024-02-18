@@ -70,6 +70,12 @@ const Sidebar = async ({ lng }: { lng: string }) => {
       route: "contact",
       text: `Contact`,
     },
+    {
+      id: 10,
+      icon: "setting.png",
+      route: "settings",
+      text: `Settings`,
+    },
   ];
 
   return (
@@ -89,18 +95,6 @@ const Sidebar = async ({ lng }: { lng: string }) => {
           />
         ))}
       </div>
-      <Link href={`/${lng}/settings`} className="sidebar__settings">
-        <Image
-          src="/assets/sidebar/setting.png"
-          alt="setting"
-          width={24}
-          height={24}
-          className="sidebar__settings__icon"
-        />
-        <div className="sidebar__settings__text">
-          {t("sidebar.link8.title")}
-        </div>
-      </Link>
       <div className="lang__switcher">
         <Trans i18nKey="languageSwitcher" t={t}>
           <span className="lang__switcher__item active">

@@ -68,3 +68,15 @@
     }
   }
 }
+
+@media only screen and (max-width: 1335px) {
+  .home__content__transaction__body__person__img {
+    display: none;
+  }
+  .home__content__transaction__body__person__info__company {
+    display: none;
+  }
+  .home__content__transaction__body__person__amount__date {
+    display: none;
+  }
+}

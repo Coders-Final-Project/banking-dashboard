@@ -31,15 +31,6 @@ const SidebarItem = ({ icon, text, iconExtra, route, lng }: Props) => {
         height={24}
         className="sidebar__links__item__icon"
       />
-      {iconExtra && (
-        <Image
-          src={`/assets/sidebar/${iconExtra}`}
-          alt={text}
-          width={7}
-          height={10}
-          className="sidebar__links__item__icon__extra"
-        />
-      )}
       <div className="sidebar__links__item__text">{text}</div>
     </Link>
   );
