@@ -28,3 +28,23 @@
     }
   }
 }
+
+@media only screen and (max-width: 600px) {
+  .page__header {
+    gap: 10px;
+
+    &__welcome__title {
+      font-size: 30px;
+    }
+  }
+}
+
+@media only screen and (max-width: 475px) {
+  .page__header {
+    gap: 10px;
+
+    &__welcome__title {
+      display: none;
+    }
+  }
+}

@@ -156,3 +156,15 @@
     background-color: $action-green-100;
   }
 }
+
+@media only screen and (max-width: 1100px) {
+  .avatar__detail__person__info {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .avatar__detail {
+    gap: 10px;
+  }
+}
