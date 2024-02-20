@@ -7,7 +7,7 @@ const HomePayment = async ({ lng }: { lng: string }) => {
   const { t } = await useTranslation(lng);
 
   return (
-    <div>
+    <div style={{ width: "100%" }}>
       <LineGraph
         title={t("home.graph.title")}
         isHeaderDetail={true}

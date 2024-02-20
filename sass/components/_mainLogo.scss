@@ -16,3 +16,9 @@
     @extend %website-heading4;
   }
 }
+
+@media only screen and (max-width: 992px) {
+  .main__logo__text {
+    display: none;
+  }
+}

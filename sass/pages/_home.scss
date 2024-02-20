@@ -6,11 +6,39 @@
 .home {
   margin-left: 280px;
 
-  .home__content {
+  &__content {
+    width: 100%;
     padding: 24px 32px 32px 32px;
     display: grid;
     grid-template-columns: repeat(2, auto);
     column-gap: 32px;
     row-gap: 34px;
+  }
+}
+
+@media only screen and (max-width: 1220px) {
+  .home__content {
+    column-gap: 10px;
+    row-gap: 10px;
+    grid-template-columns: repeat(1, auto);
+    padding: 30px auto;
+  }
+}
+
+@media only screen and (max-width: 1030px) {
+  .page__header__welcome__desc {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 992px) {
+  .home {
+    margin-left: 100px;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  .home__content {
+    padding: 30px 10px;
   }
 }

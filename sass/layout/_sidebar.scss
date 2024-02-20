@@ -42,12 +42,6 @@
       border: 1px solid transparent;
       text-decoration: none;
 
-      &__icon__extra {
-        position: absolute;
-        left: 21px;
-        top: 21px;
-      }
-
       &__text {
         color: $greyscale-grey-400;
         @extend %body-medium;
@@ -74,18 +68,6 @@
     }
   }
 
-  &__settings {
-    @include flexbox($justify: flex-start, $items: center, $gap: 0.75em);
-    position: absolute;
-    bottom: 32px;
-    left: 24px;
-    text-decoration: none;
-
-    &__text {
-      color: $greyscale-grey-400;
-    }
-  }
-
   .lang__switcher {
     position: absolute;
     top: 35px;
@@ -108,5 +90,23 @@
     &__item.active {
       color: $greyscale-grey-400;
     }
+  }
+}
+
+@media only screen and (max-width: 992px) {
+  .sidebar {
+    width: 100px;
+
+    &__links__item {
+      align-items: center;
+
+      &__text {
+        display: none;
+      }
+    }
+  }
+
+  .lang__switcher__item {
+    display: none;
   }
 }

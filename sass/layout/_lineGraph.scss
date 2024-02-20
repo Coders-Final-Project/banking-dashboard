@@ -4,8 +4,8 @@
 @import "/sass/base/typography";
 
 .line__graph__content {
-  // width: 626px;
   width: 100%;
+  height: auto;
   padding: 24px 0px;
   border-radius: 16px;
   border: 1px solid $greyscale-grey-200;
@@ -111,5 +111,25 @@
         letter-spacing: -0.32px;
       }
     }
+  }
+}
+
+@media only screen and (max-width: 780px) {
+  .line__chart {
+    width: 500px;
+    height: 500px;
+    margin: 0 auto;
+  }
+}
+
+@media only screen and (max-width: 580px) {
+  .line__graph__content__firstLine__title {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  .line__graph__content__secondLine__difference {
+    display: none;
   }
 }

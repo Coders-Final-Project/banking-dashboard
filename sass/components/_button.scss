@@ -32,3 +32,9 @@
     @extend %button-size4;
   }
 }
+
+@media only screen and (max-width: 740px) {
+  .button__text {
+    display: none;
+  }
+}

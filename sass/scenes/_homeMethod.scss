@@ -93,3 +93,18 @@
     }
   }
 }
+
+@media only screen and (max-width: 1325px) {
+  .home__content__method__withdraw__icon {
+    display: none;
+  }
+  .home__content__method__info__text {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 992px) {
+  .home__content__method {
+    display: none;
+  }
+}
