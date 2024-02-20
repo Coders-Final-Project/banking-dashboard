@@ -5,6 +5,8 @@ import { ICardReport } from "@/interface";
 
 import { IUserPayment } from "@/interface";
 
+import "@/sass/components/_lineChart.scss";
+
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -63,7 +65,7 @@ const HomeLineChart = ({
   data: IUserPayment | ICardReport;
 }) => {
   return (
-    <div style={{ width: 600, height: 300, margin: "0 auto" }}>
+    <div className="line__chart">
       <Line options={options} data={data[duration]} />
     </div>
   );

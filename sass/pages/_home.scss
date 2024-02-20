@@ -7,6 +7,7 @@
   margin-left: 280px;
 
   &__content {
+    width: 100%;
     padding: 24px 32px 32px 32px;
     display: grid;
     grid-template-columns: repeat(2, auto);
@@ -27,5 +28,11 @@
 @media only screen and (max-width: 992px) {
   .home {
     margin-left: 100px;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  .home__content {
+    padding: 30px 10px;
   }
 }

@@ -1,0 +1,40 @@
+@import "/sass/utils/colors";
+@import "/sass/utils/variables";
+@import "/sass/utils/mixins";
+@import "/sass/base/typography";
+
+.line__chart {
+  width: 600px;
+  height: auto;
+  margin: 0 auto;
+}
+
+@media only screen and (max-width: 780px) {
+  .line__chart {
+    width: 500px;
+  }
+}
+
+@media only screen and (max-width: 670px) {
+  .line__chart {
+    width: 400px;
+  }
+}
+
+@media only screen and (max-width: 580px) {
+  .line__chart {
+    width: 300px;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .line__chart {
+    width: 250px;
+  }
+}
+
+@media only screen and (max-width: 435px) {
+  .line__chart {
+    width: 200px;
+  }
+}
