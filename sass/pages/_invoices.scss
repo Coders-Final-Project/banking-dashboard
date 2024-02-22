@@ -260,6 +260,7 @@
       .filteredData {
         max-height: 250px;
         overflow-y: scroll;
+        overflow-x: hidden;
       }
 
       .filteredData::-webkit-scrollbar {
