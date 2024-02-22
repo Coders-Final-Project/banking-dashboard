@@ -21,3 +21,19 @@
     }
   }
 }
+
+@media only screen and (max-width: 1200px) {
+  .contracts__content {
+    flex-direction: column;
+
+    &__leftSide {
+      width: 100%;
+    }
+  }
+}
+
+@media only screen and (max-width: 992px) {
+  .contracts {
+    margin-left: 100px;
+  }
+}

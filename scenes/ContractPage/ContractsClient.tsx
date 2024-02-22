@@ -9,7 +9,7 @@ import "@/sass/scenes/_contractsClient.scss";
 import axios from "axios";
 
 import ContractClientItem from "@/components/ContractClientItem/ContractClientItem";
-import { IContractClient, StateProps } from "@/interface";
+import { IContractClient } from "@/interface";
 import { useGlobalContext } from "@/context/store";
 
 import { useTranslation } from "@/i18n/client";

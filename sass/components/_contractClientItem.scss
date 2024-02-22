@@ -56,3 +56,15 @@
     }
   }
 }
+
+@media only screen and (max-width: 590px) {
+  .contracts__content__client__body__item__btn__text {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 520px) {
+  .contracts__content__client__body__item__img {
+    display: none;
+  }
+}

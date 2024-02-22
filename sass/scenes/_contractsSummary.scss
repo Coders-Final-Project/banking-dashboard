@@ -45,3 +45,9 @@
     }
   }
 }
+
+@media only screen and (max-width: 590px) {
+  .contracts__content__summary {
+    display: none;
+  }
+}
