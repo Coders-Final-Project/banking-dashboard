@@ -17,12 +17,12 @@
     $direction: column,
     $justify: flex-start,
     $items: flex-start,
-    $gap: 3.5em
+    $gap: 2rem
   );
   overflow: hidden;
 
   &__main {
-    @include flexbox($justify: flex-start, $items: center, $gap: 3.5em);
+    @include flexbox($justify: flex-start, $items: center);
   }
 
   &__links {
