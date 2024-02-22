@@ -45,3 +45,14 @@
     color: $main-color-black;
   }
 }
+
+@media only screen and (max-width: 910px) {
+  .cards__action__item {
+    justify-content: space-between;
+
+    &__date,
+    &__switch {
+      display: none;
+    }
+  }
+}

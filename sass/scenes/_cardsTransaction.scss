@@ -133,3 +133,9 @@
   color: $main-color-blue;
   margin-top: 20px;
 }
+
+@media only screen and (max-width: 910px) {
+  .cards__transaction__content__header:first-child {
+    display: none;
+  }
+}

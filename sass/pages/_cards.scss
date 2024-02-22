@@ -22,3 +22,19 @@
     }
   }
 }
+
+@media only screen and (max-width: 1300px) {
+  .cards__content {
+    flex-direction: column;
+
+    &__stats {
+      width: 100%;
+    }
+  }
+}
+
+@media only screen and (max-width: 992px) {
+  .cards {
+    margin-left: 100px;
+  }
+}
