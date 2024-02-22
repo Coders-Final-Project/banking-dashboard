@@ -256,6 +256,15 @@
           }
         }
       }
+
+      .filteredData {
+        max-height: 250px;
+        overflow-y: scroll;
+      }
+
+      .filteredData::-webkit-scrollbar {
+        display: none;
+      }
     }
   }
 }

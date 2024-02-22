@@ -26,6 +26,8 @@ export async function POST(request: NextRequest) {
     const receiver = await User.find({ email });
     const sender = await User.findById(senderID);
 
+    console.log(receiver[0]);
+
     if (sender.email === email) {
       return NextResponse.json({ message: "Invalid operation!", status: 400 });
     }
@@ -37,8 +39,12 @@ export async function POST(request: NextRequest) {
     const receiverID = receiver[0]._id.toString();
     const client = receiver[0].firstName + " " + receiver[0].lastName;
 
+    console.log(receiverID);
+
     const senderCard = await Card.find({ senderID });
     const receiverCard = await Card.find({ receiverID });
+
+    console.log(receiverCard);
 
     if (!senderCard && !receiverCard) {
       return NextResponse.json({ message: "Card not found!", status: 400 });
@@ -60,8 +66,16 @@ export async function POST(request: NextRequest) {
       return Number(item.total) + count;
     }, 0);
 
-    senderCard[0].balance = senderCard[0].balance - parseFloat(totalAmount);
-    receiverCard[0].balance = receiverCard[0].balance + parseFloat(totalAmount);
+    console.log(senderCard[0].balance);
+    console.log(receiverCard[0].balance);
+
+    senderCard[0].balance =
+      (await senderCard[0].balance) - parseFloat(totalAmount);
+    receiverCard[0].balance =
+      (await receiverCard[0].balance) + parseFloat(totalAmount);
+
+    console.log(senderCard[0].balance);
+    console.log(receiverCard[0].balance);
 
     const randomPair = generateRandomStringNumberPair();
 
