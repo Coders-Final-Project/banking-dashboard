@@ -71,3 +71,21 @@
     background-color: $action-red-100;
   }
 }
+
+@media only screen and (max-width: 1200px) {
+  .documents__content__upload {
+    flex-direction: column;
+  }
+}
+
+@media only screen and (max-width: 992px) {
+  .documents {
+    margin-left: 100px;
+  }
+}
+
+@media only screen and (max-width: 540px) {
+  .documents__content__warning {
+    display: none;
+  }
+}
