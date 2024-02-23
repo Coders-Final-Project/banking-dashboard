@@ -34,7 +34,7 @@ async function saveFileToLocal(formData: any) {
     // );
 
     const tempdir = os.tmpdir();
-    const uploadDir = path.join(tempdir, `/${name}.${ext}`); //Work in Vercel
+    const uploadDir = path.join(tempdir, `/${name}.${ext}`);
 
     fs.writeFile(uploadDir, buffer);
 
