@@ -50,10 +50,20 @@ const AddCardModal = ({ handleCardModal, setShowALert }: IProps) => {
 
     const { cardNumber, endDate, securityCode } = cardValues;
 
+    function isNumberInQuotes(s: string) {
+      s = removeSpacesAndSlash(s);
+
+      return !isNaN(+s);
+    }
+
+    function removeSpacesAndSlash(s: string) {
+      return s.replace(/\s+|\/+/g, "");
+    }
+
     if (
-      isNaN(parseInt(cardNumber)) ||
-      isNaN(parseInt(endDate)) ||
-      isNaN(parseInt(securityCode))
+      !isNumberInQuotes(cardNumber) ||
+      !isNumberInQuotes(endDate) ||
+      !isNumberInQuotes(securityCode)
     ) {
       setErrorAlert("Provide correct values!");
       setCardValues(INITIAL_VALUES);
