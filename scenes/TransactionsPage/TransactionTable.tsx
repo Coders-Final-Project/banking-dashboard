@@ -29,6 +29,7 @@ const TransactionTable = () => {
   const fetcher = async (url: string) => {
     try {
       const response = await axios.get(url);
+
       setActionsData(response.data.transactions);
 
       return response;
@@ -43,18 +44,19 @@ const TransactionTable = () => {
     isLoading,
   } = useSWR(`/api/transactions/${data._id}`, fetcher);
 
-  const [actionsData, setActionsData] = useState(transactions);
+  const [actionsData, setActionsData] = useState<ITransactions[]>([]);
 
   useEffect(() => {
-    setActionsData(transactions);
+    const actions = transactions?.data?.transactions;
+    setActionsData(actions);
   }, [transactions]);
 
   const handleSort = (input: string) => {
     setCheck((prevValue) => !prevValue);
 
-    // const sortedData =
-    //   filterActionsTable({ input, data: transactions, check }) || [];
-    // setActionsData(sortedData);
+    const sortedData =
+      filterActionsTable({ input, data: actionsData, check }) || [];
+    setActionsData(sortedData);
   };
 
   const curLang = useSelector((state: StateProps) => state.curLang);
@@ -133,10 +135,10 @@ const TransactionTable = () => {
             <div className="no__action">Loading...</div>
           )}
 
-          {transactions?.data?.transactions?.length === 0 ? (
+          {actionsData?.length === 0 ? (
             <div className="no__action">There is no action yet!</div>
           ) : (
-            transactions?.data?.transactions?.map((action: ITransactions) => (
+            actionsData?.map((action: ITransactions) => (
               <TransactionsTableItem key={action._id} {...action} />
             ))
           )}

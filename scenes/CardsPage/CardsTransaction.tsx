@@ -42,6 +42,9 @@ const CardsTransaction = () => {
   const fetcher = async (url: string) => {
     try {
       const response = await axios.get(url);
+
+      setCardData(response.data.contractuals);
+
       return response;
     } catch (error: any) {
       setServerError(error?.message);
@@ -54,20 +57,22 @@ const CardsTransaction = () => {
     isLoading,
   } = useSWR(`/api/contractuals/${data._id}`, fetcher);
 
-  const [cardData, setCardData] = useState(contractual);
+  const [cardData, setCardData] = useState<IContractual[]>([]);
 
   useEffect(() => {
-    setCardData(contractual);
+    const myContracttuals = contractual?.data?.contractuals;
+
+    setCardData(myContracttuals);
   }, [contractual]);
 
   const handleSort = (input: string) => {
     setCheck((prevValue) => !prevValue);
 
-    // if (input === "name" || input === "date" || input === "amount") {
-    //   const sortedData =
-    //     filterCardsTable({ input, data: contractual, check }) || [];
-    //   setCardData(sortedData);
-    // }
+    if (input === "name" || input === "date" || input === "amount") {
+      const sortedData =
+        filterCardsTable({ input, data: cardData, check }) || [];
+      setCardData(sortedData);
+    }
   };
 
   return (
@@ -122,10 +127,10 @@ const CardsTransaction = () => {
         <div className="cards__transaction__content__body">
           {isLoading && <div className="no__action">Loading...</div>}
 
-          {contractual?.data?.contractuals?.length === 0 ? (
+          {cardData?.length === 0 ? (
             <div className="no__action">{t("card.no.contract")}</div>
           ) : (
-            contractual?.data?.contractuals?.map((action: IContractual) => (
+            cardData?.map((action: IContractual) => (
               <CardActionItem key={action._id} {...action} />
             ))
           )}
