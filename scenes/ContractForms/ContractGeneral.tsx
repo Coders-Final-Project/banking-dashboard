@@ -141,6 +141,7 @@ const ContractGeneral = ({
             style={{ padding: "10px" }}
             onChange={(e) => updateFields({ rate: e.target.value })}
             autoComplete="off"
+            min="0"
           />
         </div>
       </div>

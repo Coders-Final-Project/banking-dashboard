@@ -74,3 +74,9 @@
   background-color: $action-red-100;
   color: $main-color-white;
 }
+
+@media only screen and (max-width: 1200px) {
+  .contracts__content__client {
+    width: 100%;
+  }
+}

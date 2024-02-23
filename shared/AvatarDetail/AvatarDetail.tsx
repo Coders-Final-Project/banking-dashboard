@@ -110,11 +110,9 @@ const AvatarDetail = ({ hasBtn, lng }: Props) => {
   const handleLogout = async () => {
     try {
       await axios.get("/api/user/logout");
-      const itemsToRemove = ["persist:root", "persist:primary"];
 
-      itemsToRemove.forEach((key) => {
-        localStorage.removeItem(key);
-      });
+      localStorage.removeItem("persist:root");
+      localStorage.removeItem("persist:primary");
 
       window.location.href = "/signin";
     } catch (error: any) {

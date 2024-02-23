@@ -81,3 +81,9 @@
     background-color: $greyscale-grey-200;
   }
 }
+
+@media only screen and (max-width: 992px) {
+  .cards__summary {
+    display: none;
+  }
+}

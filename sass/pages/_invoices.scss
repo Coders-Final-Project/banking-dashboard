@@ -260,6 +260,7 @@
       .filteredData {
         max-height: 250px;
         overflow-y: scroll;
+        overflow-x: hidden;
       }
 
       .filteredData::-webkit-scrollbar {
@@ -280,4 +281,10 @@
   font-size: 18px;
   background-color: $action-red-100;
   color: $main-color-white;
+}
+
+@media only screen and (max-width: 992px) {
+  .page {
+    margin-left: 100px;
+  }
 }

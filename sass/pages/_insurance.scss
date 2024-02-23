@@ -228,3 +228,24 @@
     }
   }
 }
+
+@media only screen and (max-width: 992px) {
+  .insurance {
+    margin-left: 100px;
+  }
+}
+
+@media only screen and (max-width: 750px) {
+  .insurance__place__text {
+    display: none;
+  }
+  .insurance__content__card__header__price {
+    display: none;
+  }
+  .insurance__content__card__header__img {
+    display: none;
+  }
+  .insurance__content__card__header__divider {
+    display: none;
+  }
+}
