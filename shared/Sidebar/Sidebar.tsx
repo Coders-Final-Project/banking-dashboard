@@ -62,19 +62,19 @@ const Sidebar = async ({ lng }: { lng: string }) => {
       id: 8,
       icon: "chat.png",
       route: "chatbot",
-      text: `Chatbot`,
+      text: `${t("sidebar.link9.title")}`,
     },
     {
       id: 9,
       icon: "phone.png",
       route: "contact",
-      text: `Contact`,
+      text: `${t("sidebar.link10.title")}`,
     },
     {
       id: 10,
       icon: "setting.png",
       route: "settings",
-      text: `Settings`,
+      text: `${t("sidebar.link8.title")}`,
     },
   ];
 
