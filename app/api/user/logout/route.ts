@@ -11,10 +11,10 @@ export async function GET() {
 
     // response.cookies.set("token", "", { httpOnly: true, expires: new Date(0) });
 
-    response.cookies.delete("token");
-
-    response.headers.set("Cache-Control", "no-store");
-    response.headers.set("Pragma", "no-cache");
+    response.cookies.set("token", "", {
+      httpOnly: true,
+      maxAge: 0,
+    });
 
     return response;
   } catch (error: any) {
