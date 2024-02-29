@@ -1,5 +1,7 @@
 import { NextResponse } from "next/server";
 
+import { cookies } from "next/headers";
+
 export async function GET() {
   try {
     const response = NextResponse.json({
@@ -10,6 +12,8 @@ export async function GET() {
     // response.cookies.delete("token");
 
     // response.cookies.set("token", "", { httpOnly: true, expires: new Date(0) });
+
+    cookies().delete("token");
 
     response.cookies.set("token", "", {
       httpOnly: true,
