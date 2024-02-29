@@ -9,7 +9,12 @@ export async function GET() {
 
     // response.cookies.delete("token");
 
-    response.cookies.set("token", "", { httpOnly: true, expires: new Date(0) });
+    // response.cookies.set("token", "", { httpOnly: true, expires: new Date(0) });
+
+    response.cookies.delete("token");
+
+    response.headers.set("Cache-Control", "no-store");
+    response.headers.set("Pragma", "no-cache");
 
     return response;
   } catch (error: any) {
