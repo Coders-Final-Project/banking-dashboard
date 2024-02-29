@@ -9,10 +9,6 @@ export async function GET() {
       success: true,
     });
 
-    // response.cookies.delete("token");
-
-    // response.cookies.set("token", "", { httpOnly: true, expires: new Date(0) });
-
     cookies().delete("token");
 
     response.cookies.set("token", "", {
