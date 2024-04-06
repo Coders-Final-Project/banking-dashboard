@@ -152,11 +152,13 @@ const Chatbot = ({ params: { lng } }: { params: { lng: string } }) => {
             name="user_input"
             onChange={(e) => setQuestion(e.target.value)}
             className="chatbot__content__form__input"
+            disabled={true}
           />
           <button
             onClick={(e) => handleSubmit(e)}
             type="submit"
             className="chatbot__content__form__btn"
+            disabled={true}
           >
             Send
           </button>
