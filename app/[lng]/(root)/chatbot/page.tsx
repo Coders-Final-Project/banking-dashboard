@@ -61,6 +61,12 @@ const Chatbot = ({ params: { lng } }: { params: { lng: string } }) => {
         inputValue: question,
       });
 
+      if (response.data.status === 500) {
+        setErrorAlert("Network error!");
+        dispatch(deleteTheLastMessage());
+        return;
+      }
+
       const chatbotResponse = response.data.answer[0].message.content;
 
       dispatch(deleteTheLastMessage());
